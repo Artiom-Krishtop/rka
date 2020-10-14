@@ -1,0 +1,6 @@
+<?
+$sSectionName = "Амнистия";
+$arDirProperties = Array(
+
+);
+?>

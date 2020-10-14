@@ -1,0 +1,25 @@
+<?
+$aMenuLinks = Array(
+    Array(
+        "Аккаунт",
+        "/personal/profile/",
+        Array(),
+        Array(),
+        ""
+    ),
+    Array(
+        "Смена пароля",
+        "/personal/change-password/",
+        Array(),
+        Array(),
+        ""
+    ),
+    Array(
+        "Корзина",
+        "/personal/basket/",
+        Array(),
+        Array(),
+        ""
+    )
+);
+?>

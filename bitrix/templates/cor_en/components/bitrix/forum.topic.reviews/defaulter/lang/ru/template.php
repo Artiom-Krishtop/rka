@@ -1,0 +1,30 @@
+<?
+$MESS["OPINIONS_NAME"] = "Вашае iмя";
+$MESS["OPINIONS_EMAIL"] = "Ваш E-Mail";
+$MESS["OPINIONS_SEND"] = "Адправіць";
+$MESS["OPINIONS_PREVIEW"] = "Прагледзець";
+$MESS["F_C_GOTO_FORUM"] = "Перейти к обсуждению на форуме &gt;&gt;";
+$MESS["F_CAPTCHA_TITLE"] = "Абарона ад аўтаматычных паведамленняў";
+$MESS["F_CAPTCHA_PROMT"] = "Сімвалы на малюнку";
+$MESS["F_QUOTE_FULL"] = "Цытаваць";
+$MESS["F_WANT_ALLOW_SMILES"] = "Разрешить смайлики в этом сообщении";
+$MESS["F_WANT_SUBSCRIBE_TOPIC"] = "Подписаться на новые сообщения этой темы";
+$MESS["F_LOAD_FILE"] = "Загрузить файл";
+$MESS["F_LOAD_IMAGE"] = "Загрузить изображение";
+$MESS["F_QUOTE_HINT"] = "Для вставки цитаты в форму ответа выделите ее и нажмите сюда";
+$MESS["F_NAME"] = "Iмя";
+$MESS["JQOUTE_AUTHOR_WRITES"] = "пишет";
+$MESS["JERROR_NO_TOPIC_NAME"] = "Вы должны ввести название темы. ";
+$MESS["JERROR_NO_MESSAGE"] = "Вы павінны ўвесці паведамленне. ";
+$MESS["JERROR_MAX_LEN"] = "Максимальная длина сообщения #MAX_LENGTH# символов. Всего символов: #LENGTH#.";
+$MESS["F_FILE_SIZE"] = "Размер файла не должен превышать #SIZE#.";
+$MESS["F_PREVIEW"] = "Предпросмотр сообщения";
+$MESS["F_DOWNLOAD"] = "Скачать";
+$MESS["F_FILE_EXTENSION"] = "Разрешенные расширения файлов: #EXTENSION#.";
+$MESS["F_HIDE"] = "Схаваць";
+$MESS["F_SHOW"] = "Паказаць";
+$MESS["F_WAIT"] = "Пачакайце...";
+$MESS["F_DELETE"] = "Удаліць";
+$MESS["F_DELETE_CONFIRM"] = "Сообщение будет удалено без возможности восстановления. Удалить? ";
+$MESS["F_ATTACH_FILES"] = "Прикрепленные файлы";
+?>

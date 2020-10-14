@@ -1,0 +1,1 @@
+<p>The Belarussian Republican attorneys’ bar association provides qualified juridical support to both citizens of the Republic of Belarus and citizens of other foreign countries, who are situated in the territory of the Republic of Belarus. To foreign citizens’ attention we provide the register of attorneys, who able to speak foreign languages.</p>

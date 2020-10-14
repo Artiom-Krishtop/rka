@@ -1,0 +1,2 @@
+        <h2 class="block-title">Advocates and Officials in Belarus</h2>
+        <p>Advocates in the Republic of Belarus officially cooperate with a number of state agencies and public organizations.</p>

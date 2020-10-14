@@ -1,0 +1,69 @@
+<?php
+//$_SERVER["DOCUMENT_ROOT"] = "/home/advokat/public_html";
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
+if(($handle = fopen('/home/bitrix/www/upload/qust.csv', 'r')) !== FALSE) {
+		$result = Array();	
+$counter =0;
+CModule::IncludeModule("iblock");
+    $kolleg=[];
+
+while (($data = fgetcsv($handle, 2000, ',')) !== FALSE) {
+
+if ($counter > 0 ){
+
+    if ($data[5]=="Минская областная коллегия адвокатов") {$val = 71;}
+    elseif ($data[5]=="Минская городская коллегия адвокатов") {$val = 65;}
+    elseif ($data[5]=="Белорусская республиканская коллегия адвокатов") {$val = 64;}
+    elseif ($data[5]=="Гомельская областная коллегия адвокатов") {$val = 68;}
+    elseif ($data[5]=="Брестская областная коллегия адвокатов") {$val = 70;}
+    elseif ($data[5]=="Витебская областная коллегия адвокатов") {$val = 69;}
+    elseif ($data[5]=="Могилевская областная коллегия адвокатов") {$val = 66;}
+    elseif ($data[5]=="Гродненская областная коллегия адвокатов") {$val = 67;}
+    elseif ($data[5]=="") {$val = "";}
+
+    $NAME = mb_substr($data[3],0,100);
+    $PREV = $data[3];
+    $DATA = $data[1];
+    $CODE =  translit($NAME);
+    $CODE = mb_substr($CODE,0,50);
+    $PROPSERVICE['F_EMAIL'] = $data[4];
+    $PROPSERVICE['F_NAME'] = $data[6];
+    $PROPSERVICE['F_COLLEG'] = $val;
+    $PROPSERVICE['F_PHONE'] = $data[7];
+    CModule::IncludeModule("iblock");
+    $el = new CIBlockElement;
+    $arLoadProductSERVICE = Array(
+        "IBLOCK_ID"      => 16,
+        "NAME"           => $NAME,
+        "PREVIEW_TEXT"   => $PREV,
+        "CODE" => $CODE,
+        "PROPERTY_VALUES"=> $PROPSERVICE,
+        "ACTIVE"         => "N",
+        "ACTIVE_FROM"=>$DATA,
+        // "ACTIVE_FROM"=>date('d.m.Y'),
+
+    );
+    /*print "<pre>";
+    print_r($arLoadProductSERVICE);
+    print "</pre>";*/
+
+    $ID=$el->Add($arLoadProductSERVICE);
+    $ele = new CIBlockElement;
+    $arL = Array(
+        "IBLOCK_ID"      => 16,
+        "CODE" => $CODE."-".$ID,
+    );
+    $res = $ele->Update($ID, $arL);
+
+}
+$counter++;	 
+		
+}
+
+fclose($handle); 	
+	} 
+    
+    
+	file_put_contents($_SERVER["DOCUMENT_ROOT"].'/finish.txt', print_r('finish',1), FILE_APPEND);
+
+

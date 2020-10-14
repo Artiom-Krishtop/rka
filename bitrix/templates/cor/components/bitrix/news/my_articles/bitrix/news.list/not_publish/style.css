@@ -1,0 +1,71 @@
+div.news-list
+{
+	word-wrap: break-word;
+}
+div.news-list img.preview_picture
+{
+	float:left;
+	margin:0 4px 6px 0;
+}
+.news-date-time {
+	color:#486DAA;
+}
+
+ul.links.inline{
+    display: inline;
+    padding: 0;
+    list-style-type: none;	
+}
+
+.links.inline li{
+    display: inline;
+    list-style-type: none;
+    padding: 0 1em 0 0;
+}
+.answered{
+    width: 70%;
+    height: auto;
+}
+.answered label{
+    font-size: 17px;
+}
+.answered textarea{
+    height:150px;
+    display:block;
+    width: 100%;
+    margin:0 0 20px 0;
+    font-size: 16px;
+}
+.answered input{
+    display:block;
+    width: 100%;
+    margin:0 0 20px 0;
+}
+.answered input.btn{
+    width: 20%;
+    padding: 10px;
+    float: right;
+}
+div.status {
+    background-image: url(/bitrix/templates/cor/components/bitrix/news/not_answered/bitrix/news.list/.default/message-24-ok.png);
+    border-color: #be7;
+    background-color:#f8fff0;
+}
+div.messages {
+    background-position: 8px 8px;
+    background-repeat: no-repeat;
+    border: 1px solid;
+    padding: 10px 10px 10px 50px;
+    margin-bottom: 20px;
+}
+div.status, .ok {
+    color: #234600;
+}
+.prev_text{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.ques{
+    margin: 20px 0;
+}
+

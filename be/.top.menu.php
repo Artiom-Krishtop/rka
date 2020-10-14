@@ -1,0 +1,46 @@
+<?
+$aMenuLinks = Array(
+	/*Array(
+		"",
+		"",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"",
+		"",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"",
+		"",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"",
+		"",
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"",
+		"",
+		Array(), 
+		Array(), 
+		"" 
+	),*/
+	Array(
+		"Па-руску",
+		"/",
+		Array(), 
+		Array(), 
+		"" 
+	)
+);
+?>

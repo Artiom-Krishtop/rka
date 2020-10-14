@@ -1,0 +1,8 @@
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");?>
+<?
+$arEventFields = array(
+    "NEW_USER_EMAIL"  => "",
+    "NEW_USER_NAME"  => "",
+);
+CEvent::Send("NARUSHENIE", SITE_ID, $arEventFields, "N", "51");
+?>

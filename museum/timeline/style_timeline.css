@@ -1,0 +1,219 @@
+body{
+	background-color:#ccc;
+}
+#timelineContent{
+	background:transparent;
+}
+.triangle-right { 
+	width: 0; 
+	height: 0; 
+	border-top: 50px solid transparent; 
+	border-right: 30px solid #fff; 
+	border-bottom: 50px solid transparent; 
+	float:left;
+}
+.triangle-right-duo{
+	width: 0; 
+	height: 0; 
+	border-top: 50px solid transparent; 
+	border-right: 30px solid #fff; 
+	float:left;
+	 margin-top: -50px;
+}
+.triangle-right-duo-top{
+	width: 0; 
+	height: 0; 
+	border-right: 30px solid #fff; 
+	border-bottom: 50px solid transparent; 
+	float:left;
+}
+.triangle-right-duo .date{
+	margin-top: -15px;
+}
+.triangle-right-duo-top .date{
+	margin-top: 0px;
+}
+.right{
+	background-color:#fff;
+	float:left;
+	height:100px;
+	width:450px;
+	overflow:hidden;
+}
+.triangle-left { 
+	width: 0; 
+	height: 0; 
+	border-top: 50px solid transparent; 
+	border-left: 30px solid #fff; 
+	border-bottom: 50px solid transparent; 
+	float:left;
+}
+.left{
+	background-color:#fff;
+	float:left;
+	height:100px;
+	width:350px;
+	overflow:hidden;
+}
+.date-left{
+	clear:left;
+	width: 400px;
+	padding: 10px 0;
+}
+.datebottom{
+	margin-top: 135px;
+}
+.date-right{
+	clear:both;
+    height: 100px;
+    margin: 5px 5px 0 360px;
+    width: 500px;
+}
+#box{
+	width:360px;
+	border-right:20px solid #646464;
+	padding-bottom:300px;
+}
+#box .date-right img{
+float:right;
+height:100px;
+
+}
+#box .date-left img{
+float:left;
+height:100px;
+margin-right:5px;
+}
+#line{
+	width:800px;
+}
+.date {
+color:#85092D;
+   font-size: 8pt;
+    font-weight: bold;
+    line-height: 120%;
+    margin-left: -20px;
+    margin-top: 35px;
+    position: absolute;
+    text-align: right;
+    width: 55px;
+}
+.date-left .date {
+   margin-left: 315px;
+    margin-top: 40px;
+    position: absolute;
+    text-align: left;
+	width: 60px;
+	
+}
+.date-left .shortdate{
+margin-left: 305px;
+    margin-top: 40px;
+    text-align: right;
+}
+.date-right .shortdate{
+margin-top: 40px;
+    text-align: left;
+}
+.date-left  .info{
+	width: 260px;
+}
+.info{
+margin-left: 40px;
+    padding: 5px;
+	 font-size: 9pt;
+    line-height: 150%;
+}
+#andrejchik{
+margin-top: -240px;
+}
+#andrejchik .right{
+height:230px;
+}
+#andrejchik .date{
+margin-top: -13px;
+}
+#box #andrejchik img{
+height:230px;
+}
+#andrejchik .datebottom{
+margin-top: 185px;
+}
+.myline{
+clear:both;
+position:absolute;
+}
+#lech{
+position:absolute;
+margin-top: -300px;
+}
+#lech .left{
+height:390px;
+}
+#lech .left img{
+width:100px;
+height:auto;
+}
+#zash{
+position:absolute;
+margin-top:-10px;
+}
+.info_wide{
+background-color: #FFFFFF;
+    font-size: 9pt;
+    line-height: 150%;
+    padding: 10px;
+    width: 820px;
+}
+.info_wide img{
+	margin-left: -10px;
+}
+.datewide-top{
+border-bottom: 30px solid #FFFFFF;
+    border-left: 370px solid transparent;
+    border-right: 470px solid transparent;
+    height: 0;
+    margin-top: 10px;
+    width: 0;
+}
+.datewide{
+border-top: 30px solid #FFFFFF;
+    border-left: 370px solid transparent;
+    border-right: 470px solid transparent;
+    height: 0;
+    width: 0;
+}
+.datewide-top .date{
+ margin-left: -150px;
+    margin-top: 12px;
+    text-align: center;
+    width: 300px;
+
+}
+.datewide .date{
+margin-left: -155px;
+    margin-top: -30px;
+    text-align: center;
+    width: 300px;
+}
+.info_wide table td{
+color: #85092D;
+    font-weight: bold;
+	text-align:center;
+}
+.info_wide table td img{
+border:1px solid #85092D;
+}
+#france , #france .right{
+height:380px;
+}
+#france{
+margin-top: -230px;
+    position: absolute;
+}
+#france .date{
+margin-left:0px;
+}
+#rim{
+margin-top:160px;
+}

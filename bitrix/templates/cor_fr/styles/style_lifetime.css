@@ -1,0 +1,133 @@
+body{
+	background-color:#ccc;
+}
+.triangle-right { 
+	width: 0; 
+	height: 0; 
+	border-top: 25px solid transparent; 
+	border-right: 30px solid #fff; 
+	border-bottom: 25px solid transparent; 
+	float:left;
+}
+.triangle-duo{
+	width: 0; 
+	height: 0; 
+	border-top: 25px solid transparent; 
+	border-left: 30px solid #fff; 
+	float:left;
+}
+.date-right .triangle-duo{
+	border-left: 0px solid #fff; 
+	border-right: 30px solid #fff; 
+}
+.triangle-duo-top{
+	width: 0; 
+	height: 0; 
+	border-left: 30px solid #fff; 
+	border-bottom: 25px solid transparent; 
+	float:left;
+}
+.date-right .triangle-duo-top{
+	border-left: 0px solid #fff; 
+	border-right: 30px solid #fff; 
+}
+.triangle-left { 
+	width: 0; 
+	height: 0; 
+	border-top: 25px solid transparent; 
+	border-left: 30px solid #fff; 
+	border-bottom: 25px solid transparent; 
+	float:left;
+}
+.left{
+	background-color:#fff;
+	float:left;
+	height:50px;
+	width:250px;
+	overflow:hidden;
+}
+.right{
+	background-color:#fff;
+	float:left;
+	height:50px;
+	width:150px;
+	overflow:hidden;
+}
+.date-left{
+	clear:left;
+	width: 300px;
+	padding: 10px 0;
+}
+.datebottom{
+	margin-top: 135px;
+}
+.date-right{
+	clear:both;
+    height: 100px;
+    margin: 5px 5px 0 280px;
+    width: 200px;
+}
+#line{
+	width:270px;
+	border-right:20px solid #646464;
+	padding-bottom:300px;
+	float:left;
+}
+
+.date {
+color:#85092D;
+   font-size: 8pt;
+    font-weight: bold;
+    line-height: 120%;
+    position: absolute;
+    text-align: left;
+    width: 55px;
+	margin-left: -50px;
+}
+.date-right .date{
+margin-left: 20px;
+}
+.date-right  .info{
+	padding: 5px 10px 5px 30px;
+}
+.triangle-duo-top .date {
+margin-top: 0px;
+}
+.triangle-duo .date {
+margin-top: -15px;
+}
+.triangle-left .date{
+margin-top: -12px;
+}
+.date-left  .info{
+	width: 160px;
+}
+.info{
+    padding: 5px 10px;
+	 font-size: 9pt;
+    line-height: 150%;
+}
+.main_info{
+float:right;
+background-color: #FFFFFF;
+    float: right;
+    padding: 10px;
+    width: 340px;
+}
+#kushelevna_kurs{
+	position: absolute;
+}
+#kushelevna_kurs .right{
+	height:220px;
+}#kushelevna_kurs .triangle-duo{
+	margin-top: -25px;
+}
+.book-navigation{
+clear:both;
+}
+.page-content{
+background:transparent!important;
+}
+.page-content h1{
+color:#85092D!important;
+}

@@ -1,0 +1,3 @@
+<?
+$APPLICATION->SetTitle($arResult["NAME"]);
+?> 

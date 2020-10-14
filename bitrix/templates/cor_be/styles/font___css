@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'TrebuchetMS';
+    font-weight: normal;
+    font-style: normal;
+    src: url('../font/trebuc.eot');
+    src: url('../font/trebuc.eot') format('embedded-opentype'),
+         url('../font/trebuc.woff') format('woff'),
+         url('../font/trebuc.ttf') format('truetype'),
+         url('../font/trebuc.svg#TrebuchetMSRegular') format('svg');
+}
+@font-face {
+    font-family: 'TrebuchetMS';
+    font-weight: normal;
+    font-style: italic;
+    src: url('../font/trebucit.eot');
+    src: url('../font/trebucit.eot') format('embedded-opentype'),
+         url('../font/trebucit.woff') format('woff'),
+         url('../font/trebucit.ttf') format('truetype'),
+         url('../font/trebucit.svg#TrebuchetMSItalic') format('svg');
+}
+@font-face {
+    font-family: 'TrebuchetMS';
+    font-weight: bold;
+    font-style: normal;
+    src: url('../font/trebucbd.eot');
+    src: url('../font/trebucbd.eot') format('embedded-opentype'),
+         url('../font/trebucbd.woff') format('woff'),
+         url('../font/trebucbd.ttf') format('truetype'),
+         url('../font/trebucbd.svg#TrebuchetMSBold') format('svg');
+}
+@font-face {
+    font-family: 'TrebuchetMS';
+    font-weight: bold;
+    font-style: italic;
+    src: url('../font/trebucbi.eot');
+    src: url('../font/trebucbi.eot') format('embedded-opentype'),
+         url('../font/trebucbi.woff') format('woff'),
+         url('../font/trebucbi.ttf') format('truetype'),
+         url('../font/trebucbi.svg#TrebuchetMSBoldItalic') format('svg');
+}
