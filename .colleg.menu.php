@@ -43,7 +43,7 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Могилевская областная (МогОКА)", 
+		"Могилевская областная(МогОКА)", 
 		"/kollegies/mogilevskaya-oblastnaya/", 
 		Array(), 
 		Array(), 
