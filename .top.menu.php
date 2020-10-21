@@ -9,7 +9,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"График приёма", 
-		"/grafik-priyoma/", 
+		"grafik-priyoma-grazhdan/", 
 		Array(), 
 		Array(), 
 		"" 
