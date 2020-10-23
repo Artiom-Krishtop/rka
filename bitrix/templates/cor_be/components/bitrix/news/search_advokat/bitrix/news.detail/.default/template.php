@@ -575,17 +575,18 @@ print "</pre>";*/		?>
 
 <style>
 .field-name-field-phone .field-label{
-    width: 240px;	
+    width: 50%;
 }
 .field-name-field-phone .field-items{
-	width: 272px;
+	width: 50%;
     text-align: left;
+    padding-left: 1%;
 }
 .news-detail .field-type-text.field-label-inline{
 	text-align: right;
-    display: block;
-    width: 65%;
-    height: 20px;
+    display: flex;
+    width: 64%;
+    /*height: 20px;*/
     margin: 0 auto;	
 	margin-left: 0px;	
 }

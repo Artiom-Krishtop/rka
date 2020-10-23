@@ -1,31 +1,28 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Белорусская республиканская коллегия адвокатов | консультации адвокатов, правовая помощь и юридические услуги");
-?><section class="asidenews">
-<h2 class="block-title"><span style="font-family: Georgia, serif; font-size: 13pt;"><b>Уважаемые посетители!</b></span><b>&nbsp;</b><br>
+$APPLICATION->SetTitle("Белорусская республиканская коллегия адвокатов ");
+?><h2 class="block-title"><span style="font-family: Georgia, serif; font-size: 13pt;"><b>Уважаемые посетители!</b></span><b>&nbsp;</b><br>
  </h2>
 <p>
- <span style="font-family: Georgia, serif; font-size: 13pt;">Адвокатура в Республике Беларусь - правовой институт, призванный осуществлять профессиональную правозащитную деятельность, оказывать квалифицированную юридическую помощь всем, кто в ней нуждается.</span>&nbsp;
+ <span style="font-family: Georgia, serif; font-size: 12pt;">Адвокатура в Республике Беларусь - правовой институт, призванный осуществлять профессиональную правозащитную деятельность, оказывать квалифицированную юридическую помощь всем, кто в ней нуждается.</span>&nbsp;
 </p>
 <p>
- <span style="font-family: Georgia, serif; font-size: 13pt;">Сегодня каждый понимает необходимость обращения к адвокату за советом перед совершением какого-либо юридически значимого действия. Очевидно, что предотвратить наступление неблагоприятных последствий своих поступков гораздо проще, чем исправлять их с использованием правовых инструментов.</span>
+ <span style="font-family: Georgia, serif; font-size: 12pt;">Сегодня каждый понимает необходимость обращения к адвокату за советом перед совершением какого-либо юридически значимого действия. Очевидно, что предотвратить наступление неблагоприятных последствий своих поступков гораздо проще, чем исправлять их с использованием правовых инструментов.</span>
 </p>
 <p>
- <span style="font-family: Georgia, serif; font-size: 13pt;">
+ <span style="font-family: Georgia, serif; font-size: 12pt;">
 	На данном сайте Вы можете: найти сведения обо всех адвокатах республики; изучить разъяснения адвокатов по наиболее актуальным юридическим вопросам; получить актуальную информацию о деятельности адвокатского сообщества Беларуси; в рамках онлайн-консультации получить предварительное разъяснение норм законодательства по вопросам, не требующим ознакомления с документами и иными материалами.</span>
 </p>
- <span style="font-family: Georgia, serif; font-size: 13pt;">
+ <span style="font-family: Georgia, serif; font-size: 12pt;">
 Для получения бесплатной юридической онлайн-консультации нажмите на кнопку "Задать вопрос".</span>
 <p>
 </p>
- <a href="/faq_ask/" style="text-decoration: line-through !important;" class="ask">Задать вопрос</a>
+ <a href="/faq_ask/" class="ask"><span style="font-family: Georgia, serif; font-size: 15pt;">Задать вопрос</span></a>
 <p>
 </p>
-<h2 class="block-title"><strong><span style="font-family: Georgia, serif; font-size: 13pt;strong"><br>
- </span></strong></h2>
 <h2 class="block-title"><br>
- </h2>
- <!-- /.block --> <!-- /.region --> </section>
+</h2>
+ <!-- /.block --> <!-- /.region -->
 <div class="region region-news">
 	 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",

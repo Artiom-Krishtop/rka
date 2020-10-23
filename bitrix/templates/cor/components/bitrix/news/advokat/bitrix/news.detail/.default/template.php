@@ -426,19 +426,20 @@ print "</pre>";*/
                 <?}?>
 		<h2><a href="<?=$arResult["KOLLEG_LINK"]?>"><?=$arResult["KOLLEG_NAME"]?></a></h2>
 <style>
-.field-name-field-phone .field-label{
-    width: 240px;	
-}
-.field-name-field-phone .field-items{
-	width: 272px;
-    text-align: left;
-}
-.news-detail .field-type-text.field-label-inline{
-	text-align: right;
-    display: block;
-    width: 65%;
-    height: 20px;
-    margin: 0 auto;	
-	margin-left: 0px;	
-}
+    .field-name-field-phone .field-label{
+        width: 50%;
+    }
+    .field-name-field-phone .field-items{
+        width: 50%;
+        text-align: left;
+        padding-left: 1%;
+    }
+    .news-detail .field-type-text.field-label-inline{
+        text-align: right;
+        display: flex;
+        width: 64%;
+        /*height: 20px;*/
+        margin: 0 auto;
+        margin-left: 0px;
+    }
 </style>
