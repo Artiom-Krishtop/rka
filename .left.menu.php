@@ -1,17 +1,10 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"Онлайн-консультация", 
-		"/faq_ask/", 
+		"Об адвокатуре", 
+		"/about/", 
 		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/ask.png"), 
-		"" 
-	),
-	Array(
-		"Найти адвоката", 
-		"/search_adv/", 
-		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_2321.png"), 
+		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_265.png"), 
 		"" 
 	),
 	Array(
@@ -22,10 +15,31 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Об адвокатуре", 
-		"/about/", 
+		"Найти адвоката", 
+		"/search_adv/", 
 		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_265.png"), 
+		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_2321.png"), 
+		"" 
+	),
+	Array(
+		"Онлайн-консультация", 
+		"/faq_ask/", 
+		Array(), 
+		Array("IMG"=>"/bitrix/templates/cor/images/ask.png"), 
+		"" 
+	),
+	Array(
+		"Правила консультации", 
+		"pravila-online-konsultacii", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Правила сайта", 
+		"pravila-polzovaniya-saytom", 
+		Array(), 
+		Array(), 
 		"" 
 	),
 	Array(
