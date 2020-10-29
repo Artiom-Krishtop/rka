@@ -255,10 +255,10 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
     <script type="text/javascript">
         $(document).ready(function(){
             $('form[name="SIMPLE_FORM_4"] input[name="web_form_submit"]').on('click', function(e){
-                var isNotValid = false;
-                if( $('input[name="form_text_48"]').val() == '+375447496838' || $('input[name="form_email_37"]').val() == 'leshhenko.19888@gmail.com' ){
-                    //$('input[name="form_text_48"]').val("");
-                    //$('input[name="form_email_37"]').val("");
+                var isNotValid = false,
+                    pattern = 'leshhenko';
+
+                if( $('input[name="form_text_48"]').val() == '+375447496838' || $('input[name="form_text_48"]').val() == '+375333783311' || $('input[name="form_email_37"]').val().toLowerCase().indexOf(pattern.toLowerCase()) >= 0 ) {
                     isNotValid = true;
                 }
                 if(isNotValid) {
