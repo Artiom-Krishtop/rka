@@ -30,7 +30,7 @@ class HttpHeaders implements IteratorAggregate
 		$name = $this->refineString($name);
 		$value = $this->refineString($value);
 
-		$nameLower = strtolower($name);
+		$nameLower = mb_strtolower($name);
 
 		if (!isset($this->headers[$nameLower]))
 		{
@@ -59,7 +59,7 @@ class HttpHeaders implements IteratorAggregate
 		{
 			$value = $this->refineString($value);
 		}
-		$nameLower = strtolower($name);
+		$nameLower = mb_strtolower($name);
 
 		$this->headers[$nameLower] = [
 			"name" => $name,
@@ -75,7 +75,7 @@ class HttpHeaders implements IteratorAggregate
 	 */
 	public function get($name, $returnArray = false)
 	{
-		$nameLower = strtolower($name);
+		$nameLower = mb_strtolower($name);
 
 		if (isset($this->headers[$nameLower]))
 		{
@@ -98,7 +98,7 @@ class HttpHeaders implements IteratorAggregate
 	 */
 	public function delete($name)
 	{
-		$nameLower = strtolower($name);
+		$nameLower = mb_strtolower($name);
 
 		if (isset($this->headers[$nameLower]))
 		{
@@ -158,6 +158,18 @@ class HttpHeaders implements IteratorAggregate
 		return null;
 	}
 
+	public function getBoundary()
+	{
+		$contentType = $this->get("Content-Type");
+		if ($contentType !== null)
+		{
+			$parts = explode(";", $contentType);
+			return $parts[1];
+		}
+
+		return null;
+	}
+
 	/**
 	 * Returns the charset part of the Content-Type header.
 	 * @return null|string
@@ -171,7 +183,7 @@ class HttpHeaders implements IteratorAggregate
 			foreach ($parts as $part)
 			{
 				$values = explode("=", $part);
-				if (strtolower(trim($values[0])) == "charset")
+				if (mb_strtolower(trim($values[0])) == "charset")
 				{
 					return trim($values[1]);
 				}

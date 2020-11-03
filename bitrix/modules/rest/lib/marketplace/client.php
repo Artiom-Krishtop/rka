@@ -26,12 +26,13 @@ class Client
 
 	private static $appTop = null;
 
-	public static function getTop($action)
+	public static function getTop($action, $fields = array())
 	{
 		$allowedActions = array(
 			Transport::METHOD_GET_LAST,
 			Transport::METHOD_GET_DEV,
-			Transport::METHOD_GET_BEST
+			Transport::METHOD_GET_BEST,
+			Transport::METHOD_GET_SALE_OUT
 		);
 
 		if(in_array($action, $allowedActions))
@@ -41,7 +42,7 @@ class Client
 				$batch = array();
 				foreach($allowedActions as $method)
 				{
-					$batch[$method] = array($method, array());
+					$batch[$method] = array($method, $fields);
 				}
 
 				self::$appTop = Transport::instance()->batch($batch);
@@ -129,46 +130,81 @@ class Client
 		return intval(Option::get("rest", "mp_num_updates", 0));
 	}
 
-	public static function getCategories($forceReload = false)
+	/**
+	 * Return marketplace category query result
+	 * @param bool $forceReload
+	 *
+	 * @return array
+	 */
+	public static function getCategoriesFull($forceReload = false)
 	{
 		$managedCache = Application::getInstance()->getManagedCache();
 
-		$cacheId = 'rest|marketplace|categories|'.LANGUAGE_ID;
+		$cacheId = 'rest|marketplace|categories|full|'.LANGUAGE_ID;
 
-		if(
+		$requestNeeded = true;
+
+		if (
 			$forceReload === false
 			&& static::CATEGORIES_CACHE_TTL > 0
 			&& $managedCache->read(static::CATEGORIES_CACHE_TTL, $cacheId)
 		)
 		{
-			$categoriesList = $managedCache->get($cacheId);
+			$result = $managedCache->get($cacheId);
+			if (is_array($result))
+			{
+				$requestNeeded = false;
+			}
+			elseif (intval($result) > time())
+			{
+				$requestNeeded = false;
+				$result = [];
+			}
 		}
-		else
+
+		if ($requestNeeded)
 		{
-			$categoriesList = Transport::instance()->call(Transport::METHOD_GET_CATEGORIES);
-			if($categoriesList)
+			$result = Transport::instance()->call(Transport::METHOD_GET_CATEGORIES);
+			if (!is_array($result))
 			{
-				$categoriesList = $categoriesList["ITEMS"];
+				$result = time() + 300;
 			}
 
-			if(static::CATEGORIES_CACHE_TTL > 0)
+			if (static::CATEGORIES_CACHE_TTL > 0)
 			{
-				$managedCache->set($cacheId, $categoriesList);
+				$managedCache->set($cacheId, $result);
 			}
 		}
 
-		return $categoriesList;
+		return (is_array($result) ? $result : []);
 	}
 
-	public static function getCategory($code, $page = false)
+	/**
+	 * Return marketplace category items
+	 * @param bool $forceReload
+	 *
+	 * @return array
+	 */
+	public static function getCategories($forceReload = false)
+	{
+		$categories = static::getCategoriesFull($forceReload);
+		return (is_array($categories['ITEMS']) ? $categories['ITEMS'] : []);
+	}
+
+	public static function getCategory($code, $page = false, $pageSize = false)
 	{
 		$queryFields = Array(
 			"code" => $code
 		);
 		$page = intval($page);
+		$pageSize = intval($pageSize);
 		if($page > 0)
 		{
 			$queryFields["page"] = $page;
+		}
+		if($pageSize > 0)
+		{
+			$queryFields["onPageSize"] = $pageSize;
 		}
 
 		return Transport::instance()->call(
@@ -177,7 +213,7 @@ class Client
 		);
 	}
 
-	public static function getByTag($tag, $page = false)
+	public static function getByTag($tag, $page = false, $pageSize = false)
 	{
 		$queryFields = Array(
 			"tag" => $tag
@@ -188,10 +224,36 @@ class Client
 			$queryFields["page"] = $page;
 		}
 
+		if($pageSize > 0)
+		{
+			$queryFields["onPageSize"] = $pageSize;
+		}
+
 		return Transport::instance()->call(
 			Transport::METHOD_GET_TAG,
 			$queryFields
 		);
+	}
+
+	public static function getLastByTag($tag, $page = false, $pageSize = false)
+	{
+		$queryFields = Array(
+			"tag" => $tag,
+			"sort" => "date_public"
+		);
+
+		$page = intval($page);
+		if($page > 0)
+		{
+			$queryFields["page"] = $page;
+		}
+
+		if($pageSize > 0)
+		{
+			$queryFields["onPageSize"] = $pageSize;
+		}
+
+		return Transport::instance()->call(Transport::METHOD_GET_TAG, $queryFields);
 	}
 
 	public static function getApp($code, $version = false, $checkHash = false, $installHash = false)
@@ -214,6 +276,49 @@ class Client
 
 		return Transport::instance()->call(
 			Transport::METHOD_GET_APP,
+			$queryFields
+		);
+	}
+
+	public static function getAppPublic($code, $version = false, $checkHash = false, $installHash = false)
+	{
+		$queryFields = [
+			"code" => $code
+		];
+
+		$version = intval($version);
+		if($version > 0)
+		{
+			$queryFields["ver"] = $version;
+		}
+
+		if($checkHash !== false)
+		{
+			$queryFields["check_hash"] = $checkHash;
+			$queryFields["install_hash"] = $installHash;
+		}
+
+		return Transport::instance()->call(
+			Transport::METHOD_GET_APP_PUBLIC,
+			$queryFields
+		);
+	}
+
+	public static function filterApp($fields, $page = false)
+	{
+		if (!is_array($fields))
+			$fields = array($fields);
+
+		$queryFields = $fields;
+
+		$page = intval($page);
+		if($page > 0)
+		{
+			$queryFields["page"] = $page;
+		}
+
+		return Transport::instance()->call(
+			Transport::METHOD_FILTER_APP,
 			$queryFields
 		);
 	}
@@ -323,9 +428,9 @@ class Client
 	public static function getTagByPlacement($placement)
 	{
 		$tag = array();
-		if(strlen($placement) > 0)
+		if($placement <> '')
 		{
-			if(substr($placement, 0, 4) === 'CRM_' || $placement === \Bitrix\Rest\Api\UserFieldType::PLACEMENT_UF_TYPE)
+			if(mb_substr($placement, 0, 4) === 'CRM_' || $placement === \Bitrix\Rest\Api\UserFieldType::PLACEMENT_UF_TYPE)
 			{
 				if($placement !== 'CRM_ROBOT_TRIGGERS')
 				{
@@ -338,7 +443,7 @@ class Client
 
 				$tag[] = 'crm';
 			}
-			elseif(substr($placement, 0, 5) === 'CALL_')
+			elseif(mb_substr($placement, 0, 5) === 'CALL_')
 			{
 				$tag[] = 'placement';
 				$tag[] = 'telephony';
@@ -348,6 +453,37 @@ class Client
 		$tag[] = $placement;
 
 		return $tag;
+	}
+
+	public static function getTagByAppType($type)
+	{
+		$tag = [];
+		$tag[] = $type;
+		return $tag;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function isSubscriptionAvailable()
+	{
+		$status = \Bitrix\Main\Config\Option::get('bitrix24', '~mp24_paid', 'N');
+		return ($status === 'Y' || $status === 'T');
+	}
+
+	/**
+	 * @return \Bitrix\Main\Type\Date
+	 */
+	public static function getSubscriptionFinalDate()
+	{
+		$result = false;
+		$timestamp = \Bitrix\Main\Config\Option::get("bitrix24", "~mp24_paid_date");
+		if ($timestamp > 0)
+		{
+			$result = \Bitrix\Main\Type\Date::createFromTimestamp($timestamp);
+		}
+
+		return $result;
 	}
 
 }

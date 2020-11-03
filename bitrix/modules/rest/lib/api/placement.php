@@ -4,6 +4,7 @@ namespace Bitrix\Rest\Api;
 
 use Bitrix\Main\ArgumentException;
 use Bitrix\Main\ArgumentNullException;
+use Bitrix\Main\Entity\ExpressionField;
 use Bitrix\Rest\AccessException;
 use Bitrix\Rest\AppTable;
 use Bitrix\Rest\AuthTypeException;
@@ -96,7 +97,7 @@ class Placement extends \IRestService
 		$placement = toUpper($params['PLACEMENT']);
 		$placementHandler = $params['HANDLER'];
 
-		if(strlen($placement) <= 0)
+		if($placement == '')
 		{
 			throw new ArgumentNullException("PLACEMENT");
 		}
@@ -106,7 +107,7 @@ class Placement extends \IRestService
 			throw new ArgumentException("Wrong value", "PLACEMENT");
 		}
 
-		if(strlen($placementHandler) <= 0)
+		if($placementHandler == '')
 		{
 			throw new ArgumentNullException("HANDLER");
 		}
@@ -139,6 +140,38 @@ class Placement extends \IRestService
 				$placementBind['COMMENT'] = trim($params['DESCRIPTION']);
 			}
 
+			if(!empty($params['GROUP_NAME']))
+			{
+				$placementBind['GROUP_NAME'] = trim($params['GROUP_NAME']);
+			}
+
+			if($placementInfo['max_count'] > 0)
+			{
+				$res = PlacementTable::getList(
+					[
+						'filter' => [
+							'=APP_ID' => $placementBind['APP_ID'],
+							'=PLACEMENT' => $placementBind['PLACEMENT']
+						],
+						'select' => array('COUNT'),
+						'runtime' => array(
+							new ExpressionField('COUNT', 'COUNT(*)')
+						)
+					]
+				);
+
+				if($result = $res->fetch())
+				{
+					if($result['COUNT'] >= $placementInfo['max_count'])
+					{
+						throw new RestException(
+							'Placement max count: '.$placementInfo['max_count'],
+							PlacementTable::ERROR_PLACEMENT_MAX_COUNT
+						);
+					}
+				}
+			}
+
 			$result = PlacementTable::add($placementBind);
 			if(!$result->isSuccess())
 			{
@@ -168,7 +201,7 @@ class Placement extends \IRestService
 		$placement = toUpper($params['PLACEMENT']);
 		$placementHandler = $params['HANDLER'];
 
-		if(strlen($placement) <= 0)
+		if($placement == '')
 		{
 			throw new ArgumentNullException("PLACEMENT");
 		}
@@ -186,7 +219,7 @@ class Placement extends \IRestService
 				'=PLACEMENT' => $placement,
 			);
 
-			if(strlen($placementHandler) > 0)
+			if($placementHandler <> '')
 			{
 				$filter['=PLACEMENT_HANDLER'] = $placementHandler;
 			}

@@ -10,6 +10,8 @@ abstract class SqlHelper
 	/** @var Connection $connection */
 	protected $connection;
 
+	protected $idCache;
+
 	/**
 	 * @param Connection $connection Database connection.
 	 */
@@ -61,17 +63,22 @@ abstract class SqlHelper
 	 */
 	public function quote($identifier)
 	{
-		// security unshielding
-		$identifier = str_replace(array($this->getLeftQuote(), $this->getRightQuote()), '', $identifier);
-
-		// shield [[database.]tablename.]columnname
-		if (strpos($identifier, '.') !== false)
+		if (empty($this->idCache[$identifier]))
 		{
-			$identifier = str_replace('.', $this->getRightQuote() . '.' . $this->getLeftQuote(), $identifier);
+			// security unshielding
+			$quotedIdentifier = str_replace([$this->getLeftQuote(), $this->getRightQuote()], '', $identifier);
+
+			// shield [[database.]tablename.]columnname
+			if (mb_strpos($quotedIdentifier, '.') !== false)
+			{
+				$quotedIdentifier = str_replace('.', $this->getRightQuote() . '.' . $this->getLeftQuote(), $quotedIdentifier);
+			}
+
+			// shield general borders
+			$this->idCache[$identifier] = $this->getLeftQuote() . $quotedIdentifier . $this->getRightQuote();
 		}
 
-		// shield general borders
-		return $this->getLeftQuote() . $identifier . $this->getRightQuote();
+		return $this->idCache[$identifier];
 	}
 
 	/**
@@ -281,11 +288,15 @@ abstract class SqlHelper
 	 * Builds the strings for the SQL INSERT command for the given table.
 	 *
 	 * @param string $tableName A table name.
-	 * @param array $fields Array("column" => $value)[].
+	 * @param array  $fields    Array("column" => $value)[].
+	 *
+	 * @param bool   $returnAsArray
 	 *
 	 * @return array (columnList, valueList, binds)
+	 * @throws Main\ArgumentTypeException
+	 * @throws SqlQueryException
 	 */
-	public function prepareInsert($tableName, array $fields)
+	public function prepareInsert($tableName, array $fields, $returnAsArray = false)
 	{
 		$columns = array();
 		$values = array();
@@ -312,8 +323,8 @@ abstract class SqlHelper
 		$binds = $this->prepareBinds($tableFields, $fields);
 
 		return array(
-			implode(", ", $columns),
-			implode(", ", $values),
+			$returnAsArray ? $columns : implode(", ", $columns),
+			$returnAsArray ? $values : implode(", ", $values),
 			$binds
 		);
 	}
@@ -522,7 +533,7 @@ abstract class SqlHelper
 	{
 		if ($length > 0)
 		{
-			$value = substr($value, 0, $length);
+			$value = mb_substr($value, 0, $length);
 		}
 
 		return strval($value);

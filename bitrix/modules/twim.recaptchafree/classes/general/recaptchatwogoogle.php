@@ -38,7 +38,7 @@ class ReCaptchaTwoGoogle{
 	public function OnVerificContent(){
  		if (defined("ADMIN_SECTION")){ return; }
 		$arSettings = self::getParamSite();
-        if($arSettings["act"] !== "Y" && !self::checkBrowser()){return;}
+        if($arSettings["act"] !== "Y" || !self::checkBrowser()){return;}
             Asset::getInstance()->addJs('/bitrix/js/twim.recaptchafree/script.js');
             Asset::getInstance()->addJs('https://www.google.com/recaptcha/api.js?onload=onloadRecaptchafree&render=explicit&hl='. LANGUAGE_ID);
             $arRequest =  self::getParamRequest();

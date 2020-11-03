@@ -10,6 +10,7 @@ use Bitrix\Rest\AppTable;
 use Bitrix\Rest\OAuth\Auth;
 use Bitrix\Rest\OAuthService;
 use Bitrix\Rest\Sqs;
+use Bitrix\Rest\UsageStatTable;
 
 /**
  * Class Sender
@@ -199,6 +200,11 @@ class Sender
 						"application_token" => \CRestUtil::getApplicationToken($application),
 					);
 				}
+
+				if($handler['EVENT_HANDLER'] <> '')
+				{
+					UsageStatTable::logEvent($application['CLIENT_ID'], $handler['EVENT_NAME']);
+				}
 			}
 			else
 			{
@@ -213,7 +219,7 @@ class Sender
 
 			if($authData)
 			{
-				if(strlen($handler['EVENT_HANDLER']) > 0)
+				if($handler['EVENT_HANDLER'] <> '')
 				{
 					self::$queryData[] = Sqs::queryItem(
 						$application['CLIENT_ID'],
@@ -264,6 +270,7 @@ class Sender
 	{
 		if(count(self::$queryData) > 0)
 		{
+			UsageStatTable::finalize();
 			static::getProvider()->send(self::$queryData);
 			self::$queryData = array();
 		}
@@ -339,7 +346,7 @@ class Sender
 	protected static function getHandlerName($moduleId, $eventName)
 	{
 		// \Bitrix\Rest\EventTable::on
-		if(strpos($eventName, '::') >= 0)
+		if(mb_strpos($eventName, '::') >= 0)
 		{
 			$handlerName = $moduleId.'__'.ToUpper(str_replace(array("\\", '::'), array('_0_', '_1_'), $eventName));
 		}

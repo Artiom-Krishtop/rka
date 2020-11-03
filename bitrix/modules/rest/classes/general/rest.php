@@ -121,7 +121,7 @@ class CRestServer
 
 					if($this->checkAuth())
 					{
-						\Bitrix\Rest\StatTable::log($this);
+						\Bitrix\Rest\UsageStatTable::log($this);
 
 
 						if($this->tokenCheck)
@@ -383,7 +383,7 @@ class CRestServer
 
 		$key = \Bitrix\Rest\OAuthService::getEngine()->getClientSecret();
 
-		$signatureState = $method
+		$signatureState = ToLower($method)
 			.\CRestUtil::TOKEN_DELIMITER.($this->scope === \CRestUtil::GLOBAL_SCOPE ? '' : $this->scope)
 			.\CRestUtil::TOKEN_DELIMITER.$queryString
 			.\CRestUtil::TOKEN_DELIMITER.implode(\CRestUtil::TOKEN_DELIMITER, $this->auth);
@@ -396,7 +396,7 @@ class CRestServer
 		$signature = '';
 
 		$arRes = \Bitrix\Rest\AppTable::getByClientId($this->clientId);
-		if(is_array($arRes) && strlen($arRes['SHARED_KEY']) > 0)
+		if(is_array($arRes) && $arRes['SHARED_KEY'] <> '')
 		{
 			$methodState = is_array($this->securityMethodState)
 				? $this->securityMethodState
@@ -413,7 +413,7 @@ class CRestServer
 
 	public function requestConfirmation($userList, $message)
 	{
-		if(strlen($message) <= 0)
+		if($message == '')
 		{
 			throw new ArgumentNullException('message');
 		}
@@ -560,7 +560,7 @@ class CRestServer
 	{
 		if($this->tokenCheck)
 		{
-			if(isset($this->query["token"]) && strlen($this->query["token"]) > 0)
+			if(isset($this->query["token"]) && $this->query["token"] <> '')
 			{
 				list($scope) = explode(\CRestUtil::TOKEN_DELIMITER, $this->query["token"], 2);
 				$this->scope = $scope == "" ? \CRestUtil::GLOBAL_SCOPE : $scope;
@@ -706,7 +706,7 @@ class CRestServer
 	public function output($data)
 	{
 		\Bitrix\Rest\LogTable::log($this, $data);
-		\Bitrix\Rest\StatTable::finalize();
+		\Bitrix\Rest\UsageStatTable::finalize();
 
 		switch($this->transport)
 		{

@@ -24,12 +24,15 @@ if($USER->IsAuthorized() && (!defined("BX_AUTH_FORM") || !BX_AUTH_FORM))
 	echo $hkInstance->PrintJSExecs($Execs);
 	echo $hkInstance->PrintPhpToJSVars();
 
-	echo CAdminInformer::PrintHtml();
+	if (!defined('BX_PUBLIC_MODE') || BX_PUBLIC_MODE != 1)
+	{
+		echo CAdminInformer::PrintHtml();
+	}
 
 	if(
 		$USER->IsAuthorized()
 		&& (!defined('BX_PUBLIC_MODE') || BX_PUBLIC_MODE != 1)
-		&& (!isset($_SESSION["SS_B24NET_STATE"]) || $_SESSION["SS_B24NET_STATE"] !== $USER->GetID())
+		&& (!isset(\Bitrix\Main\Application::getInstance()->getSession()["SS_B24NET_STATE"]) || \Bitrix\Main\Application::getInstance()->getSession()["SS_B24NET_STATE"] !== $USER->GetID())
 		&& \Bitrix\Main\ModuleManager::isModuleInstalled("socialservices")
 		&& \Bitrix\Main\Config\Option::get("socialservices", "bitrix24net_id", "") != ""
 	)

@@ -135,7 +135,7 @@ class Network
 		}
 
 		$search = trim($search);
-		if (strlen($search) < 3)
+		if (mb_strlen($search) < 3)
 		{
 			$this->errorCollection[] = new Error(Loc::getMessage('B24NET_SEARCH_STRING_TO_SHORT'), self::ERROR_SEARCH_STRING_TO_SHORT);
 			return null;
@@ -163,6 +163,19 @@ class Network
 		}
 
 		return $result;
+	}
+
+	public static function sendMobileApplicationLink($phone, $language_id)
+	{
+		$query = \CBitrix24NetPortalTransport::init();
+		if ($query)
+		{
+			$query->call('profile.send', array(
+				'TYPE' => 'mobile_application_link',
+				'PHONE' => $phone,
+				'LANGUAGE_ID' => $language_id,
+			));
+		}
 	}
 
 	/**
@@ -390,7 +403,7 @@ class Network
 		$searchArray = Array();
 		foreach ($networkIds as $networkId)
 		{
-			$searchArray[] = substr($networkId, 0, 1).intval(substr($networkId, 1))."|%";
+			$searchArray[] = mb_substr($networkId, 0, 1).intval(mb_substr($networkId, 1))."|%";
 		}
 
 		$result = \Bitrix\Main\UserTable::getList(Array(
@@ -594,7 +607,7 @@ class Network
 	{
 		return array(
 			"REGISTER" => Option::get("socialservices", "new_user_registration_network", "N"),
-			"REGISTER_CONFIRM" => Option::get("socialservices", "new_user_registration_confirm", "Y"),
+			"REGISTER_CONFIRM" => Option::get("socialservices", "new_user_registration_confirm", "N"),
 			"REGISTER_WHITELIST" => implode(';', unserialize(Option::get("socialservices", "new_user_registration_whitelist", serialize(array())))),
 			"REGISTER_TEXT" => Option::get("socialservices", "new_user_registration_text", ""),
 			"REGISTER_SECRET" => Option::get("socialservices", "new_user_registration_secret", ""),

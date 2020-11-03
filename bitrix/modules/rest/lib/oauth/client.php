@@ -39,9 +39,11 @@ class Client
 	const METHOD_APPLICATION_UPDATE = 'application.update';
 	const METHOD_APPLICATION_DELETE = 'application.delete';
 	const METHOD_APPLICATION_INSTALL = 'application.install';
+	const METHOD_APPLICATION_INSTALL_SUBSCRIPTION = 'application.install.subscription';
 	const METHOD_APPLICATION_UNINSTALL = 'application.uninstall';
 	const METHOD_APPLICATION_STAT = 'application.stat';
 	const METHOD_APPLICATION_LIST = 'application.list';
+	const METHOD_APPLICATION_USAGE = 'application.usage.add';
 
 	const METHOD_APPLICATION_VERSION_UPDATE = 'application.version.update';
 	const METHOD_APPLICATION_VERSION_DELETE = 'application.version.delete';
@@ -86,6 +88,7 @@ class Client
 		$additionalParams['client_id'] = $this->clientId;
 		$additionalParams['client_secret'] = $this->clientSecret;
 		$additionalParams['client_redirect_uri'] = OAuthService::getRedirectUri();
+		$additionalParams['member_id'] = \CRestUtil::getMemberId();
 
 		if($licenseCheck)
 		{
@@ -220,7 +223,19 @@ class Client
 			$queryFields['INSTALL_HASH'] = $applicationSettings["INSTALL_HASH"];
 		}
 
-		return $this->call(static::METHOD_APPLICATION_INSTALL, $queryFields);
+		if (
+			$applicationSettings['BY_SUBSCRIPTION'] === 'Y'
+			&& \Bitrix\Main\ModuleManager::isModuleInstalled('bitrix24')
+		)
+		{
+			$method = static::METHOD_APPLICATION_INSTALL_SUBSCRIPTION;
+		}
+		else
+		{
+			$method = static::METHOD_APPLICATION_INSTALL;
+		}
+
+		return $this->call($method, $queryFields);
 	}
 
 	public function unInstallApplication(array $applicationSettings)
@@ -258,6 +273,13 @@ class Client
 	public function getApplicationList()
 	{
 		return $this->call(static::METHOD_APPLICATION_LIST);
+	}
+
+	public function sendApplicationUsage(array $usage)
+	{
+		return $this->call(static::METHOD_APPLICATION_USAGE, array(
+			"USAGE" => $usage,
+		));
 	}
 
 	public function sendEvent(array $eventItems)

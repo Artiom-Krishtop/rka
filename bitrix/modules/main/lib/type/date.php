@@ -3,7 +3,6 @@ namespace Bitrix\Main\Type;
 
 use Bitrix\Main;
 use Bitrix\Main\Context;
-use Bitrix\Main\DB;
 
 class Date
 {
@@ -26,32 +25,68 @@ class Date
 				$format = static::getFormat();
 			}
 
-			$parsedValue = date_parse_from_format($format, $date);
-			//Ignore errors when format is longer than date
-			//or date string is longer than format
-			if ($parsedValue['error_count'] > 1)
+			$parsedValue = $this->parse($format, $date);
+
+			if($parsedValue === false)
 			{
-				if (
-					current($parsedValue['errors']) !== 'Trailing data'
-					&& current($parsedValue['errors']) !== 'Data missing'
-				)
-				{
-					throw new Main\ObjectException("Incorrect date: ".$date);
-				}
+				throw new Main\ObjectException("Incorrect date: ".$date);
 			}
 
-			$this->value->setDate($parsedValue['year'], $parsedValue['month'], $parsedValue['day']);
-
-			if (
-				isset($parsedValue["relative"])
-				&& isset($parsedValue["relative"]["second"])
-				&& $parsedValue["relative"]["second"] != 0
-			)
+			if(isset($parsedValue["timestamp"]))
 			{
-				$this->value->add(new \DateInterval("PT".$parsedValue["relative"]["second"]."S"));
+				$this->value->setTimestamp($parsedValue["timestamp"]);
 			}
+			else
+			{
+				$this->value->setDate($parsedValue['year'], $parsedValue['month'], $parsedValue['day']);
+  			}
 		}
 		$this->value->setTime(0, 0, 0);
+	}
+
+	/**
+	 * @param string $format
+	 * @param string $time
+	 * @return array|bool
+	 */
+	protected function parse($format, $time)
+	{
+		$parsedValue = date_parse_from_format($format, $time);
+
+		//Ignore errors when format is longer than date
+		//or date string is longer than format
+		if ($parsedValue['error_count'] > 1)
+		{
+			$error = current($parsedValue['errors']);
+
+			if ($error === 'A two digit second could not be found')
+			{
+				//possibly missed seconds with am/pm format
+				$timestamp = strtotime($time);
+
+				if ($timestamp === false)
+				{
+					return false;
+				}
+
+				return [
+					"timestamp" => $timestamp,
+				];
+			}
+			if ($error !== 'Trailing data' && $error !== 'Data missing')
+			{
+				return false;
+			}
+		}
+
+		if(isset($parsedValue["relative"]["second"]) && $parsedValue["relative"]["second"] <> 0)
+		{
+			return [
+				"timestamp" => $parsedValue["relative"]["second"],
+			];
+		}
+
+		return $parsedValue;
 	}
 
 	/**
@@ -172,6 +207,17 @@ class Date
 	}
 
 	/**
+	 * Returns difference between dates.
+	 *
+	 * @param DateTime $time
+	 * @return \DateInterval
+	 */
+	public function getDiff(DateTime $time)
+	{
+		return $this->value->diff($time->value);
+	}
+
+	/**
 	 * Converts a date to the string.
 	 *
 	 * @param Context\Culture $culture Culture contains date format.
@@ -210,7 +256,10 @@ class Date
 			if($defaultCulture === null)
 			{
 				$context = Context::getCurrent();
-				$defaultCulture = $context->getCulture();
+				if($context)
+				{
+					$defaultCulture = $context->getCulture();
+				}
 			}
 			$culture = $defaultCulture;
 		}
@@ -227,9 +276,13 @@ class Date
 	 *
 	 * @return string
 	 */
-	protected static function getCultureFormat(Context\Culture $culture)
+	protected static function getCultureFormat(Context\Culture $culture = null)
 	{
-		return $culture->getDateFormat();
+		if($culture)
+		{
+			return $culture->getDateFormat();
+		}
+		return "DD.MM.YYYY";
 	}
 
 	/**
@@ -319,9 +372,8 @@ class Date
 	 */
 	public static function createFromPhp(\DateTime $datetime)
 	{
-		/** @var Date $d */
 		$d = new static();
-		$d->value = $datetime;
+		$d->value = clone $datetime;
 		$d->value->setTime(0, 0, 0);
 		return $d;
 	}
@@ -335,7 +387,6 @@ class Date
 	 */
 	public static function createFromTimestamp($timestamp)
 	{
-		/** @var Date $d */
 		$d = new static();
 		$d->value->setTimestamp($timestamp);
 		$d->value->setTime(0, 0, 0);
@@ -347,11 +398,11 @@ class Date
 	 * Examples: "end of next week", "tomorrow morning", "friday 25.10"
 	 *
 	 * @param string $text
-	 * @return \Bitrix\Main\Type\DateTime|null
+	 * @return DateTime|null
 	 */
 	public static function createFromText($text)
 	{
-		$result = \Bitrix\Main\Text\DateConverter::decode($text);
+		$result = Main\Text\DateConverter::decode($text);
 		if (empty($result))
 		{
 			return null;

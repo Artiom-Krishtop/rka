@@ -14,6 +14,7 @@ use Bitrix\Main\ORM\Query\Filter\ConditionTree as Filter;
 use Bitrix\Main\ORM\Data\Result;
 use Bitrix\Main\ORM\Query\Filter\Expressions\ColumnExpression;
 use Bitrix\Main\Error;
+use Bitrix\Main\ORM\Query\Join;
 use Bitrix\Main\SystemException;
 
 /**
@@ -26,7 +27,11 @@ class Reference extends Relation
 	/** @var array|Filter */
 	protected $reference;
 
-	protected $joinType = 'LEFT';
+	protected $joinType = Join::TYPE_LEFT;
+
+	protected $cascadeSavePolicy = CascadePolicy::NO_ACTION;
+
+	protected $cascadeDeletePolicy = CascadePolicy::NO_ACTION; // follow | no_action
 
 	const ELEMENTAL_THIS = 1;
 	const ELEMENTAL_REF = 2;
@@ -65,9 +70,9 @@ class Reference extends Relation
 
 		if (isset($parameters['join_type']))
 		{
-			$join_type = strtoupper($parameters['join_type']);
+			$join_type = mb_strtoupper($parameters['join_type']);
 
-			if (in_array($join_type, array('LEFT', 'INNER', 'RIGHT'), true))
+			if (in_array($join_type, Join::getTypes(), true))
 			{
 				$this->joinType = $join_type;
 			}
@@ -150,8 +155,8 @@ class Reference extends Relation
 				$value = ($col1Flag == static::ELEMENTAL_REF) ? $col1 : $col2;
 
 				// cut .this and .ref from the start of definitions
-				$key = substr($key, 5);
-				$value = substr($value, 4);
+				$key = mb_substr($key, 5);
+				$value = mb_substr($value, 4);
 
 				$elemental[$key] = $value;
 			}
@@ -164,11 +169,11 @@ class Reference extends Relation
 	{
 		if (substr_count($definition, '.') == 1)
 		{
-			if (strpos($definition, 'this.') === 0)
+			if (mb_strpos($definition, 'this.') === 0)
 			{
 				return static::ELEMENTAL_THIS;
 			}
-			elseif (strpos($definition, 'ref.') === 0)
+			elseif (mb_strpos($definition, 'ref.') === 0)
 			{
 				return static::ELEMENTAL_REF;
 			}
