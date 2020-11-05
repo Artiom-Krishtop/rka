@@ -156,7 +156,7 @@ class LandingBaseComponent extends \CBitrixComponent
 				'ID' => 'landing-feedback-demo',
 				'VIEW_TARGET' => null,
 				'FORMS' => [
-					['zones' => ['com.br'], 'id' => '279','lang' => 'br', 'sec' => 'wcqdvn'],
+					['zones' => ['br'], 'id' => '279','lang' => 'br', 'sec' => 'wcqdvn'],
 					['zones' => ['es'], 'id' => '277','lang' => 'la', 'sec' => 'eytrfo'],
 					['zones' => ['de'], 'id' => '281','lang' => 'de', 'sec' => '167ch0'],
 					['zones' => ['ua'], 'id' => '283','lang' => 'ua', 'sec' => 'ggoa61'],
@@ -172,7 +172,25 @@ class LandingBaseComponent extends \CBitrixComponent
 				'VIEW_TARGET' => null,
 				'FORMS' => [
 					['zones' => ['en'], 'id' => '946','lang' => 'en', 'sec' => 'b3isk2'],
-					['zones' => ['ru', 'by', 'kz'], 'id' => '891','lang' => 'ru', 'sec' => 'h208n3']
+					['zones' => ['de'], 'id' => '951','lang' => 'de', 'sec' => '34dwna'],
+					['zones' => ['es'], 'id' => '952','lang' => 'la', 'sec' => 'pkalm2'],
+					['zones' => ['br'], 'id' => '953','lang' => 'br', 'sec' => 'p9ty5r'],
+					['zones' => ['fr'], 'id' => '954','lang' => 'fr', 'sec' => 'udxiup'],
+					['zones' => ['pl'], 'id' => '955','lang' => 'pl', 'sec' => 'isnnbz'],
+					['zones' => ['it'], 'id' => '956','lang' => 'it', 'sec' => 'wnelcr'],
+					['zones' => ['tr'], 'id' => '957','lang' => 'tr', 'sec' => '6utlw2'],
+					['zones' => ['sc'], 'id' => '958','lang' => 'sc', 'sec' => '3bbec2'],
+					['zones' => ['tc'], 'id' => '959','lang' => 'tc', 'sec' => '4fo52q'],
+					['zones' => ['id'], 'id' => '960','lang' => 'id', 'sec' => 'jy3w82'],
+					['zones' => ['ms'], 'id' => '961','lang' => 'ms', 'sec' => 'pbmmy8'],
+					['zones' => ['th'], 'id' => '962','lang' => 'th', 'sec' => 'e587lw'],
+					['zones' => ['ja'], 'id' => '963','lang' => 'ja', 'sec' => 'hh20c2'],
+					['zones' => ['vn'], 'id' => '964','lang' => 'vn', 'sec' => '01bk91'],
+					['zones' => ['hi'], 'id' => '965','lang' => 'hi', 'sec' => 'io8koq'],
+					['zones' => ['ua'], 'id' => '969','lang' => 'ua', 'sec' => 'e5se9x'],
+					['zones' => ['ru'], 'id' => '891','lang' => 'ru', 'sec' => 'h208n3'],
+					['zones' => ['kz'], 'id' => '968','lang' => 'ru', 'sec' => '1312ws'],
+					['zones' => ['by'], 'id' => '971','lang' => 'ru', 'sec' => '023nxk']
 				],
 				'PRESETS' => [
 					'url' => defined('BX24_HOST_NAME') ? BX24_HOST_NAME : $_SERVER['SERVER_NAME'],

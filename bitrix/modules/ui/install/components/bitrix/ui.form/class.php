@@ -516,7 +516,7 @@ class UIFormComponent extends \CBitrixComponent
 		$this->arResult['USER_SCOPES'] = $userScopes;
 		$this->arResult['USER_SCOPE_ID'] = $userScopeId;
 
-		$config = $config ?? [];
+		$config = (array) $config;
 
 		[$config, $defaultConfig] = $this->processParamsConfig($config, $this->arResult['FORCE_DEFAULT_SECTION_NAME'], $this->arResult['ENTITY_CONFIG']);
 

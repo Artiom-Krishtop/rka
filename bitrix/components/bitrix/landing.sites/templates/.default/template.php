@@ -253,7 +253,6 @@ if ($arParams['TYPE'] == \Bitrix\Landing\Site\Type::SCOPE_CODE_GROUP)
 			$lastPage &&
 			!$arResult['IS_DELETED'] &&
 			$arParams['TYPE'] == 'PAGE' &&
-			Manager::isB24() && ($zone == 'ru' || $zone == 'en') &&
 			(!isset($arResult['LICENSE']) || $arResult['LICENSE'] != 'nfr')
 		)
 		{
