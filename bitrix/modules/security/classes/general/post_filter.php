@@ -197,10 +197,10 @@ class CSecurityXSSDetect
 				{
 					$isFound = preg_match("/^[a-zA-Z_]/", $prevChar) <= 0;
 				}
-			}
 
-			if ($isFound)
-				return $i;
+				if ($isFound)
+					return $i;
+			}
 		}
 		return null;
 	}

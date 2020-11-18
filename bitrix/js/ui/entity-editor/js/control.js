@@ -7983,6 +7983,7 @@ if(typeof BX.UI.EntityEditorHtml === "undefined")
 	{
 		this._htmlEditorContainer.style.display = "";
 
+		setTimeout(function() {
 			this._htmlEditor.CheckAndReInit();
 			this._htmlEditor.ResizeSceleton("100%", 200);
 			this._htmlEditor.SetContent(this.getStringValue(""), true);
@@ -7992,6 +7993,7 @@ if(typeof BX.UI.EntityEditorHtml === "undefined")
 				this._htmlEditor.Focus(true);
 				this._focusOnLoad = false;
 			}
+		}.bind(this), 0);
 	};
 	BX.UI.EntityEditorHtml.prototype.release = function()
 	{
