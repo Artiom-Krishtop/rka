@@ -3966,7 +3966,12 @@ function ImgShw(ID, width, height, alt)
 
 	protected static function ImageTypeSupported($type)
 	{
-		static $knownTypes = [IMAGETYPE_PNG => 1, IMAGETYPE_JPEG => 1, IMAGETYPE_GIF => 1, IMAGETYPE_BMP => 1, IMAGETYPE_WEBP => 1];
+		$knownTypes = [IMAGETYPE_PNG => 1, IMAGETYPE_JPEG => 1, IMAGETYPE_GIF => 1, IMAGETYPE_BMP => 1];
+
+		if(function_exists("imagecreatefromwebp"))
+		{
+			$knownTypes[IMAGETYPE_WEBP] = 1;
+		}
 
 		return isset($knownTypes[$type]);
 	}

@@ -15,6 +15,10 @@ class HttpExceptionHandlerOutput implements IExceptionHandlerOutput
 	 */
 	public function renderExceptionMessage($exception, $debug = false)
 	{
+		Main\Context::getCurrent()->getResponse()
+			->setStatus('500 Internal Server Error')
+			->writeHeaders();
+
 		if ($debug)
 		{
 			echo ExceptionHandlerFormatter::format($exception, true);

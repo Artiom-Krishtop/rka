@@ -2926,14 +2926,6 @@ class CAllUser extends CDBResult
 		/** @global CMain $APPLICATION */
 		global $APPLICATION, $DB;
 
-		if(Main\Config\Option::get("main", "secure_logout", "N") == "Y")
-		{
-			if(!check_bitrix_sessid())
-			{
-				return;
-			}
-		}
-
 		$USER_ID = $this->GetID();
 
 		$arParams = array(

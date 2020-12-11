@@ -1887,8 +1887,6 @@
 			});
 		}
 
-		var landingNoteType = null;
-
 		if (
 			el.getAttribute("bx-mpl-createtask-show") == "Y"
 			&& typeof oLF != "undefined"
@@ -1910,35 +1908,6 @@
 					return false;
 				}
 			});
-			if (typeof BX.Landing.UI.Note.Menu.getMenuItem !== "undefined")
-			{
-				if (commentEntityType === "FORUM_POST")
-				{
-					landingNoteType = "livefeed";
-				}
-				else
-				{
-					landingNoteType = "blogcomment";
-				}
-			}
-		}
-		else
-		{
-			// special detect for tasks
-			var taskMatch = el.getAttribute("id").match(/record-TASK_([\d]+)-/);
-			if (taskMatch)
-			{
-				landingNoteType = "taskcomment";
-			}
-		}
-
-		if (landingNoteType)
-		{
-			var landingMenuItem = BX.Landing.UI.Note.Menu.getMenuItem(landingNoteType, ID);
-			if (landingMenuItem)
-			{
-				panels.push(landingMenuItem);
-			}
 		}
 
 		if (panels.length > 0) {

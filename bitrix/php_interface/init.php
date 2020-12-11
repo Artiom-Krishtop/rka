@@ -350,4 +350,26 @@ function onAfterMessageUpdateHandler($id, &$arField){
     }
 }
 
+/*
+ * Вспомогательная функция. Распечатывает переменные и массивы во время отладки.
+ * Результат виден только администратору.
+ * */
+function p( $_mixVar=null, $_intExit=null )
+{
+    global $USER;
+    if ($USER->IsAdmin())
+    {
+        echo "<div align='left' style='background-color:#FFFFFF;color:#000000;width:100%;'><hr><pre>";
+        if ( 2==$_intExit||3==$_intExit )
+            var_dump( $_mixVar );
+        elseif ( is_array( $_mixVar )||is_object( $_mixVar ) )
+            print_r( $_mixVar );
+        else
+            echo $_mixVar;
+        echo '</pre><hr></div>';
+        if ( 1==$_intExit||3==$_intExit)
+            exit;
+    }
+}
+
 ?>

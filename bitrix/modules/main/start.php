@@ -112,10 +112,7 @@ if ($show_sql_stat == "Y")
 
 if(!($GLOBALS["DB"]->Connect($DBHost, $DBName, $DBLogin, $DBPassword)))
 {
-	if(file_exists(($fname = $_SERVER["DOCUMENT_ROOT"].BX_PERSONAL_ROOT."/php_interface/dbconn_error.php")))
-		include($fname);
-	else
-		include($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/include/dbconn_error.php");
+	CDatabase::showConnectionError();
 	die();
 }
 
@@ -123,7 +120,7 @@ if(!($GLOBALS["DB"]->Connect($DBHost, $DBName, $DBLogin, $DBPassword)))
 $LICENSE_KEY = "";
 if(file_exists(($_fname = $_SERVER["DOCUMENT_ROOT"].BX_ROOT."/license_key.php")))
 	include($_fname);
-if($LICENSE_KEY == "" || mb_strtoupper($LICENSE_KEY) == "DEMO")
+if($LICENSE_KEY == "" || strtoupper($LICENSE_KEY) == "DEMO")
 	define("LICENSE_KEY", "DEMO");
 else
 	define("LICENSE_KEY", $LICENSE_KEY);

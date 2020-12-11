@@ -106,7 +106,7 @@ if(!defined("BX_COMP_MANAGED_CACHE") && COption::GetOptionString("main", "compon
 require_once($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/filter_tools.php");
 require_once($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/ajax_tools.php");
 
-/*ZDUyZmZYjcwNGJjNTJkOTA5NzBkZTk3NThmMTVlNjg2NzA0MGU=*/$GLOBALS['____1977671701']= array(base64_decode('ZGV'.'ma'.'W5'.'l'));if(!function_exists(__NAMESPACE__.'\\___121529828')){function ___121529828($_321167672){static $_267200885= false; if($_267200885 == false) $_267200885=array(''.'RU5DT'.'0'.'RF','WQ==');return base64_decode($_267200885[$_321167672]);}};class CBXFeatures{ public static function IsFeatureEnabled($_1813933298){ return true;} public static function IsFeatureEditable($_1813933298){ return true;} public static function SetFeatureEnabled($_1813933298, $_1249562967= true){} public static function SaveFeaturesSettings($_1789588058, $_555740559){} public static function GetFeaturesList(){ return array();} public static function InitiateEditionsSettings($_1362445186){} public static function ModifyFeaturesSettings($_1362445186, $_1552063530){} public static function IsFeatureInstalled($_1813933298){ return true;}} $GLOBALS['____1977671701'][0](___121529828(0), ___121529828(1));/**/			//Do not remove this
+/*ZDUyZmZMmI4ZDUxODU0ODQxMmI4NDgzYzI1NGRiYWJmMjg1Yzc=*/$GLOBALS['____873448609']= array(base64_decode('ZGVma'.'W'.'5'.'l'));if(!function_exists(__NAMESPACE__.'\\___1614454838')){function ___1614454838($_2037913509){static $_1858189047= false; if($_1858189047 == false) $_1858189047=array('RU5DT0RF','WQ'.'==');return base64_decode($_1858189047[$_2037913509]);}};class CBXFeatures{ public static function IsFeatureEnabled($_2116531425){ return true;} public static function IsFeatureEditable($_2116531425){ return true;} public static function SetFeatureEnabled($_2116531425, $_1689504156= true){} public static function SaveFeaturesSettings($_369520288, $_216447325){} public static function GetFeaturesList(){ return array();} public static function InitiateEditionsSettings($_1771512483){} public static function ModifyFeaturesSettings($_1771512483, $_1752917907){} public static function IsFeatureInstalled($_2116531425){ return true;}} $GLOBALS['____873448609'][0](___1614454838(0), ___1614454838(1));/**/			//Do not remove this
 
 //component 2.0 template engines
 $GLOBALS["arCustomTemplateEngines"] = array();
@@ -175,15 +175,6 @@ if(COption::GetOptionString("main", "check_events", "Y") !== "N")
 
 $healerOfEarlySessionStart = new HealerEarlySessionStart();
 $healerOfEarlySessionStart->process($application->getKernelSession());
-
-//session initialization
-ini_set("session.cookie_httponly", "1");
-ini_set("session.use_strict_mode", "On");
-
-if(($domain = \Bitrix\Main\Web\Cookie::getCookieDomain()) <> '')
-{
-	ini_set("session.cookie_domain", $domain);
-}
 
 $kernelSession = $application->getKernelSession();
 $kernelSession->start();
@@ -279,12 +270,17 @@ if (isset($kernelSession['BX_ADMIN_LOAD_AUTH']))
 
 if(!defined("NOT_CHECK_PERMISSIONS") || NOT_CHECK_PERMISSIONS!==true)
 {
-	$bLogout = isset($_REQUEST["logout"]) && (mb_strtolower($_REQUEST["logout"]) == "yes");
+	$doLogout = isset($_REQUEST["logout"]) && (strtolower($_REQUEST["logout"]) == "yes");
 
-	if($bLogout && $GLOBALS["USER"]->IsAuthorized())
+	if($doLogout && $GLOBALS["USER"]->IsAuthorized())
 	{
-		$GLOBALS["USER"]->Logout();
-		LocalRedirect($GLOBALS["APPLICATION"]->GetCurPageParam('', array('logout', 'sessid')));
+		$secureLogout = (\Bitrix\Main\Config\Option::get("main", "secure_logout", "N") == "Y");
+
+		if(!$secureLogout || check_bitrix_sessid())
+		{
+			$GLOBALS["USER"]->Logout();
+			LocalRedirect($GLOBALS["APPLICATION"]->GetCurPageParam('', array('logout', 'sessid')));
+		}
 	}
 
 	// authorize by cookies

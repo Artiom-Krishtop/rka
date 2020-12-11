@@ -4,7 +4,7 @@
 //**    MODIFICATION OF THIS FILE WILL ENTAIL SITE FAILURE            **/
 //**********************************************************************/
 if (!defined("UPDATE_SYSTEM_VERSION"))
-	define("UPDATE_SYSTEM_VERSION", "20.100.0");
+	define("UPDATE_SYSTEM_VERSION", "20.200.260");
 
 require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_admin_before.php");
 define("HELP_FILE", "marketplace/sysupdate.php");
@@ -145,7 +145,7 @@ if (function_exists('apache_get_modules') && !in_array('mod_rewrite', apache_get
 	$errorMessage .= "<br>".GetMessage("SUP_WRONG_APACHE_MOD_REWRITE").". ";
 }
 
-if (version_compare(SM_VERSION, "20.5.0") >= 0)
+if (version_compare(SM_VERSION, "20.0.1500") >= 0)
 {
 	if ((int)ini_get('mbstring.func_overload') > 0)
 	{

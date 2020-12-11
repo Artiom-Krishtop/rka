@@ -6476,7 +6476,7 @@ class CHTTP
 
 	public static function SetStatus($status)
 	{
-		$bCgi = (mb_stristr(php_sapi_name(), "cgi") !== false);
+		$bCgi = (stristr(php_sapi_name(), "cgi") !== false);
 		if($bCgi && (!defined("BX_HTTP_STATUS") || BX_HTTP_STATUS == false))
 			header("Status: ".$status);
 		else

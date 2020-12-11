@@ -403,7 +403,7 @@ class HttpRequest extends Request
 				continue;
 
 			$name = mb_substr($name, $cookiePrefixLength);
-			if ($cookiesCrypter->shouldDecrypt($name, $value))
+			if (is_string($value) && $cookiesCrypter->shouldDecrypt($name, $value))
 			{
 				$cookiesToDecrypt[$name] = $value;
 			}

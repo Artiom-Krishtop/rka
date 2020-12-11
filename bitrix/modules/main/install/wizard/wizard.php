@@ -279,7 +279,7 @@ class AgreementStep4VM extends CWizardStep
 			if ($databaseStep->needCodePage)
 			{
 				$codePage = false;
-				if (LANGUAGE_ID == "ru")
+				if (LANGUAGE_ID == "ru" || LANGUAGE_ID == "ua")
 					$codePage = "cp1251";
 				elseif ($databaseStep->createCharset != '')
 					$codePage = $databaseStep->createCharset;
@@ -1678,7 +1678,7 @@ class CreateDBStep extends CWizardStep
 		{
 			if ($this->utf8)
 				$codePage = "utf8";
-			elseif (LANGUAGE_ID == "ru")
+			elseif (LANGUAGE_ID == "ru" || LANGUAGE_ID == "ua")
 				$codePage = "cp1251";
 			elseif ($this->createCharset != '')
 				$codePage = $this->createCharset;
@@ -1912,7 +1912,7 @@ class CreateDBStep extends CWizardStep
 			{
 				if ($this->utf8)
 					$codePage = "utf8";
-				elseif (LANGUAGE_ID == "ru")
+				elseif (LANGUAGE_ID == "ru" || LANGUAGE_ID == "ua")
 					$codePage = "cp1251";
 				else
 					$codePage = $this->createCharset;
@@ -3078,107 +3078,6 @@ class LoadModuleStep extends CWizardStep
 		//CUtil::InitJSCore(array('window'));
 		$wizard->SetVar("nextStepStage", $selectedModule);
 		$wizard->SetCurrentStep("load_module_action");
-		return true;
-
-		if (!file_exists($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/".$selectedModule))
-		{
-			$selectedModule = preg_replace("#[^a-z0-9_.-]+#i", "", $selectedModule);
-
-			$errorMessage = "";
-			if (!CUpdateClientPartner::LoadModuleNoDemand($selectedModule, $errorMessage, "Y", LANGUAGE_ID))
-			{
-				$this->SetError($errorMessage);
-				return;
-			}
-		}
-
-		if (!IsModuleInstalled($selectedModule))
-		{
-			$module = $this->GetModuleObject($selectedModule);
-			if (!is_object($module))
-				return;
-
-			if (!$module->InstallDB())
-			{
-				if ($ex = $APPLICATION->GetException())
-					$this->SetError($ex->GetString());
-				return;
-			}
-
-			$module->InstallEvents();
-
-			if (!$module->InstallFiles())
-			{
-				if ($ex = $APPLICATION->GetException())
-					$this->SetError($ex->GetString());
-				return;
-			}
-		}
-
-		$arWizardsList = BXInstallServices::GetWizardsList($selectedModule);
-		if (count($arWizardsList) == 1)
-		{
-			$arTmp = explode(":", $arWizardsList[0]["ID"]);
-			$ar = array();
-			foreach ($arTmp as $a)
-			{
-				$a = preg_replace("#[^a-z0-9_.-]+#i", "", $a);
-				if ($a <> '')
-					$ar[] = $a;
-			}
-
-			BXInstallServices::CopyDirFiles(
-				$_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/".$ar[0]."/install/wizards/".$ar[1]."/".$ar[2],
-				$_SERVER["DOCUMENT_ROOT"]."/bitrix/wizards/".$ar[1]."/".$ar[2],
-				true
-			);
-
-			$errorMessageTmp = "";
-			if (BXInstallServices::CreateWizardIndex($ar[1].":".$ar[2], $errorMessageTmp))
-			{
-				$u = "/index.php";
-				if (defined("WIZARD_DEFAULT_SITE_ID"))
-				{
-					$rsSite = CSite::GetList($by="sort", $order="asc", array("ID" => WIZARD_DEFAULT_SITE_ID));
-					$arSite = $rsSite->GetNext();
-
-					$u = "";
-					if (is_array($arSite["DOMAINS"]) && $arSite["DOMAINS"][0] <> '' || $arSite["DOMAINS"] <> '')
-						$u .= "http://";
-					if (is_array($arSite["DOMAINS"]))
-						$u .= $arSite["DOMAINS"][0];
-					else
-						$u .= $arSite["DOMAINS"];
-					$u .= $arSite["DIR"];
-				}
-				else
-				{
-					BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/license.php");
-					BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/readme.php");
-					BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/license.html");
-					BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/readme.html");
-					BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/install.config");
-					BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/restore.php");
-					BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/bitrixsetup.php");
-				}
-
-				if (defined("BX_UTF"))
-					BXInstallServices::EncodeFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/lang/".LANGUAGE_ID."/install.php", INSTALL_CHARSET);
-
-				BXInstallServices::LocalRedirect($u);
-			}
-			else
-			{
-				$this->SetError($errorMessageTmp);
-			}
-		}
-		elseif (count($arWizardsList) == 0)
-		{
-			$wizard->SetCurrentStep("select_wizard");
-			return true;
-		}
-
-		$wizard->SetVar("selected_module", $selectedModule);
 
 		return true;
 	}

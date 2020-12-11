@@ -261,7 +261,7 @@ class HttpResponse extends Response
 	{
 		$httpStatus = Config\Configuration::getValue("http_status");
 
-		$cgiMode = (mb_stristr(php_sapi_name(), "cgi") !== false);
+		$cgiMode = (stristr(php_sapi_name(), "cgi") !== false);
 		if ($cgiMode && (($httpStatus == null) || ($httpStatus == false)))
 		{
 			$this->addHeader("Status", $status);
