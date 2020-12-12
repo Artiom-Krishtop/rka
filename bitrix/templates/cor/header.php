@@ -1,63 +1,44 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <!DOCTYPE html>
-<html class="js">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=LANGUAGE_ID?>" lang="<?=LANGUAGE_ID?>" class="js">
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title><?$APPLICATION->ShowTitle()?></title>
-<?$APPLICATION->ShowHead()?>
+    <?global $APPLICATION;?>
+    <?IncludeTemplateLangFile(__FILE__);?>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title><?$APPLICATION->ShowTitle()?></title>
+    <?
+    $APPLICATION->ShowMeta("viewport");
+    $APPLICATION->ShowMeta("HandheldFriendly");
+    $APPLICATION->ShowMeta("apple-mobile-web-app-capable", "yes");
+    $APPLICATION->ShowMeta("apple-mobile-web-app-status-bar-style");
+    $APPLICATION->ShowMeta("SKYPE_TOOLBAR");
 
-<?
-$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/style.css');
-//$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/owl.carousel.css');
-$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/flexslider.css');
-$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/jquery.fancybox.css');
-//$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/header.css');
-//$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/sidebar.css');
-//$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/footer.css');
-//$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/content.css');
-//$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/color.css'); // color scheme
-//$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/custom/style.css');
-?>
+    $APPLICATION->ShowHead();
 
-<?
-    //$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery-1.11.2.min.js');	
-    //$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.flexslider.js');	
-	//$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/script.js');
-	
-	
-    //$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/owl.carousel.min.js');	
-   //$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/bootstrap/bootstrap.js');
-    //$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/fancybox/jquery.fancybox.pack.js');
-    //$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/lightgal/js/jquery.chocolat.js'); 
-	//$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/choko.js'); 
+    $APPLICATION->SetPageProperty("viewport", "initial-scale=1.0, width=device-width");
+    $APPLICATION->SetPageProperty("HandheldFriendly", "true");
+    $APPLICATION->SetPageProperty("apple-mobile-web-app-capable", "yes");
+    $APPLICATION->SetPageProperty("apple-mobile-web-app-status-bar-style", "black");
+    $APPLICATION->SetPageProperty("SKYPE_TOOLBAR", "SKYPE_TOOLBAR_PARSER_COMPATIBLE");
 
+    $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/style.css');
+    $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/flexslider.css');
+    $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/jquery.fancybox.css');
 
-	
-	//$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/modernizr.custom.53451.js');
-	//$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.gallery.js');
-	//$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.spincrement.min.js');
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jspdf.debug.js');
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery-1.11.2.min.js');
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.flexslider.js');
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.fancybox.js');
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.ui.widget.js');
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.fiji.ticker.js');
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.validate.min.js');
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/localization/messages_ru.js');
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.inputmask.min.js');
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/script.js');
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/api.js');
 
-    $APPLICATION->AddHeadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js');
-      $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery-1.11.2.min.js');
-      $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.flexslider.js');
-      $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.fancybox.js');  
-      $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.ui.widget.js');      
-      $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.fiji.ticker.js');             
-      $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/script.js');        
-?>
-
-<!--<script  src="<?=SITE_TEMPLATE_PATH.'/js/jquery-1.11.2.min.js'?>"></script>	
-<script  src="<?=SITE_TEMPLATE_PATH.'/js/jquery.flexslider.js'?>"></script>	
-<script  src="<?=SITE_TEMPLATE_PATH.'/js/jquery.fancybox.js'?>"></script>	
-<script  src="<?=SITE_TEMPLATE_PATH.'/js/script.js'?>"></script>	-->
-<?php 
-//<script>jQuery.noConflict();</script>
-//print "<pre>"; 
-//print_r(SITE_TEMPLATE_PATH.'/js/script.js');
-//print "</pre>";
-?>
-    <?/*<script type="text/javascript" async="" src="https://www.gstatic.com/recaptcha/releases/Zy-zVXWdnDW6AUZkKlojAKGe/recaptcha__ru.js"></script>*/?>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
+    $APPLICATION->AddHeadString('<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />', true);
+    ?>
 </head>
 
 <body class="html front not-logged-in one-sidebar sidebar-first page-node i18n-ru fb_processed <?global $USER; if ($USER->IsAdmin()):?>admined-body<?endif;?> ">

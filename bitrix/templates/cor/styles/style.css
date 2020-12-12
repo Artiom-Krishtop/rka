@@ -2204,3 +2204,32 @@ h2.boo-h{
 	border-bottom: none;
 	padding-bottom: 0;
 }
+
+form .input.error {
+	position: relative;
+}
+form label.error {
+	display: inline-block;
+	font-weight: 400;
+	color: #e02222!important;
+	margin: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 6;
+	font-size: .8em;
+}
+
+form .text-wrap label.error {
+	right: 30%;
+}
+
+form .licence_block.bx_filter {
+	position: relative;
+	display: block;
+	padding: 19px 0 21px;
+}
+
+.input.error input, .input.error textarea {
+	border: 1px solid #e02222;
+}

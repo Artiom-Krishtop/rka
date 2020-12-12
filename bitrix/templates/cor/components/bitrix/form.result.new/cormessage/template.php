@@ -20,12 +20,12 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                             if ($rowCounter%2==0) {
                                 ?><div class="row"><?
                             }
-                            ?><div class="col col-md-12 form-group field-wrap text-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><?
+                            ?><div class="col col-md-12 form-group field-wrap text-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><div class="input"><?
                             ?><label class="control-label" for="<?=$code?>"><?
                             ?><?=$arField['CAPTION']?><?if ($arField['REQUIRED']=="Y") {?><span class="required"> <?=$arResult['REQUIRED_SIGN']?></span><?}?><?
                             ?></label><?
-                            ?><input type="text" name="form_text_<?=$arField['STRUCTURE'][0]['ID']?>" class="<?if ($arField['REQUIRED']=="Y") {?>req-input<?}?> form-control" value="<?=$arResult['arrVALUES']['form_text_'.$arField['STRUCTURE'][0]['ID']]?>"><?
-                            ?></div><?
+                            ?><input type="text" name="form_text_<?=$arField['STRUCTURE'][0]['ID']?>" class="<?if ($arField['REQUIRED']=="Y") {?>req-input<?}?> form-control<?=($code=='SIMPLE_QUESTION_692' ? ' phone' : '');?>" value="<?=$arResult['arrVALUES']['form_text_'.$arField['STRUCTURE'][0]['ID']]?>"<?=($arField['REQUIRED']=="Y" ? ' required' : '');?>><?
+                            ?></div></div><?
                             if ($rowCounter%2!=0) {
                                 ?></div><?
                             }
@@ -35,7 +35,7 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                             if ($rowCounter%2==0) {
                                 ?><div class="row"><?
                             }
-                            ?><div class="col col-md-6 calendar-wrap form-group field-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><?
+                            ?><div class="col col-md-6 calendar-wrap form-group field-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><div class="input"><?
                             ?><label class="control-label" for="<?=$code?>"><?
                             ?><?=$arField['CAPTION']?><?if ($arField['REQUIRED']=="Y") {?><span class="required"> <?=$arResult['REQUIRED_SIGN']?></span><?}?><?
                             ?></label><?
@@ -51,7 +51,7 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                                     "REQUIRED" => $arField['REQUIRED']
                                 )
                             );
-                            ?></div><?
+                            ?></div></div><?
                             if ($rowCounter%2!=0) {
                                 ?></div><?
                             }
@@ -61,12 +61,12 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                             if ($rowCounter%2==0) {
                                 ?><div class="row"><?
                             }
-                            ?><div class="col col-md-12 field-wrap textarea-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><?
+                            ?><div class="col col-md-12 field-wrap textarea-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><div class="input"><?
                             ?><label class="control-label" for="<?=$code?>"><?
                             ?><?=$arField['CAPTION']?><?if ($arField['REQUIRED']=="Y") {?><span class="required"> <?=$arResult['REQUIRED_SIGN']?></span><?}?><?
                             ?></label><?
-                            ?><textarea name="form_textarea_<?=$arField['STRUCTURE'][0]['ID']?>" class="form-control <?if ($arField['REQUIRED']=="Y") {?>req-input<?}?>"><?=$arResult['arrVALUES']['form_textarea_'.$arField['STRUCTURE'][0]['ID']]?></textarea><?/*<div class="text-triangle"><div class="inner-triangle"></div></div>*/?><?
-                            ?></div><?
+                            ?><textarea name="form_textarea_<?=$arField['STRUCTURE'][0]['ID']?>" class="form-control <?if ($arField['REQUIRED']=="Y") {?>req-input<?}?>"<?=($arField['REQUIRED']=="Y" ? ' required' : '');?>><?=$arResult['arrVALUES']['form_textarea_'.$arField['STRUCTURE'][0]['ID']]?></textarea><?/*<div class="text-triangle"><div class="inner-triangle"></div></div>*/?><?
+                            ?></div></div><?
                             /*<div class="row">
                                 <div class="col col-md-5 load-avatar">
                                     <div class="avatar-wrap"><img src="<?=SITE_DIR?>avatar-simple.png"></div>
@@ -122,16 +122,16 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                             if ($rowCounter%2==0) {
                                 ?><div class="row"><?
                             }
-                            ?><div class="col col-md-6 field-wrap select-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><?
+                            ?><div class="col col-md-6 field-wrap select-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><div class="input"><?
                             ?><label class="control-label" for="<?=$code?>"><?
                             ?><?=$arField['CAPTION']?><?if ($arField['REQUIRED']=="Y") {?><span class="required"> <?=$arResult['REQUIRED_SIGN']?></span><?}?><?
                             ?></label><?
-                            ?><select class="form-control" name="form_dropdown_<?=$code?>" id="form_dropdown_<?=$code?>"><?
+                            ?><select class="form-control" name="form_dropdown_<?=$code?>" id="form_dropdown_<?=$code?>"<?=($arField['REQUIRED']=="Y" ? ' required' : '');?>><?
                             foreach ($arField['STRUCTURE'] as $variables) {
                                 ?><option value="<?=$variables['ID']?>" <? if ($variables['FIELD_PARAM']!="") echo "selected"; ?>><?=$variables['MESSAGE']?></option><?
                             }
                             ?></select><?
-                            ?></div><?
+                            ?></div></div><?
                             /*<div class="col col-md-6 field-wrap dropdown <?if ($arField['REQUIRED']=="Y") {?>req<?}?>">
                                 <span>
                                     <?=$arField['CAPTION']?><?if ($arField['REQUIRED']=="Y") {?><span class="required"> <?=$arResult['REQUIRED_SIGN']?></span><?}?>
@@ -160,12 +160,12 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                             if ($rowCounter%2==0) {
                                 ?><div class="row"><?
                             }
-                            ?><div class="col col-md-12 form-group field-wrap text-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><?
+                            ?><div class="col col-md-12 form-group field-wrap text-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><div class="input"><?
                             ?><label class="control-label" for="<?=$code?>"><?
                             ?><?=$arField['CAPTION']?><?if ($arField['REQUIRED']=="Y") {?><span class="required"> <?=$arResult['REQUIRED_SIGN']?></span><?}?><?
                             ?></label><?
-                            ?><input type="email" value="<?=$arResult['arrVALUES']['form_email_'.$arField['STRUCTURE'][0]['ID']]?>" name="form_email_<?=$arField['STRUCTURE'][0]['ID']?>" class="<?if ($arField['REQUIRED']=="Y") {?>req-input<?}?> form-control"><?
-                            ?></div><?
+                            ?><input type="email" value="<?=$arResult['arrVALUES']['form_email_'.$arField['STRUCTURE'][0]['ID']]?>" name="form_email_<?=$arField['STRUCTURE'][0]['ID']?>" class="<?if ($arField['REQUIRED']=="Y") {?>req-input<?}?> form-control"<?=($arField['REQUIRED']=="Y" ? ' required' : '');?>><?
+                            ?></div></div><?
                             if ($rowCounter%2!=0) {
                                 ?></div><?
                             }
@@ -175,12 +175,12 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                             if ($rowCounter%2==0) {
                                 ?><div class="row"><?
                             }
-                            ?><div class="col col-md-6 form-group field-wrap text-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><?
+                            ?><div class="col col-md-6 form-group field-wrap text-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><div class="input"><?
                             ?><label class="control-label" for="<?=$code?>"><?
                             ?><?=$arField['CAPTION']?><?if ($arField['REQUIRED']=="Y") {?><span class="required"> <?=$arResult['REQUIRED_SIGN']?></span><?}?><?
                             ?></label><?
-                            ?><input type="text" name="form_url_<?=$arField['STRUCTURE'][0]['ID']?>" class="<?if ($arField['REQUIRED']=="Y") {?>req-input<?}?> form-control"><?
-                            ?></div><?
+                            ?><input type="text" name="form_url_<?=$arField['STRUCTURE'][0]['ID']?>" class="<?if ($arField['REQUIRED']=="Y") {?>req-input<?}?> form-control"<?=($arField['REQUIRED']=="Y" ? ' required' : '');?>><?
+                            ?></div></div><?
                             if ($rowCounter%2!=0) {
                                 ?></div><?
                             }
@@ -190,16 +190,16 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                             if ($rowCounter%2==0) {
                                 ?><div class="row"><?
                             }
-                            ?><div class="col col-md-6 form-group field-wrap select-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><?
+                            ?><div class="col col-md-6 form-group field-wrap select-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><div class="input"><?
                             ?><label class="control-label" for="<?=$code?>"><?
                             ?><?=$arField['CAPTION']?><?if ($arField['REQUIRED']=="Y") {?><span class="required"> <?=$arResult['REQUIRED_SIGN']?></span><?}?><?
                             ?></label><?
-                            ?><select multiple class="form-control" name="form_multiselect_<?=$code?>[]" id="form_multiselect_<?=$code?>[]"><?
+                            ?><select multiple class="form-control" name="form_multiselect_<?=$code?>[]" id="form_multiselect_<?=$code?>[]"<?=($arField['REQUIRED']=="Y" ? ' required' : '');?>><?
                             foreach ($arField['STRUCTURE'] as $variables) {
                                 ?><option <? if ($variables['FIELD_PARAM']!="") echo "selected"; ?> value="<?=$variables['ID']?>"><?=$variables['MESSAGE']?></option><?
                             }
                             ?></select><?
-                            ?></div><?
+                            ?></div></div><?
                             if ($rowCounter%2!=0) {
                                 ?></div><?
                             }
@@ -209,14 +209,14 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                             if ($rowCounter%2==0) {
                                 ?><div class="row"><?
                             }
-                            ?><div class="col col-md-6 form-group field-wrap file-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><?
+                            ?><div class="col col-md-6 form-group field-wrap file-wrap <?if ($arField['REQUIRED']=="Y") {?>req<?}?>"><div class="input"><?
                             ?><label class="control-label" for="<?=$code?>"><?
                             ?><?=$arField['CAPTION']?><?if ($arField['REQUIRED']=="Y") {?><span class="required"> <?=$arResult['REQUIRED_SIGN']?></span><?}?><?
                             ?></label><?
                             ?><div class="file_upload"><?
                             ?><a href="javascript:void(0)" class="file-link"><?=GetMessage('MONOP_LOAD_'.$arField['STRUCTURE'][0]['FIELD_TYPE'])?></a><?
-                            ?><input class="<?if ($arField['REQUIRED']=="Y") {?>req-input<?}?>" type="file" name="form_<?=$arField['STRUCTURE'][0]['FIELD_TYPE']?>_<?=$arField['STRUCTURE'][0]['ID']?>"><?
-                            ?></div><?
+                            ?><input class="<?if ($arField['REQUIRED']=="Y") {?>req-input<?}?>" type="file" name="form_<?=$arField['STRUCTURE'][0]['FIELD_TYPE']?>_<?=$arField['STRUCTURE'][0]['ID']?>"<?=($arField['REQUIRED']=="Y" ? ' required' : '');?>><?
+                            ?></div></div><?
                             ?></div><?
                             if ($rowCounter%2!=0) {
                                 ?></div><?
@@ -226,19 +226,28 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                     }
                     if ($rowCounter%2!=0) {?></div><?}
                     ?>
+                <?if($arResult["WEB_FORM_NAME"] == "SIMPLE_FORM_4"):?>
+                    <div class="licence_block bx_filter">
+                        <input type="checkbox" id="licenses_inline_<?=$arResult["arForm"]["ID"]?>" <?=(COption::GetOptionString("aspro.allcorp2", "LICENCE_CHECKED", "N") == "Y" ? "checked" : "");?> name="licenses_popup" required value="Y">
+                        <label for="licenses_inline_<?=$arResult["arForm"]["ID"]?>">
+                            <?$APPLICATION->IncludeFile(SITE_DIR."include/licenses_text.php", Array(), Array("MODE" => "html", "NAME" => "LICENSES")); ?>
+                        </label>
+                    </div>
+                <?endif;?>
                 </div>
                 <div class="row">
                     <?
-                    if($arResult["isUseCaptcha"] == "1") {
+                    if($arResult["isUseCaptcha"])
+                    {
                         ?><div class="captcha_wrap col col-md-6 form-group field-wrap req"><?
-                        ?><label for="captcha_<?=$arResult['WEB_FORM_NAME']?>" class="col col-md-12"><?=GetMessage("MSG_CAPTHA")?>: <span class="required"><?=$arResult['REQUIRED_SIGN']?></span><br /></label><?
-                        ?><div class="row"><?
-                        echo $arResult['CAPTCHA']
-                        /*?><div class="col col-md-6"><img class="captchaImg" src="/bitrix/tools/captcha.php?captcha_sid=<?=$arResult["CAPTCHACode"]?>" alt="CAPTCHA"></div><br /><?
-                        ?><div class="col col-md-6"><input class="form-control req-input" id="captcha_<?=$arResult['WEB_FORM_NAME']?>" type="text" name="captcha_word" size="30" maxlength="50" value=""></div><?
-                        ?><input type="hidden" class="captchaSid" name="captcha_sid" value="<?=$arResult["CAPTCHACode"]?>"><?
-                        ?><a id="reloadCaptcha" class="reloadCaptcha"><?=GetMessage('AR.CORP.RELOAD_CAPTCHA')?></a><?*/
-                        ?></div><?
+                            ?><label for="captcha_<?=$arResult['WEB_FORM_NAME']?>" class="col col-md-12"><?=GetMessage("MSG_CAPTHA")?>: <span class="required"><?=$arResult['REQUIRED_SIGN']?></span><br /></label><?
+                            ?><div class="row"><?
+                                echo $arResult['CAPTCHA']
+                                /*?><div class="col col-md-6"><img class="captchaImg" src="/bitrix/tools/captcha.php?captcha_sid=<?=$arResult["CAPTCHACode"]?>" alt="CAPTCHA"></div><br /><?
+                                ?><div class="col col-md-6"><input class="form-control req-input" id="captcha_<?=$arResult['WEB_FORM_NAME']?>" type="text" name="captcha_word" size="30" maxlength="50" value=""></div><?
+                                ?><input type="hidden" class="captchaSid" name="captcha_sid" value="<?=$arResult["CAPTCHACode"]?>"><?
+                                ?><a id="reloadCaptcha" class="reloadCaptcha"><?=GetMessage('AR.CORP.RELOAD_CAPTCHA')?></a><?*/
+                            ?></div><?
                         ?></div><?
                     }
                     ?>
@@ -253,7 +262,54 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
         </div>
     </div>
     <script type="text/javascript">
+        BX.ready(function(){
+            BX.message({
+                JS_REQUIRED_LICENSES: '<?=GetMessage("JS_REQUIRED_LICENSES");?>'
+            });
+        });
+
         $(document).ready(function(){
+
+            $('form[name="<?=$arResult["arForm"]["VARNAME"]?>"]').validate({
+                highlight: function( element ){
+                    $(element).parent().addClass('error');
+                },
+                unhighlight: function( element ){
+                    $(element).parent().removeClass('error');
+                },
+                submitHandler: function( form ){
+                    if( $('form[name="<?=$arResult["arForm"]["VARNAME"]?>"]').valid() ){
+                        setTimeout(function() {
+                            $(form).find('button[type="submit"]').attr("disabled", "disabled");
+                        }, 300);
+                        var eventdata = {type: 'form_submit', form: form, form_name: '<?=$arResult["arForm"]["VARNAME"]?>'};
+                        BX.onCustomEvent('onSubmitForm', [eventdata]);
+                    }
+                },
+                errorPlacement: function( error, element ){
+                    error.insertBefore(element);
+                },
+                messages:{
+                    licenses_popup: {
+                        required : BX.message('JS_REQUIRED_LICENSES')
+                    }
+                }
+            });
+
+            var phoneMask = '+375 (99) 999-99-99';
+            if(phoneMask.length){
+                var base_mask = phoneMask.replace( /(\d)/g, '_' );
+                $('form[name="<?=$arResult["arForm"]["VARNAME"]?>"] input.phone').inputmask('mask', {'mask': phoneMask, 'showMaskOnHover': false });
+                $('form[name="<?=$arResult["arForm"]["VARNAME"]?>"] input.phone').blur(function(){
+                    if( $(this).val() == base_mask || $(this).val() == '' ){
+                        if( $(this).hasClass('required') ){
+                            $(this).parent().find('div.error').html(BX.message('JS_REQUIRED'));
+                        }
+                    }
+                });
+            }
+
+
             $('form[name="SIMPLE_FORM_4"] input[name="web_form_submit"]').on('click', function(e){
                 var isNotValid = false,
                     pattern = 'leshhenko';
