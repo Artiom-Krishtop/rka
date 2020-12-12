@@ -31,4 +31,38 @@ $(document).ready(function(){
         }
     );
 
+    $('form[name="form_auth"] input[type="submit"]').on('click', function(e){
+        if($(this).closest('form').data('event')) {
+        } else {
+            e.preventDefault();
+            initPopUp("form[name='form_auth'] input[type='submit']");
+        }
+    });
+
+    $('#user-login-form input[type="submit"]').on('click', function(e){
+        if($(this).closest('form').data('event')) {
+        } else {
+            e.preventDefault();
+            initPopUp("#user-login-form input[type='submit']");
+        }
+    });
+
+    $(document).on('click', '*[data-event="question-exist"]', function(e){
+        var name = $(this).data('sid');
+        $(this).parent().remove();
+        $('.questionOverlay').remove();
+        $(name).closest('form').addClass('loadings').attr('data-event', 'loadings');
+        $(name).trigger('click');
+    });
+
+
 });
+
+initPopUp = function (form) {
+    if($(".question_frame_licenses").length){
+    }else {
+        $('<div class="questionOverlay"></div>').appendTo('body');
+        $('body').append('<div class="question_frame_licenses" style="width: 500px; z-index: 3000; margin-left: -250px; top: 0px; opacity: 1; display: block;animation: toggle_opacity .2s;position: fixed;left: 50%;background: #fff;padding: 55px;"><div class="question_frame_text" style="margin-bottom: 25px;"></div><button id="question_frame_btn" type="button" class="question-btn-success" data-sid="'+form+'" data-event="question-exist">Принимаю</button></div>');
+        $(".question_frame_licenses .question_frame_text").load('/include/licenses_text.php');
+    }
+}

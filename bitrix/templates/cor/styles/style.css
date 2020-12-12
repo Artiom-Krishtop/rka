@@ -2233,3 +2233,51 @@ form .licence_block.bx_filter {
 .input.error input, .input.error textarea {
 	border: 1px solid #e02222;
 }
+
+.question-btn-success {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 1.428571429;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+
+	font-weight: 400;
+	text-transform: none;
+	text-decoration: none;
+	margin: 0 10px 10px 0;
+	border: 1px solid;
+	border-radius: 2px;
+	padding: 8px 20px 9px;
+	overflow: hidden;
+	transition: background-color .1s ease;
+	-moz-transition: background-color .1s ease;
+	-ms-transition: background-color .1s ease;
+	-o-transition: background-color .1s ease;
+	-webkit-transition: background-color .1s ease;
+
+	color: #fff;
+	background-color: #85092d;
+	border-color: #85092d;
+}
+
+.question-btn-success:hover, .question-btn-success:active, .question-btn-success:focus {
+    background-color: #e63f3a;
+    border-color: #e63f3a;
+}
+.questionOverlay{
+	background: #3a3f44;
+	opacity: .7;
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 2999;
+}
