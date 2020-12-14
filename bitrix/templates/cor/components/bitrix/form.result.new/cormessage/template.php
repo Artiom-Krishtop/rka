@@ -242,7 +242,7 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                         ?><div class="captcha_wrap col col-md-6 form-group field-wrap req"><?
                             ?><label for="captcha_<?=$arResult['WEB_FORM_NAME']?>" class="col col-md-12"><?=GetMessage("MSG_CAPTHA")?>: <span class="required"><?=$arResult['REQUIRED_SIGN']?></span><br /></label><?
                             ?><div class="row"><?
-                                echo $arResult['CAPTCHA']
+                                echo $arResult['CAPTCHA'];
                                 /*?><div class="col col-md-6"><img class="captchaImg" src="/bitrix/tools/captcha.php?captcha_sid=<?=$arResult["CAPTCHACode"]?>" alt="CAPTCHA"></div><br /><?
                                 ?><div class="col col-md-6"><input class="form-control req-input" id="captcha_<?=$arResult['WEB_FORM_NAME']?>" type="text" name="captcha_word" size="30" maxlength="50" value=""></div><?
                                 ?><input type="hidden" class="captchaSid" name="captcha_sid" value="<?=$arResult["CAPTCHACode"]?>"><?
@@ -276,15 +276,6 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                 },
                 unhighlight: function( element ){
                     $(element).parent().removeClass('error');
-                },
-                submitHandler: function( form ){
-                    if( $('form[name="<?=$arResult["arForm"]["VARNAME"]?>"]').valid() ){
-                        setTimeout(function() {
-                            $(form).find('button[type="submit"]').attr("disabled", "disabled");
-                        }, 300);
-                        var eventdata = {type: 'form_submit', form: form, form_name: '<?=$arResult["arForm"]["VARNAME"]?>'};
-                        BX.onCustomEvent('onSubmitForm', [eventdata]);
-                    }
                 },
                 errorPlacement: function( error, element ){
                     error.insertBefore(element);

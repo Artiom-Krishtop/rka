@@ -35,10 +35,11 @@
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/localization/messages_ru.js');
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.inputmask.min.js');
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/script.js');
-    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/api.js');
+    // $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/api.js');
 
     $APPLICATION->AddHeadString('<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />', true);
     ?>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 </head>
 
 <body class="html front not-logged-in one-sidebar sidebar-first page-node i18n-ru fb_processed <?global $USER; if ($USER->IsAdmin()):?>admined-body<?endif;?> ">
