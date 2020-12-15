@@ -31,19 +31,25 @@ $(document).ready(function(){
         }
     );
 
+    var authorization_lawyer = Cookies.get('authorization_lawyer');
+
     $('form[name="form_auth"] input[type="submit"]').on('click', function(e){
-        if($(this).closest('form').data('event')) {
-        } else {
-            e.preventDefault();
-            initPopUp("form[name='form_auth'] input[type='submit']");
+        if (authorization_lawyer == null) {
+            if($(this).closest('form').data('event')) {
+            } else {
+                e.preventDefault();
+                initPopUp("form[name='form_auth'] input[type='submit']");
+            }
         }
     });
 
     $('#user-login-form input[type="submit"]').on('click', function(e){
-        if($(this).closest('form').data('event')) {
-        } else {
-            e.preventDefault();
-            initPopUp("#user-login-form input[type='submit']");
+        if (authorization_lawyer == null) {
+            if($(this).closest('form').data('event')) {
+            } else {
+                e.preventDefault();
+                initPopUp("#user-login-form input[type='submit']");
+            }
         }
     });
 
@@ -52,6 +58,8 @@ $(document).ready(function(){
         $(this).parent().remove();
         $('.questionOverlay').remove();
         $(name).closest('form').addClass('loadings').attr('data-event', 'loadings');
+        // set cookie
+        Cookies.set('authorization_lawyer', 'yes');
         $(name).trigger('click');
     });
 

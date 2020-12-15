@@ -25,8 +25,9 @@
     $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/flexslider.css');
     $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/jquery.fancybox.css');
 
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/js.cookie.min.js');
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jspdf.debug.js');
-    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery-1.11.2.min.js');
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery-1.12.4.min.js');
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.flexslider.js');
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.fancybox.js');
     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.ui.widget.js');
