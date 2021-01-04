@@ -136,9 +136,9 @@ abstract class CAllDatabase
 
 	public static function showConnectionError()
 	{
-		Bitrix\Main\Context::getCurrent()->getResponse()
-			->setStatus('500 Internal Server Error')
-			->writeHeaders();
+		$response = new Main\HttpResponse();
+		$response->setStatus('500 Internal Server Error');
+		$response->writeHeaders();
 
 		if(file_exists($_SERVER["DOCUMENT_ROOT"].BX_PERSONAL_ROOT."/php_interface/dbconn_error.php"))
 		{

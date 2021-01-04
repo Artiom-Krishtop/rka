@@ -15,9 +15,9 @@ class HttpExceptionHandlerOutput implements IExceptionHandlerOutput
 	 */
 	public function renderExceptionMessage($exception, $debug = false)
 	{
-		Main\Context::getCurrent()->getResponse()
-			->setStatus('500 Internal Server Error')
-			->writeHeaders();
+		$response = new Main\HttpResponse();
+		$response->setStatus('500 Internal Server Error');
+		$response->writeHeaders();
 
 		if ($debug)
 		{
@@ -32,11 +32,15 @@ class HttpExceptionHandlerOutput implements IExceptionHandlerOutput
 			}
 			else
 			{
-				$context = Main\Application::getInstance();
-				if ($context)
+				$application = Main\Application::getInstance();
+				if ($application)
+				{
 					echo Main\Localization\Loc::getMessage("eho_render_exception_message");
+				}
 				else
+				{
 					echo "A error occurred during execution of this script. You can turn on extended error reporting in .settings.php file.";
+				}
 			}
 		}
 	}
