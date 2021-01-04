@@ -118,7 +118,7 @@ $APPLICATION->SetTitle("Белорусская республиканская к
                         "CACHE_FILTER" => "Y",
                         "CACHE_GROUPS" => "Y",
                         "CACHE_TIME" => "36000000",
-                        "CACHE_TYPE" => "N",
+                        "CACHE_TYPE" => "A",
                         "CHECK_DATES" => "Y",
                         "COMPONENT_TEMPLATE" => "active_advo",
                         "DETAIL_URL" => "",

@@ -153,28 +153,54 @@ if(!IsModuleInstalled('socialnetwork')) {
 }
 
 function getActiveAdvokat() {
-    CModule::IncludeModule("iblock");
-    $DATE1 = date("01.m.Y 00:00:00", strtotime("-1 month"));
-    $DATE2 = date("t.m.Y 23:59:59", strtotime("-1 month"));
-     /*$DATE1 = "01.06.2018 00:00:00"; $DATE2 = "30.06.2018 23:59:59";*/
-    $arFilter = array(
-    "IBLOCK_ID"=>16,
-         ">=DATE_ACTIVE_FROM" => $DATE1,
-        "<=DATE_ACTIVE_FROM" => $DATE2,   
-    );				 
-                        $rest = CIBlockElement::GetList(Array('SORT' => 'ASC', 'ID' => 'DESC'),$arFilter, false, array(), Array("DATE_ACTIVE_FROM","PROPERTY_PUBLIC_DATE","PROPERTY_USER", "ID", "IBLOCK_ID"));
-                        $navCount = $rest->SelectedRowsCount(); 	      
-                        while ($ob = $rest->GetNextElement()){
-                            $arFields = $ob->GetFields(); // поля элемента
-                            if(!empty($arFields["PROPERTY_USER_VALUE"])) {
-                                $arResult["counter"][$arFields["PROPERTY_USER_VALUE"]]++;
-                            }
-                        }
-    arsort($arResult["counter"]);  
-    $arResult["counter"]=array_slice($arResult["counter"],0,7,TRUE);
-                          
-   // $arrKeys = array_keys($arResult["counter"]);   
-    return $arResult["counter"];    
+    if(!CModule::IncludeModule("iblock"))
+        return;
+
+    $arResult = array();
+
+    //$DATE1 = date("01.m.Y 00:00:00", strtotime("-1 month"));
+    //$DATE2 = date("t.m.Y 23:59:59", strtotime("-1 month"));
+    /*$arFilter = array(
+        "IBLOCK_ID"=>16,
+        ">=DATE_ACTIVE_FROM" => $DATE1,
+        "<=DATE_ACTIVE_FROM" => $DATE2,
+    );*/
+
+    $date = Bitrix\Main\Type\Date::createFromTimestamp(strtotime("first day of previous month"));
+    $dateTime = new Bitrix\Main\UI\Filter\DateTime($date->getTimestamp());
+    $DATE_FROM = $dateTime->toString();
+    $DATE_TO = $dateTime->offset("1 month - 1 second");
+
+    $arFilter = Array
+    (
+        "IBLOCK_ID" => 16,
+        ">=DATE_ACTIVE_FROM" => $DATE_FROM,
+        "<=DATE_ACTIVE_FROM" => $DATE_TO,
+        "ACTIVE" => "Y",
+    );
+    $rest = CIBlockElement::GetList(
+        Array('SORT' => 'ASC', 'ID' => 'DESC'),
+        $arFilter,
+        false,
+        array(),
+        Array("DATE_ACTIVE_FROM","PROPERTY_PUBLIC_DATE","PROPERTY_USER", "ID", "IBLOCK_ID")
+    );
+
+    $navCount = $rest->SelectedRowsCount();
+
+    while ($ob = $rest->GetNextElement()){
+        $arFields = $ob->GetFields(); // поля элемента
+        if(!empty($arFields["PROPERTY_USER_VALUE"])) {
+            $arResult["counter"][$arFields["PROPERTY_USER_VALUE"]]++;
+        }
+    }
+
+    arsort($arResult["counter"]);
+
+    $arResult["counter"] = array_slice($arResult["counter"],0,7,TRUE);
+
+    // $arrKeys = array_keys($arResult["counter"]);
+    return $arResult["counter"];
 }
 function getAdvokat() {
     CModule::IncludeModule("iblock");
