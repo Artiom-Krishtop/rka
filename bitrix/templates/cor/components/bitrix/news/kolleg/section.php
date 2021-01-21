@@ -125,7 +125,7 @@ else {
             <div class="field field-name-field-phone field-type-text field-label-inline clearfix">
                 <div class="field-label">Телефон:&nbsp;</div>
                 <div class="field-items">
-                    <div class="field-item even" property="schema:telephone"><?=$section['UF_S_PHONE']?></div>
+                    <div class="field-item even" property="schema:telephone"><?=htmlspecialcharsBack($section['UF_S_PHONE']);?></div>
                 </div>
             </div>
         <?}?>
@@ -266,26 +266,29 @@ else {
                     );?>
                 <?}else if ($section['ID'] == 67){?>
                     <?$APPLICATION->IncludeComponent(
-                        "bitrix:map.yandex.view",
-                        "grodno",
-                        array(
-                            "COMPONENT_TEMPLATE" => "grodno",
-                            "CONTROLS" => array(
-                                0 => "ZOOM",
-                                1 => "TYPECONTROL",
-                                2 => "SCALELINE",
-                            ),
-                            "INIT_MAP_TYPE" => "MAP",
-                            "MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:53.68168644605393;s:10:\"yandex_lon\";d:23.83292345536136;s:12:\"yandex_scale\";i:17;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:23.833171525131192;s:3:\"LAT\";d:53.68145486731326;s:4:\"TEXT\";s:77:\"Гродненская областная коллегия адвокатов\";}}}",
-                            "MAP_HEIGHT" => "300",
-                            "MAP_ID" => "",
-                            "MAP_WIDTH" => "100%",
-                            "OPTIONS" => array(
-                                0 => "ENABLE_DBLCLICK_ZOOM",
-                            )
-                        ),
-                        false
-                    );?>
+	"bitrix:map.yandex.view", 
+	"grodno", 
+	array(
+		"COMPONENT_TEMPLATE" => "grodno",
+		"CONTROLS" => array(
+			0 => "ZOOM",
+			1 => "TYPECONTROL",
+			2 => "SCALELINE",
+		),
+		"INIT_MAP_TYPE" => "MAP",
+		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:53.68785088279097;s:10:\"yandex_lon\";d:23.845200857412195;s:12:\"yandex_scale\";i:17;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:23.84532423902688;s:3:\"LAT\";d:53.687803915364135;s:4:\"TEXT\";s:77:\"Гродненская областная коллегия адвокатов\";}}}",
+		"MAP_HEIGHT" => "300",
+		"MAP_ID" => "",
+		"MAP_WIDTH" => "100%",
+		"OPTIONS" => array(
+			0 => "ENABLE_DBLCLICK_ZOOM",
+		),
+		"API_KEY" => "",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
+	),
+	false
+);?>
                 <?}else if ($section['ID'] == 68){?>
                     <?$APPLICATION->IncludeComponent(
                         "bitrix:map.yandex.view",

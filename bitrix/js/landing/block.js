@@ -3495,6 +3495,8 @@
 				fireCustomEvent(window, "BX.Landing.Block:beforeApplyContentChanges", [event]);
 			}
 
+			var valuePromises = [];
+
 			Object.keys(data).forEach(function(selector) {
 				if (isNodeSelector(selector))
 				{
@@ -3502,13 +3504,27 @@
 
 					if (node)
 					{
-						node.setValue(data[selector], true, true);
-						data[selector] = node.getValue();
+						var valuePromise = node.setValue(data[selector], true, true);
+						if (valuePromise)
+						{
+							valuePromises.push(valuePromise);
+							valuePromise.then(function() {
+								data[selector] = node.getValue();
+							});
+						}
+						else
+						{
+							data[selector] = node.getValue();
+						}
 					}
 				}
 			}, this);
 
-			return Promise.resolve(data);
+			return Promise
+				.all(valuePromises)
+				.then(function() {
+					return data;
+				});
 		},
 
 		applyMenuChanges: function(data)

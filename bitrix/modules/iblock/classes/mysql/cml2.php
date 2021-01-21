@@ -21,17 +21,7 @@ class CIBlockXMLFile
 	function __construct($table_name = "b_xml_tree")
 	{
 		$this->_table_name = strtolower($table_name);
-		if (defined("BX_UTF"))
-		{
-			if (function_exists("mb_orig_strpos") && function_exists("mb_orig_strlen") && function_exists("mb_orig_substr"))
-				$this->_get_xml_chunk_function = "_get_xml_chunk_mb_orig";
-			else
-				$this->_get_xml_chunk_function = "_get_xml_chunk_mb";
-		}
-		else
-		{
-			$this->_get_xml_chunk_function = "_get_xml_chunk";
-		}
+		$this->_get_xml_chunk_function = "_get_xml_chunk";
 	}
 
 	function StartSession($sess_id)
@@ -317,9 +307,8 @@ class CIBlockXMLFile
 			$end_time = time() + 365*24*3600; // One year
 
 		$cs = $this->charset;
-		$_get_xml_chunk = array($this, $this->_get_xml_chunk_function);
 		fseek($fp, $this->file_position);
-		while(($xmlChunk = call_user_func_array($_get_xml_chunk, array($fp))) !== false)
+		while(($xmlChunk = $this->_get_xml_chunk($fp)) !== false)
 		{
 			if($cs)
 			{
@@ -355,10 +344,13 @@ class CIBlockXMLFile
 		return feof($fp);
 	}
 
-	/*
-	Internal function.
-	Used to read an xml by chunks started with "<" and endex with "<"
-	*/
+	/**
+	 * Internal function.
+	 * Used to read an xml by chunks started with "<" and endex with "<"
+	 *
+	 * @param resource $fp
+	 * @return bool|string
+	 */
 	function _get_xml_chunk($fp)
 	{
 		if($this->buf_position >= $this->buf_len)
@@ -421,10 +413,14 @@ class CIBlockXMLFile
 		return $result;
 	}
 
-	/*
-	Internal function.
-	Used to read an xml by chunks started with "<" and endex with "<"
-	*/
+	/**
+	 * Internal function.
+	 * Used to read an xml by chunks started with "<" and endex with "<"
+	 *
+	 * @deprecated deprecated since iblock 20.100.0
+	 * @param resource $fp
+	 * @return bool|string
+	 */
 	function _get_xml_chunk_mb_orig($fp)
 	{
 		if($this->buf_position >= $this->buf_len)
@@ -487,10 +483,14 @@ class CIBlockXMLFile
 		return $result;
 	}
 
-	/*
-	Internal function.
-	Used to read an xml by chunks started with "<" and endex with "<"
-	*/
+	/**
+	 * Internal function.
+	 * Used to read an xml by chunks started with "<" and endex with "<"
+	 *
+	 * @deprecated deprecated since iblock 20.100.0
+	 * @param resource $fp
+	 * @return bool|string
+	 */
 	function _get_xml_chunk_mb($fp)
 	{
 		if($this->buf_position >= $this->buf_len)

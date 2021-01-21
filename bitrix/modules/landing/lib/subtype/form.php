@@ -411,12 +411,6 @@ class Form
 			return;
 		}
 
-		$content = $block->getContent();
-		if (strpos($content, self::ATTR_FORM_EMBED) !== false)
-		{
-			return;
-		}
-
 		$dom = $block->getDom();
 		if (!$resultNode = $dom->querySelector(self::SELECTOR_FORM_NODE))
 		{
@@ -439,14 +433,20 @@ class Form
 				$resultNode->removeAttribute(self::ATTR_FORM_OLD_DOMAIN);
 				$resultNode->removeAttribute(self::ATTR_FORM_OLD_HEADER);
 
-				// find new styles
-				$contentFromRepo = Block::getContentFromRepository($block->getCode());
 				if (
-					$contentFromRepo
-					&& preg_match(self::REGEXP_FORM_STYLE, $contentFromRepo, $style)
+					!array_key_exists(self::ATTR_FORM_STYLE, $attrs)
+					|| !$attrs[self::ATTR_FORM_STYLE]->getValue()
 				)
 				{
-					$resultNode->setAttribute(self::ATTR_FORM_STYLE, $style[1]);
+					// find new styles
+					$contentFromRepo = Block::getContentFromRepository($block->getCode());
+					if (
+						$contentFromRepo
+						&& preg_match(self::REGEXP_FORM_STYLE, $contentFromRepo, $style)
+					)
+					{
+						$resultNode->setAttribute(self::ATTR_FORM_STYLE, $style[1]);
+					}
 				}
 			}
 		}

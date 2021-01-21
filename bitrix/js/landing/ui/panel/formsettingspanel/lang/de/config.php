@@ -3,6 +3,7 @@ $MESS["LANDING_AGREEMENTS_MESSAGE_DESCRIPTION"] = "In den meisten Ländern müss
 $MESS["LANDING_AGREEMENTS_MESSAGE_HEADER"] = "Wir haben bereits eine erforderliche Zustimmung hinzugefügt";
 $MESS["LANDING_AGREEMENTS_TITLE"] = "Zustimmungen";
 $MESS["LANDING_CRM_ACCESS_ERROR_MESSAGE"] = "Sie haben nicht genügend Rechte, um das Onlineformular zu bearbeiten. Senden Sie bitte eine Anfrage an Ihren Bitrix24 Administrator.";
+$MESS["LANDING_CRM_FORM_LANGUAGE"] = "Sprache";
 $MESS["LANDING_CRM_FORM_USER"] = "Verantwortlich";
 $MESS["LANDING_FIELDS_ADD_NEW_RULE_LINK_LABEL"] = "Neue Regel hinzufügen";
 $MESS["LANDING_FIELDS_RULES_TITLE"] = "Regeln zur Feldansicht";

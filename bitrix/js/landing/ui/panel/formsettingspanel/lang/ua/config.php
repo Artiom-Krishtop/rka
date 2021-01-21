@@ -3,6 +3,7 @@ $MESS["LANDING_AGREEMENTS_MESSAGE_DESCRIPTION"] = "Усе в більшій кі
 $MESS["LANDING_AGREEMENTS_MESSAGE_HEADER"] = "Ми вже додали необхідну угоду";
 $MESS["LANDING_AGREEMENTS_TITLE"] = "Угоди";
 $MESS["LANDING_CRM_ACCESS_ERROR_MESSAGE"] = "Недостатньо прав на редагування CRM-форми. Надішліть запит на доступ адміністратору порталу.";
+$MESS["LANDING_CRM_FORM_LANGUAGE"] = "Мова";
 $MESS["LANDING_CRM_FORM_USER"] = "Відповідальний";
 $MESS["LANDING_FIELDS_ADD_NEW_RULE_LINK_LABEL"] = "Додати нове правило";
 $MESS["LANDING_FIELDS_RULES_TITLE"] = "Правила відображення полів";
