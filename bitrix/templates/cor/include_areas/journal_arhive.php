@@ -9,7 +9,7 @@
         <tr>
             <td>&nbsp;</td>
             <td><a href="http://www.rka.by/journal/27/" target="_blank" rel="nofollow">№25 / 2020</a></td>
-            <td> </td>
+            <td><a href="http://www.rka.by/journal/28/" target="_blank" rel="nofollow">№26 / 2020</a></td>
         </tr>
         <tr>
             <td>&nbsp;</td>

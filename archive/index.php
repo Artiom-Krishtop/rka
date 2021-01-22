@@ -6,6 +6,11 @@ $APPLICATION->SetTitle("Архив журналов");
         <tbody>
         <tr>
             <td>
+                <a href="/journal/28/" target="_blank">№ 26 / 2020</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <a href="/journal/27/" target="_blank">№ 25 / 2020</a>
             </td>
         </tr>
