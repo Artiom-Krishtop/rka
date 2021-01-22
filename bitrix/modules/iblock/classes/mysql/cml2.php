@@ -1,4 +1,6 @@
 <?
+use Bitrix\Main;
+
 /*
 This class is used to parse and load an xml file into database table.
 */
@@ -280,8 +282,6 @@ class CIBlockXMLFile
 	*/
 	function ReadXMLToDatabase($fp, &$NS, $time_limit=0, $read_size = 1024)
 	{
-		global $APPLICATION;
-
 		//Initialize object
 		if(!array_key_exists("charset", $NS))
 			$NS["charset"] = false;
@@ -312,7 +312,7 @@ class CIBlockXMLFile
 		{
 			if($cs)
 			{
-				$xmlChunk = $APPLICATION->ConvertCharset($xmlChunk, $cs, LANG_CHARSET);
+				$xmlChunk = Main\Text\Encoding::convertEncoding($xmlChunk, $cs, LANG_CHARSET);
 			}
 
 			if($xmlChunk[0] == "/")
@@ -815,8 +815,6 @@ class CIBlockXMLFile
 
 	public static function UnZip($file_name, $last_zip_entry = "", $start_time = 0, $interval = 0)
 	{
-		global $APPLICATION;
-
 		//Function and securioty checks
 		if(!function_exists("zip_open"))
 			return false;
@@ -846,7 +844,7 @@ class CIBlockXMLFile
 			{
 
 				$file_name = trim(str_replace("\\", "/", trim($entry_name)), "/");
-				$file_name = $APPLICATION->ConvertCharset($file_name, "cp866", LANG_CHARSET);
+				$file_name = Main\Text\Encoding::convertEncoding($file_name, "cp866", LANG_CHARSET);
 				$file_name = preg_replace("#^import_files/tmp/webdata/\\d+/\\d+/import_files/#", "import_files/", $file_name);
 
 				$bBadFile = HasScriptExtension($file_name)

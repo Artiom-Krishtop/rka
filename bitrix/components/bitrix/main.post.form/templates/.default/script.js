@@ -3154,30 +3154,24 @@ window.MPFMentionInit = function(formId, params)
 
 			selectorInstance.bindOptions.zIndex = 2200;
 		});
+	}
 
-		if (
-			repo.form[formId]
-			&& BX('div' + repo.form[formId].__divId)
-		)
-		{
-			BX.addCustomEvent(BX('div' + repo.form[formId].__divId), 'OnShowLHE', function(show) {
+	if (
+		repo.form[formId]
+		&& BX('div' + repo.form[formId].__divId)
+	)
+	{
+		BX.addCustomEvent(repo.handler[repo.form[formId].oEditorId], 'OnEditorIsLoaded', function() {
+			var selectorId = window.MPFgetSelectorId('bx-mention-' + formId + '-id');
 
-				if (!show)
-				{
-					return;
-				}
-
-				var selectorId = window.MPFgetSelectorId('bx-mention-' + formId + '-id');
-
-				if (selectorId)
-				{
-					BX.onCustomEvent(window, 'BX.MPF.MentionSelector:init', [{
-						id: selectorId,
-						openDialogWhenInit: false
-					}]);
-				}
-			});
-		}
+			if (selectorId)
+			{
+				BX.onCustomEvent(window, 'BX.MPF.MentionSelector:init', [{
+					id: selectorId,
+					openDialogWhenInit: false
+				}]);
+			}
+		});
 	}
 
 	BX.ready(function() {

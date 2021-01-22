@@ -279,9 +279,18 @@
 					showOptions.state = 'presets';
 				}
 
-				void BX.Landing.UI.Panel.FormSettingsPanel
-					.getInstance()
-					.show(showOptions);
+				var rootWindow = BX.Landing.PageObject.getRootWindow();
+				void Promise.all([
+					rootWindow.BX.Runtime
+						.loadExtension('landing.ui.panel.formsettingspanel'),
+					BX.Runtime
+						.loadExtension('landing.ui.panel.formsettingspanel')
+				])
+				.then(function(result) {
+					void result[1].FormSettingsPanel
+						.getInstance()
+						.show(showOptions);
+				});
 			}
 		}
 
@@ -1675,16 +1684,36 @@
 		onShowContentPanel: function()
 		{
 			var formId = this.getBlockFormId();
-			if (BX.Type.isPlainObject(formId))
+			var type = BX.Text.capitalize(
+				BX.Landing.Env.getInstance().getOptions().params.type
+			);
+			if (
+				BX.Type.isPlainObject(formId)
+				&& type !== 'SMN'
+			)
 			{
-				void BX.Landing.UI.Panel.FormSettingsPanel
-					.getInstance()
-					.show({
-						formId: formId.id,
-						instanceId: formId.instanceId,
-						formOptions: this.getCrmFormOptions(),
-						block: this,
-					});
+				var rootWindow = BX.Landing.PageObject.getRootWindow();
+				void Promise
+					.all([
+						rootWindow.BX.Runtime
+							.loadExtension('landing.ui.panel.formsettingspanel'),
+						BX.Runtime
+							.loadExtension('landing.ui.panel.formsettingspanel')
+					])
+					.then(function(result) {
+						var FormSettingsPanel = result[1].FormSettingsPanel;
+						if (FormSettingsPanel)
+						{
+							FormSettingsPanel
+								.getInstance()
+								.show({
+									formId: formId.id,
+									instanceId: formId.instanceId,
+									formOptions: this.getCrmFormOptions(),
+									block: this,
+								});
+						}
+					}.bind(this));
 			}
 			else
 			{
@@ -2416,7 +2445,14 @@
 					]
 				});
 
-				if (this.getBlockFormId())
+				var formId = this.getBlockFormId();
+				var type = BX.Text.capitalize(
+					BX.Landing.Env.getInstance().getOptions().params.type
+				);
+				if (
+					BX.Type.isPlainObject(formId)
+					&& type !== 'SMN'
+				)
 				{
 					var button = new BX.UI.Button({
 						text: BX.Landing.Loc.getMessage('LANDING_SHOW_FORM_EDITOR'),
@@ -2560,16 +2596,16 @@
 					}
 				});
 
-				var nodesOptions = {};
-
 				contentForms.fetchFields().forEach(function(field) {
 					if (field.tag)
 					{
-						nodesOptions[field.selector] = {tagName: field.tag};
+						var node = this.nodes.getBySelector(field.selector);
+						if (node)
+						{
+							node.onChangeTag(field.tag);
+						}
 					}
 				}, this);
-
-				this.onNodeOptionsChange(nodesOptions);
 			}
 		},
 
@@ -2909,16 +2945,29 @@
 
 					if (options.type === 'crm-form')
 					{
-						var formStyleAdapter = new BX.Landing.FormStyleAdapter({
-							formId: this.getBlockFormId().id,
-							instanceId: this.getBlockFormId().instanceId,
-							currentBlock: this,
-						});
+						var rootWindow = BX.Landing.PageObject.getRootWindow();
 
-						return Promise.all([
-							stylePanel.show(),
-							formStyleAdapter.load()
-						]);
+						return Promise
+							.all([
+								rootWindow.BX.Runtime.loadExtension('landing.formstyleadapter'),
+								BX.Runtime.loadExtension('landing.formstyleadapter')
+							])
+							.then(function(result) {
+								var FormStyleAdapter = result[1].FormStyleAdapter;
+								var formStyleAdapter = new FormStyleAdapter({
+									formId: this.getBlockFormId().id,
+									instanceId: this.getBlockFormId().instanceId,
+									currentBlock: this,
+								});
+
+								return Promise.all([
+									stylePanel.show(),
+									formStyleAdapter.load()
+								]);
+							}.bind(this))
+							.catch(function(error) {
+								console.log(error);
+							});
 					}
 
 					return stylePanel
