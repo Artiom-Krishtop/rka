@@ -12,8 +12,9 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-    <div style="color:red;margin-bottom: 20px;">Уважаемые адвокаты! Обращаем ваше внимание, что при открытии вопроса он привязывается к вашему профилю. Если на вопрос не опубликован ответ в течение 30 минут, вопрос снова становится доступен для других адвокатов.</div>
-    <div style="color:red;margin-bottom: 20px;">В соответствии с правилами <a href="/pravila-online-konsultacii/">online-консультации</a> просим НЕ отвечать на вопросы, содержащие персонифицированные данные изложенные Посетителем (ФИО, наименования юридических лиц, адреса, телефоны и т.п.).</div>
+    <div style="margin-bottom: 20px; color: #7a0045; font-family: Georgia; font-size: 13pt;"><i><b>Просим не отвечать на вопросы, которые содержат личные данные во избежание их несанкционированного распространения в сети Интернет. При открытии адвокатом вопроса для ответа он "привязывается" к профилю данного адвоката и недоступен для ответа другими адвокатами. Если ответ на вопрос не опубликован в течение 30 минут, вопрос снова доступен для ответа.</b></i></div>
+    <!--<div style="color:red;margin-bottom: 20px;">Уважаемые адвокаты! Обращаем ваше внимание, что при открытии вопроса он привязывается к вашему профилю. Если на вопрос не опубликован ответ в течение 30 минут, вопрос снова становится доступен для других адвокатов.</div>
+    <div style="color:red;margin-bottom: 20px;">В соответствии с правилами <a href="/pravila-online-konsultacii/">online-консультации</a> просим НЕ отвечать на вопросы, содержащие персонифицированные данные изложенные Посетителем (ФИО, наименования юридических лиц, адреса, телефоны и т.п.).</div>-->
 <?if($arParams["USE_RSS"]=="Y"):?>
     <?
     if(method_exists($APPLICATION, 'addheadstring'))
@@ -62,21 +63,31 @@ if (!empty($_REQUEST["colleg"])) {
     $arrFilter["PROPERTY_F_COLLEG"] = $_REQUEST["colleg"];
     $USE_FILTER = "Y";
 }
-$resElemCnt = CIBlockElement::GetList(false, array('IBLOCK_ID' => 16, "PROPERTY_F_COLLEG" => $_REQUEST["colleg"], "ACTIVE"=>"N", "PROPERTY_USER"=> false), false, false, array("ID"));
+$resElemCnt = CIBlockElement::GetList(false, array_merge(array('IBLOCK_ID' => 16), $arrFilter), false, false, array("ID"));
 global $count;
 $count = $resElemCnt->SelectedRowsCount();
+//p($arrFilter);
+/*
+Белорусская республиканская коллегия адвокатов - 64
+Минская городская коллегия адвокатов - 65
+Могилевская областная коллегия адвокатов - 66
+Гродненская областная коллегия адвокатов - 67
+Гомельская областная коллегия адвокатов - 68
+Витебская областная коллегия адвокатов - 69
+Брестская областная коллегия адвокатов - 70
+Минская областная коллегия адвокатов  - 71
+*/
 ?>
-
     <div id="block-block-14" class="block block-block contextual-links-region first last odd">
         <p><em><strong>
-                    <a href="?colleg=64" rel="nofollow">РКА</a> |
-                    <a href="?colleg=71" rel="nofollow">ОКА</a> |
-                    <a href="?colleg=65" rel="nofollow">ГКА</a>  |
-                    <a href="?colleg=70" rel="nofollow">БОКА</a> |
-                    <a href="?colleg=69" rel="nofollow">ВОКА</a> |
-                    <a href="?colleg=68" rel="nofollow">ГОКА</a> |
-                    <a href="?colleg=67" rel="nofollow">ГрОКА</a> |
-                    <a href="?colleg=66" rel="nofollow">МОКА</a> |
+                    <!--<a href="?colleg=64" rel="nofollow">РКА</a> |-->
+                    <a href="?colleg=71" rel="nofollow" title="Минская областная коллегия адвокатов">МОКА</a> |
+                    <a href="?colleg=65" rel="nofollow" title="Минская городская коллегия адвокатов">МГКА</a>  |
+                    <a href="?colleg=70" rel="nofollow" title="Брестская областная коллегия адвокатов">БОКА</a> |
+                    <a href="?colleg=69" rel="nofollow" title="Витебская областная коллегия адвокатов">ВОКА</a> |
+                    <a href="?colleg=68" rel="nofollow" title="Гомельская областная коллегия адвокатов">ГОКА</a> |
+                    <a href="?colleg=67" rel="nofollow" title="Гродненская областная коллегия адвокатов">ГрОКА</a> |
+                    <a href="?colleg=66" rel="nofollow" title="Могилевская областная коллегия адвокатов">МогОКА</a> |
                     <a href="/faq_ask/unanswered/" rel="nofollow">Все вопросы</a>
                 </strong></em></p>
     </div>
@@ -137,7 +148,7 @@ $count = $resElemCnt->SelectedRowsCount();
         "GROUP_PERMISSIONS" => $arParams["GROUP_PERMISSIONS"],
         "FILTER_NAME" => 'arrFilter',
         "HIDE_LINK_WHEN_NO_DETAIL" => $arParams["HIDE_LINK_WHEN_NO_DETAIL"],
-        "CHECK_DATES" => $arParams["CHECK_DATES"],
+        "CHECK_DATES" => "N",
     ),
     $component
 );?>

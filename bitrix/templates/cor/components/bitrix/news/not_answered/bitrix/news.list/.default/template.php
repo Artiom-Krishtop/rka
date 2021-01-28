@@ -11,6 +11,8 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
+$c = count($arResult["ITEMS"]);
+//p($c);
 ?>
 <div class="news-list view view-faq view-id-faq view-display-id-page">
     <div class="view-content">
