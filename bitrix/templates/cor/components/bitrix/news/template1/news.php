@@ -59,7 +59,7 @@ $this->setFrameMode(true);
 
 <?
 global $arrFilterMuseum; 
-$arrFilterMuseum = array ("SECTION_ID"=>"", "INCLUDE_SUBSECTIONS"=>"Y");
+$arrFilterMuseum = array ("SECTION_ID"=>"", "INCLUDE_SUBSECTIONS"=>"N");
 $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"",
