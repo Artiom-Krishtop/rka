@@ -8,8 +8,8 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Знаки и логотипы белорусской коллегии адвокатов", 
-		"/about/znaki-i-logotipy-belorusskoy-kollegii/", 
+		"Правила профессиональной этики адвоката", 
+		"/about/pravila-professionalnoy-etiki-advokata/", 
 		Array(), 
 		Array(), 
 		"" 
@@ -22,20 +22,6 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Постановление Совета РКА Об отдельных вопросах стажировки", 
-		"/about/postanovlenie-soveta-rka-ob-otdelnyh-voprosah-stazhirovki/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Правила профессиональной этики адвоката", 
-		"/about/pravila-professionalnoy-etiki-advokata/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
 		"Белорусская республиканская коллегия адвокатов", 
 		"/kollegies/respublikanskaya/", 
 		Array(), 
@@ -43,15 +29,15 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Слово в Защиту", 
-		"/about/slovo-v-zashchitu/", 
+		"Постановление Совета РКА Об отдельных вопросах стажировки", 
+		"/about/postanovlenie-soveta-rka-ob-otdelnyh-voprosah-stazhirovki/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Информация Белорусской республиканской коллегии адвокатов о выполненной работе за 2014 год", 
-		"/about/informaciya-belorusskoy-respublikanskoy/", 
+		"Слово в Защиту", 
+		"/about/slovo-v-zashchitu/", 
 		Array(), 
 		Array(), 
 		"" 

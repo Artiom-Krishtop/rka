@@ -6,20 +6,6 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
-	),
-	Array(
-		"Вверх", 
-		"/about/poryadok-i-usloviya-okazaniya/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Бесплатный адвокат: где его найти ›", 
-		"/blogs/besplatnyy-advokat-gde-ego-nayti/", 
-		Array(), 
-		Array(), 
-		"" 
 	)
 );
 ?>
