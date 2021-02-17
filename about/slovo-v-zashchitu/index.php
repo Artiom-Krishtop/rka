@@ -64,11 +64,8 @@ $APPLICATION->SetTitle("Слово в Защиту");
 );?> 
 <h2 class="title comment-form" id="commento">Добавить комментарий</h2>
 <hr>
-<?$APPLICATION->IncludeComponent(
-	"bitrix:forum.topic.reviews", 
-	"comment_fiz", 
-	array(
-		"AJAX_POST" => "Y",
+<?$APPLICATION->IncludeComponent("bitrix:forum.topic.reviews", "comment_fiz", array(
+	"AJAX_POST" => "Y",
 		"CACHE_TIME" => "0",
 		"CACHE_TYPE" => "A",
 		"DATE_TIME_FORMAT" => "j F Y G:i",
@@ -93,6 +90,9 @@ $APPLICATION->SetTitle("Слово в Защиту");
 		"USE_CAPTCHA" => "Y",
 		"COMPONENT_TEMPLATE" => "comment_fiz"
 	),
-	false
+	false,
+	array(
+	"ACTIVE_COMPONENT" => "N"
+	)
 );?> 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

@@ -398,4 +398,93 @@ function p( $_mixVar=null, $_intExit=null )
     }
 }
 
+/* Список адвокатов для ЮНИСЕФ. Данные сохраняются как файл /upload/lawyers.csv */
+function listLawyersCSV()
+{
+    if(CModule::IncludeModule("iblock"))
+    {
+        // ФИО, лицензия, место работы (юридическая консультация, адвокатское бюро либо индивидуал), контакты - при наличии их на сайте (телефон, емейл)
+        $expUsersFile = 'lawyers.csv';
+        $strDlmtr = ';';
+        $lineDlmtr = "\n";
+
+        $arUsers = array('#,Фамилия,Имя,Отчество,Номер лицензии,Дата выдачи лицензии,Коллегия,Место работы,Телефон,EMail');
+        $i = 1;
+
+        $rsResCat = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 17, "ACTIVE_DATE" => "Y", "ACTIVE" => "Y"), false, false, Array("ID", "IBLOCK_ID"));
+        while($arItemCat = $rsResCat->GetNextElement())
+        {
+            $arFields = $arItemCat->GetFields();
+            $arProps = $arItemCat->GetProperties();
+
+            $userParams = array(
+                "SELECT" => array("UF_COLLEGIA", "UF_CONSULT", "UF_BURO", "UF_IND_US"),
+                "FIELDS" => array("ID", "NAME", "LAST_NAME", "SECOND_NAME", "EMAIL", "PERSONAL_PHONE")
+            );
+
+            $db = CUser::GetList($a, $b, array("ID" => $arProps["USER"]["VALUE"]), $userParams);
+            while ($u = $db->Fetch())
+            {
+                if (strlen(trim($arProps["KOLLEG"]["VALUE"])))
+                    $collegia = trim($arProps["KOLLEG"]["VALUE"]);
+                elseif(strlen(trim($u["UF_COLLEGIA"])))
+                    $collegia = trim($u["UF_COLLEGIA"]);
+                else
+                    $collegia = '';
+
+                if((isset($arProps["IND_DEYAT"]["VALUE"]) && !empty($arProps["IND_DEYAT"]["VALUE"])) or (isset($u["UF_IND_US"]) && !empty($u["UF_IND_US"])))
+                    $work = 'Осуществляет адвокатскую деятельность индивидуально';
+                else
+                {
+                    $resWork = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 15, "ACTIVE" => "Y", "PROPERTY_ADVOKATS" => $u["ID"]), false, false, Array("ID", "NAME"));
+                    while($arWork = $resWork->GetNext())
+                    {
+                        if(strlen(trim($arWork["NAME"])))
+                            $work = trim($arWork["NAME"]);
+                        else
+                            $work = trim($u["UF_CONSULT"]);
+                    }
+                    unset($resWork);
+                }
+
+                if (strlen(trim($arProps["PHONE"]["VALUE"])))
+                    $phone = trim($arProps["PHONE"]["VALUE"]);
+                //elseif(strlen(trim($u["PERSONAL_PHONE"])))
+                    //$phone = trim($u["PERSONAL_PHONE"]);
+                else
+                    $phone = '';
+
+                if (strlen(trim($arProps["EMAIL"]["VALUE"])))
+                    $email = trim($arProps["EMAIL"]["VALUE"]);
+                //elseif(strlen(trim($u["EMAIL"])))
+                    //$email = trim($u["EMAIL"]);
+                else
+                    $email = '';
+
+                $tmp = array(
+                    $i++,
+                    trim($u["LAST_NAME"]),
+                    trim($u["NAME"]),
+                    trim($u["SECOND_NAME"]),
+                    trim($arProps["NOM_LIC"]["VALUE"]),
+                    trim($arProps["DATA_LIC"]["VALUE"]),
+                    $collegia,
+                    $work,
+                    $phone,
+                    $email
+                );
+                $arUsers[] = implode($strDlmtr, $tmp);
+            }
+            unset($db);
+
+        }
+        unset($rsResCat);
+
+        $strUsers = implode($lineDlmtr, $arUsers);
+        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/'.$expUsersFile, $strUsers, LOCK_EX);
+    }
+
+    return "listLawyersCSV();";
+}
+
 ?>

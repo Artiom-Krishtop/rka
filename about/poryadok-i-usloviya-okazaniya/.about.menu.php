@@ -13,6 +13,13 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
+	),
+	Array(
+		"Юридическое обслуживание субъектов хозяйствования", 
+		"https://rka.by/about/poryadok-i-usloviya-okazaniya/yuridicheskoe-obsluzhivanie-subektov-khozyaystvovaniya.php", 
+		Array(), 
+		Array(), 
+		"" 
 	)
 );
 ?>

@@ -22,11 +22,11 @@ body{
 table{font-size:100%;}
 
 /*Links*/
-/*a:link {color: #0D2F62;}*/
-a:link {color: #0D2F62;}
+/*a:link {color: #2d399f;}*/
+a:link {color: #2d399f;}
 /*a:visited{color:#8C9AA8;}*/
 a:visited{color: #8C9AA8;}
-a:active {color: #0D2F62;}
+a:active {color: #2d399f;}
 /*a:hover{color:#b70438;}*/
 a:hover{color: #b70438;}
 small{font-size:85%;}

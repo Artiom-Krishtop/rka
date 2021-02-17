@@ -8,6 +8,20 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
+		"Юридическая помощь", 
+		"https://rka.by/about/poryadok-i-usloviya-okazaniya/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Онлайн-консультация", 
+		"/faq_ask/", 
+		Array(), 
+		Array("IMG"=>"/bitrix/templates/cor/images/ask.png"), 
+		"" 
+	),
+	Array(
 		"Новости", 
 		"/news/", 
 		Array(), 
@@ -19,13 +33,6 @@ $aMenuLinks = Array(
 		"/search_adv/", 
 		Array(), 
 		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_2321.png"), 
-		"" 
-	),
-	Array(
-		"Онлайн-консультация", 
-		"/faq_ask/", 
-		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/ask.png"), 
 		"" 
 	),
 	Array(
