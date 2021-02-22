@@ -1,6 +1,13 @@
 <?
 $aMenuLinks = Array(
 	Array(
+		"Ковид-19", 
+		"https://rka.by/kovid-19.php?sphrase_id=39813", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
 		"О БРКА", 
 		"/kollegies/respublikanskaya/", 
 		Array(), 

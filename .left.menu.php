@@ -22,17 +22,17 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Новости", 
-		"/news/", 
-		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_241.png"), 
-		"" 
-	),
-	Array(
 		"Найти адвоката", 
 		"/search_adv/", 
 		Array(), 
 		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_2321.png"), 
+		"" 
+	),
+	Array(
+		"Новости", 
+		"/news/", 
+		Array(), 
+		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_241.png"), 
 		"" 
 	),
 	Array(
@@ -75,6 +75,13 @@ $aMenuLinks = Array(
 		"/museum/", 
 		Array(), 
 		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_266.png"), 
+		"" 
+	),
+	Array(
+		"Ковид-19", 
+		"/kovid-19.php", 
+		Array(), 
+		Array(), 
 		"" 
 	)
 );
