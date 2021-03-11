@@ -403,12 +403,11 @@ function listLawyersCSV()
 {
     if(CModule::IncludeModule("iblock"))
     {
-        // ФИО, лицензия, место работы (юридическая консультация, адвокатское бюро либо индивидуал), контакты - при наличии их на сайте (телефон, емейл)
+        global $APPLICATION;
         $expUsersFile = 'lawyers.csv';
         $strDlmtr = ';';
         $lineDlmtr = "\n";
-
-        $arUsers = array('#,Фамилия,Имя,Отчество,Номер лицензии,Дата выдачи лицензии,Коллегия,Место работы,Телефон,EMail');
+        $arUsers = array('#,ФИО,Номер лицензии,Дата выдачи лицензии,Коллегия,Основной номер телефона,Дополнительные номера телефонов,Контакты в мессенджерах,Адреса электронной почты,Место работы,Gps-координаты адреса,График работы,Ссылка на фото,Основные отрасли права');
         $i = 1;
 
         $rsResCat = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 17, "ACTIVE_DATE" => "Y", "ACTIVE" => "Y"), false, false, Array("ID", "IBLOCK_ID"));
@@ -419,12 +418,20 @@ function listLawyersCSV()
 
             $userParams = array(
                 "SELECT" => array("UF_COLLEGIA", "UF_CONSULT", "UF_BURO", "UF_IND_US"),
-                "FIELDS" => array("ID", "NAME", "LAST_NAME", "SECOND_NAME", "EMAIL", "PERSONAL_PHONE")
+                "FIELDS" => array("ID", "NAME", "LAST_NAME", "SECOND_NAME", "EMAIL", "PERSONAL_PHONE", "PERSONAL_PHOTO")
             );
 
             $db = CUser::GetList($a, $b, array("ID" => $arProps["USER"]["VALUE"]), $userParams);
             while ($u = $db->Fetch())
             {
+                $fio = '';
+                if(strlen(trim($u["LAST_NAME"])))
+                    $fio .= trim($u["LAST_NAME"]);
+                if(strlen(trim($u["NAME"])))
+                    $fio .= ' '.trim($u["NAME"]);
+                if(strlen(trim($u["SECOND_NAME"])))
+                    $fio .= ' '.trim($u["SECOND_NAME"]);
+
                 if (strlen(trim($arProps["KOLLEG"]["VALUE"])))
                     $collegia = trim($arProps["KOLLEG"]["VALUE"]);
                 elseif(strlen(trim($u["UF_COLLEGIA"])))
@@ -432,19 +439,26 @@ function listLawyersCSV()
                 else
                     $collegia = '';
 
+                $map = '';
                 if((isset($arProps["IND_DEYAT"]["VALUE"]) && !empty($arProps["IND_DEYAT"]["VALUE"])) or (isset($u["UF_IND_US"]) && !empty($u["UF_IND_US"])))
                     $work = 'Осуществляет адвокатскую деятельность индивидуально';
                 else
                 {
-                    $resWork = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 15, "ACTIVE" => "Y", "PROPERTY_ADVOKATS" => $u["ID"]), false, false, Array("ID", "NAME"));
-                    while($arWork = $resWork->GetNext())
+                    $resWork = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 15, "ACTIVE" => "Y", "PROPERTY_ADVOKATS" => $u["ID"]), false, false, Array("IBLOCK_ID", "ID", "NAME", "PREVIEW_TEXT"));
+                    while($arWork = $resWork->GetNextElement())
                     {
-                        if(strlen(trim($arWork["NAME"])))
-                            $work = trim($arWork["NAME"]);
+                        $fieldsWork = $arWork->GetFields();
+                        $propsWork = $arWork->GetProperties();
+
+                        if(strlen(trim($fieldsWork["NAME"])))
+                            $work = trim($fieldsWork["NAME"]);
                         else
                             $work = trim($u["UF_CONSULT"]);
+
+                        if($propsWork["MAP"]["VALUE"])
+                            $map = $propsWork["MAP"]["VALUE"];
                     }
-                    unset($resWork);
+                    unset($resWork, $arWork, $fieldsWork, $propsWork);
                 }
 
                 if (strlen(trim($arProps["PHONE"]["VALUE"])))
@@ -454,6 +468,18 @@ function listLawyersCSV()
                 else
                     $phone = '';
 
+                if (strlen(trim($arProps["SKYPE"]["VALUE"])))
+                    $skype = 'SKYPE: '.trim($arProps["SKYPE"]["VALUE"]);
+                else
+                    $skype = '';
+
+                if (strlen(trim($arProps["ISQ"]["VALUE"])))
+                {
+                    if(strlen($skype))
+                        $skype .= ', ISQ: ';
+                    $skype .= trim($arProps["ISQ"]["VALUE"]);
+                }
+
                 if (strlen(trim($arProps["EMAIL"]["VALUE"])))
                     $email = trim($arProps["EMAIL"]["VALUE"]);
                 //elseif(strlen(trim($u["EMAIL"])))
@@ -461,24 +487,74 @@ function listLawyersCSV()
                 else
                     $email = '';
 
+                $photo = '';
+                if(isset($u["PERSONAL_PHOTO"]) && !empty($u["PERSONAL_PHOTO"]))
+                    $photo = ($APPLICATION->IsHTTPS() ? "https://" : "http://").$_SERVER["HTTP_HOST"].CFile::GetPath($u["PERSONAL_PHOTO"]);
+
+                $sferaPrava = '';
+                if(is_array($arProps["SFERA_DET"]["VALUE"]))
+                {
+                    $si = 0;
+                    foreach ($arProps["SFERA_DET"]["VALUE"] as $v)
+                    {
+                        $resSfera = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 21, "ID" => $v), false, false, Array("ID", "NAME"));
+                        while($arSfera = $resSfera->GetNext())
+                        {
+                            if($si >= 1)
+                                $sferaPrava .= ', ';
+                            $sferaPrava .= $arSfera["NAME"];
+                            $si ++;
+                        }
+                        unset($resSfera, $arSfera);
+                    }
+                    unset($v, $si);
+                }
+
+                /*
+#
+ФИО
+Номер лицензии
+Дата выдачи лицензии
+Коллегия
+Основной номер телефона
+Дополнительные номера телефонов
+Контакты в мессенджерах
+Адреса электронной почты
+Место работы
+Gps-координаты адреса
+График работы
+Ссылка на фото
+Основные отрасли права
+*/
+                $pattern = '/[\;]/u';
+                $replacement = ',';
                 $tmp = array(
                     $i++,
-                    trim($u["LAST_NAME"]),
-                    trim($u["NAME"]),
-                    trim($u["SECOND_NAME"]),
-                    trim($arProps["NOM_LIC"]["VALUE"]),
-                    trim($arProps["DATA_LIC"]["VALUE"]),
-                    $collegia,
-                    $work,
-                    $phone,
-                    $email
+                    $fio,
+                    preg_replace($pattern, $replacement, trim($arProps["NOM_LIC"]["VALUE"])),
+                    preg_replace($pattern, $replacement, trim($arProps["DATA_LIC"]["VALUE"])),
+                    preg_replace($pattern, $replacement, $collegia),
+                    preg_replace($pattern, $replacement, $phone),
+                    '',
+                    preg_replace($pattern, $replacement, $skype),
+                    preg_replace($pattern, $replacement, $email),
+                    preg_replace($pattern, $replacement, $work),
+                    preg_replace($pattern, $replacement, $map),
+                    '',
+                    $photo,
+                    $sferaPrava
                 );
-                $arUsers[] = implode($strDlmtr, $tmp);
+//                if($arFields["ID"] === '107127')
+//                    p($arFields["ID"]);
+
+                $arUsers[] = implode($strDlmtr, $tmp).';';
+
+                unset($tmp, $fio, $collegia, $phone, $skype, $email, $work, $map, $photo, $sferaPrava);
             }
-            unset($db);
+            unset($db, $u, $arFields, $arProps);
 
         }
-        unset($rsResCat);
+        unset($rsResCat, $arItemCat);
 
         $strUsers = implode($lineDlmtr, $arUsers);
         file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/'.$expUsersFile, $strUsers, LOCK_EX);

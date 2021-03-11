@@ -76,13 +76,6 @@ $aMenuLinks = Array(
 		Array(), 
 		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_266.png"), 
 		"" 
-	),
-	Array(
-		"Ковид-19", 
-		"/kovid-19.php", 
-		Array(), 
-		Array(), 
-		"" 
 	)
 );
 ?>

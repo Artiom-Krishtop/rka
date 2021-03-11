@@ -1050,6 +1050,10 @@
 				this.config.height = endHeight;
 
 				BX.addClass(this.dom.cont, 'bx-html-editor-absolute');
+				if (BX.ZIndexManager)
+				{
+					BX.ZIndexManager.register(this.dom.cont);
+				}
 				this._bodyOverflow = document.body.style.overflow;
 				document.body.style.overflow = "hidden";
 
@@ -1122,6 +1126,11 @@
 						_this.dom.cont.style.top = '';
 						_this.dom.cont.style.left = '';
 						BX.removeClass(_this.dom.cont, 'bx-html-editor-absolute');
+						if (BX.ZIndexManager)
+						{
+							BX.ZIndexManager.unregister(_this.dom.cont);
+						}
+						_this.dom.cont.style.removeProperty('z-index');
 						document.body.style.overflow = _this._bodyOverflow;
 						_this.config.width = _this.savedSize.configWidth;
 						_this.config.height = _this.savedSize.configHeight;

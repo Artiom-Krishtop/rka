@@ -402,7 +402,7 @@ class DBTypeStep extends CWizardStep
 
 		$licenseKey = $wizard->GetVar("license");
 
-		if (!defined("TRIAL_VERSION") && !defined("TRIAL_RENT_VERSION") && function_exists("preg_match") && !preg_match('/[A-Z0-9]{3}-[A-Z]{2}-?[A-Z0-9]{12,18}/i', $licenseKey))
+		if (!defined("TRIAL_VERSION") && !defined("TRIAL_RENT_VERSION") && function_exists("preg_match") && !preg_match('/[A-Z0-9]{3}-[A-Z]{2}-?[A-Z0-9]{12,30}/i', $licenseKey))
 			$this->SetError(InstallGetMessage("BAD_LICENSE_KEY"), "license");
 
 		if(defined("TRIAL_VERSION") || defined("TRIAL_RENT_VERSION"))
@@ -3787,7 +3787,7 @@ class CheckLicenseKey extends CWizardStep
 		$licenseKey = $wizard->GetVar("license");
 		global $DBType;
 
-		if (!defined("TRIAL_VERSION") && !defined("TRIAL_RENT_VERSION") && function_exists("preg_match") && !preg_match('/[A-Z0-9]{3}-[A-Z]{2}-?[A-Z0-9]{12,18}/i', $licenseKey))
+		if (!defined("TRIAL_VERSION") && !defined("TRIAL_RENT_VERSION") && function_exists("preg_match") && !preg_match('/[A-Z0-9]{3}-[A-Z]{2}-?[A-Z0-9]{12,30}/i', $licenseKey))
 		{
 			$this->SetError(InstallGetMessage("BAD_LICENSE_KEY"), "license");
 			return;
