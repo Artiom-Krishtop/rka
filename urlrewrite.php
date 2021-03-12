@@ -104,20 +104,20 @@ $arUrlRewrite=array (
     'PATH' => '/question/index.php',
     'SORT' => 100,
   ),
-  40 => 
-  array (
-    'CONDITION' => '#^/advokat/#',
-    'RULE' => '',
-    'ID' => 'bitrix:news',
-    'PATH' => '/advokat/index.php',
-    'SORT' => 100,
-  ),
   41 => 
   array (
     'CONDITION' => '#^/be/news/#',
     'RULE' => '',
     'ID' => 'bitrix:news',
     'PATH' => '/be/news/index.php',
+    'SORT' => 100,
+  ),
+  43 => 
+  array (
+    'CONDITION' => '#^/advokat/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/advokat/index.php',
     'SORT' => 100,
   ),
   15 => 

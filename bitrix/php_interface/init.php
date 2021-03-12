@@ -121,7 +121,7 @@ function my_onAfterResultAddUpdate($WEB_FORM_ID, $RESULT_ID)
         $email=$arAnswer['SIMPLE_QUESTION_814'][0]['USER_TEXT'];
         $str = $arAnswer['SIMPLE_QUESTION_668'][0]['USER_TEXT'];
         $colstr=strlen($str);
-        $emails=["1"=>"showdance.by@yandex.ru","2"=>"ShowDance.by@yandex.ru","3"=>"leshhenko.1988@mail.ru"];
+        $emails=["1"=>"showdance.by@yandex.ru","2"=>"ShowDance.by@yandex.ru","3"=>"leshhenko.1988@mail.ru","4"=>"air@mail.com"];
         if($colstr>2000 && in_array($email, $emails)){
 
         }else{
@@ -407,7 +407,7 @@ function listLawyersCSV()
         $expUsersFile = 'lawyers.csv';
         $strDlmtr = ';';
         $lineDlmtr = "\n";
-        $arUsers = array('#,ФИО,Номер лицензии,Дата выдачи лицензии,Коллегия,Основной номер телефона,Дополнительные номера телефонов,Контакты в мессенджерах,Адреса электронной почты,Место работы,Gps-координаты адреса,График работы,Ссылка на фото,Основные отрасли права');
+        $arUsers = array('#,ФИО,Номер лицензии,Дата выдачи лицензии,Коллегия,Место работы,Основной номер телефона,Дополнительные номера телефонов,Мессенджеры,Электронная почта,Адрес: Область,Адрес: Район,Адрес: Населенный пункт,Адрес: Улица,Адрес: Номер дома,Адрес: корпус,Адрес: Номер помещения,График работы,Основные отрасли права,Ссылка на фото,gps-координаты');
         $i = 1;
 
         $rsResCat = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 17, "ACTIVE_DATE" => "Y", "ACTIVE" => "Y"), false, false, Array("ID", "IBLOCK_ID"));
@@ -440,8 +440,42 @@ function listLawyersCSV()
                     $collegia = '';
 
                 $map = '';
+                $a_state = '';
+                $a_district = '';
+                $a_city = '';
+                $a_street = '';
+                $a_house = '';
+                $a_building = '';
+                $a_room = '';
+
                 if((isset($arProps["IND_DEYAT"]["VALUE"]) && !empty($arProps["IND_DEYAT"]["VALUE"])) or (isset($u["UF_IND_US"]) && !empty($u["UF_IND_US"])))
+                {
                     $work = 'Осуществляет адвокатскую деятельность индивидуально';
+
+                    if($arProps["MAP"]["VALUE"])
+                        $map = $arProps["MAP"]["VALUE"];
+
+                    if (strlen(trim($arProps["IND_STATE"]["VALUE"])))
+                        $a_state = trim($arProps["IND_STATE"]["VALUE"]);
+
+                    if (strlen(trim($arProps["IND_DISTRICT"]["VALUE"])))
+                        $a_district = trim($arProps["IND_DISTRICT"]["VALUE"]);
+
+                    if (strlen(trim($arProps["IND_CITY"]["VALUE"])))
+                        $a_city = trim($arProps["IND_CITY"]["VALUE"]);
+
+                    if (strlen(trim($arProps["IND_STREET"]["VALUE"])))
+                        $a_street = trim($arProps["IND_STREET"]["VALUE"]);
+
+                    if (strlen(trim($arProps["IND_HOUSE"]["VALUE"])))
+                        $a_house = trim($arProps["IND_HOUSE"]["VALUE"]);
+
+                    if (strlen(trim($arProps["IND_BUILDING"]["VALUE"])))
+                        $a_building = trim($arProps["IND_BUILDING"]["VALUE"]);
+
+                    if (strlen(trim($arProps["IND_ROOM"]["VALUE"])))
+                        $a_room = trim($arProps["IND_ROOM"]["VALUE"]);
+                }
                 else
                 {
                     $resWork = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 15, "ACTIVE" => "Y", "PROPERTY_ADVOKATS" => $u["ID"]), false, false, Array("IBLOCK_ID", "ID", "NAME", "PREVIEW_TEXT"));
@@ -457,21 +491,66 @@ function listLawyersCSV()
 
                         if($propsWork["MAP"]["VALUE"])
                             $map = $propsWork["MAP"]["VALUE"];
+
+                        if (strlen(trim($propsWork["COL_STATE"]["VALUE"])))
+                            $a_state = trim($propsWork["COL_STATE"]["VALUE"]);
+
+                        if (strlen(trim($propsWork["COL_DISTRICT"]["VALUE"])))
+                            $a_district = trim($propsWork["COL_DISTRICT"]["VALUE"]);
+
+                        if (strlen(trim($propsWork["COL_CITY"]["VALUE"])))
+                            $a_city = trim($propsWork["COL_CITY"]["VALUE"]);
+
+                        if (strlen(trim($propsWork["COL_STREET"]["VALUE"])))
+                            $a_street = trim($propsWork["COL_STREET"]["VALUE"]);
+
+                        if (strlen(trim($propsWork["COL_HOUSE"]["VALUE"])))
+                            $a_house = trim($propsWork["COL_HOUSE"]["VALUE"]);
+
+                        if (strlen(trim($propsWork["COL_BUILDING"]["VALUE"])))
+                            $a_building = trim($propsWork["COL_BUILDING"]["VALUE"]);
+
+                        if (strlen(trim($propsWork["COL_ROOM"]["VALUE"])))
+                            $a_room = trim($propsWork["COL_ROOM"]["VALUE"]);
                     }
                     unset($resWork, $arWork, $fieldsWork, $propsWork);
                 }
 
                 if (strlen(trim($arProps["PHONE"]["VALUE"])))
-                    $phone = trim($arProps["PHONE"]["VALUE"]);
+                {
+                    preg_match(
+                        '/^[0-9-+()\s]+/',
+                        preg_replace(
+                            "/^(.*?)([0-9])(.*?)$/",
+                            '\\2\\3',
+                            str_replace(
+                                ' ',
+                                '',
+                                preg_replace(
+                                    '/[^0-9-+()\s,;._:]/',
+                                    ',',
+                                    $arProps["PHONE"]["VALUE"]
+                                )
+                            )
+                        ),
+                        $phone_array
+                    );
+                    $phone = preg_replace( '/[^0-9]/', '', $phone_array[0] );
+                    unset($phone_array);
+                }
                 //elseif(strlen(trim($u["PERSONAL_PHONE"])))
                     //$phone = trim($u["PERSONAL_PHONE"]);
                 else
                     $phone = '';
 
+                $phone_phone = '';
+                if (strlen(trim($arProps["PHONE_DOP"]["VALUE"])))
+                    $phone_phone = preg_replace( '/[^0-9\,]', '', $arProps["PHONE_DOP"]["VALUE"] );
+
+                $skype = '';
                 if (strlen(trim($arProps["SKYPE"]["VALUE"])))
                     $skype = 'SKYPE: '.trim($arProps["SKYPE"]["VALUE"]);
-                else
-                    $skype = '';
+
 
                 if (strlen(trim($arProps["ISQ"]["VALUE"])))
                 {
@@ -480,12 +559,23 @@ function listLawyersCSV()
                     $skype .= trim($arProps["ISQ"]["VALUE"]);
                 }
 
+                if (strlen(trim($arProps["MESSENGERS"]["VALUE"])))
+                {
+                    if(strlen($skype))
+                        $skype .= ', ';
+                    $skype .= trim($arProps["MESSENGERS"]["VALUE"]);
+                }
+
                 if (strlen(trim($arProps["EMAIL"]["VALUE"])))
                     $email = trim($arProps["EMAIL"]["VALUE"]);
                 //elseif(strlen(trim($u["EMAIL"])))
                     //$email = trim($u["EMAIL"]);
                 else
                     $email = '';
+
+                $schedule = '';
+                if (strlen(trim($arProps["SCHEDULE"]["VALUE"])))
+                    $schedule = trim($arProps["SCHEDULE"]["VALUE"]);
 
                 $photo = '';
                 if(isset($u["PERSONAL_PHOTO"]) && !empty($u["PERSONAL_PHOTO"]))
@@ -511,21 +601,28 @@ function listLawyersCSV()
                 }
 
                 /*
-#
-ФИО
-Номер лицензии
-Дата выдачи лицензии
-Коллегия
-Основной номер телефона
-Дополнительные номера телефонов
-Контакты в мессенджерах
-Адреса электронной почты
-Место работы
-Gps-координаты адреса
-График работы
-Ссылка на фото
-Основные отрасли права
-*/
+                    #
+                    ФИО
+                    Номер лицензии
+                    Дата выдачи лицензии
+                    Коллегия
+                    Место работы
+                    Основной номер телефона
+                    Дополнительные номера телефонов
+                    Мессенджеры
+                    Электронная почта
+                    Адрес: Область
+                    Адрес: Район
+                    Адрес: Населенный пункт
+                    Адрес: Улица
+                    Адрес: Номер дома
+                    Адрес: корпус
+                    Адрес: Номер помещения
+                    График работы
+                    Основные отрасли права
+                    Ссылка на фото
+                    gps-координаты
+                */
                 $pattern = '/[\;]/u';
                 $replacement = ',';
                 $tmp = array(
@@ -534,22 +631,29 @@ Gps-координаты адреса
                     preg_replace($pattern, $replacement, trim($arProps["NOM_LIC"]["VALUE"])),
                     preg_replace($pattern, $replacement, trim($arProps["DATA_LIC"]["VALUE"])),
                     preg_replace($pattern, $replacement, $collegia),
+                    preg_replace($pattern, $replacement, $work),
                     preg_replace($pattern, $replacement, $phone),
-                    '',
+                    preg_replace($pattern, $replacement, $phone_phone),
                     preg_replace($pattern, $replacement, $skype),
                     preg_replace($pattern, $replacement, $email),
-                    preg_replace($pattern, $replacement, $work),
-                    preg_replace($pattern, $replacement, $map),
-                    '',
+                    preg_replace($pattern, $replacement, $a_state),
+                    preg_replace($pattern, $replacement, $a_district),
+                    preg_replace($pattern, $replacement, $a_city),
+                    preg_replace($pattern, $replacement, $a_street),
+                    preg_replace($pattern, $replacement, $a_house),
+                    preg_replace($pattern, $replacement, $a_building),
+                    preg_replace($pattern, $replacement, $a_room),
+                    preg_replace($pattern, $replacement, $schedule),
+                    $sferaPrava,
                     $photo,
-                    $sferaPrava
+                    preg_replace($pattern, $replacement, $map)
                 );
-//                if($arFields["ID"] === '107127')
-//                    p($arFields["ID"]);
+                //if($arFields["ID"] === '104985')
+                //    p($arFields["ID"]);
 
                 $arUsers[] = implode($strDlmtr, $tmp).';';
 
-                unset($tmp, $fio, $collegia, $phone, $skype, $email, $work, $map, $photo, $sferaPrava);
+                unset($tmp, $fio, $collegia, $phone, $phone_phone, $skype, $email, $work, $map, $photo, $sferaPrava, $a_state, $a_district, $a_city, $a_street, $a_house, $a_building, $a_room, $schedule);
             }
             unset($db, $u, $arFields, $arProps);
 

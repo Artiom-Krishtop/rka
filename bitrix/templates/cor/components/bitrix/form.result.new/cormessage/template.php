@@ -303,9 +303,16 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
 
             $('form[name="SIMPLE_FORM_4"] input[name="web_form_submit"]').on('click', function(e){
                 var isNotValid = false,
-                    pattern = 'leshhenko';
+                    pattern = 'leshhenko',
+                    phone = $('input[name="form_text_48"]').val(),
+                    mail = $('input[name="form_email_37"]').val().toLowerCase().indexOf(pattern.toLowerCase());
 
-                if( $('input[name="form_text_48"]').val() == '+375447496838' || $('input[name="form_text_48"]').val() == '+375333783311' || $('input[name="form_email_37"]').val().toLowerCase().indexOf(pattern.toLowerCase()) >= 0 ) {
+                //console.log('pattern: '+pattern+'; phone: '+phone+'; mail: '+mail);
+                if(
+                    phone == '+375 (44) 749-68-38' ||
+                    phone == '+375 (33) 378-33-11' ||
+                    mail >= 0
+                ) {
                     isNotValid = true;
                 }
                 if(isNotValid) {
