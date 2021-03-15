@@ -65,6 +65,8 @@ function translit($s) {
     return $s; // возвращаем результат
 }
 
+/* Перезапись данных форм в инфоблок */
+AddEventHandler('form', 'onAfterResultAdd', 'my_onAfterResultAddUpdate');
 function my_onAfterResultAddUpdate($WEB_FORM_ID, $RESULT_ID)
 {
   if ($WEB_FORM_ID == 3) 
@@ -136,12 +138,11 @@ function my_onAfterResultAddUpdate($WEB_FORM_ID, $RESULT_ID)
         }
 
 
-        CFormResult::Delete($RESULT_ID);
+        CFormResult::Delete($RESULT_ID, "N");
         //file_put_contents($_SERVER["DOCUMENT_ROOT"]."/add_message.log", date("d-m-Y")."; ".print_r($kolleg,1).";\n", FILE_APPEND);
     }
 }
 
-AddEventHandler('form', 'onAfterResultAdd', 'my_onAfterResultAddUpdate');
 // регистрируем последнюю активность пользователя, если модуль соцсетей не установлен
 if(!IsModuleInstalled('socialnetwork')) {
    AddEventHandler('main', 'OnBeforeProlog', 'CustomSetLastActivityDate');
@@ -225,7 +226,6 @@ function getAdvokat() {
     $arResult["counter"]=array_slice($arResult["counter"],0,7,TRUE);
     return $arResult["counter"];    
 }
-
 
 AddEventHandler("main", "OnAfterUserUpdate", Array("EventHandlerClass", "OnAfterUserUpdateHandler"));
 class EventHandlerClass
@@ -316,9 +316,7 @@ class EventHandlerClass
     }
 }
 
-
 AddEventHandler("main", "OnAfterUserUpdate", Array("MyClassUp", "OnAfterUserUpdateHandler"));
-
 class MyClassUp
 {
     // создаем обработчик события "OnAfterUserUpdate"
@@ -354,7 +352,6 @@ class MyClassUp
 }
 
 AddEventHandler("forum", "onAfterMessageUpdate", "onAfterMessageUpdateHandler");
-
 function onAfterMessageUpdateHandler($id, &$arField){
 
     $filter = array("ID"=>$id,"APPROVED"=>"Y");
@@ -665,6 +662,137 @@ function listLawyersCSV()
     }
 
     return "listLawyersCSV();";
+}
+
+/* Удаление по расписанию сообщений форума "Вопрос-ответ", в течении последних трех месяцев не прошедших модерацию и неопубликованных по каким либо причинам.  */
+function deleteNotActiveMessages()
+{
+    global $USER;
+
+    $date = Bitrix\Main\Type\Date::createFromTimestamp(strtotime("- 3 month"));
+    $dateTime = new Bitrix\Main\UI\Filter\DateTime($date->getTimestamp());
+    $DATE_TO = $dateTime->offset("- 1 second");
+
+    // выберем все неопубликованные сообщения
+    if(CModule::IncludeModule("forum"))
+    {
+        $arFilter = array( "FORUM_ID" => 13, "NEW_TOPIC" => "N","APPROVED" => "N", "<=POST_DATE" => $DATE_TO );
+        $db_res = CForumMessage::GetList(array("ID" => "ASC"), $arFilter);
+        while ($ar_res = $db_res->Fetch())
+        {
+            // Проверяем, имеет ли текущий пользователь право удалять сообщения и удаляем, есил имеет
+            if (CForumMessage::CanUserDeleteMessage($ar_res["ID"], $USER->GetUserGroupArray(), $USER->GetID()))
+            {
+                // Проверка существования темы форума, к которой привязаны сообщения. Сообщения без темы не удаляются
+                if (CForumTopic::GetByID($ar_res["TOPIC_ID"]))
+                    CForumMessage::Delete($ar_res["ID"]);
+            }
+        }
+    }
+    return "deleteNotActiveMessages();";
+}
+
+/* Удаление по расписанию элементов инфоблока "Вопрос-ответ", в течении последнего месяца не прошедших модерацию и неопубликованных по каким либо причинам.  */
+function deleteNotActiveFAQ()
+{
+    global $USER, $DB;
+
+    $date = Bitrix\Main\Type\Date::createFromTimestamp(strtotime("- 1 month"));
+    $dateTime = new Bitrix\Main\UI\Filter\DateTime($date->getTimestamp());
+    $DATE_TO = $dateTime->offset("- 1 second");
+
+    // выберем все неопубликованные сообщения
+    if(CModule::IncludeModule("iblock"))
+    {
+        $arFilter = Array( "IBLOCK_ID" => 16, "<=DATE_MODIFY_TO" => $DATE_TO, "ACTIVE" => "N" );
+        $rest = CIBlockElement::GetList(
+            Array('SORT' => 'ASC', 'ID' => 'DESC'),
+            $arFilter,
+            false,
+            array(),
+            Array("PROPERTY_FORUM_TOPIC_ID", "ID", "IBLOCK_ID")
+        );
+        while ($ob = $rest->GetNextElement())
+        {
+            $arFields = $ob->GetFields();
+            $topicID = $arFields["PROPERTY_FORUM_TOPIC_ID_VALUE"];
+            if(!empty($topicID))
+            {
+                if (CForumTopic::GetByID($topicID))
+                {
+                    $db_res = CForumMessage::GetList( array("ID" => "ASC"), array( "FORUM_ID" => 13, "TOPIC_ID" => $topicID ) );
+                    while ($ar_res = $db_res->Fetch())
+                    {
+                        if (CForumMessage::CanUserDeleteMessage($ar_res["ID"], $USER->GetUserGroupArray(), $USER->GetID()))
+                            CForumMessage::Delete($ar_res["ID"]);
+                    }
+
+                    if (CForumTopic::CanUserDeleteTopic($topicID, $USER->GetUserGroupArray(), $USER->GetID()))
+                        CForumTopic::Delete($topicID);
+                }
+            }
+            if(CIBlock::GetPermission($arFields["IBLOCK_ID"])>='W')
+            {
+                $DB->StartTransaction();
+                if(!CIBlockElement::Delete($arFields["ID"]))
+                    $DB->Rollback();
+                else
+                    $DB->Commit();
+            }
+        }
+    }
+    return "deleteNotActiveFAQ();";
+}
+
+/* Удаление по расписанию элементов инфоблока "Вопрос-ответ" старше года.  */
+function deleteOldFAQ()
+{
+    global $USER, $DB;
+
+    $date = Bitrix\Main\Type\Date::createFromTimestamp(strtotime("- 1 year"));
+    $dateTime = new Bitrix\Main\UI\Filter\DateTime($date->getTimestamp());
+    $DATE_TO = $dateTime->offset("- 1 second");
+
+    if(CModule::IncludeModule("iblock"))
+    {
+        $arFilter = Array( "IBLOCK_ID" => 16, "<=DATE_MODIFY_TO" => $DATE_TO );
+        $rest = CIBlockElement::GetList(
+            Array('SORT' => 'ASC', 'ID' => 'DESC'),
+            $arFilter,
+            false,
+            array(),
+            Array("PROPERTY_FORUM_TOPIC_ID", "ID", "IBLOCK_ID")
+        );
+        while ($ob = $rest->GetNextElement())
+        {
+            $arFields = $ob->GetFields();
+            $topicID = $arFields["PROPERTY_FORUM_TOPIC_ID_VALUE"];
+            if(!empty($topicID))
+            {
+                if (CForumTopic::GetByID($topicID))
+                {
+                    $db_res = CForumMessage::GetList( array("ID" => "ASC"), array( "FORUM_ID" => 13, "TOPIC_ID" => $topicID ) );
+                    while ($ar_res = $db_res->Fetch())
+                    {
+                        if (CForumMessage::CanUserDeleteMessage($ar_res["ID"], $USER->GetUserGroupArray(), $USER->GetID()))
+                            CForumMessage::Delete($ar_res["ID"]);
+                    }
+
+                    if (CForumTopic::CanUserDeleteTopic($topicID, $USER->GetUserGroupArray(), $USER->GetID()))
+                        CForumTopic::Delete($topicID);
+                }
+            }
+            if(CIBlock::GetPermission($arFields["IBLOCK_ID"])>='W')
+            {
+                $DB->StartTransaction();
+                if(!CIBlockElement::Delete($arFields["ID"]))
+                    $DB->Rollback();
+                else
+                    $DB->Commit();
+            }
+        }
+    }
+    return "deleteOldFAQ();";
 }
 
 ?>

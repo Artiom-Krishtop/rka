@@ -14,7 +14,10 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                 <div class="webform clearfix">
                     <?
                     $rowCounter = 0;
+                    $phone_name = 'phone';
                     foreach ($arResult['QUESTIONS'] as $code => $arField) {
+                        if($code == 'SIMPLE_QUESTION_692')
+                            $phone_name = 'form_text_'.$arField['STRUCTURE'][0]['ID'];
                         /* INPUT TYPE ___TEXT___ */
                         if ($arField['STRUCTURE'][0]['FIELD_TYPE']=='text') {
                             if ($rowCounter%2==0) {
@@ -264,11 +267,17 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
     <script type="text/javascript">
         BX.ready(function(){
             BX.message({
-                JS_REQUIRED_LICENSES: '<?=GetMessage("JS_REQUIRED_LICENSES");?>'
+                JS_REQUIRED_LICENSES: '<?=GetMessage("JS_REQUIRED_LICENSES");?>',
+                JS_REQUIRED_PHONE: '<?=GetMessage("JS_REQUIRED_PHONE");?>'
+
             });
         });
 
         $(document).ready(function(){
+
+            $.validator.addMethod('rka_phone', function (value, element) {
+                return this.optional(element) || /^[0-9\+\-\(\)\s]+$/.test(value);
+            }, BX.message('JS_REQUIRED_PHONE'));
 
             $('form[name="<?=$arResult["arForm"]["VARNAME"]?>"]').validate({
                 highlight: function( element ){
@@ -284,6 +293,9 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                     licenses_popup: {
                         required : BX.message('JS_REQUIRED_LICENSES')
                     }
+                },
+                rules: {
+                    <?=$phone_name;?>: 'rka_phone'
                 }
             });
 
@@ -292,9 +304,10 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                 var base_mask = phoneMask.replace( /(\d)/g, '_' );
                 $('form[name="<?=$arResult["arForm"]["VARNAME"]?>"] input.phone').inputmask('mask', {'mask': phoneMask, 'showMaskOnHover': false });
                 $('form[name="<?=$arResult["arForm"]["VARNAME"]?>"] input.phone').blur(function(){
-                    if( $(this).val() == base_mask || $(this).val() == '' ){
+                    if( $(this).val() == base_mask || $(this).val() == '' || $(this).val().indexOf('_') >= 0 ){
                         if( $(this).hasClass('required') ){
-                            $(this).parent().find('div.error').html(BX.message('JS_REQUIRED'));
+                            //$(this).parent().find('div.error').html(BX.message('JS_REQUIRED_PHONE'));
+                            $(this).parent().find('div.input').addClass('error');
                         }
                     }
                 });

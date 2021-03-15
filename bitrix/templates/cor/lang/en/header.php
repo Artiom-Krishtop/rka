@@ -11,6 +11,7 @@ $MESS['JS_FILE_DEFAULT'] = 'Файл не найден';
 $MESS['JS_DATE'] = 'Некорректная дата!';
 $MESS['JS_DATETIME'] = 'Некорректная дата/время!';
 $MESS['JS_REQUIRED_LICENSES'] = 'Согласитесь с условиями';
+$MESS['JS_REQUIRED_PHONE'] = 'Не правильно указан номер';
 $MESS['S_CALLBACK'] = 'Заказать звонок';
 $MESS['S_QUESTION'] = 'Задать вопрос';
 $MESS['S_ASK_QUESTION'] = 'Задать вопрос';
