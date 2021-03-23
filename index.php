@@ -2,13 +2,25 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Белорусская республиканская коллегия адвокатов ");
 ?><section class="asidenews">
-<h2 class="block-title"><span style="font-family: Georgia, serif; font-size: 13pt;"><b><i>Уважаемые посетители!</i></b></span></h2>
+<h2 class="block-title"><span style="font-size: 13pt;"><b><i><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 15pt;">Уважаемые посетители!</span></i></b></span></h2>
 <p>
- <i style="font-family: Georgia, serif; font-size: 11pt;"><span style="color: #2d399f;">Если вы перешли на сайт БРКА, значит, вам требуется помощь адвоката. Обращаясь за помощью к адвокату, </span><b><span style="color: #2d399f;">вы поступаете правильно, потому что</span></b><span style="color: #2d399f;">:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; - крайне важно обратиться к адвокату за советом прежде, чем совершить какое-либо юридически значимое действие. Очевидно, что предотвратить наступление неблагоприятных юридических последствий своих действий гораздо проще, чем их исправлять (если такое исправление вообще возможно);&nbsp;</span></i>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<i style="font-family: Georgia, serif; font-size: 11pt;"><span style="color:#2d399f;">-только адвокаты в Республике Беларусь имеют право оказывать юридическую помощь гражданам, в том числе и консультирование по правовым вопросам. Все другие&nbsp;субъекты, которые предлагают юридическую помощь гражданам (интернет-ресурсы, общественные организации, юристы, не имеющие адвокатской лицензии, и т.д.), действуют нелегально;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></i><i style="font-family: Georgia, serif; font-size: 11pt;"><span style="color: #2d399f;">-только адвокаты отвечают за грамотность оказанной юридической помощи и несут ответственность за качество своей работы. Иные лица, действующие нелегально, не отвечают за последствия некачественного оказания юридической помощи;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></i><span style="font-size: 11pt; font-family: Georgia, serif;"><i><span style="color: #2d399f;">- только общение с адвокатом является предметом адвокатской тайны. Все иные лица не обязаны хранить в тайне информацию, полученную от вас в процессе оказания юридической помощи</span></i></span>;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<i style="font-family: Georgia, serif; font-size: 11pt;"><span style="color: #2d399f;">- только адвокаты постоянно совершенствуют свое профессиональное мастерство, регулярно проходят аттестацию для подтверждения своего профессионального уровня.&nbsp;</span></i><span style="color: #486DAA;"> </span><span style="color: #486DAA;"> </span>
 </p>
- <span style="color: #486DAA;"> </span><span style="color: #486DAA;"> </span><br>
+ Если вы перешли на сайт БРКА, значит, вам требуется помощь адвоката. Обращаясь за помощью к адвокату, вы поступаете правильно, потому что:
+<p>
+	 - крайне важно обратиться к адвокату за советом прежде, чем совершить какое-либо юридически значимое действие. Предотвратить наступление неблагоприятных юридических последствий своих действий гораздо проще, чем их исправлять;
+</p>
+<p>
+	 - только адвокаты в Республике Беларусь имеют право оказывать юридическую помощь гражданам, в том числе и консультирование по правовым вопросам. Все другие субъекты, которые предлагают юридическую помощь гражданам (интернет-ресурсы, общественные организации, юристы, не имеющие адвокатской лицензии, и т.д.), действуют нелегально, а потому не отвечают за грамотность оказанной юридической помощи и не несут ответственность за качество своей работы;
+</p>
+<p>
+	 - только общение с адвокатом является предметом адвокатской тайны. Все иные лица не обязаны хранить в тайне информацию, полученную от вас в процессе оказания юридической помощи;
+</p>
+<p>
+	 - только адвокаты постоянно совершенствуют свое профессиональное мастерство, регулярно проходят аттестацию для подтверждения своего профессионального уровня. <span style="color: #486DAA;"> </span><span style="color: #486DAA;"> </span><br>
  <a href="/faq_ask/" style="text-decoration: line-through !important;" class="ask">Задать вопрос</a>
-<!-- /.block --> <!-- /.region --> </section>
+	<!-- /.block --> <!-- /.region -->
+</p>
+</section>
 <div class="region region-news">
 	 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",

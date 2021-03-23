@@ -324,6 +324,8 @@ if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?end
                 if(
                     phone == '+375 (44) 749-68-38' ||
                     phone == '+375 (33) 378-33-11' ||
+                    phone == '+375 (44) 749-68-39' ||
+                    phone == '+375 (44) 749-68-37' ||
                     mail >= 0
                 ) {
                     isNotValid = true;

@@ -1,17 +1,10 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"Об адвокатуре", 
-		"/about/", 
+		"Новости", 
+		"/news/", 
 		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_265.png"), 
-		"" 
-	),
-	Array(
-		"Юридическая помощь", 
-		"https://rka.by/about/poryadok-i-usloviya-okazaniya/", 
-		Array(), 
-		Array(), 
+		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_241.png"), 
 		"" 
 	),
 	Array(
@@ -29,22 +22,15 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Новости", 
-		"/news/", 
+		"Об адвокатуре", 
+		"/about/", 
 		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_241.png"), 
+		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_265.png"), 
 		"" 
 	),
 	Array(
-		"Правила консультации", 
-		"pravila-online-konsultacii", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Правила сайта", 
-		"pravila-polzovaniya-saytom", 
+		"Юридическая помощь", 
+		"https://rka.by/about/poryadok-i-usloviya-okazaniya/", 
 		Array(), 
 		Array(), 
 		"" 
@@ -68,6 +54,20 @@ $aMenuLinks = Array(
 		"/electronic-appeal/", 
 		Array(), 
 		Array("IMG"=>"/bitrix/templates/cor/images/letter.png"), 
+		"" 
+	),
+	Array(
+		"Правила консультации", 
+		"pravila-online-konsultacii", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Правила сайта", 
+		"pravila-polzovaniya-saytom", 
+		Array(), 
+		Array(), 
 		"" 
 	),
 	Array(

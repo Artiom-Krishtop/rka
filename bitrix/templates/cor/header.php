@@ -81,12 +81,18 @@
 						Array(),
 						Array("MODE"=>"html")
 					);?>
-			<?$APPLICATION->IncludeComponent("bitrix:search.form", "serch_advo", Array(
-				"PAGE" => "#SITE_DIR#search/index.php",	// Страница выдачи результатов поиска (доступен макрос #SITE_DIR#)
-					"USE_SUGGEST" => "N",	// Показывать подсказку с поисковыми фразами
-				),
-				false
-			);?>
+			<?$APPLICATION->IncludeComponent(
+	"bitrix:search.form", 
+	"serch_advo", 
+	array(
+		"PAGE" => "#SITE_DIR#search/index.php",
+		"USE_SUGGEST" => "Y",
+		"COMPONENT_TEMPLATE" => "serch_advo",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
+	),
+	false
+);?>
 			<?$APPLICATION->IncludeComponent(
 	"bitrix:menu", 
 	"left_menu", 

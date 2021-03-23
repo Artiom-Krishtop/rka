@@ -69,16 +69,16 @@ function translit($s) {
 AddEventHandler('form', 'onAfterResultAdd', 'my_onAfterResultAddUpdate');
 function my_onAfterResultAddUpdate($WEB_FORM_ID, $RESULT_ID)
 {
-  if ($WEB_FORM_ID == 3) 
-  {
-       $arAnswer = CFormResult::GetDataByID(
+    if ($WEB_FORM_ID == 3)
+    {
+        $arAnswer = CFormResult::GetDataByID(
             $RESULT_ID,
-           array("SIMPLE_QUESTION_643"),
+            array("SIMPLE_QUESTION_643"),
             $arResult2,
             $arAnswer2);
-       $text = "<div class='webform-confirmation chekw'><p>Спасибо, обращение отправлено.</p></div><div class='links'><a href='/electronic-appeal/'>Вернуться к форме</a></div><style>.field-item.even{display:none;}</style>";
-       $_SESSION['answer_text']= $text;
-  }
+        $text = "<div class='webform-confirmation chekw'><p>Спасибо, обращение отправлено.</p></div><div class='links'><a href='/electronic-appeal/'>Вернуться к форме</a></div><style>.field-item.even{display:none;}</style>";
+        $_SESSION['answer_text']= $text;
+    }
     if ($WEB_FORM_ID == 4)
     {
         $arAnswer = CFormResult::GetDataByID(
@@ -86,61 +86,132 @@ function my_onAfterResultAddUpdate($WEB_FORM_ID, $RESULT_ID)
             array("SIMPLE_QUESTION_529","SIMPLE_QUESTION_668","SIMPLE_QUESTION_814"),
             $arResult2,
             $arAnswer2);
-        $text = "<div class='webform-confirmation chekw'><p style='color:green;'>Ваш вопрос отправлен.</p></div><style>.field-item.even{display:none;}</style>";
-        $_SESSION['answer_text']= $text;
 
-        $kolleg=$arAnswer['SIMPLE_QUESTION_529'][0]['ANSWER_ID'];
-        if($kolleg==39){$val=64;}
-        elseif($kolleg==40){$val=70;}
-        elseif($kolleg==41){$val=69;}
-        elseif($kolleg==42){$val=68;}
-        elseif($kolleg==43){$val=67;}
-        elseif($kolleg==44){$val=65;}
-        elseif($kolleg==45){$val=71;}
-        elseif($kolleg==46){$val=66;}
-        else{$val="";}
-        $NAME = mb_substr($_POST['form_textarea_36'],0,100);
-        $PREV = $_POST['form_textarea_36'];
-        $CODE =  translit($NAME);
-        $CODE = mb_substr($CODE,0,50);
-        $PROPSERVICE['F_EMAIL'] = $_POST['form_email_37'];
-        $PROPSERVICE['F_NAME'] = $_POST['form_text_47'];
-        $PROPSERVICE['F_COLLEG'] = $val;
-        $PROPSERVICE['F_PHONE'] = $_POST['form_text_48'];
-		CModule::IncludeModule("iblock");
-        $el = new CIBlockElement;
-        $arLoadProductSERVICE = Array(
-            "IBLOCK_ID"      => 16,
-            "NAME"           => $NAME,
-            "PREVIEW_TEXT"   => $PREV,
-            "CODE" => $CODE,
-            "PROPERTY_VALUES"=> $PROPSERVICE,
-            "ACTIVE"         => "N",
+        $userText = $arAnswer["SIMPLE_QUESTION_668"][0]["USER_TEXT"];
+        if( min( mb_strlen($userText, "UTF-8"), strlen($userText) ) > 2000)
+        {
+            $text = "<p style='color:red;'>Внимание! Длинна вопроса превышает допустимые 2 000 символов. И он не может быть отправлен.</p>";
+        }
+        else
+        {
+            $numberInText = false;
+            preg_match_all('/\b\d[- \/\d]*\d\b/', $_POST['form_textarea_36'], $arPhoneTest);
+            foreach ($arPhoneTest[0] as $phoneTest)
+            {
+                $phoneTest = preg_replace('/\D+/', '', $phoneTest);
+                if (stripos($phoneTest, "447496838") !== false)
+                    $numberInText = true;
+            }
 
-            "ACTIVE_FROM"=>date('d.m.Y'),
-
-        );
-        $email=$arAnswer['SIMPLE_QUESTION_814'][0]['USER_TEXT'];
-        $str = $arAnswer['SIMPLE_QUESTION_668'][0]['USER_TEXT'];
-        $colstr=strlen($str);
-        $emails=["1"=>"showdance.by@yandex.ru","2"=>"ShowDance.by@yandex.ru","3"=>"leshhenko.1988@mail.ru","4"=>"air@mail.com"];
-        if($colstr>2000 && in_array($email, $emails)){
-
-        }else{
-            $ID=$el->Add($arLoadProductSERVICE);
-
-            $ele = new CIBlockElement;
-            $arL = Array(
-                "IBLOCK_ID"      => 16,
-                "CODE" => $CODE."-".$ID,
+            $email = $arAnswer["SIMPLE_QUESTION_814"][0]["USER_TEXT"];
+            $banListEmails = Array(
+                "showdance.by@yandex.ru",
+                "ShowDance.by@yandex.ru",
+                "leshhenko.1988@mail.ru",
+                "air@mail.com",
+                "tv@gmail.com",
+                "tv11@mail.com"
             );
-            $res = $ele->Update($ID, $arL);
+
+            if ($numberInText == false && !in_array($email, $banListEmails))
+            {
+                switch ($arAnswer["SIMPLE_QUESTION_529"][0]["ANSWER_ID"])
+                {
+                    case 39: $kolleg = 64; break;
+                    case 40: $kolleg = 70; break;
+                    case 41: $kolleg = 69; break;
+                    case 42: $kolleg = 68; break;
+                    case 43: $kolleg = 67; break;
+                    case 44: $kolleg = 65; break;
+                    case 45: $kolleg = 71; break;
+                    case 46: $kolleg = 66; break;
+                    default: $kolleg = "";
+                }
+                $NAME = customNameForFAQ($_POST['form_textarea_36']);
+                $PREV = $_POST['form_textarea_36'];
+                $CODE = translit($NAME);
+                $CODE = mb_substr($CODE,0,50);
+                $PROPSERVICE['F_EMAIL'] = $_POST['form_email_37'];
+                $PROPSERVICE['F_NAME'] = $_POST['form_text_47'];
+                $PROPSERVICE['F_COLLEG'] = $kolleg;
+                $PROPSERVICE['F_PHONE'] = $_POST['form_text_48'];
+
+                CModule::IncludeModule("iblock");
+                $el = new CIBlockElement;
+                $arLoadProductSERVICE = Array(
+                    "IBLOCK_ID"         => 16,
+                    "NAME"              => $NAME,
+                    "PREVIEW_TEXT"      => $PREV,
+                    "CODE"              => $CODE,
+                    "PROPERTY_VALUES"   => $PROPSERVICE,
+                    "ACTIVE"            => "N",
+                    "ACTIVE_FROM"       => date('d.m.Y'),
+                );
+                $ID = $el->Add($arLoadProductSERVICE);
+
+                if($ID)
+                {
+                    $ele = new CIBlockElement;
+                    $arL = Array(
+                        "IBLOCK_ID" => 16,
+                        "CODE"      => $CODE."-".$ID,
+                    );
+                    $res = $ele->Update($ID, $arL);
+
+                    if($res)
+                    {
+                        if(isset($arLoadProductSERVICE["PROPERTY_VALUES"]["F_EMAIL"]) && !empty($arLoadProductSERVICE["PROPERTY_VALUES"]["F_EMAIL"]))
+                        {
+                            $arKolleg = CIBlockSection::GetByID($arLoadProductSERVICE["PROPERTY_VALUES"]["F_COLLEG"])->GetNext();
+
+                            \Bitrix\Main\Mail\Event::sendImmediate(
+                                array(
+                                    "EVENT_NAME" => "FORM_FILLING_SIMPLE_FORM_4_ANSVER",
+                                    "LID" => "s1",
+                                    "C_FIELDS" => array(
+                                        "NAME" => $arLoadProductSERVICE["PROPERTY_VALUES"]["F_NAME"],
+                                        "PHONE" => $arLoadProductSERVICE["PROPERTY_VALUES"]["F_PHONE"],
+                                        "EMAIL" => $arLoadProductSERVICE["PROPERTY_VALUES"]["F_EMAIL"],
+                                        "KOLLEGIA" => $arKolleg["NAME"],
+                                        "QUESTION" => $arLoadProductSERVICE["PREVIEW_TEXT"],
+                                        "URL" => 'https://'.$_SERVER["SERVER_NAME"].'/question/'.$arL["CODE"].'/',
+                                        "DATE" => $arLoadProductSERVICE["ACTIVE_FROM"]
+                                    ),
+                                ));
+                        }
+                        $text = "<p style='color:green;'>Ваш вопрос отправлен.</p>";
+                    }
+                    else
+                        $text = "<p style='color:red;'>Возникла ошибка! Попробуйте отправить вопрос еще раз.</p>";
+                }
+                else
+                    $text = "<p style='color:red;'>Возникла ошибка! Попробуйте отправить вопрос еще раз.</p>";
+
+
+            }
+            else
+                $text = "<p style='color:red;'>Возникла ошибка! Ваш вопрос не может быть отправлен.</p>";
         }
 
+        $row = "<div class='webform-confirmation chekw'>".$text."</div><style>.field-item.even{display:none;}</style>";
+        $_SESSION['answer_text']= $row;
 
         CFormResult::Delete($RESULT_ID, "N");
-        //file_put_contents($_SERVER["DOCUMENT_ROOT"]."/add_message.log", date("d-m-Y")."; ".print_r($kolleg,1).";\n", FILE_APPEND);
     }
+}
+
+function customNameForFAQ($name)
+{
+    $arReplace = array("здравствуйте", "здраствуйте", "добрый", "доброго", "доброе", "додень", "времени суток", "день", "дня", "вечер", "вечера", "утро", "утра", "господа", "уважаемые", "уважаемая", "коллегия", "юристы и адвокаты", "адвокаты и юристы", "адвокаты", "юристы", "адвокатов", "юристов", "пожалуйста", "скажите", "подскажите", "ответьте", "помогите", "поясните", "проконсультируйте", "пожалуйста", "на вопросы", "на вопрос", "хочу уточнить", "хочу задать", "у меня такой", "вопрос", "вопросы", "у меня вопрос", "такой вопрос", "вопрос такой", "ответ", "я хочю уточнить", "я хочу уточнить", "хочу уточнить", "у вас один вопрос", "один вопрос", "вопрос", "к вам", "у вас", "от вас", "разобраться");
+    $trimmed = ltrim($name," \n\r\t\v\0\.\,\:\;\!\"\'\#\&\*\(\)\{\}\[\]\/\-\+");
+    $trimmed = preg_replace('/\s{2,}/', ' ', $trimmed);
+    foreach ($arReplace as $repl) {
+        $trimmed = preg_replace('/^'.$repl.'/iu', '', $trimmed);
+        $trimmed = ltrim($trimmed," \n\r\t\v\0\.\,\:\;\!\"\'\#\&\*\(\)\{\}\[\]\/\-\+");
+    }
+    $trimmed = mb_substr($trimmed,0,100);
+
+    return $trimmed;
 }
 
 // регистрируем последнюю активность пользователя, если модуль соцсетей не установлен
@@ -667,7 +738,7 @@ function listLawyersCSV()
 /* Удаление по расписанию сообщений форума "Вопрос-ответ", в течении последних трех месяцев не прошедших модерацию и неопубликованных по каким либо причинам.  */
 function deleteNotActiveMessages()
 {
-    global $USER;
+    global $USER, $DB;
 
     $date = Bitrix\Main\Type\Date::createFromTimestamp(strtotime("- 3 month"));
     $dateTime = new Bitrix\Main\UI\Filter\DateTime($date->getTimestamp());
@@ -676,16 +747,24 @@ function deleteNotActiveMessages()
     // выберем все неопубликованные сообщения
     if(CModule::IncludeModule("forum"))
     {
-        $arFilter = array( "FORUM_ID" => 13, "NEW_TOPIC" => "N","APPROVED" => "N", "<=POST_DATE" => $DATE_TO );
-        $db_res = CForumMessage::GetList(array("ID" => "ASC"), $arFilter);
+        $db_res = CForumMessage::GetList(array("ID" => "ASC"), array( "FORUM_ID" => 13, "<=POST_DATE" => $DATE_TO ));
         while ($ar_res = $db_res->Fetch())
         {
-            // Проверяем, имеет ли текущий пользователь право удалять сообщения и удаляем, есил имеет
-            if (CForumMessage::CanUserDeleteMessage($ar_res["ID"], $USER->GetUserGroupArray(), $USER->GetID()))
+            // Проверяем, имеет ли текущий пользователь право удалять сообщения и удаляем, если имеет
+            if (CForumMessage::CanUserDeleteMessage($ar_res["ID"], $USER->GetUserGroupArray(), $USER->GetID(), true))
             {
-                // Проверка существования темы форума, к которой привязаны сообщения. Сообщения без темы не удаляются
+                // Проверка существования темы форума, к которой привязаны сообщения.
                 if (CForumTopic::GetByID($ar_res["TOPIC_ID"]))
-                    CForumMessage::Delete($ar_res["ID"]);
+                {
+                    // Удаляем лишь те, которые не активированы
+                    if ($ar_res["APPROVED"] == "N" && $ar_res["NEW_TOPIC"] == "N" && $ar_res["USE_SMILES"] == "N")
+                        CForumMessage::Delete($ar_res["ID"]);
+                }
+                else
+                {
+                    // Если темы форума нет, то удаляем "не привязанные" сообщения
+                    $DB->Query("DELETE FROM b_forum_message WHERE ID=".$ar_res["ID"]);
+                }
             }
         }
     }
@@ -753,45 +832,77 @@ function deleteOldFAQ()
     $dateTime = new Bitrix\Main\UI\Filter\DateTime($date->getTimestamp());
     $DATE_TO = $dateTime->offset("- 1 second");
 
-    if(CModule::IncludeModule("iblock"))
+    if (CModule::IncludeModule("iblock"))
     {
-        $arFilter = Array( "IBLOCK_ID" => 16, "<=DATE_MODIFY_TO" => $DATE_TO );
         $rest = CIBlockElement::GetList(
-            Array('SORT' => 'ASC', 'ID' => 'DESC'),
-            $arFilter,
+            Array( 'SORT' => 'ASC', 'ID' => 'DESC' ),
+            Array( "IBLOCK_ID" => 16, "<=DATE_MODIFY_TO" => $DATE_TO ),
             false,
-            array(),
-            Array("PROPERTY_FORUM_TOPIC_ID", "ID", "IBLOCK_ID")
+            Array("nTopCount" => 1000),
+            Array( "PROPERTY_FORUM_TOPIC_ID", "ID", "IBLOCK_ID" )
         );
         while ($ob = $rest->GetNextElement())
         {
             $arFields = $ob->GetFields();
-            $topicID = $arFields["PROPERTY_FORUM_TOPIC_ID_VALUE"];
+
+            file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', 'Элемент: '.$arFields["ID"], FILE_APPEND);
+
+            $topicID = intval($arFields["PROPERTY_FORUM_TOPIC_ID_VALUE"]);
             if(!empty($topicID))
             {
-                if (CForumTopic::GetByID($topicID))
+                if (CModule::IncludeModule("forum"))
                 {
+                    $arTopic = CForumTopic::GetByID($topicID);
+                    file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', ". Тема ".$topicID." существует: '".(!empty($arTopic) ? 'Да' : 'Нет')."'", FILE_APPEND);
+
                     $db_res = CForumMessage::GetList( array("ID" => "ASC"), array( "FORUM_ID" => 13, "TOPIC_ID" => $topicID ) );
                     while ($ar_res = $db_res->Fetch())
                     {
-                        if (CForumMessage::CanUserDeleteMessage($ar_res["ID"], $USER->GetUserGroupArray(), $USER->GetID()))
-                            CForumMessage::Delete($ar_res["ID"]);
+                        if (CForumMessage::CanUserDeleteMessage($ar_res["ID"], $USER->GetUserGroupArray(), $USER->GetID(), true))
+                        {
+                            if (!empty($arTopic)) {
+                                CForumMessage::Delete($ar_res["ID"]);
+                                file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Удалено сообщение: '.$ar_res["ID"], FILE_APPEND);
+                            }
+                            else {
+                                $DB->Query("DELETE FROM b_forum_message WHERE ID=" . $ar_res["ID"]);
+                                file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Удалено сообщение (HARD): '.$ar_res["ID"], FILE_APPEND);
+                            }
+                        }
                     }
 
-                    if (CForumTopic::CanUserDeleteTopic($topicID, $USER->GetUserGroupArray(), $USER->GetID()))
-                        CForumTopic::Delete($topicID);
+                    if (!empty($arTopic))
+                    {
+                        if (CForumTopic::CanUserDeleteTopic($topicID, $USER->GetUserGroupArray(), $USER->GetID(), true)) {
+                            CForumTopic::Delete($topicID);
+                            file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Удалена тема: '.$topicID, FILE_APPEND);
+                        }
+                    }
                 }
             }
-            if(CIBlock::GetPermission($arFields["IBLOCK_ID"])>='W')
-            {
-                $DB->StartTransaction();
-                if(!CIBlockElement::Delete($arFields["ID"]))
-                    $DB->Rollback();
-                else
-                    $DB->Commit();
+
+            $DB->StartTransaction();
+            if(!CIBlockElement::Delete($arFields["ID"])) {
+                $DB->Rollback();
+                file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Ошибка: '.$arFields["ID"], FILE_APPEND);
             }
+            else {
+                $DB->Commit();
+                file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Удален элемент: '.$arFields["ID"], FILE_APPEND);
+            }
+            file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', PHP_EOL.'--------------------'.PHP_EOL, FILE_APPEND);
         }
     }
+
+    /*if(CModule::IncludeModule("search"))
+    {
+        $NS = false;
+        $NS = CSearch::ReIndexAll(false, 60, $NS);
+        while(is_array($NS)) {
+            $NS = CSearch::ReIndexAll(false, 60, $NS);
+        }
+        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', PHP_EOL.'--- Reindex Search Completely ---'.PHP_EOL, FILE_APPEND);
+    }*/
     return "deleteOldFAQ();";
 }
 
