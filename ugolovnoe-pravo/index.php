@@ -7,7 +7,7 @@ $APPLICATION->SetTitle("");
 	 <?
 
 global $Element;
-$Element=$APPLICATION->IncludeComponent("bitrix:news.detail", "otrasly", Array(
+$Element = $APPLICATION->IncludeComponent("bitrix:news.detail", "otrasly", Array(
 	"ACTIVE_DATE_FORMAT" => "d.m.Y",	// Формат показа даты
 		"ADD_ELEMENT_CHAIN" => "N",	// Включать название элемента в цепочку навигации
 		"ADD_SECTIONS_CHAIN" => "N",	// Включать раздел в цепочку навигации
@@ -72,7 +72,7 @@ $Element=$APPLICATION->IncludeComponent("bitrix:news.detail", "otrasly", Array(
             <?
             function getMaxAdvokat($Element)
             {
-                $ID_SORT = $ID_AD= $ID_ADOVO = array();
+                $ID_SORT = $ID_AD = $ID_ADOVO = array();
                 CModule::IncludeModule("iblock");
 
                 $arFilter = array(
@@ -97,90 +97,96 @@ $Element=$APPLICATION->IncludeComponent("bitrix:news.detail", "otrasly", Array(
                 $ID_SORT = array_keys ($ID_SORT);
                 return $ID_SORT;
             }
+
             $ID_SORT = getMaxAdvokat($Element);
-$arrSfera = array("PROPERTY_SFERA_DET"=>106964);?>
-			 <?$APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"otrasl-advo", 
-	array(
-		"ACTIVE_DATE_FORMAT" => "",
-		"ADD_SECTIONS_CHAIN" => "N",
-        "USER_ID" => $ID_SORT,
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"ARCORP_BLOCK_NAME_IS_LINK" => "N",
-		"ARCORP_CHANGE_DELAY" => "80000",
-		"ARCORP_CHANGE_SPEED" => "2000",
-		"ARCORP_COLS_IN_ROW" => "3",
-		"ARCORP_OWL_CHANGE_DELAY" => "80000",
-		"ARCORP_OWL_CHANGE_SPEED" => "500",
-		"ARCORP_OWL_PC" => "5",
-		"ARCORP_OWL_PHONE" => "2",
-		"ARCORP_OWL_TABLET" => "4",
-		"ARCORP_SHOW_BLOCK_NAME" => "N",
-		"ARCORP_USE_OWL" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "Y",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"FILTER_NAME" => "arrSfera",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "17",
-		"IBLOCK_TYPE" => "-",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"INCLUDE_SUBSECTIONS" => "Y",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "500",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "USER",
-			1 => "LINK",
-			2 => "SFERA_DET",
-			3 => "",
-		),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "ID",
-		"SORT_BY2" => "ID",
-		"SORT_ORDER1" => "ASC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N",
-		"COMPONENT_TEMPLATE" => "otrasl-advo"
-	),
-	false,
-	array(
-		"ACTIVE_COMPONENT" => $MSPartners
-	)
-);?>
+
+            //p($Element);
+            //p($ID_SORT);
+
+            $GLOBALS["arrSfera"]["PROPERTY_SFERA_DET"] = $Element;
+            ?>
+            <?$APPLICATION->IncludeComponent(
+                "bitrix:news.list",
+                "otrasl-advo",
+                array(
+                    "ACTIVE_DATE_FORMAT" => "",
+                    "ADD_SECTIONS_CHAIN" => "N",
+                    "USER_ID" => $ID_SORT,
+                    "AJAX_MODE" => "N",
+                    "AJAX_OPTION_ADDITIONAL" => "",
+                    "AJAX_OPTION_HISTORY" => "N",
+                    "AJAX_OPTION_JUMP" => "N",
+                    "AJAX_OPTION_STYLE" => "Y",
+                    "ARCORP_BLOCK_NAME_IS_LINK" => "N",
+                    "ARCORP_CHANGE_DELAY" => "80000",
+                    "ARCORP_CHANGE_SPEED" => "2000",
+                    "ARCORP_COLS_IN_ROW" => "3",
+                    "ARCORP_OWL_CHANGE_DELAY" => "80000",
+                    "ARCORP_OWL_CHANGE_SPEED" => "500",
+                    "ARCORP_OWL_PC" => "5",
+                    "ARCORP_OWL_PHONE" => "2",
+                    "ARCORP_OWL_TABLET" => "4",
+                    "ARCORP_SHOW_BLOCK_NAME" => "N",
+                    "ARCORP_USE_OWL" => "Y",
+                    "CACHE_FILTER" => "N",
+                    "CACHE_GROUPS" => "Y",
+                    "CACHE_TIME" => "36000000",
+                    "CACHE_TYPE" => "A",
+                    "CHECK_DATES" => "Y",
+                    "DETAIL_URL" => "",
+                    "DISPLAY_BOTTOM_PAGER" => "Y",
+                    "DISPLAY_DATE" => "Y",
+                    "DISPLAY_NAME" => "Y",
+                    "DISPLAY_PICTURE" => "Y",
+                    "DISPLAY_PREVIEW_TEXT" => "Y",
+                    "DISPLAY_TOP_PAGER" => "N",
+                    "FIELD_CODE" => array(
+                        0 => "",
+                        1 => "",
+                    ),
+                    "FILTER_NAME" => "arrSfera",
+                    "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+                    "IBLOCK_ID" => "17",
+                    "IBLOCK_TYPE" => "-",
+                    "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                    "INCLUDE_SUBSECTIONS" => "Y",
+                    "MESSAGE_404" => "",
+                    "NEWS_COUNT" => "500",
+                    "PAGER_BASE_LINK_ENABLE" => "N",
+                    "PAGER_DESC_NUMBERING" => "N",
+                    "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+                    "PAGER_SHOW_ALL" => "N",
+                    "PAGER_SHOW_ALWAYS" => "N",
+                    "PAGER_TEMPLATE" => ".default",
+                    "PAGER_TITLE" => "Новости",
+                    "PARENT_SECTION" => "",
+                    "PARENT_SECTION_CODE" => "",
+                    "PREVIEW_TRUNCATE_LEN" => "",
+                    "PROPERTY_CODE" => array(
+                        0 => "USER",
+                        1 => "LINK",
+                        2 => "SFERA_DET",
+                        3 => "",
+                    ),
+                    "SET_BROWSER_TITLE" => "N",
+                    "SET_LAST_MODIFIED" => "N",
+                    "SET_META_DESCRIPTION" => "N",
+                    "SET_META_KEYWORDS" => "N",
+                    "SET_STATUS_404" => "N",
+                    "SET_TITLE" => "N",
+                    "SHOW_404" => "N",
+                    "SORT_BY1" => "ID",
+                    "SORT_BY2" => "ID",
+                    "SORT_ORDER1" => "ASC",
+                    "SORT_ORDER2" => "ASC",
+                    "STRICT_SECTION_CHECK" => "N",
+                    "COMPONENT_TEMPLATE" => "otrasl-advo"
+                ),
+                false,
+                array(
+                    "ACTIVE_COMPONENT" => $MSPartners
+                )
+            );?>
 		</div>
 	</div>
 </div>
