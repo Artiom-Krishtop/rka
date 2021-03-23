@@ -8,14 +8,14 @@ $(document).ready(function(){
         controlNav:false
     });
 
-    $('#otrasl.flexslider').flexslider({
+    /*$('#otrasl.flexslider').flexslider({
         animation: "slide",
         itemWidth: 136,
         itemMargin: 0,
         minItems: 3,
         maxItems: 10,
         controlNav:true
-    });
+    });*/
 
     $('#langnavigation').stop().animate({'marginRight':'-73px'},1000);
 
@@ -65,6 +65,43 @@ $(document).ready(function(){
 
 
 });
+
+(function() {
+
+    // store the slider in a local variable
+    var $window = $(window),
+        flexslider = { vars:{} };
+
+    // tiny helper function to add breakpoints
+    function getGridSize() {
+        return (window.innerWidth < 600) ? 3 :
+            (window.innerWidth < 900) ? 4 : 5;
+    }
+
+    $(function() {
+        SyntaxHighlighter.all();
+    });
+
+    $window.load(function() {
+        $('#otrasl.flexslider').flexslider({
+            animation: "slide",
+            itemWidth: 155,
+            itemMargin: 1,
+            controlNav:true,
+            animationLoop: false,
+            minItems: getGridSize(), // use function to pull in initial value
+            maxItems: getGridSize() // use function to pull in initial value
+        });
+    });
+
+    // check grid size on resize event
+    $window.resize(function() {
+        var gridSize = getGridSize();
+
+        flexslider.vars.minItems = gridSize;
+        flexslider.vars.maxItems = gridSize;
+    });
+}());
 
 initPopUp = function (form) {
     if($(".question_frame_licenses").length){

@@ -3,8 +3,8 @@ $this->setFrameMode(true);
 
 if(is_array($arResult['ITEMS']) && count($arResult['ITEMS'])>0) {?>
 
-	<div id="otrasl" class="flexslider otrasl">  
-	<div class="flex-viewport" style="overflow: hidden; position: relative;">	
+	<div id="otrasl" class="flexslider otrasl" style="padding-left: -3px;">
+	<!--<div class="flex-viewport" style="overflow: hidden; position: relative;">-->
 	<ul class="slides">  	
     <?/*<div class="<?if($arParams['ARCORP_USE_OWL']=='Y'):?>owl flexslider banners<?else:?>row<?endif;?> partners" <?
 		?>data-changespeed="<?if(IntVal($arParams["ARCORP_OWL_CHANGE_SPEED"])<1):?>2000<?else:?><?=$arParams["ARCORP_OWL_CHANGE_SPEED"]?><?endif;?>" <?
@@ -32,15 +32,15 @@ print "</pre>";*/
 								?><div class="col col-md-12"><?*/
 									//if( $arItem['PREVIEW_PICTURE']['SRC']!='' ) {
 										?><?
-      $renderImage = CFile::ResizeImageGet($arItem['PREVIEW_PICTURE'], Array("width" => 105, "height" => 105), BX_RESIZE_IMAGE_EXACT, false);
-      $pic_def = strpos($renderImage['src'], 'picture-default');
-?>
-<?if(!empty($renderImage['src']) && empty($pic_def)){?>
-<img width="105" height="105" src="<?=$renderImage['src']?>" alt="<?=$arItem['NAME']?>">
-<?}else{?>
-<img width="105" height="105" src="/bitrix/templates/cor/images/rka-photo.png" alt="<?=$arItem['NAME']?>">
-<?}?>
- <div><?=$arItem['NAME']?></div>
+                    $renderImage = CFile::ResizeImageGet($arItem['PREVIEW_PICTURE'], Array("width" => 105, "height" => 105), BX_RESIZE_IMAGE_EXACT, false);
+                    $pic_def = strpos($renderImage['src'], 'picture-default');
+                    ?>
+                    <?if(!empty($renderImage['src']) && empty($pic_def)){?>
+                        <img width="105" height="105" src="<?=$renderImage['src']?>" alt="<?=$arItem['NAME']?>">
+                    <?}else{?>
+                        <img width="105" height="105" src="/bitrix/templates/cor/images/rka-photo.png" alt="<?=$arItem['NAME']?>">
+                    <?}?>
+                    <div><?=$arItem['NAME']?></div>
                                         <?
 									//}
 								/*?></div><?
@@ -51,9 +51,9 @@ print "</pre>";*/
 			?></div></li><?
          } 
 //}         
-	?></div><?
-	?></div><?
-	?></div><?
+    ?></ul></div><?
+	/**/?><!--</div><?/*
+	*/?></div>--><?
 }?>
 
 
