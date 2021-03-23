@@ -834,6 +834,8 @@ function deleteOldFAQ()
 
     if (CModule::IncludeModule("iblock"))
     {
+        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', date("Y.m.d").PHP_EOL, FILE_APPEND);
+
         $rest = CIBlockElement::GetList(
             Array( 'SORT' => 'ASC', 'ID' => 'DESC' ),
             Array( "IBLOCK_ID" => 16, "<=DATE_MODIFY_TO" => $DATE_TO ),
@@ -890,7 +892,7 @@ function deleteOldFAQ()
                 $DB->Commit();
                 file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Удален элемент: '.$arFields["ID"], FILE_APPEND);
             }
-            file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', PHP_EOL.'--------------------'.PHP_EOL, FILE_APPEND);
+            file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', PHP_EOL.'--------------------'.PHP_EOL.PHP_EOL, FILE_APPEND);
         }
     }
 
