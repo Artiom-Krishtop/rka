@@ -32,9 +32,9 @@ echo "</pre>";*/
 <div class="submitted-faq">
 <?
 	  //$rImage = CFile::GetPath($arItem["US_ID"]["PERSONAL_PHOTO"]);
-      $renderImage = CFile::ResizeImageGet($arItem["PICTURE_ADVO"], Array("width" => 120, "height" => 120), BX_RESIZE_IMAGE_EXACT, false);
+      $renderImage = CFile::ResizeImageGet($arItem["PICTURE_ADVO"], Array("width" => 100, "height" => 100), BX_RESIZE_IMAGE_EXACT, true);
 		?>		
-				  <a href="<?=$arItem["LINKS"]?>"><img width="55%" src="<?=$renderImage["src"]?>" alt="<?=$arItem["NAME_ADVO"]?>"></a><br>
+				  <a href="<?=$arItem["LINKS"]?>"><img width="<?=$renderImage["width"]?>" height="<?=$renderImage["height"]?>" src="<?=$renderImage["src"]?>" alt="<?=$arItem["NAME_ADVO"]?>"></a><br>
 				
 				  <a href="<?=$arItem["LINKS"]?>"> адвокат
 				  <?if(!empty($arItem["NAME_ADVO"])){?>

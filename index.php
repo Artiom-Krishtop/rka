@@ -5,22 +5,29 @@ $APPLICATION->SetTitle("Белорусская республиканская к
 <h2 class="block-title"><span style="font-size: 13pt;"><b><i><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 15pt;">Уважаемые посетители!</span></i></b></span></h2>
 <p>
 </p>
- Если вы перешли на сайт БРКА, значит, вам требуется помощь адвоката. Обращаясь за помощью к адвокату, вы поступаете правильно, потому что:
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Если вы перешли на сайт БРКА, значит, вам требуется помощь адвоката. Обращаясь за помощью к адвокату, <b>вы поступаете правильно, потому что</b>: </span>
 <p>
-	 - крайне важно обратиться к адвокату за советом прежде, чем совершить какое-либо юридически значимое действие. Предотвратить наступление неблагоприятных юридических последствий своих действий гораздо проще, чем их исправлять;
+	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+	- крайне важно обратиться к адвокату за советом прежде, чем совершить какое-либо юридически значимое действие. Предотвратить наступление неблагоприятных юридических последствий своих действий гораздо проще, чем их исправлять; </span>
 </p>
+<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 <p>
-	 - только адвокаты в Республике Беларусь имеют право оказывать юридическую помощь гражданам, в том числе и консультирование по правовым вопросам. Все другие субъекты, которые предлагают юридическую помощь гражданам (интернет-ресурсы, общественные организации, юристы, не имеющие адвокатской лицензии, и т.д.), действуют нелегально, а потому не отвечают за грамотность оказанной юридической помощи и не несут ответственность за качество своей работы;
+	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+	- только адвокаты в Республике Беларусь имеют право оказывать юридическую помощь гражданам, в том числе и консультирование по правовым вопросам. Все другие субъекты, которые предлагают юридическую помощь гражданам (интернет-ресурсы, общественные организации, юристы, не имеющие адвокатской лицензии, и т.д.), действуют нелегально, а потому не отвечают за грамотность оказанной юридической помощи и не несут ответственность за качество своей работы; </span>
 </p>
+<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 <p>
-	 - только общение с адвокатом является предметом адвокатской тайны. Все иные лица не обязаны хранить в тайне информацию, полученную от вас в процессе оказания юридической помощи;
+	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+	- только общение с адвокатом является предметом адвокатской тайны. Все иные лица не обязаны хранить в тайне информацию, полученную от вас в процессе оказания юридической помощи; </span>
 </p>
+<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 <p>
-	 - только адвокаты постоянно совершенствуют свое профессиональное мастерство, регулярно проходят аттестацию для подтверждения своего профессионального уровня. <span style="color: #486DAA;"> </span><span style="color: #486DAA;"> </span><br>
+	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+	- только адвокаты постоянно совершенствуют свое профессиональное мастерство, регулярно проходят аттестацию для подтверждения своего профессионального уровня.</span> <span style="color: #486DAA;"> </span><span style="color: #486DAA;"> </span><br>
  <a href="/faq_ask/" style="text-decoration: line-through !important;" class="ask">Задать вопрос</a>
 	<!-- /.block --> <!-- /.region -->
 </p>
-</section>
+ </section>
 <div class="region region-news">
 	 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
@@ -186,7 +193,7 @@ Array(
 	"bitrix:news.list",
 	"news_front",
 	Array(
-		"ACTIVE_DATE_FORMAT" => "",
+		"ACTIVE_DATE_FORMAT" => "d.m.y G:i",
 		"ADD_SECTIONS_CHAIN" => "N",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
@@ -210,6 +217,8 @@ Array(
 		"CACHE_TYPE" => "A",
 		"CHECK_DATES" => "Y",
 		"COMPONENT_TEMPLATE" => "news_front",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO",
 		"DETAIL_URL" => "",
 		"DISPLAY_BOTTOM_PAGER" => "Y",
 		"DISPLAY_DATE" => "Y",
@@ -225,7 +234,7 @@ Array(
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "Y",
 		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "6",
+		"NEWS_COUNT" => "3",
 		"PAGER_BASE_LINK_ENABLE" => "N",
 		"PAGER_DESC_NUMBERING" => "N",
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
@@ -236,7 +245,7 @@ Array(
 		"PARENT_SECTION" => "",
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(0=>"PUBLIC_DATE",1=>"LINK",2=>"",),
+		"PROPERTY_CODE" => array(0=>"",1=>"PUBLIC_DATE",2=>"LINK",3=>"",),
 		"SET_BROWSER_TITLE" => "N",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "N",

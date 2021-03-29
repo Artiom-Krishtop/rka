@@ -103,7 +103,7 @@ $arrSfera = array("PROPERTY_SFERA_DET"=>106943);?>
 	array(
 		"ACTIVE_DATE_FORMAT" => "",
 		"ADD_SECTIONS_CHAIN" => "N",
-        "USER_ID" => $ID_SORT,
+		"USER_ID" => $ID_SORT,
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
 		"AJAX_OPTION_HISTORY" => "N",
@@ -139,11 +139,11 @@ $arrSfera = array("PROPERTY_SFERA_DET"=>106943);?>
 		"FILTER_NAME" => "arrSfera",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "17",
-		"IBLOCK_TYPE" => "-",
+		"IBLOCK_TYPE" => "company",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "Y",
 		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "500",
+		"NEWS_COUNT" => "2000",
 		"PAGER_BASE_LINK_ENABLE" => "N",
 		"PAGER_DESC_NUMBERING" => "N",
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
@@ -172,7 +172,9 @@ $arrSfera = array("PROPERTY_SFERA_DET"=>106943);?>
 		"SORT_ORDER1" => "ASC",
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N",
-		"COMPONENT_TEMPLATE" => "otrasl-advo"
+		"COMPONENT_TEMPLATE" => "otrasl-advo",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
 	false,
 	array(

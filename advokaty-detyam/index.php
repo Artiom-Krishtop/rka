@@ -2,7 +2,7 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Адвокаты детям");
 ?><div class="field-item even" property="content:encoded">
-<table width="830" height="1047" cellspacing="0" cellpadding="0" background="../images/main_bg_1.jpg">
+	<table width="830" height="1047" cellspacing="0" cellpadding="0" background="../images/main_bg_1.jpg">
 	<tbody>
 	<tr>
 		<td colspan="3" height="57">
@@ -13,57 +13,62 @@ $APPLICATION->SetTitle("Адвокаты детям");
 	</tr>
 	<tr valign="bottom">
 		<td colspan="3" height="47">
- <span style="font-family: Georgia, serif; font-size: 14pt;">&nbsp; Мы рады видеть вас на нашем сайте. </span>
+ <span style="font-family: Georgia, serif; font-size: 14pt;">&nbsp; <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Мы рады видеть вас на нашем сайте. </span></span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="3" height="31">
- <span style="font-family: Georgia, serif; font-size: 14pt;">&nbsp; Здесь вы сможете получить самую достоверную и точную информацию о своих правах и обязанностях. Ведь не всегда легко понять, где ты прав, а где - нет.</span>
+			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">&nbsp; Здесь вы сможете получить самую достоверную и точную информацию о своих правах и обязанностях. Ведь не всегда легко понять, где ты прав, а где - нет.</span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="3" height="44">
- <span style="font-family: Georgia, serif; font-size: 14pt;">&nbsp; Наверняка вам интересно знать, за какие проступки вас могут наказать не только родители, но и государство, и с&nbsp;какого возраста наступает ваша гражданская, административная и уголовная ответственность. Полагаем, вы также задавались вопросом о том, какими правами вы обладаете, и каким образом их можно защитить.</span>
+			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">&nbsp; Наверняка вам интересно знать, за какие проступки вас могут наказать не только родители, но и государство, и с&nbsp;какого возраста наступает ваша гражданская, административная и уголовная ответственность. Полагаем, вы также задавались вопросом о том, какими правами вы обладаете, и каким образом их можно защитить.</span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="3" height="35">
- <span style="font-family: Georgia, serif; font-size: 14pt;">&nbsp; На все ваши вопросы с радостью ответят адвокаты. Вам лишь необходимо написать свой вопрос, нажав на кнопку "Задать вопрос".</span>
+			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">&nbsp; На все ваши вопросы с радостью ответят адвокаты. Вам лишь необходимо написать свой вопрос, нажав на кнопку "Задать вопрос".</span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 		</td>
 	</tr>
 	<tr>
 		<td height="55">
- <b>
-			&nbsp; </b>
+			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><b><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+			&nbsp; </span></b><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 		</td>
 		<td height="55">
- <b> </b><span style="font-family: Georgia, serif; font-size: 18pt;"><span style="font-size: 20pt;"><b>&nbsp; &nbsp;&nbsp;</b></span></span>
+			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><b><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span></b><span style="font-family: Georgia, serif; font-size: 18pt;"><span style="font-size: 20pt;"><b><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">&nbsp; &nbsp;&nbsp;</span></b></span></span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 		</td>
 		<td height="55">
- <span style="font-family: Georgia, serif; font-size: 20pt;">
-			&nbsp;</span>
+			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+			&nbsp;</span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 		</td>
 	</tr>
 	<tr>
 		<td height="48">
-			 &nbsp;
+			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+			&nbsp; </span>
 		</td>
 		<td height="48">
-			 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="font-family: Georgia, serif; font-size: 16pt;"><b>Мы вам поможем.&nbsp;</b></span><br>
- <span style="font-family: Georgia, serif; font-size: 16pt;"><b> </b></span><span style="font-family: Georgia, serif; font-size: 16pt;"><b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</b></span><span style="font-family: Georgia, serif; font-size: 16pt;"><b>Жмите сюда↓</b></span>
+			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-family: Georgia, serif; font-size: 16pt;"><b><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Мы вам поможем.&nbsp;</span></b></span><br>
+			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: Georgia, serif; font-size: 16pt;"><b><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span></b></span><span style="font-family: Georgia, serif; font-size: 16pt;"><b><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></b></span><span style="font-family: Georgia, serif; font-size: 16pt;"><b><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Жмите сюда↓</span></b></span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 		</td>
 		<td height="48">
-			 &nbsp;
+			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+			&nbsp; </span>
 		</td>
 	</tr>
 	<tr>
 		<td height="71">
+			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 		</td>
 		<td height="75">
- <a href="http://www.rka.by/faq_ask"><img width="299" src="http://www.rka.by/sites/all/themes/zen/beladvocate/image/ask_baby.gif" height="70"></a>
+			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><a href="http://www.rka.by/faq_ask"><img width="299" src="http://www.rka.by/sites/all/themes/zen/beladvocate/image/ask_baby.gif" height="70"></a><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 		</td>
 		<td height="71">
-			 &nbsp;
+			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+			&nbsp;</span>
 		</td>
 	</tr>
 	<tr>

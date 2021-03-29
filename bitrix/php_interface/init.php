@@ -475,7 +475,7 @@ function listLawyersCSV()
         $expUsersFile = 'lawyers.csv';
         $strDlmtr = ';';
         $lineDlmtr = "\n";
-        $arUsers = array('#,ФИО,Номер лицензии,Дата выдачи лицензии,Коллегия,Место работы,Основной номер телефона,Дополнительные номера телефонов,Мессенджеры,Электронная почта,Адрес: Область,Адрес: Район,Адрес: Населенный пункт,Адрес: Улица,Адрес: Номер дома,Адрес: корпус,Адрес: Номер помещения,График работы,Основные отрасли права,Ссылка на фото,gps-координаты');
+        $arUsers = array('#;ФИО;Номер лицензии;Дата выдачи лицензии;Коллегия;Место работы;Основной номер телефона;Дополнительные номера телефонов;Мессенджеры;Электронная почта;Адрес: Область;Адрес: Район;Адрес: Населенный пункт;Адрес: Улица;Адрес: Номер дома;Адрес: корпус;Адрес: Номер помещения;График работы;Основные отрасли права;Ссылка на фото;gps-координаты');
         $i = 1;
 
         $rsResCat = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 17, "ACTIVE_DATE" => "Y", "ACTIVE" => "Y"), false, false, Array("ID", "IBLOCK_ID"));
@@ -647,7 +647,7 @@ function listLawyersCSV()
 
                 $photo = '';
                 if(isset($u["PERSONAL_PHOTO"]) && !empty($u["PERSONAL_PHOTO"]))
-                    $photo = ($APPLICATION->IsHTTPS() ? "https://" : "http://").$_SERVER["HTTP_HOST"].CFile::GetPath($u["PERSONAL_PHOTO"]);
+                    $photo = ((\Bitrix\Main\Context::getCurrent()->getRequest()->isHttps()) ? 'https://rka.by' : 'http://rka.by').CFile::GetPath($u["PERSONAL_PHOTO"]);
 
                 $sferaPrava = '';
                 if(is_array($arProps["SFERA_DET"]["VALUE"]))
@@ -834,7 +834,7 @@ function deleteOldFAQ()
 
     if (CModule::IncludeModule("iblock"))
     {
-        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', date("Y.m.d").PHP_EOL, FILE_APPEND);
+        //file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', date("Y.m.d").PHP_EOL, FILE_APPEND);
 
         $rest = CIBlockElement::GetList(
             Array( 'SORT' => 'ASC', 'ID' => 'DESC' ),
@@ -847,7 +847,7 @@ function deleteOldFAQ()
         {
             $arFields = $ob->GetFields();
 
-            file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', 'Элемент: '.$arFields["ID"], FILE_APPEND);
+            //file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', 'Элемент: '.$arFields["ID"], FILE_APPEND);
 
             $topicID = intval($arFields["PROPERTY_FORUM_TOPIC_ID_VALUE"]);
             if(!empty($topicID))
@@ -855,7 +855,7 @@ function deleteOldFAQ()
                 if (CModule::IncludeModule("forum"))
                 {
                     $arTopic = CForumTopic::GetByID($topicID);
-                    file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', ". Тема ".$topicID." существует: '".(!empty($arTopic) ? 'Да' : 'Нет')."'", FILE_APPEND);
+                    //file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', ". Тема ".$topicID." существует: '".(!empty($arTopic) ? 'Да' : 'Нет')."'", FILE_APPEND);
 
                     $db_res = CForumMessage::GetList( array("ID" => "ASC"), array( "FORUM_ID" => 13, "TOPIC_ID" => $topicID ) );
                     while ($ar_res = $db_res->Fetch())
@@ -864,11 +864,11 @@ function deleteOldFAQ()
                         {
                             if (!empty($arTopic)) {
                                 CForumMessage::Delete($ar_res["ID"]);
-                                file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Удалено сообщение: '.$ar_res["ID"], FILE_APPEND);
+                                //file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Удалено сообщение: '.$ar_res["ID"], FILE_APPEND);
                             }
                             else {
                                 $DB->Query("DELETE FROM b_forum_message WHERE ID=" . $ar_res["ID"]);
-                                file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Удалено сообщение (HARD): '.$ar_res["ID"], FILE_APPEND);
+                                //file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Удалено сообщение (HARD): '.$ar_res["ID"], FILE_APPEND);
                             }
                         }
                     }
@@ -877,7 +877,7 @@ function deleteOldFAQ()
                     {
                         if (CForumTopic::CanUserDeleteTopic($topicID, $USER->GetUserGroupArray(), $USER->GetID(), true)) {
                             CForumTopic::Delete($topicID);
-                            file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Удалена тема: '.$topicID, FILE_APPEND);
+                            //file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Удалена тема: '.$topicID, FILE_APPEND);
                         }
                     }
                 }
@@ -886,14 +886,15 @@ function deleteOldFAQ()
             $DB->StartTransaction();
             if(!CIBlockElement::Delete($arFields["ID"])) {
                 $DB->Rollback();
-                file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Ошибка: '.$arFields["ID"], FILE_APPEND);
+                //file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Ошибка: '.$arFields["ID"], FILE_APPEND);
             }
             else {
                 $DB->Commit();
-                file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Удален элемент: '.$arFields["ID"], FILE_APPEND);
+                //file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', '. Удален элемент: '.$arFields["ID"], FILE_APPEND);
             }
-            file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', PHP_EOL.'--------------------'.PHP_EOL.PHP_EOL, FILE_APPEND);
+            //file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', PHP_EOL.'--------------------'.PHP_EOL, FILE_APPEND);
         }
+        //file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', PHP_EOL, FILE_APPEND);
     }
 
     /*if(CModule::IncludeModule("search"))
@@ -903,7 +904,7 @@ function deleteOldFAQ()
         while(is_array($NS)) {
             $NS = CSearch::ReIndexAll(false, 60, $NS);
         }
-        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', PHP_EOL.'--- Reindex Search Completely ---'.PHP_EOL, FILE_APPEND);
+        //file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/faq-debug-log.txt', PHP_EOL.'--- Reindex Search Completely ---'.PHP_EOL, FILE_APPEND);
     }*/
     return "deleteOldFAQ();";
 }

@@ -32,13 +32,13 @@ print "</pre>";*/
 								?><div class="col col-md-12"><?*/
 									//if( $arItem['PREVIEW_PICTURE']['SRC']!='' ) {
 										?><?
-                    $renderImage = CFile::ResizeImageGet($arItem['PREVIEW_PICTURE'], Array("width" => 105, "height" => 105), BX_RESIZE_IMAGE_EXACT, false);
+                    $renderImage = CFile::ResizeImageGet($arItem['PREVIEW_PICTURE'], Array("width" => 127, "height" => 127), BX_RESIZE_IMAGE_EXACT, false);
                     $pic_def = strpos($renderImage['src'], 'picture-default');
                     ?>
                     <?if(!empty($renderImage['src']) && empty($pic_def)){?>
-                        <img width="105" height="105" src="<?=$renderImage['src']?>" alt="<?=$arItem['NAME']?>">
+                        <img width="127" height="127" src="<?=$renderImage['src']?>" alt="<?=$arItem['NAME']?>">
                     <?}else{?>
-                        <img width="105" height="105" src="/bitrix/templates/cor/images/rka-photo.png" alt="<?=$arItem['NAME']?>">
+                        <img width="127" height="127" src="/bitrix/templates/cor/images/rka-photo.png" alt="<?=$arItem['NAME']?>">
                     <?}?>
                     <div><?=$arItem['NAME']?></div>
                                         <?
