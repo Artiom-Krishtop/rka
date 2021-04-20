@@ -1,6 +1,7 @@
-<?
+<?php
 $MESS["UI_USERFIELD_ADD"] = "Додати";
 $MESS["UI_USERFIELD_CANCEL"] = "Скасувати";
+$MESS["UI_USERFIELD_DELETE_ERROR"] = "Не вдалося видалити поле";
 $MESS["UI_USERFIELD_FACTORY_BOOLEAN_TITLE"] = "Так/Ні";
 $MESS["UI_USERFIELD_FACTORY_CONFIGURATOR_FIELD_TITLE"] = "Назва поля";
 $MESS["UI_USERFIELD_FACTORY_FIELD_MULTIPLE"] = "Множинне";
@@ -36,4 +37,4 @@ $MESS["UI_USERFIELD_FACTORY_UF_STRING_TITLE"] = "Рядок";
 $MESS["UI_USERFIELD_FACTORY_UF_URL_LEGEND"] = "Для зберігання посилань на веб-сторінки.";
 $MESS["UI_USERFIELD_FACTORY_UF_URL_TITLE"] = "Посилання";
 $MESS["UI_USERFIELD_SAVE"] = "Зберегти";
-?>
+$MESS["UI_USERFIELD_SAVE_ERROR"] = "Неможливо зберегти налаштування поля";

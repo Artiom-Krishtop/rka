@@ -14,92 +14,124 @@ $this->setFrameMode(true);
 
 use Bitrix\Main\Type\DateTime;
 
-	$date2 = date("d.m.Y");
-	$dater1 = date_create($date2);
-	$dater2 = date_create($arResult['PROPERTIES']["DATA_YUR"]["VALUE"]);
-	$diff = date_diff($dater1, $dater2);
-	$year = $diff->format('%y');
-	$month = $diff->format('%m');	
-	$day = $diff->format('%d');		
-	if ($year!=0){ 
-		if($year%10 >5 ||  $year%10 == 0 ||  $year == 11 || $year == 12 || $year == 13 || $year == 14 || preg_match("/(5|6|7|8|9|0)$/",$year)){
-			$year = $diff->format('%y'.' лет');				
-		}elseif($year%10 ==1 || preg_match("|(1)$|",$year)){
-			$year = $diff->format('%y'.' год');						
-		}else{
-			$year = $diff->format('%y'.' года');	
-		}
-	}else{
-		$year="";		
-	}
-	if ($month!=0){		
-		if($month%10 >4 ||  $month%10 == 0 ||  $month == 11||  $month == 12){
-			$month = $diff->format('%m'.' месяцев');				
-		}elseif($month%10 ==1){		
-			$month = $diff->format('%m'.' месяц');				
-		}else{			
-			$month = $diff->format('%m'.' месяца');					
-		}		
-	}else{
-		$month="";
-	} 	
-	if ($day!=0){
-		if($day == 11 || $day == 12 || $day == 13 || $day == 14 || preg_match("/(5|6|7|8|9|0)$/",$day)){
-			$day = $diff->format('%d'.' дней');				
-		}elseif($day%10 ==1 || preg_match("|(1)$|",$day)){
-			$day = $diff->format('%d'.' день');						
-		}elseif(preg_match("/(2|3|4)$/",$day)){
-			$day = $diff->format('%d'.' дня');						
-		}		
-	}else{
-		$day="";		
-	} 	
+$date2 = date("d.m.Y");
+$dater1 = date_create($date2);
+$dater2 = date_create($arResult['PROPERTIES']["DATA_YUR"]["VALUE"]);
+$diff = date_diff($dater1, $dater2);
+$year = $diff->format('%y');
+$month = $diff->format('%m');
+$day = $diff->format('%d');
+if ($year!=0){
+    if($year%10 >5 ||  $year%10 == 0 ||  $year == 11 || $year == 12 || $year == 13 || $year == 14 || preg_match("/(5|6|7|8|9|0)$/",$year)){
+        $year = $diff->format('%y'.' лет');
+    }elseif($year%10 ==1 || preg_match("|(1)$|",$year)){
+        $year = $diff->format('%y'.' год');
+    }else{
+        $year = $diff->format('%y'.' года');
+    }
+}else{
+    $year="";
+}
+if ($month!=0){
+    if($month%10 >4 ||  $month%10 == 0 ||  $month == 11||  $month == 12){
+        $month = $diff->format('%m'.' месяцев');
+    }elseif($month%10 ==1){
+        $month = $diff->format('%m'.' месяц');
+    }else{
+        $month = $diff->format('%m'.' месяца');
+    }
+}else{
+    $month="";
+}
+if ($day!=0){
+    if($day == 11 || $day == 12 || $day == 13 || $day == 14 || preg_match("/(5|6|7|8|9|0)$/",$day)){
+        $day = $diff->format('%d'.' дней');
+    }elseif($day%10 ==1 || preg_match("|(1)$|",$day)){
+        $day = $diff->format('%d'.' день');
+    }elseif(preg_match("/(2|3|4)$/",$day)){
+        $day = $diff->format('%d'.' дня');
+    }
+}else{
+    $day="";
+}
 
-	$dater3 = date_create($arResult['PROPERTIES']["DATA_ADV"]["VALUE"]);		
-	$diff2 = date_diff($dater1, $dater3);
-	$year2 = $diff2->format('%y');
-	$month2 = $diff2->format('%m');	
-	$day2 = $diff2->format('%d');		
-if ($year2!=0){ 
-		if($year2%10 >5 ||  $year2%10 == 0 ||  $year2 == 11 || $$year2 == 12 || $year2 == 13 || $year2 == 14 || preg_match("/(5|6|7|8|9|0)$/",$year2)){	
-			$year2 = $diff2->format('%y'.' лет');					
-		}elseif($year2%10 ==1 || preg_match("|(1)$|",$year2)){	
-			$year2 = $diff2->format('%y'.' год');					
-		}else{
-			$year2 = $diff2->format('%y'.' года');			
-		}
-	}else{
-		$year2="";			
-	}
-	if ($month2!=0){		
-		if($month2%10 >4 ||  $month2%10 == 0 ||  $month2 == 11||  $month2 == 12){
-			$month2 = $diff2->format('%m'.' месяцев');				
-		}elseif($month2%10 ==1){		
-			$month2 = $diff2->format('%m'.' месяц');				
-		}else{			
-			$month2 = $diff2->format('%m'.' месяца');					
-		}		
-	}else{
-		$month2="";		
-	} 	
-	if ($day2!=0){
-		if($day2 == 11 || $day2 == 12 || $day2 == 13 || $day2 == 14 || preg_match("/(5|6|7|8|9|0)$/",$day2)){
-			$day2 = $diff2->format('%d'.' дней');					
-		}elseif($day%10 ==1 || preg_match("|(1)$|",$day2)){
-			$day2 = $diff2->format('%d'.' день');					
-		}elseif(preg_match("/(2|3|4)$/",$day2)){		
-			$day2 = $diff2->format('%d'.' дня');				
-		}		
-	}else{
-		$day2="";		
-	} 		
+$dater3 = date_create($arResult['PROPERTIES']["DATA_ADV"]["VALUE"]);
+$diff2 = date_diff($dater1, $dater3);
+$year2 = $diff2->format('%y');
+$month2 = $diff2->format('%m');
+$day2 = $diff2->format('%d');
+if ($year2!=0){
+    if($year2%10 >5 ||  $year2%10 == 0 ||  $year2 == 11 || $$year2 == 12 || $year2 == 13 || $year2 == 14 || preg_match("/(5|6|7|8|9|0)$/",$year2)){
+        $year2 = $diff2->format('%y'.' лет');
+    }elseif($year2%10 ==1 || preg_match("|(1)$|",$year2)){
+        $year2 = $diff2->format('%y'.' год');
+    }else{
+        $year2 = $diff2->format('%y'.' года');
+    }
+}else{
+    $year2="";
+}
+if ($month2!=0){
+    if($month2%10 >4 ||  $month2%10 == 0 ||  $month2 == 11||  $month2 == 12){
+        $month2 = $diff2->format('%m'.' месяцев');
+    }elseif($month2%10 ==1){
+        $month2 = $diff2->format('%m'.' месяц');
+    }else{
+        $month2 = $diff2->format('%m'.' месяца');
+    }
+}else{
+    $month2="";
+}
+if ($day2!=0){
+    if($day2 == 11 || $day2 == 12 || $day2 == 13 || $day2 == 14 || preg_match("/(5|6|7|8|9|0)$/",$day2)){
+        $day2 = $diff2->format('%d'.' дней');
+    }elseif($day%10 ==1 || preg_match("|(1)$|",$day2)){
+        $day2 = $diff2->format('%d'.' день');
+    }elseif(preg_match("/(2|3|4)$/",$day2)){
+        $day2 = $diff2->format('%d'.' дня');
+    }
+}else{
+    $day2="";
+}
+
+if(strpos($arResult['PREVIEW_PICTURE']['SRC'], 'picture-default'))
+{
+    $ptime = getmicrotime();
+    $io = CBXVirtualIo::GetInstance();
+    if($arResult["PREVIEW_PICTURE"]["HEIGHT"] < 250 || $arResult["PREVIEW_PICTURE"]["WIDTH"] < 250)
+    {
+        CopyDirFiles($_SERVER["DOCUMENT_ROOT"]."/upload/picture-default.jpg", $_SERVER["DOCUMENT_ROOT"].$arResult["PREVIEW_PICTURE"]["SRC"]);
+
+        $ToResizeImg = $_SERVER["DOCUMENT_ROOT"].$arResult["PREVIEW_PICTURE"]["SRC"];
+        $tempFile = $_SERVER['DOCUMENT_ROOT']. '/upload/' .$arResult["PREVIEW_PICTURE"]["SUBDIR"]. 'temp.jpg';
+
+        $rif = CFile::ResizeImageFile(
+            $ToResizeImg,
+            $tempFile,
+            array('width' => 250,'height' => 250),
+            BX_RESIZE_IMAGE_PROPORTIONAL,
+            array(),
+            false,
+            false
+        );
+
+        if ($rif)
+        {
+            $arImageSize = CFile::GetImageSize($tempFile);
+
+            $f = $io->GetFile($tempFile);
+            $arImageSize[2] = $f->GetFileSize();
+
+            unlink($ToResizeImg);
+            rename($tempFile, $ToResizeImg);
+
+            $DB->Query("UPDATE b_file SET FILE_SIZE='".round(floatval($arImageSize[2]))."', HEIGHT='".round(floatval($arImageSize[1]))."', WIDTH='".round(floatval($arImageSize[0]))."' WHERE ID=".intval($arResult["PREVIEW_PICTURE"]["ID"]));
+
+        }
+    }
+}
 ?>
 <div class="news-detail profile">
-<?php /*
-print "<pre>";
-print_r($arResult);
-print "</pre>";*/
-?>
     <div class="adv_stats_prof">
             <? if(!empty($arResult['PREVIEW_PICTURE'])) {?>    
                 <img width="100%" src="<?=$arResult['PREVIEW_PICTURE']['SRC']?>" alt="<?=$arResult['NAME']?>">

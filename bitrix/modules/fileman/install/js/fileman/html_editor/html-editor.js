@@ -1050,10 +1050,6 @@
 				this.config.height = endHeight;
 
 				BX.addClass(this.dom.cont, 'bx-html-editor-absolute');
-				if (BX.ZIndexManager)
-				{
-					BX.ZIndexManager.register(this.dom.cont);
-				}
 				this._bodyOverflow = document.body.style.overflow;
 				document.body.style.overflow = "hidden";
 
@@ -1067,6 +1063,13 @@
 				BX.addCustomEvent(this, 'OnIframeKeydown', BX.proxy(this.CheckEscCollapse, this));
 				BX.bind(document.body, "keydown", BX.proxy(this.CheckEscCollapse, this));
 				BX.bind(window, "scroll", BX.proxy(this.PreventScroll, this));
+
+				if (BX.ZIndexManager)
+				{
+					BX.ZIndexManager.register(this.dom.cont);
+					BX.ZIndexManager.addStack(this.dom.cont);
+					BX.ZIndexManager.bringToFront(this.dom.cont);
+				}
 			}
 			else
 			{

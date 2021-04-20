@@ -179,7 +179,7 @@ export class ClientSelector
 		for (let item of this.items)
 		{
 			menuItems.push({
-				text: this.getMenuItemHtml(item),
+				html: this.getMenuItemHtml(item),
 				className : "seo-ads-client-menu menu-popup-no-icon",
 				onclick: this.onSelectItem.bind(this, item)
 			});

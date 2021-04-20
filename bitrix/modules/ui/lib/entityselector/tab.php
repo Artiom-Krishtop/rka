@@ -20,6 +20,9 @@ class Tab implements \JsonSerializable
 	/** @var array */
 	protected $footerOptions;
 
+	/** @var bool | null */
+	protected $showAvatars;
+
 	public function __construct(array $options)
 	{
 		if (!empty($options['id']) && is_string($options['id']))
@@ -68,7 +71,7 @@ class Tab implements \JsonSerializable
 			}
 		}
 
-		if (!empty($options['visible']) && is_bool($options['visible']))
+		if (isset($options['visible']) && is_bool($options['visible']))
 		{
 			$this->setVisible($options['visible']);
 		}
@@ -102,6 +105,11 @@ class Tab implements \JsonSerializable
 			;
 
 			$this->setFooter($options['footer'], $footerOptions);
+		}
+
+		if (isset($options['showAvatars']) && is_bool($options['showAvatars']))
+		{
+			$this->setShowAvatars($options['showAvatars']);
 		}
 	}
 
@@ -230,6 +238,16 @@ class Tab implements \JsonSerializable
 		return $this->footerOptions;
 	}
 
+	public function setShowAvatars(bool $flag)
+	{
+		$this->showAvatars = $flag;
+	}
+
+	public function getShowAvatars(): ?bool
+	{
+		return $this->showAvatars;
+	}
+
 	public function jsonSerialize()
 	{
 		$json = [
@@ -257,6 +275,11 @@ class Tab implements \JsonSerializable
 		{
 			$json['footer'] = $this->getFooter();
 			$json['footerOptions'] = $this->getFooterOptions();
+		}
+
+		if ($this->getShowAvatars() !== null)
+		{
+			$json['showAvatars'] = $this->getShowAvatars();
 		}
 
 		return $json;

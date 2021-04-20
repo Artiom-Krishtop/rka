@@ -1958,10 +1958,11 @@ class CAdminUiContextMenu extends CAdminContextMenu
 				$menuUrl = "BX.adminList.ShowMenu(this, ".HtmlFilter::encode(
 					CAdminPopup::PhpToJavaScript($items)).");";
 			}
+			$buttonId = !empty($firstItem["ID"]) ? "id=\"" . $firstItem["ID"] . "\"" : "";
 			if (!empty($items)):?>
 				<? if (!empty($firstItem["ONCLICK"])): ?>
 					<div class="ui-btn-split ui-btn-primary">
-						<button onclick="<?=HtmlFilter::encode($firstItem["ONCLICK"])?>" class="ui-btn-main">
+						<button <?=$buttonId?> onclick="<?=HtmlFilter::encode($firstItem["ONCLICK"])?>" class="ui-btn-main">
 							<?=HtmlFilter::encode($firstItem["TEXT"])?>
 						</button>
 						<button onclick="<?=$menuUrl?>" class="ui-btn-extra"></button>
@@ -1969,14 +1970,14 @@ class CAdminUiContextMenu extends CAdminContextMenu
 				<? else: ?>
 					<? if (isset($firstItem["DISABLE"])): ?>
 						<div class="ui-btn-split ui-btn-primary">
-							<button onclick="<?=$menuUrl?>" class="ui-btn-main">
+							<button <?=$buttonId?> onclick="<?=$menuUrl?>" class="ui-btn-main">
 								<?=HtmlFilter::encode($firstItem["TEXT"])?>
 							</button>
 							<button onclick="<?=$menuUrl?>" class="ui-btn-extra"></button>
 						</div>
 					<? else: ?>
 						<div class="ui-btn-split ui-btn-primary">
-							<a href="<?=HtmlFilter::encode($firstItem["LINK"])?>" class="ui-btn-main">
+							<a <?=$buttonId?> href="<?=HtmlFilter::encode($firstItem["LINK"])?>" class="ui-btn-main">
 								<?=HtmlFilter::encode($firstItem["TEXT"])?>
 							</a>
 							<button onclick="<?=$menuUrl?>" class="ui-btn-extra"></button>
@@ -1985,11 +1986,11 @@ class CAdminUiContextMenu extends CAdminContextMenu
 				<? endif; ?>
 			<? else:?>
 				<? if (!empty($firstItem["ONCLICK"])): ?>
-					<button class="ui-btn ui-btn-primary" onclick="<?=HtmlFilter::encode($firstItem["ONCLICK"])?>">
+					<button <?=$buttonId?> class="ui-btn ui-btn-primary" onclick="<?=HtmlFilter::encode($firstItem["ONCLICK"])?>">
 						<?=HtmlFilter::encode($firstItem["TEXT"])?>
 					</button>
 				<? else: ?>
-					<a class="ui-btn ui-btn-primary" href="<?=HtmlFilter::encode($firstItem["LINK"])?>">
+					<a <?=$buttonId?> class="ui-btn ui-btn-primary" href="<?=HtmlFilter::encode($firstItem["LINK"])?>">
 						<?=HtmlFilter::encode($firstItem["TEXT"])?>
 					</a>
 				<? endif; ?>

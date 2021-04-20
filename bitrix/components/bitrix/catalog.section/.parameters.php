@@ -695,12 +695,12 @@ if ($catalogIncluded)
 	{
 		$arComponentParameters['PARAMETERS']['CUSTOM_FILTER'] = array(
 			'PARENT' => 'DATA_SOURCE',
-			'NAME' => GetMessage('CP_BCS_TPL_CUSTOM_FILTER'),
+			'NAME' => GetMessage('CP_BCS_CUSTOM_FILTER'),
 			'TYPE' => 'CUSTOM',
 			'JS_FILE' => CatalogSectionComponent::getSettingsScript($componentPath, 'filter_conditions'),
 			'JS_EVENT' => 'initFilterConditionsControl',
 			'JS_MESSAGES' => Json::encode(array(
-				'invalid' => GetMessage('CP_BCS_TPL_SETTINGS_INVALID_CONDITION')
+				'invalid' => GetMessage('CP_BCS_SETTINGS_INVALID_CONDITION')
 			)),
 			'JS_DATA' => Json::encode($filterDataValues),
 			'DEFAULT' => ''

@@ -22,18 +22,7 @@ if (isset($_REQUEST["clear_db"]))
 
 require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/bx_root.php");
 require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/lib/loader.php");
-
-\Bitrix\Main\Loader::registerAutoLoadClasses(
-	"main",
-	array(
-		"bitrix\\main\\systemexception" => "lib/exception.php",
-		"bitrix\\main\\db\\sqlqueryexception" => "lib/db/sqlexception.php",
-	)
-);
-
-\Bitrix\Main\Loader::registerHandler([\Bitrix\Main\ORM\Loader::class, 'autoLoad']);
-
-require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/compatibility.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/autoload.php");
 
 require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/general/wizard.php"); //Wizard API
 require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/general/version.php"); //Sitemanager version
@@ -206,8 +195,8 @@ class AgreementStep4VM extends CWizardStep
 			$this->SetError(InstallGetMessage("INST_UTF8_NOT_SUPPORT"));
 
 		//Check connection
-		require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/".$DBType."/database.php");
-		require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/".$DBType."/main.php");
+		require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/mysql/database.php");
+		require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/mysql/main.php");
 		require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/tools.php");
 		IncludeModuleLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/general/main.php");
 
@@ -216,16 +205,13 @@ class AgreementStep4VM extends CWizardStep
 		$conPool = $application->getConnectionPool();
 
 		$DBType = strtolower($DBType);
-		if ($DBType == 'mysql')
+		if(defined("BX_USE_MYSQLI") && BX_USE_MYSQLI === true)
 		{
-			if(defined("BX_USE_MYSQLI") && BX_USE_MYSQLI === true)
-			{
-				$dbClassName = "\\Bitrix\\Main\\DB\\MysqliConnection";
-			}
-			else
-			{
-				$dbClassName = "\\Bitrix\\Main\\DB\\MysqlConnection";
-			}
+			$dbClassName = "\\Bitrix\\Main\\DB\\MysqliConnection";
+		}
+		else
+		{
+			$dbClassName = "\\Bitrix\\Main\\DB\\MysqlConnection";
 		}
 
 		$conPool->setConnectionParameters(
@@ -239,6 +225,8 @@ class AgreementStep4VM extends CWizardStep
 				'options' => 2
 			)
 		);
+
+		$conPool->useMasterOnly(true);
 
 		$DB = new CDatabase;
 
@@ -260,59 +248,55 @@ class AgreementStep4VM extends CWizardStep
 			$this->SetError($databaseStep->GetErrors());
 
 		//Database check
-		if ($DBType == "mysql")
+		$dbResult = $DB->Query("select VERSION() as ver", true);
+		if ($dbResult && ($arVersion = $dbResult->Fetch()))
 		{
-			$dbResult = $DB->Query("select VERSION() as ver", true);
-			if ($dbResult && ($arVersion = $dbResult->Fetch()))
+			$mysqlVersion = trim($arVersion["ver"]);
+			if (!BXInstallServices::VersionCompare($mysqlVersion, "5.6.0"))
+				$this->SetError(InstallGetMessage("SC_DB_VERS_MYSQL_ER"));
+
+			$databaseStep->needCodePage = true;
+
+			if (!$databaseStep->needCodePage && defined("BX_UTF"))
+				$this->SetError(InstallGetMessage("INS_CREATE_DB_CHAR_NOTE"));
+		}
+
+		//Code page
+		if ($databaseStep->needCodePage)
+		{
+			$codePage = false;
+			if (LANGUAGE_ID == "ru" || LANGUAGE_ID == "ua")
+				$codePage = "cp1251";
+			elseif ($databaseStep->createCharset != '')
+				$codePage = $databaseStep->createCharset;
+			else
+				$codePage = 'latin1';
+
+			if ($databaseStep->utf8)
+				$DB->Query("ALTER DATABASE `".$databaseStep->dbName."` CHARACTER SET UTF8 COLLATE utf8_unicode_ci", true);
+			elseif ($codePage)
+				$DB->Query("ALTER DATABASE `".$databaseStep->dbName."` CHARACTER SET ".$codePage, true);
+		}
+
+		if ($databaseStep->createDBType <> '')
+		{
+			$res = $DB->Query("SET storage_engine = '".$databaseStep->createDBType."'", true);
+			if(!$res)
 			{
-				$mysqlVersion = trim($arVersion["ver"]);
-				if (!BXInstallServices::VersionCompare($mysqlVersion, "5.6.0"))
-					$this->SetError(InstallGetMessage("SC_DB_VERS_MYSQL_ER"));
-
-				$databaseStep->needCodePage = true;
-
-				if (!$databaseStep->needCodePage && defined("BX_UTF"))
-					$this->SetError(InstallGetMessage("INS_CREATE_DB_CHAR_NOTE"));
+				//mysql 5.7 removed storage_engine variable
+				$DB->Query("SET default_storage_engine = '".$databaseStep->createDBType."'");
 			}
+		}
 
-			//Code page
-			if ($databaseStep->needCodePage)
+		//SQL mode
+		$dbResult = $DB->Query("SELECT @@sql_mode", true);
+		if ($dbResult && ($arResult = $dbResult->Fetch()))
+		{
+			$sqlMode = trim($arResult["@@sql_mode"]);
+			if ($sqlMode <> "")
 			{
-				$codePage = false;
-				if (LANGUAGE_ID == "ru" || LANGUAGE_ID == "ua")
-					$codePage = "cp1251";
-				elseif ($databaseStep->createCharset != '')
-					$codePage = $databaseStep->createCharset;
-				else
-					$codePage = 'latin1';
-
-				if ($databaseStep->utf8)
-					$DB->Query("ALTER DATABASE `".$databaseStep->dbName."` CHARACTER SET UTF8 COLLATE utf8_unicode_ci", true);
-				elseif ($codePage)
-					$DB->Query("ALTER DATABASE `".$databaseStep->dbName."` CHARACTER SET ".$codePage, true);
+				$databaseStep->sqlMode = "";
 			}
-
-			if ($databaseStep->createDBType <> '')
-			{
-				$res = $DB->Query("SET storage_engine = '".$databaseStep->createDBType."'", true);
-				if(!$res)
-				{
-					//mysql 5.7 removed storage_engine variable
-					$DB->Query("SET default_storage_engine = '".$databaseStep->createDBType."'");
-				}
-			}
-
-			//SQL mode
-			$dbResult = $DB->Query("SELECT @@sql_mode", true);
-			if ($dbResult && ($arResult = $dbResult->Fetch()))
-			{
-				$sqlMode = trim($arResult["@@sql_mode"]);
-				if ($sqlMode <> "")
-				{
-					$databaseStep->sqlMode = "";
-				}
-			}
-
 		}
 
 		//Create after_connect.php if not exists
@@ -1440,24 +1424,14 @@ class CreateDBStep extends CWizardStep
 			return;
 		}
 
-		if ($this->dbType == "mysql" && !$this->CreateMySQL())
-			return;
-
-		if (!$this->CreateAfterConnect())
-			return;
-
-		$DBType = strtolower($this->dbType);
-		if ($DBType == 'mysql')
+		if(extension_loaded('mysqli'))
 		{
-			if(extension_loaded('mysqli'))
-			{
-				$dbClassName = "\\Bitrix\\Main\\DB\\MysqliConnection";
-				define("BX_USE_MYSQLI", true);
-			}
-			else
-			{
-				$dbClassName = "\\Bitrix\\Main\\DB\\MysqlConnection";
-			}
+			$dbClassName = "\\Bitrix\\Main\\DB\\MysqliConnection";
+			define("BX_USE_MYSQLI", true);
+		}
+		else
+		{
+			$dbClassName = "\\Bitrix\\Main\\DB\\MysqlConnection";
 		}
 
 		$application = \Bitrix\Main\HttpApplication::getInstance();
@@ -1473,6 +1447,14 @@ class CreateDBStep extends CWizardStep
 				'options' => 2
 			)
 		);
+
+		$conPool->useMasterOnly(true);
+
+		if (!$this->CreateMySQL())
+			return;
+
+		if (!$this->CreateAfterConnect())
+			return;
 
 		require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/".$this->dbType."/database.php");
 		require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/".$this->dbType."/main.php");
@@ -1741,17 +1723,13 @@ class CreateDBStep extends CWizardStep
 			"readonly" => false
 		);
 
-		$DBType = strtolower($this->dbType);
-		if ($DBType == 'mysql')
+		if(extension_loaded('mysqli'))
 		{
-			if(extension_loaded('mysqli'))
-			{
-				$dbClassName = "\\Bitrix\\Main\\DB\\MysqliConnection";
-			}
-			else
-			{
-				$dbClassName = "\\Bitrix\\Main\\DB\\MysqlConnection";
-			}
+			$dbClassName = "\\Bitrix\\Main\\DB\\MysqliConnection";
+		}
+		else
+		{
+			$dbClassName = "\\Bitrix\\Main\\DB\\MysqlConnection";
 		}
 
 		$ar['connections']['value']['default'] = array(
@@ -1905,37 +1883,28 @@ class CreateDBStep extends CWizardStep
 
 	function CreateAfterConnect()
 	{
-		if ($this->dbType == "mysql")
+		$codePage = "";
+		if ($this->needCodePage)
 		{
-			$codePage = "";
-			if ($this->needCodePage)
-			{
-				if ($this->utf8)
-					$codePage = "utf8";
-				elseif (LANGUAGE_ID == "ru" || LANGUAGE_ID == "ua")
-					$codePage = "cp1251";
-				else
-					$codePage = $this->createCharset;
-			}
-
-			$after_conn = "<"."?\n".
-				($codePage <> '' ? "$"."DB->Query(\"SET NAMES '".$codePage."'\");\n" : "").
-				($this->sqlMode !== false ? "$"."DB->Query(\"SET sql_mode='".$this->sqlMode."'\");\n" : "").
-				($this->utf8 ? "$"."DB->Query('SET collation_connection = \"utf8_unicode_ci\"');\n" : "").
-				"?".">";
-			$after_connNew = "<"."?\n".
-				"$"."connection = \\Bitrix\\Main\\Application::getConnection();\n".
-				($codePage <> '' ? "$"."connection->queryExecute(\"SET NAMES '".$codePage."'\");\n" : "").
-				($this->sqlMode !== false ? "$"."connection->queryExecute(\"SET sql_mode='".$this->sqlMode."'\");\n" : "").
-				($this->utf8 ? "$"."connection->queryExecute('SET collation_connection = \"utf8_unicode_ci\"');\n" : "").
-				"?".">";
-
+			if ($this->utf8)
+				$codePage = "utf8";
+			elseif (LANGUAGE_ID == "ru" || LANGUAGE_ID == "ua")
+				$codePage = "cp1251";
+			else
+				$codePage = $this->createCharset;
 		}
-		else
-		{
-			$after_conn = "<"."?\n"."?".">";
-			$after_connNew = "<"."?\n"."?".">";
-		}
+
+		$after_conn = "<"."?\n".
+			($codePage <> '' ? "$"."DB->Query(\"SET NAMES '".$codePage."'\");\n" : "").
+			($this->sqlMode !== false ? "$"."DB->Query(\"SET sql_mode='".$this->sqlMode."'\");\n" : "").
+			($this->utf8 ? "$"."DB->Query('SET collation_connection = \"utf8_unicode_ci\"');\n" : "").
+			"?".">";
+		$after_connNew = "<"."?\n".
+			"$"."connection = \\Bitrix\\Main\\Application::getConnection();\n".
+			($codePage <> '' ? "$"."connection->queryExecute(\"SET NAMES '".$codePage."'\");\n" : "").
+			($this->sqlMode !== false ? "$"."connection->queryExecute(\"SET sql_mode='".$this->sqlMode."'\");\n" : "").
+			($this->utf8 ? "$"."connection->queryExecute('SET collation_connection = \"utf8_unicode_ci\"');\n" : "").
+			"?".">";
 
 		$filePath = $_SERVER["DOCUMENT_ROOT"].BX_PERSONAL_ROOT."/php_interface/after_connect.php";
 		$filePathNew = $_SERVER["DOCUMENT_ROOT"].BX_PERSONAL_ROOT."/php_interface/after_connect_d7.php";
@@ -2429,18 +2398,11 @@ class CreateModulesStep extends CWizardStep
 
 			require_once($_SERVER["DOCUMENT_ROOT"].BX_PERSONAL_ROOT."/php_interface/dbconn.php");
 			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/autoload.php");
-			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/general/module.php");
-			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/".$DBType."/database.php");
-			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/general/time.php");
-			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/general/user_options.php");
-			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/".$DBType."/main.php");
+			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/mysql/database.php");
+			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/mysql/main.php");
 			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/general/cache.php");
-			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/".$DBType."/usertype.php");
-			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/general/user.php");
-			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/".$DBType."/option.php");
-			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/".$DBType."/event.php");
-			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/".$DBType."/agent.php");
-			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/".$DBType."/sqlwhere.php");
+			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/general/module.php");
+			require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/mysql/usertype.php");
 		}
 		else
 		{

@@ -482,9 +482,7 @@ class Mail
 						'This is not the original file. The size of the original file `%name%` exceeded the limit of %limit% MB.'
 					);
 				}
-
-
-
+				
 				if(isset($attachment['METHOD']))
 				{
 					$name = $this->encodeSubject($attachment["NAME"], $attachment['CHARSET']);
@@ -541,7 +539,7 @@ class Mail
 
 	private function isFileLimitExceeded($fileSize, &$summarySize)
 	{
-		// magic for length after base64
+		// for length after base64
 		$summarySize += 4 * ceil($fileSize / 3);
 
 		return $this->settingMaxFileSize > 0

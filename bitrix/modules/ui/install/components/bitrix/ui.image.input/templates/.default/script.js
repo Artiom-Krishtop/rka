@@ -1,15 +1,7 @@
 (function (exports,main_core,main_core_events,main_loader) {
 	'use strict';
 
-	function _templateObject() {
-	  var data = babelHelpers.taggedTemplateLiteral(["<div class=\"ui-image-item-shadow\"></div>"]);
-
-	  _templateObject = function _templateObject() {
-	    return data;
-	  };
-
-	  return data;
-	}
+	var _templateObject;
 
 	var ImageInput = /*#__PURE__*/function () {
 	  function ImageInput() {
@@ -25,6 +17,15 @@
 	    this.containerId = params.containerId;
 	    this.loaderContainerId = params.loaderContainerId;
 	    this.settings = params.settings || {};
+	    this.disabled = params.disabled || false;
+
+	    if (this.disabled) {
+	      main_core.Event.bind(this.getContainer(), 'click', function (event) {
+	        event.stopPropagation();
+	        event.preventDefault();
+	      });
+	    }
+
 	    this.addImageHandler = this.addImage.bind(this);
 	    this.editImageHandler = this.editImage.bind(this);
 	    main_core_events.EventEmitter.subscribe('onUploaderIsInited', this.onUploaderIsInitedHandler.bind(this));
@@ -53,6 +54,7 @@
 	        main_core_events.EventEmitter.subscribe(uploader, 'onStart', this.onUploadStartHandler.bind(this));
 	        main_core_events.EventEmitter.subscribe(uploader, 'onDone', this.onUploadDoneHandler.bind(this));
 	        main_core_events.EventEmitter.subscribe(uploader, 'onFileCanvasIsLoaded', this.onFileCanvasIsLoadedHandler.bind(this));
+	        main_core_events.EventEmitter.subscribe('onDemandRecalculateWrapper', this.recalculateWrapper.bind(this));
 	      }
 	    }
 	  }, {
@@ -239,10 +241,14 @@
 	  }, {
 	    key: "buildShadowElement",
 	    value: function buildShadowElement(wrapper) {
+	      if (wrapper.offsetParent === null) {
+	        return;
+	      }
+
 	      var shadowElement = wrapper.querySelector('div.ui-image-item-shadow');
 
 	      if (!shadowElement) {
-	        shadowElement = main_core.Tag.render(_templateObject());
+	        shadowElement = main_core.Tag.render(_templateObject || (_templateObject = babelHelpers.taggedTemplateLiteral(["<div class=\"ui-image-item-shadow\"></div>"])));
 	        main_core.Dom.prepend(shadowElement, wrapper);
 	      }
 

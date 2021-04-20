@@ -7,7 +7,7 @@
  * @copyright 2001-2019 Bitrix
  */
 
-import {Vuex} from "./../vuex.bitrix.js";
+import {Vuex} from "../vuex.js";
 import {VuexBuilderModel} from "./model.js";
 
 const DatabaseType = Object.freeze({

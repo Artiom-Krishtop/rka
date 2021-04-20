@@ -7,11 +7,11 @@
  * @copyright 2001-2019 Bitrix
  */
 
+import {Vuex} from "../vuex.js";
+import {VuexBuilder} from "./builder.js";
 import {VuexBuilderDatabaseIndexedDB} from "./database/indexeddb.js";
 import {VuexBuilderDatabaseLocalStorage} from "./database/localstorage.js";
 import {VuexBuilderDatabaseJnSharedStorage} from "./database/jnsharedstorage.js";
-import {VuexBuilder} from "./builder.js";
-import {VuexVendor} from "ui.vue.vuex";
 
 export class VuexBuilderModel
 {
@@ -494,7 +494,7 @@ export class VuexBuilderModel
 
 	setStore(store)
 	{
-		if (!(store instanceof VuexVendor.Store))
+		if (!(store instanceof Vuex.Store))
 		{
 			this.logger('error', 'VuexBuilderModel.setStore: passed store is not a Vuex.Store', store);
 			return this;

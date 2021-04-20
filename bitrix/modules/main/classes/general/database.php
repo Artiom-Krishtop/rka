@@ -9,6 +9,8 @@
 use Bitrix\Main;
 use Bitrix\Main\Data\ConnectionPool;
 
+IncludeModuleLangFile(__FILE__);
+
 abstract class CAllDatabase
 {
 	var $DBName;

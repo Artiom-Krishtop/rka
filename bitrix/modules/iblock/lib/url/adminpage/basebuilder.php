@@ -23,6 +23,9 @@ abstract class BaseBuilder
 	public const PAGE_SECTION_SAVE = 'sectionSave';
 	public const PAGE_SECTION_SEARCH = 'sectionSearch';
 
+	public const ENTITY_SECTION = 'section';
+	public const ENTITY_ELEMENT = 'element';
+
 	protected $id = null;
 
 	protected $weight = null;
@@ -127,6 +130,21 @@ abstract class BaseBuilder
 		$this->initIblockListMode();
 		return $this->iblockListMixed;
 	}
+
+	public function preloadUrlData(string $entityType, array $entityIds): void
+	{
+		switch ($entityType)
+		{
+			case self::ENTITY_SECTION:
+				$this->preloadSectionUrlData($entityIds);
+				break;
+			case self::ENTITY_ELEMENT:
+				$this->preloadElementUrlData($entityIds);
+				break;
+		}
+	}
+
+	public function clearPreloadedUrlData(): void {}
 
 	abstract public function use(): bool;
 
@@ -397,7 +415,7 @@ abstract class BaseBuilder
 
 	protected function getExtendedVariables(array $options = [], string $additional = ''): array
 	{
-		$replaces = $this->templateVariables;
+		$replaces = $this->getTemplateVariables();
 		$replaces['#ADDITIONAL_PARAMETERS#'] = $this->extendUrl($options, $additional);
 		return $replaces;
 	}
@@ -422,4 +440,8 @@ abstract class BaseBuilder
 	{
 		return '&action=copy';
 	}
+
+	protected function preloadSectionUrlData(array $sectionIds): void {}
+
+	protected function preloadElementUrlData(array $elementIds): void {}
 }

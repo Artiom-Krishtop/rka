@@ -18,7 +18,7 @@ export class Ears
 
 	bindEvents() {
 		this.container.addEventListener('scroll', this.toggleEars.bind(this));
-		this.container.addEventListener("wheel", this.onWheel.bind(this));
+		this.container.addEventListener('wheel', this.onWheel.bind(this));
 
 		this.getLeftEar().addEventListener('mouseenter', this.scrollLeft.bind(this));
 		this.getLeftEar().addEventListener('mouseleave', this.stopScroll.bind(this));
@@ -35,12 +35,31 @@ export class Ears
 		this.setWrapper();
 		this.bindEvents();
 
-		setTimeout(function() {
+		setTimeout(() => {
 			if (this.container.scrollWidth > this.container.offsetWidth)
 			{
 				this.toggleRightEar();
+
+				let activeItem = this.container.querySelector('[data-role="ui-ears-active"]');
+
+				activeItem ? this.scrollToActiveItem(activeItem) : null;
 			}
-		}.bind(this), 600);
+		}, 600);
+	}
+
+	scrollToActiveItem(activeItem)
+	{
+		let scrollToPoint = activeItem.offsetLeft - (this.container.offsetWidth / 2 - activeItem.offsetWidth / 2);
+		let scrollWidth = 0;
+		let interval = setInterval(() => {
+			if( scrollWidth >= scrollToPoint ||
+				scrollWidth + this.container.offsetWidth >= this.container.scrollWidth)
+			{
+				clearInterval(interval);
+			}
+
+			this.container.scrollLeft = scrollWidth += 10;
+		},10)
 	}
 
 	onWheel(event)
@@ -55,16 +74,14 @@ export class Ears
 		}
 
 		clearTimeout(this.scrollTimeout);
-		this.scrollTimeout = setTimeout(function() {
-			this.stopScroll();
-		}.bind(this), 150);
+		this.scrollTimeout = setTimeout(() => this.stopScroll(), 150);
 	}
 
 	setWrapper() {
-		this.container.classList.add("ui-ear-container");
+		this.container.classList.add('ui-ear-container');
 		if (this.noScrollbar)
 		{
-			this.container.classList.add("ui-ear-container-no-scrollbar");
+			this.container.classList.add('ui-ear-container-no-scrollbar');
 		}
 		Dom.append(this.getWrapper(), this.parentContainer);
 	}
@@ -73,7 +90,7 @@ export class Ears
 	{
 		return this.cache.remember('wrapper', () => {
 			return Tag.render`
-					<div class="ui-ears-wrapper ${this.smallSize ? ' ui-ears-wrapper-sm' : ''}">
+					<div class='ui-ears-wrapper ${this.smallSize ? ' ui-ears-wrapper-sm' : ''}'>
 						${this.getLeftEar()}
 						${this.getRightEar()}
 						${this.container}
@@ -86,7 +103,7 @@ export class Ears
 	{
 		return this.cache.remember('leftEar', () => {
 			return Tag.render`
-					<div class="ui-ear ui-ear-left"></div>
+					<div class='ui-ear ui-ear-left'></div>
 				`;
 		});
 	}
@@ -95,7 +112,7 @@ export class Ears
 	{
 		return this.cache.remember('rightEar', () => {
 			return Tag.render`
-					<div class="ui-ear ui-ear-right"></div>
+					<div class='ui-ear ui-ear-right'></div>
 				`;
 		});
 	}
@@ -109,22 +126,22 @@ export class Ears
 		if (this.container.scrollWidth > this.container.offsetWidth
 			&& (this.container.offsetWidth + this.container.scrollLeft) < this.container.scrollWidth)
 		{
-			this.getRightEar().classList.add("ui-ear-show");
+			this.getRightEar().classList.add('ui-ear-show');
 		}
 		else
 		{
-			this.getRightEar().classList.remove("ui-ear-show");
+			this.getRightEar().classList.remove('ui-ear-show');
 		}
 	}
 
 	toggleLeftEar() {
 		if (this.container.scrollLeft > 0)
 		{
-			this.getLeftEar().classList.add("ui-ear-show");
+			this.getLeftEar().classList.add('ui-ear-show');
 		}
 		else
 		{
-			this.getLeftEar().classList.remove("ui-ear-show");
+			this.getLeftEar().classList.remove('ui-ear-show');
 		}
 	}
 

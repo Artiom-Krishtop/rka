@@ -18,6 +18,15 @@ class ImageInput
 		this.loaderContainerId = params.loaderContainerId;
 		this.settings = params.settings || {};
 
+		this.disabled = params.disabled || false;
+		if (this.disabled)
+		{
+			Event.bind(this.getContainer(), 'click', (event) => {
+				event.stopPropagation();
+				event.preventDefault();
+			});
+		}
+
 		this.addImageHandler = this.addImage.bind(this);
 		this.editImageHandler = this.editImage.bind(this);
 
@@ -44,6 +53,8 @@ class ImageInput
 			EventEmitter.subscribe(uploader, 'onStart', this.onUploadStartHandler.bind(this));
 			EventEmitter.subscribe(uploader, 'onDone', this.onUploadDoneHandler.bind(this));
 			EventEmitter.subscribe(uploader, 'onFileCanvasIsLoaded', this.onFileCanvasIsLoadedHandler.bind(this));
+
+			EventEmitter.subscribe('onDemandRecalculateWrapper', this.recalculateWrapper.bind(this));
 		}
 	}
 
@@ -154,7 +165,7 @@ class ImageInput
 
 		return this.loader;
 	}
-	
+
 	showLoader()
 	{
 		this.getLoader().setOptions({
@@ -162,7 +173,7 @@ class ImageInput
 		});
 		this.getLoader().show();
 	}
-	
+
 	hideLoader()
 	{
 		this.getLoader().hide();
@@ -230,6 +241,11 @@ class ImageInput
 
 	buildShadowElement(wrapper)
 	{
+		if (wrapper.offsetParent === null)
+		{
+			return;
+		}
+
 		let shadowElement = wrapper.querySelector('div.ui-image-item-shadow');
 		if (!shadowElement)
 		{

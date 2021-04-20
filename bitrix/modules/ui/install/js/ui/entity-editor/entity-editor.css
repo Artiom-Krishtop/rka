@@ -684,9 +684,18 @@ input.ui-entity-editor-header-title-text {
 	transition: 200ms padding-top linear;
 }
 
-.ui-entity-editor-content-block-field-html-collapsed .ui-entity-editor-content-block-field-html-expand-btn-container { height: 20px; }
+.ui-entity-editor-content-block-field-html-collapsed .ui-entity-editor-content-block-field-html-expand-btn-container {
+	height: 20px;
+}
 
-.ui-entity-editor-content-block-field-html-expand .ui-entity-editor-content-block-field-html-expand-btn-container { padding-top: 0; }
+.ui-entity-editor-content-block-field-html-expand {
+	padding-bottom: 1px;
+}
+
+.ui-entity-editor-content-block-field-html-expand .ui-entity-editor-content-block-field-html-expand-btn-container {
+	padding-top: 0;
+	bottom: -10px;
+}
 
 .ui-entity-editor-content-block-field-html-expand-btn {
 	display: inline-block;

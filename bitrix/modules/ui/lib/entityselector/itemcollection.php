@@ -56,11 +56,16 @@ class ItemCollection implements \IteratorAggregate, \JsonSerializable
 
 	public function toJsObject()
 	{
-		$items = array_map(function(Item $item) {
-			return $item->jsonSerialize();
-		}, $this->getAll());
+		$items = $this->toArray();
 
-		return \CUtil::phpToJSObject($items);
+		return \CUtil::phpToJSObject($items, false, false, true);
+	}
+
+	public function toArray(): array
+	{
+		return array_map(function(Item $item) {
+			return $item->toArray();
+		}, $this->getAll());
 	}
 
 	public function jsonSerialize()

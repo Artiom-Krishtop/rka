@@ -1,6 +1,7 @@
-<?
+<?php
 $MESS["UI_USERFIELD_ADD"] = "Hinzufügen";
 $MESS["UI_USERFIELD_CANCEL"] = "Abbrechen";
+$MESS["UI_USERFIELD_DELETE_ERROR"] = "Feld kann nicht gelöscht werden";
 $MESS["UI_USERFIELD_FACTORY_BOOLEAN_TITLE"] = "Ja/Nein";
 $MESS["UI_USERFIELD_FACTORY_CONFIGURATOR_FIELD_TITLE"] = "Feldname";
 $MESS["UI_USERFIELD_FACTORY_FIELD_MULTIPLE"] = "Mehrfach";
@@ -36,4 +37,4 @@ $MESS["UI_USERFIELD_FACTORY_UF_STRING_TITLE"] = "Zeile";
 $MESS["UI_USERFIELD_FACTORY_UF_URL_LEGEND"] = "Gibt Weblinks an.";
 $MESS["UI_USERFIELD_FACTORY_UF_URL_TITLE"] = "Link";
 $MESS["UI_USERFIELD_SAVE"] = "Speichern";
-?>
+$MESS["UI_USERFIELD_SAVE_ERROR"] = "Feldeinstellungen können nicht gespeichert werden";

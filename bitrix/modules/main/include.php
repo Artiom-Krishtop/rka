@@ -8,11 +8,8 @@
 
 use Bitrix\Main\Session\Legacy\HealerEarlySessionStart;
 
-require_once(mb_substr(__FILE__, 0, mb_strlen(__FILE__) - mb_strlen("/include.php"))."/bx_root.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/start.php");
-
-require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/general/virtual_io.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/classes/general/virtual_file.php");
+require_once(__DIR__."/bx_root.php");
+require_once(__DIR__."/start.php");
 
 $application = \Bitrix\Main\Application::getInstance();
 $application->initializeExtendedKernel(array(
@@ -89,11 +86,9 @@ if (!defined("POST_FORM_ACTION_URI"))
 	define("POST_FORM_ACTION_URI", htmlspecialcharsbx(GetRequestUri()));
 }
 
-$GLOBALS["MESS"] = array();
-$GLOBALS["ALL_LANG_FILES"] = array();
-IncludeModuleLangFile($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/tools.php");
-IncludeModuleLangFile($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/classes/general/database.php");
-IncludeModuleLangFile($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/classes/general/main.php");
+$GLOBALS["MESS"] = [];
+$GLOBALS["ALL_LANG_FILES"] = [];
+IncludeModuleLangFile(__DIR__."/tools.php");
 IncludeModuleLangFile(__FILE__);
 
 error_reporting(COption::GetOptionInt("main", "error_reporting", E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR|E_PARSE) & ~E_STRICT & ~E_DEPRECATED);
@@ -103,30 +98,26 @@ if(!defined("BX_COMP_MANAGED_CACHE") && COption::GetOptionString("main", "compon
 	define("BX_COMP_MANAGED_CACHE", true);
 }
 
-require_once($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/filter_tools.php");
-require_once($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/ajax_tools.php");
+// global functions
+require_once(__DIR__."/filter_tools.php");
 
-/*ZDUyZmZNWUyNDM1MzgzODFmZjI5MDk0MTE1ZTdhYTg2MWQ2N2M=*/$GLOBALS['____840095807']= array(base64_decode(''.'ZGVmaW'.'5l'));if(!function_exists(__NAMESPACE__.'\\___597868181')){function ___597868181($_980813622){static $_355428389= false; if($_355428389 == false) $_355428389=array(''.'RU5D'.'T0RF','W'.'Q='.'=');return base64_decode($_355428389[$_980813622]);}};class CBXFeatures{ public static function IsFeatureEnabled($_887536209){ return true;} public static function IsFeatureEditable($_887536209){ return true;} public static function SetFeatureEnabled($_887536209, $_1321016108= true){} public static function SaveFeaturesSettings($_706203798, $_1997086076){} public static function GetFeaturesList(){ return array();} public static function InitiateEditionsSettings($_1368329562){} public static function ModifyFeaturesSettings($_1368329562, $_1023362402){} public static function IsFeatureInstalled($_887536209){ return true;}} $GLOBALS['____840095807'][0](___597868181(0), ___597868181(1));/**/			//Do not remove this
+define('BX_AJAX_PARAM_ID', 'bxajaxid');
+
+/*ZDUyZmZMjc5MDQ4N2VlZGFkMjM2YTFmNDdiNjMwNDgxOTQ4NDQ=*/$GLOBALS['____2067626069']= array(base64_decode(''.'ZG'.'Vma'.'W5l'));if(!function_exists(__NAMESPACE__.'\\___1027925313')){function ___1027925313($_1145182441){static $_1693627870= false; if($_1693627870 == false) $_1693627870=array('R'.'U5DT0RF','WQ='.'=');return base64_decode($_1693627870[$_1145182441]);}};class CBXFeatures{ public static function IsFeatureEnabled($_380804391){ return true;} public static function IsFeatureEditable($_380804391){ return true;} public static function SetFeatureEnabled($_380804391, $_1321489397= true){} public static function SaveFeaturesSettings($_944537083, $_1810760300){} public static function GetFeaturesList(){ return array();} public static function InitiateEditionsSettings($_1117469723){} public static function ModifyFeaturesSettings($_1117469723, $_1066605866){} public static function IsFeatureInstalled($_380804391){ return true;}} $GLOBALS['____2067626069'][0](___1027925313(0), ___1027925313(1));/**/			//Do not remove this
 
 //component 2.0 template engines
-$GLOBALS["arCustomTemplateEngines"] = array();
-
-require_once($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/classes/general/urlrewriter.php");
+$GLOBALS["arCustomTemplateEngines"] = [];
 
 /**
  * Defined in dbconn.php
  * @param string $DBType
  */
 
-require_once(__DIR__.'/autoload.php');
-require_once($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/classes/".$DBType."/agent.php");
-require_once($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/classes/general/user.php");
-require_once($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/classes/".$DBType."/event.php");
-require_once($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/classes/general/menu.php");
-AddEventHandler("main", "OnAfterEpilog", array("\\Bitrix\\Main\\Data\\ManagedCache", "finalize"));
-require_once($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/classes/".$DBType."/usertype.php");
+require_once(__DIR__."/autoload.php");
+require_once(__DIR__."/classes/general/menu.php");
+require_once(__DIR__."/classes/mysql/usertype.php");
 
-if(file_exists(($_fname = $_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/classes/general/update_db_updater.php")))
+if(file_exists(($_fname = __DIR__."/classes/general/update_db_updater.php")))
 {
 	$US_HOST_PROCESS_MAIN = False;
 	include($_fname);
@@ -170,7 +161,7 @@ if(COption::GetOptionString("main", "check_agents", "Y") == "Y")
 //send email events
 if(COption::GetOptionString("main", "check_events", "Y") !== "N")
 {
-	$application->addBackgroundJob(["CEvent", "CheckEvents"], [], \Bitrix\Main\Application::JOB_PRIORITY_LOW-1);
+	$application->addBackgroundJob(['\Bitrix\Main\Mail\EventManager', 'checkEvents'], [], \Bitrix\Main\Application::JOB_PRIORITY_LOW-1);
 }
 
 $healerOfEarlySessionStart = new HealerEarlySessionStart();
@@ -358,8 +349,8 @@ if(!defined("NOT_CHECK_PERMISSIONS") || NOT_CHECK_PERMISSIONS!==true)
 					$GLOBALS["APPLICATION"]->StoreCookies();
 					$kernelSession['BX_ADMIN_LOAD_AUTH'] = true;
 
+					// die() follows
 					CMain::FinalActions('<script type="text/javascript">window.onload=function(){(window.BX || window.parent.BX).AUTHAGENT.setAuthResult(false);};</script>');
-					die();
 				}
 			}
 		}
