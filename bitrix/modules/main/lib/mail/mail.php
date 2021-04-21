@@ -1182,16 +1182,16 @@ class Mail
 
 		// modify links to text version
 		$body = preg_replace_callback(
-			"/<a\\s[^>]*?href=['|\\\"](.*?)['|\\\"][^>]*?>([^>]*?)<\\/a>/i",
+			"%<a[^>]*?href=(['\"])(?<href>[^\1]*?)(?1)[^>]*?>(?<text>.*?)<\/a>%ims",
 			function ($matches)
 			{
-				$href = $matches[1];
-				$text = trim($matches[2]);
+				$href = $matches['href'];
+				$text = trim($matches['text']);
 				if (!$href)
 				{
 					return $matches[0];
 				}
-
+				$text = strip_tags($text);
 				return ($text ? "$text:" : '') ."\n$href\n";
 			},
 			$body

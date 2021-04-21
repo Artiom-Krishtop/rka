@@ -791,6 +791,8 @@ do{ //one iteration loop
 
 			$DB->StartTransaction();
 
+			\Bitrix\Iblock\PropertyIndex\Manager::disableDeferredIndexing();
+
 			if(isset($_POST["IBLOCK_SECTION"]))
 			{
 				if(is_array($_POST["IBLOCK_SECTION"]))
@@ -1126,6 +1128,7 @@ do{ //one iteration loop
 					{
 						$ipropValues = new \Bitrix\Iblock\InheritedProperty\ElementValues($IBLOCK_ID, $ID);
 						$ipropValues->clearValues();
+
 					}
 
 					if ('' == $strWarning && $bCatalog)
@@ -1238,6 +1241,8 @@ do{ //one iteration loop
 				}
 			}
 
+			\Bitrix\Iblock\PropertyIndex\Manager::enableDeferredIndexing();
+
 			if($strWarning != '')
 			{
 				$error = new _CIBlockError(2, "BAD_SAVE", $strWarning);
@@ -1252,6 +1257,12 @@ do{ //one iteration loop
 				$arFields['ID'] = $ID;
 				if (function_exists('BXIBlockAfterSave'))
 					BXIBlockAfterSave($arFields);
+
+				\Bitrix\Iblock\PropertyIndex\Manager::runDeferredIndexing($IBLOCK_ID);
+				if ($bCatalog && $arShowTabs['sku'])
+				{
+					\Bitrix\Iblock\PropertyIndex\Manager::runDeferredIndexing($arMainCatalog['IBLOCK_ID']);
+				}
 
 				$DB->Commit();
 

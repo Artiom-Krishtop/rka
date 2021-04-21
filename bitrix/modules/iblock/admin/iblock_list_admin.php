@@ -1,4 +1,4 @@
-<?
+<?php
 /** @global CMain $APPLICATION */
 /** @global CDatabase $DB */
 /** @global CUser $USER */
@@ -122,6 +122,7 @@ switch ($urlBuilder->getId())
 		$pageConfig['SHOW_NAVCHAIN'] = false;
 		$pageConfig['CONTEXT_PATH'] = '/shop/settings/cat_product_list.php'; // TODO: temporary hack
 		$pageConfig['CATALOG'] = true;
+		$pageConfig['ALLOW_EXTERNAL_LINK'] = false;
 		$pageConfig['ALLOW_USER_EDIT'] = false;
 		break;
 	case 'CATALOG':
@@ -4026,7 +4027,7 @@ foreach (array_keys($rawRows) as $rowId)
 					);
 				}
 
-				if ($arRes['DETAIL_PAGE_URL'] <> '')
+				if ($arRes['DETAIL_PAGE_URL'] <> '' && $pageConfig['ALLOW_EXTERNAL_LINK'])
 				{
 					$tmpVar = CIBlock::ReplaceDetailUrl($arRes_orig["DETAIL_PAGE_URL"], $arRes_orig, true, "E");
 					if (
@@ -4228,7 +4229,7 @@ foreach (array_keys($rawRows) as $rowId)
 				$arActions[] = $action;
 			}
 
-			if ($arRes['DETAIL_PAGE_URL'] <> '')
+			if ($arRes['DETAIL_PAGE_URL'] <> '' && $pageConfig['ALLOW_EXTERNAL_LINK'])
 			{
 				$tmpVar = CIBlock::ReplaceDetailUrl($arRes["DETAIL_PAGE_URL"], $arRes_orig, true, "E");
 				$arActions[] = array(
@@ -5002,8 +5003,10 @@ $sliderPath = \Bitrix\Main\Context::getCurrent()->getRequest()->get('slider_path
 if (!empty($sliderPath))
 {
 	?><script>window.history.replaceState({}, '', '<?=CUtil::JSEscape('?' . $arParams['PAGE_PARAMS'])?>');</script><?
-	if (preg_match('/^\/shop\/catalog\/[0-9]+\/product\/[0-9]+\/variation\/[0-9]+\/$/', $sliderPath) ||
-		preg_match('/^\/shop\/catalog\/[0-9]+\/product\/[0-9]+\/$/', $sliderPath))
+	if (
+		preg_match('/^\/(shop|crm)\/catalog\/[0-9]+\/product\/[0-9]+\/variation\/[0-9]+\/$/', $sliderPath)
+		|| preg_match('/^\/(shop|crm)\/catalog\/[0-9]+\/product\/[0-9]+\/$/', $sliderPath)
+	)
 	{
 		?>
 		<script>

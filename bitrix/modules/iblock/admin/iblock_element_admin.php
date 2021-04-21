@@ -122,6 +122,7 @@ switch ($urlBuilder->getId())
 		$pageConfig['SHOW_NAVCHAIN'] = false;
 		$pageConfig['CONTEXT_PATH'] = '/shop/settings/cat_product_admin.php'; // TODO: temporary hack
 		$pageConfig['CATALOG'] = true;
+		$pageConfig['ALLOW_EXTERNAL_LINK'] = false;
 		$pageConfig['ALLOW_USER_EDIT'] = false;
 		break;
 	case 'CATALOG':
@@ -3967,7 +3968,7 @@ foreach($arRows as $idRow => $row)
 				);
 			}
 
-			if ($row->arRes['DETAIL_PAGE_URL'] <> '' && !$publicMode)
+			if ($row->arRes['DETAIL_PAGE_URL'] <> '' && $pageConfig['ALLOW_EXTERNAL_LINK'])
 			{
 				$tmpVar = CIBlock::ReplaceDetailUrl($row->arRes['orig']["DETAIL_PAGE_URL"], $row->arRes['orig'], true, "E");
 
@@ -4186,7 +4187,7 @@ foreach($arRows as $idRow => $row)
 			);
 		}
 
-		if ($row->arRes['DETAIL_PAGE_URL'] <> '' && !$publicMode)
+		if ($row->arRes['DETAIL_PAGE_URL'] <> '' && $pageConfig['ALLOW_EXTERNAL_LINK'])
 		{
 			$tmpVar = CIBlock::ReplaceDetailUrl($row->arRes['orig']["DETAIL_PAGE_URL"], $row->arRes['orig'], true, "E");
 			$arActions[] = array(
@@ -4623,8 +4624,9 @@ $sliderPath = \Bitrix\Main\Context::getCurrent()->getRequest()->get('slider_path
 if (!empty($sliderPath))
 {
 	?><script>window.history.replaceState({}, '', '<?=CUtil::JSEscape('?' . $arParams['PAGE_PARAMS'])?>');</script><?
-	if (preg_match('/^\/shop\/catalog\/[0-9]+\/product\/[0-9]+\/variation\/[0-9]+\/$/', $sliderPath) ||
-		preg_match('/^\/shop\/catalog\/[0-9]+\/product\/[0-9]+\/$/', $sliderPath))
+	if (
+		preg_match('/^\/(shop|crm)\/catalog\/[0-9]+\/product\/[0-9]+\/variation\/[0-9]+\/$/', $sliderPath)
+		|| preg_match('/^\/(shop|crm)\/catalog\/[0-9]+\/product\/[0-9]+\/$/', $sliderPath))
 	{
 		?>
 		<script>
