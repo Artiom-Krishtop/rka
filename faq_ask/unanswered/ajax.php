@@ -51,6 +51,17 @@ if ($ob = $res->GetNextElement()){;
 
 if(empty($Detail)){
     $res = $el->Update($PRODUCT_ID, $arLoadProductSERVICE);
+    if($res)
+    {
+        // Добавляем адвокату $PROPSERVICE['USER'] к количеству отвеченных вопросов.
+        $success = ListLawAnsw::addElement($PROPSERVICE['USER'], $PRODUCT_ID);
+
+        if($success && $PROPSERVICE['F_EMAIL'])
+        {
+            // И отправляем на адрес $PROPSERVICE['F_EMAIL'] уведомление и ссылку об ответе
+        }
+
+    }
     echo json_encode(0);
     exit();
 }else{

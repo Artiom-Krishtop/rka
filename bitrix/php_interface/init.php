@@ -911,4 +911,51 @@ function deleteOldFAQ()
     return "deleteOldFAQ();";
 }
 
+/* Ведем посчет количества ответов на вопросы */
+class ListLawAnsw
+{
+    private $hlblock_id = 1;
+    private $entity_data_class;
+
+    private function __construct()
+    {
+        if (!Bitrix\Main\Loader::includeModule('highloadblock'))
+            return;
+
+        $hlblock = \Bitrix\Highloadblock\HighloadBlockTable::getById( $this->hlblock_id )->fetch();
+        $entity = \Bitrix\Highloadblock\HighloadBlockTable::compileEntity( $hlblock );
+        $this->entity_data_class = $entity->getDataClass();
+    }
+
+    private function notEmpty($element)
+    {
+        $res = false;
+        $arData = $this->entity_data_class::getList(Array(
+            "select" => Array('*'),
+            "filter" => Array("UF_ELEMENT" => $element)
+        ));
+        $arData = new CDBResult($arData, "b_listlawansw");
+        while($arResult = $arData->Fetch()){
+            $res = $arResult;
+        }
+        return $res;
+    }
+
+    public function addElement($user, $element)
+    {
+        $user = !$user ? '' : $user;
+        $c = new ListLawAnsw();
+        $arRes = $c->notEmpty($element);
+        if( $arRes )
+        {
+            if(!$user)
+                $c->entity_data_class::delete($arRes['ID']); // Удаляем запись
+            else
+                $c->entity_data_class::update($arRes['ID'], Array('UF_USER' => $user)); // Обновляем запись, перезаписывая ID пользователя
+        }
+        else
+            $c->entity_data_class::add(Array('UF_USER' => $user, 'UF_ELEMENT' => $element)); // Добавляем новую запись
+    }
+}
+
 ?>
