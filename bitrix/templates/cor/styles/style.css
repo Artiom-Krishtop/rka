@@ -564,7 +564,7 @@ form#user-login-form tbody{
 
 	display:block;
 
-	float:left;
+	/*float:left;*/
 
 	list-style-type: none;
 
@@ -574,9 +574,9 @@ form#user-login-form tbody{
 
 }
 #block-views-news-on-mainpage-block{
-	width: 550px;
+	/*width: 550px;
 	float:left;
-	display: inline-block;
+	display: inline-block;*/
 }
 .book-ad{
 	display: inline-block;
@@ -598,11 +598,12 @@ form#user-login-form tbody{
 	box-sizing: border-box;
 
 	height:119px;
-	margin-top:4px;
-	margin-bottom:7px;
+	margin-top:1rem;
+	margin-bottom:1rem;
 
-	padding:7px;
+	padding:1rem;
 	border: 1px solid #CCCCCC;
+	border-radius: .3rem!important;
 
 }
 
@@ -631,6 +632,9 @@ form#user-login-form tbody{
 .lastnews li  a{
 
 	display:block;
+	font-size: 1rem;
+	float: left;
+	line-height: 1.5rem;
 
 	/*clear: right;*/
 
@@ -1673,22 +1677,23 @@ a.edit_profile span{
 
 }
 #block-views-month-active-block{
-	height: 270px;
+	/*height: 270px;*/
 	margin-top: 20px;
 
 }
 #block-views-news-on-mainpage-block-1{
-	height: 265px;
+	/*height: 265px;*/
 }
 #block-views-news-on-mainpage-block-1 ul,  #block-views-month-active-block ul{
 	padding:0px;
 	margin: 0;
 	margin-top: 7px;
+	display: flex;
 }
 #block-views-news-on-mainpage-block-1 ul li,  #block-views-month-active-block ul li{
 	background: none repeat scroll 0 0 #F4F4F4;
-	float: left;
-	height: 212px;
+	/*float: left;*/
+	/*height: 212px;*/
 	list-style: none outside none;
 	margin-right: 7px;
 	overflow: hidden;
@@ -1696,14 +1701,19 @@ a.edit_profile span{
 	font-size: 12px;
 
 }
+#block-views-news-on-mainpage-block-1 ul li:last-child,  #block-views-month-active-block ul li:last-child {margin-right: 0px;}
 #block-views-month-active-block ul li{
-	padding: 7px 0;
-	width: 119px;
+	/*padding: 7px 0;*/
+	/*width: 119px;*/
+	padding: 0.7rem 0 0;
+	width: 14%;
 }
+#block-views-month-active-block ul li div:last-child {display: none;}
 #block-views-news-on-mainpage-block-1 ul li{
-	padding: 6.5px;
-	width: 106px;
+	padding: 0.7rem;
+	width: 13%;
 }
+#block-views-news-on-mainpage-block-1 ul li img {width: 100%;}
 #block-views-languages-block{
 	font-size: 12px;
 }
@@ -1716,34 +1726,41 @@ a.edit_profile span{
 	padding:3px;
 }
 #block-views-month-active-block ul li{
-	height: 208px!important;
+	/*height: 208px!important;*/
 	text-align:center;
-	display: table;
-	background-image:url(../images/active.gif);
-	background-position:bottom;
-	background-repeat:repeat-x;
-
+	/*display: table;*/
+	/*background-image:url(../images/active.gif);*/
+	/*background-position:bottom;*/
+	/*background-repeat:repeat-x;*/
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	position: relative;
 }
 #block-views-month-active-block ul li a.sm_koll{
 	display: table-row;
 	font-size: 11px;
 	line-height: 1em;
-	vertical-align: bottom;
+	/*vertical-align: bottom;*/
 	color:#fff;
-	height:10px;
+	/*height:10px;*/
 	text-decoration: none;
+	background-color: #a2a2a2;
+	padding: 0.7rem 0;
 }
 #block-views-month-active-block h2{
 	font-size:25px;
 }
 #block-views-month-active-block .act_upper{
-	height: 70px;
+	/*height: 70px;*/
 }
 #block-views-month-active-block ul li strong{
 	background: none repeat scroll 0 0 #750324;
 	color: #FFFFFF;
 	font-size: 11px;
 	padding: 2px 5px;
+	display: inline-block;
+	margin: 0.5rem 0 1rem;
 }
 #block-views-news-on-mainpage-block-1 ul li.views-row-last,  #block-views-month-active-block ul li.views-row-last{
 	margin-right: 0px;
@@ -1883,9 +1900,11 @@ h2.smaller{
 .online{
 	background-color: #01d001;
 	height: 10px;
-	margin-left:102px;
-	margin-top: -110px;
+	/*margin-left:102px;*/
+	/*margin-top: -110px;*/
 	position: absolute;
+	top: 1rem;
+	right: 1rem;
 	width: 10px;
 	z-index: 100;
 	-webkit-animation-name: blinker;
@@ -1912,6 +1931,8 @@ h2.smaller{
 	text-align: center;
 	width: auto;
 	animation:none;
+	top: 0;
+	right: 0;
 }
 .submitted-faq .online{
 	margin-bottom: 5px;
