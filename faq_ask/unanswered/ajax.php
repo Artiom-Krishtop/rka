@@ -54,11 +54,27 @@ if(empty($Detail)){
     if($res)
     {
         // Добавляем адвокату $PROPSERVICE['USER'] к количеству отвеченных вопросов.
-        $success = ListLawAnsw::addElement($PROPSERVICE['USER'], $PRODUCT_ID);
+        ListLawAnsw::addElement($PROPSERVICE['USER'], $PRODUCT_ID);
 
-        if($success && $PROPSERVICE['F_EMAIL'])
+        if($PROPSERVICE["F_EMAIL"])
         {
             // И отправляем на адрес $PROPSERVICE['F_EMAIL'] уведомление и ссылку об ответе
+            $arKolleg = CIBlockSection::GetByID($arProps["F_COLLEG"]["VALUE"])->GetNext();
+
+            \Bitrix\Main\Mail\Event::sendImmediate(
+                array(
+                    "EVENT_NAME" => "LAWYER_RESPONSE_RECEIVED",
+                    "LID" => "s1",
+                    "C_FIELDS" => array(
+                        "NAME" => $PROPSERVICE["F_NAME"],
+                        "PHONE" => $PROPSERVICE["F_PHONE"],
+                        "EMAIL" => $PROPSERVICE["F_EMAIL"],
+                        "KOLLEGIA" => $arKolleg["NAME"],
+                        "QUESTION" => $arFields["PREVIEW_TEXT"],
+                        "URL" => 'https://'.$_SERVER["SERVER_NAME"].$arFields["DETAIL_PAGE_URL"],
+                        "DATE" => $arFields["DATE_ACTIVE_FROM"]
+                    ),
+                ));
         }
 
     }
