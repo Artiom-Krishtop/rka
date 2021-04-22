@@ -17,7 +17,7 @@ $this->setFrameMode(true);
 <div class="view view-month-active view-id-month_active view-display-id-block view-dom-id-c1fce8fbef67f8ebba7c1c8ff431040f">
 <div class="view-content">
 <div class="item-list">
-<ul>
+<ul style="flex-wrap: wrap;">
 <?if($arParams["DISPLAY_TOP_PAGER"]):?>
 	<?=$arResult["NAV_STRING"]?><br />
 <?endif;?>

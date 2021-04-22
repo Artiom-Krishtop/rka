@@ -79,7 +79,7 @@ while($arProp = $rsProp->Fetch())
     }
 }
 
-$resElemCnt = CIBlockElement::GetList(
+/*$resElemCnt = CIBlockElement::GetList(
     false,      // сортировка
     array('IBLOCK_ID' => 16,"PROPERTY_USER"=>$arrFilter["PROPERTY_USER"],"ACTIVE"=>"Y"),   // фильтрация
     false,      // параметры группировки полей
@@ -87,7 +87,9 @@ $resElemCnt = CIBlockElement::GetList(
     array("ID") // поля для выборки
 );
 global $count;
-$count = $resElemCnt -> SelectedRowsCount();
+$count = $resElemCnt -> SelectedRowsCount();*/
+$count = ListLawAnsw::getAnswerCout($arrFilter["PROPERTY_USER"]);
+
 $resElemB = CIBlockElement::GetList(
     false,      // сортировка
     array('IBLOCK_ID' => 14,"PROPERTY_USER"=>$arrFilter["PROPERTY_USER"],"ACTIVE"=>"Y"),   // фильтрация

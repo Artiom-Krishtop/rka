@@ -47,7 +47,7 @@ while ($obs = $ress->GetNextElement()){
     $arResult["UR_NAME"]=$arFieldss["NAME"];
     $arResult["UR_LINK"]=$arFieldss["DETAIL_PAGE_URL"];
 }
-$resElemCnt = CIBlockElement::GetList(
+/*$resElemCnt = CIBlockElement::GetList(
     false,      // сортировка
     array('IBLOCK_ID' => 16,"PROPERTY_USER"=>$arResult["PROPERTIES"]["USER"]["VALUE"]),   // фильтрация
     false,      // параметры группировки полей
@@ -55,7 +55,8 @@ $resElemCnt = CIBlockElement::GetList(
     array("ID") // поля для выборки
 );
 $count_otvet = $resElemCnt -> SelectedRowsCount();
-$arResult["COUNT_OTVET"] = $count_otvet;
+$arResult["COUNT_OTVET"] = $count_otvet;*/
+$arResult["COUNT_OTVET"] = ListLawAnsw::getAnswerCout($arResult["PROPERTIES"]["USER"]["VALUE"]);
 
 $resElemBl = CIBlockElement::GetList(
     false,      // сортировка

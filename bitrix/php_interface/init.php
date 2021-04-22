@@ -958,6 +958,8 @@ class ListLawAnsw
         }
         else
             $c->entity_data_class::add(Array('UF_USER' => $user, 'UF_ELEMENT' => $element)); // Добавляем новую запись
+
+        $c->entity_data_class::getEntity()->cleanCache();
     }
 
     public function addOldElements()
@@ -993,7 +995,7 @@ class ListLawAnsw
     public function getAnswerCout($id)
     {
         $c = new ListLawAnsw();
-        $arData = $c->entity_data_class::getList( Array( "select" => Array("ID"), "filter" => Array("UF_USER" => $id) ) );
+        $arData = $c->entity_data_class::getList( Array( "select" => Array("CNT", "ID"), "runtime" => array(new \Bitrix\Main\Entity\ExpressionField('CNT', 'COUNT(*)')), "filter" => Array("UF_USER" => $id), "cache" => Array("ttl" => 3600) ) );
         $arData = new CDBResult($arData, "b_listlawansw");
         while($arResult = $arData->Fetch()){
             $res[] = $arResult;
