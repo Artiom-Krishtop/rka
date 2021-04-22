@@ -951,11 +951,56 @@ class ListLawAnsw
             if(!$user)
                 $c->entity_data_class::delete($arRes['ID']); // Удаляем запись
             else
-                $c->entity_data_class::update($arRes['ID'], Array('UF_USER' => $user)); // Обновляем запись, перезаписывая ID пользователя
+            {
+                if($arRes["UF_USER"] != $user)
+                    $c->entity_data_class::update($arRes['ID'], array('UF_USER' => $user)); // Обновляем запись, перезаписывая ID пользователя
+            }
         }
         else
             $c->entity_data_class::add(Array('UF_USER' => $user, 'UF_ELEMENT' => $element)); // Добавляем новую запись
     }
+
+    public function addOldElements()
+    {
+        if (!Bitrix\Main\Loader::includeModule('iblock'))
+            return;
+
+        $res = CIBlockElement::GetList(Array("ID" => "ASC"), Array("IBLOCK_ID"=>16, "ACTIVE"=>"Y", "!PROPERTY_USER" => false), false, false, Array("IBLOCK_ID", "ID"));
+        while($ob = $res->GetNextElement())
+        {
+            $arFields = $ob->GetFields();
+            $arProps = $ob->GetProperties(array(), array("ID" => 66));
+
+            $c = new ListLawAnsw();
+            $arRes = $c->notEmpty($arFields["ID"]);
+            if( $arRes )
+            {
+                if(!$arProps["USER"]["VALUE"])
+                    $c->entity_data_class::delete($arRes['ID']); // Удаляем запись
+                else
+                {
+                    if($arRes["UF_USER"] != $arProps["USER"]["VALUE"])
+                        $c->entity_data_class::update($arRes['ID'], Array('UF_USER' => $arProps["USER"]["VALUE"]));
+                }
+            }
+            else
+                $c->entity_data_class::add(Array('UF_USER' => $arProps["USER"]["VALUE"], 'UF_ELEMENT' => $arFields["ID"]));
+        }
+
+
+    }
+
+    public function getAnswerCout($id)
+    {
+        $c = new ListLawAnsw();
+        $arData = $c->entity_data_class::getList( Array( "select" => Array("ID"), "filter" => Array("UF_USER" => $id) ) );
+        $arData = new CDBResult($arData, "b_listlawansw");
+        while($arResult = $arData->Fetch()){
+            $res[] = $arResult;
+        }
+        return count($res);
+    }
+
 }
 
 ?>

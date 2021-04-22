@@ -63,6 +63,8 @@ if($val=="N" && !empty($DET)){
     $res = $el->Update($PRODUCT_ID, $arLoadProductSERVICE);
     if($res && $val == "N")
         ListLawAnsw::addElement(false, $PRODUCT_ID);
+    else
+        ListLawAnsw::addElement($PROPSERVICE['USER'], $PRODUCT_ID);
     echo json_encode(0);
     exit();
 }
