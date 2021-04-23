@@ -1003,6 +1003,42 @@ class ListLawAnsw
         return count($res);
     }
 
+
+
+    public function importCVS ($file)
+    {
+        $filePath = $_SERVER["DOCUMENT_ROOT"]."/upload/".$file;
+        $c = new ListLawAnsw();
+        require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/php_interface/include/Spout/Autoloader/autoload.php");
+        $reader = Box\Spout\Reader\Common\Creator\ReaderEntityFactory::createCSVReader();
+        $reader->open($filePath);
+
+        foreach ($reader->getSheetIterator() as $sheet)
+        {
+            foreach ($sheet->getRowIterator() as $row)
+            {
+                foreach ($row->getCells() as $cell)
+                {
+                    if(!$cell->isEmpty())
+                    {
+                        $arElement = explode(";", $cell->getValue());
+                        if( $arElement[1] == 'Y' && isset($arElement[2]) && !empty($arElement[2]) )
+                        {
+                            $arRes = $c->notEmpty($arElement[0]);
+                            if (!$arRes)
+                            {
+                                $c->entity_data_class::add(array('UF_USER' => $arElement[2], 'UF_ELEMENT' => $arElement[0]));
+                                //p($arElement);
+                            }
+                        }
+                        //exit();
+                    }
+                }
+            }
+        }
+        $reader->close();
+    }
+
 }
 
 ?>
