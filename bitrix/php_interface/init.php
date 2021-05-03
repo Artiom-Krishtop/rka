@@ -958,11 +958,30 @@ class ListLawAnsw
         }
         else
             $c->entity_data_class::add(Array('UF_USER' => $user, 'UF_ELEMENT' => $element)); // Добавляем новую запись
+// \ListLawAnswTable
+        $cr = \Bitrix\Main\UserTable::getEntity()->cleanCache();
 
-        $c->entity_data_class::getEntity()->cleanCache();
+        return $cr;
     }
 
-    public function addOldElements()
+    public function getAnswerCout($id)
+    {
+        $c = new ListLawAnsw();
+        $parameters = array(
+            "select" => Array("CNT"),
+            "filter" => Array("UF_USER" => $id),
+            "runtime" => array(
+                new \Bitrix\Main\Entity\ExpressionField("CNT", "COUNT(*)")
+            )
+        );
+
+        $rows = $c->entity_data_class::getList($parameters)->fetchAll();
+
+
+        return $rows[0]["CNT"];
+    }
+
+    /*public function addOldElements()
     {
         if (!Bitrix\Main\Loader::includeModule('iblock'))
             return;
@@ -990,22 +1009,9 @@ class ListLawAnsw
         }
 
 
-    }
+    }*/
 
-    public function getAnswerCout($id)
-    {
-        $c = new ListLawAnsw();
-        $arData = $c->entity_data_class::getList( Array( "select" => Array("CNT", "ID"), "runtime" => array(new \Bitrix\Main\Entity\ExpressionField('CNT', 'COUNT(*)')), "filter" => Array("UF_USER" => $id), "cache" => Array("ttl" => 3600) ) );
-        $arData = new CDBResult($arData, "b_listlawansw");
-        while($arResult = $arData->Fetch()){
-            $res[] = $arResult;
-        }
-        return count($res);
-    }
-
-
-
-    public function importCVS ($file)
+    /*public function importCVS ($file)
     {
         $filePath = $_SERVER["DOCUMENT_ROOT"]."/upload/".$file;
         $c = new ListLawAnsw();
@@ -1037,8 +1043,7 @@ class ListLawAnsw
             }
         }
         $reader->close();
-    }
-
+    }*/
 }
 
 ?>

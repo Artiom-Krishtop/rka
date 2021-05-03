@@ -12,8 +12,19 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 
+$rs = CIBlockElement::GetList(Array(), Array('IBLOCK_ID' => $arParams["IBLOCK_ID"], 'CODE' => $arResult["VARIABLES"]["ELEMENT_CODE"]), false, false, Array('ID', 'IBLOCK_ID', 'PROPERTY_USER'));
+while ($ar = $rs->Fetch())
+{
+    $ElementID = $ar["ID"];
+    $arrFilter["PROPERTY_USER"] = $ar["PROPERTY_USER_VALUE"];
+}
+
+if($arrFilter["PROPERTY_USER"])
+    $count = ListLawAnsw::getAnswerCout($arrFilter["PROPERTY_USER"]);
+else
+    $count = 0;
 ?>
-<?$ElementID = $APPLICATION->IncludeComponent(
+<?$APPLICATION->IncludeComponent(
 	"bitrix:news.detail",
 	"",
 	Array(
@@ -69,27 +80,9 @@ $this->setFrameMode(true);
 		'STRICT_SECTION_CHECK' => (isset($arParams['STRICT_SECTION_CHECK']) ? $arParams['STRICT_SECTION_CHECK'] : ''),
 	),
 	$component
-);
-$rsProp = CIBlockElement::GetProperty($arParams["IBLOCK_ID"], $ElementID, "sort", "asc", array("ACTIVE"=>"Y"));
-global $arrFilter;
-while($arProp = $rsProp->Fetch())
-{
-    if($arProp["CODE"] == "USER") {
-        $arrFilter["PROPERTY_USER"] = $arProp["VALUE"];
-    }
-}
+);?>
 
-/*$resElemCnt = CIBlockElement::GetList(
-    false,      // сортировка
-    array('IBLOCK_ID' => 16,"PROPERTY_USER"=>$arrFilter["PROPERTY_USER"],"ACTIVE"=>"Y"),   // фильтрация
-    false,      // параметры группировки полей
-    false,      // параметры навигации
-    array("ID") // поля для выборки
-);
-global $count;
-$count = $resElemCnt -> SelectedRowsCount();*/
-$count = ListLawAnsw::getAnswerCout($arrFilter["PROPERTY_USER"]);
-
+<?php
 $resElemB = CIBlockElement::GetList(
     false,      // сортировка
     array('IBLOCK_ID' => 14,"PROPERTY_USER"=>$arrFilter["PROPERTY_USER"],"ACTIVE"=>"Y"),   // фильтрация
