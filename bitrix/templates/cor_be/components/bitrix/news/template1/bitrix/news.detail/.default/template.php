@@ -94,10 +94,13 @@ print "</pre>";*/
     echo $date;?>
 <?}?>    
     
-    <?//echo $arResult['PROPERTIES']['PUBLIC_DATE']['VALUE'] ?> 
+    <?//echo $arResult['PROPERTIES']['PUBLIC_DATE']['VALUE'] ?>
+    <?
+    $create_name = $arResult["CREATED_USER_NAME"];
+    $create_name = preg_replace('~\(.*\)~ ','', $create_name);
+    ?>
     
-    
-    | аўтар: Ірына Рэут<?//echo $arResult['PROPERTIES']['AUTHOR']['~VALUE'] ?>
+    | аўтар:<?=$create_name?><!--Ірына Рэут--><?//echo $arResult['PROPERTIES']['AUTHOR']['~VALUE'] ?>
 </div>
 <?}?>  
 <div class="dop-image">	

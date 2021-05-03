@@ -120,12 +120,16 @@ print "</pre>";*/
 <?/*if(!empty($arItem['DISPLAY_PROPERTIES']['AUTHOR']['~VALUE'])){?>
 | аўтар: <?echo $arItem['DISPLAY_PROPERTIES']['AUTHOR']['~VALUE'] ?>
 <?}*/?>
-    | аўтар: Ірына Рэут
-</span>	
+    <?
+    $create_name=$arItem["CREATED_USER_NAME"];
+    $create_name=preg_replace('~\(.*\)~ ','',$create_name);
+    ?>
+    | аўтар:<?=$create_name?><!--Ірына Рэут-->
+</span><br>
 <?}?>	
 <ul class="links inline">
-<li class="node-readmore first"><a href="<?=$arItem["DETAIL_PAGE_URL"]?>">Больш падрабязна</a>	</li>
-<li class="comment-add"><a href="<?=$arItem["DETAIL_PAGE_URL"]?>#commento" title="Дадаць новы каментар да гэтае старонкі.">Дадаць каментар</a></li>
+<li class="node-readmore first"><a href="<?=$arItem["DETAIL_PAGE_URL"]?>">Больш падрабязна</a><br></li>
+<li class="comment-add"><a href="<?=$arItem["DETAIL_PAGE_URL"]?>#commento" title="Дадаць новы каментар да гэтае старонкі.">Дадаць каментар</a><br></li>
 <!--<li class="quote"><a href="/comment/reply/174709?quote=1#comment-form" title="Цитировать это сообщение в своем ответе" class="js-quote" data-name="">цитировать</a></li>-->
 <li class="jsquote last"></li>
 </ul>

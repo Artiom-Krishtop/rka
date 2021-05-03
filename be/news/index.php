@@ -59,6 +59,7 @@ $APPLICATION->IncludeComponent(
 			1 => "название",
 			2 => "дата создания",
 			3 => "кем создан (ID)",
+            4 => "CREATED_USER_NAME",
 		),
 		"DETAIL_PAGER_SHOW_ALL" => "Y",
 		"DETAIL_PAGER_TEMPLATE" => "",
@@ -84,7 +85,7 @@ $APPLICATION->IncludeComponent(
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"LIST_ACTIVE_DATE_FORMAT" => "",
 		"LIST_FIELD_CODE" => array(
-			0 => "",
+			0 => "CREATED_USER_NAME",
 			1 => "",
 		),
 		"LIST_PROPERTY_CODE" => array(
