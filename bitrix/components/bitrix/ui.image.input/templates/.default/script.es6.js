@@ -2,6 +2,8 @@ import {Dom, Event, Reflection, Tag, Type} from 'main.core';
 import {type BaseEvent, EventEmitter} from 'main.core.events';
 import {Loader} from 'main.loader';
 
+const instances = new Map();
+
 class ImageInput
 {
 	container = null;
@@ -10,6 +12,14 @@ class ImageInput
 	loader = null;
 	timeout = null;
 	uploading = false;
+
+	onUploaderIsInitedHandler = this.handleOnUploaderIsInited.bind(this);
+	recalculateWrapperHandler = this.recalculateWrapper.bind(this);
+
+	static getById(id: string): ?ImageInput
+	{
+		return instances.get(id) || null;
+	}
 
 	constructor(params = {})
 	{
@@ -30,10 +40,12 @@ class ImageInput
 		this.addImageHandler = this.addImage.bind(this);
 		this.editImageHandler = this.editImage.bind(this);
 
-		EventEmitter.subscribe('onUploaderIsInited', this.onUploaderIsInitedHandler.bind(this));
+		EventEmitter.subscribe('onUploaderIsInited', this.onUploaderIsInitedHandler);
+
+		instances.set(this.instanceId, this);
 	}
 
-	onUploaderIsInitedHandler(event: BaseEvent)
+	handleOnUploaderIsInited(event: BaseEvent)
 	{
 		const [id, uploader] = event.getCompatData();
 
@@ -54,8 +66,15 @@ class ImageInput
 			EventEmitter.subscribe(uploader, 'onDone', this.onUploadDoneHandler.bind(this));
 			EventEmitter.subscribe(uploader, 'onFileCanvasIsLoaded', this.onFileCanvasIsLoadedHandler.bind(this));
 
-			EventEmitter.subscribe('onDemandRecalculateWrapper', this.recalculateWrapper.bind(this));
+			EventEmitter.unsubscribe('onDemandRecalculateWrapper', this.recalculateWrapperHandler);
+			EventEmitter.subscribe('onDemandRecalculateWrapper', this.recalculateWrapperHandler);
 		}
+	}
+
+	unsubscribeEvents()
+	{
+		EventEmitter.unsubscribe('onDemandRecalculateWrapper', this.recalculateWrapperHandler);
+		EventEmitter.unsubscribe('onUploaderIsInited', this.onUploaderIsInitedHandler);
 	}
 
 	getInputInstance()

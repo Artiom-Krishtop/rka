@@ -7,6 +7,7 @@ export class Ears
 		this.container = options.container;
 		this.smallSize = options.smallSize || null;
 		this.noScrollbar = options.noScrollbar ? options.noScrollbar : false;
+		this.className = options.className ? options.className : null;
 		this.wrapper = null;
 		this.leftEar = null;
 		this.rightEar = null;
@@ -90,7 +91,7 @@ export class Ears
 	{
 		return this.cache.remember('wrapper', () => {
 			return Tag.render`
-					<div class='ui-ears-wrapper ${this.smallSize ? ' ui-ears-wrapper-sm' : ''}'>
+					<div class='ui-ears-wrapper ${this.smallSize ? ' ui-ears-wrapper-sm' : ''} ${this.className ? this.className : ''}'>
 						${this.getLeftEar()}
 						${this.getRightEar()}
 						${this.container}

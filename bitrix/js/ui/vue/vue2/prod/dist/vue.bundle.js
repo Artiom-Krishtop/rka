@@ -71,7 +71,7 @@
 	      var instance = new this._instance(params);
 
 	      instance.mount = function (rootContainer) {
-	        this.$mount(rootContainer);
+	        return this.$mount(rootContainer);
 	      };
 
 	      return instance;

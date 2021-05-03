@@ -23,7 +23,7 @@ this.BX = this.BX || {};
 	}
 
 	function _templateObject() {
-	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t\t\t\t<div class='ui-ears-wrapper ", "'>\n\t\t\t\t\t\t", "\n\t\t\t\t\t\t", "\n\t\t\t\t\t\t", "\n\t\t\t\t\t</div>\n\t\t\t\t"]);
+	  var data = babelHelpers.taggedTemplateLiteral(["\n\t\t\t\t\t<div class='ui-ears-wrapper ", " ", "'>\n\t\t\t\t\t\t", "\n\t\t\t\t\t\t", "\n\t\t\t\t\t\t", "\n\t\t\t\t\t</div>\n\t\t\t\t"]);
 
 	  _templateObject = function _templateObject() {
 	    return data;
@@ -37,6 +37,7 @@ this.BX = this.BX || {};
 	    this.container = options.container;
 	    this.smallSize = options.smallSize || null;
 	    this.noScrollbar = options.noScrollbar ? options.noScrollbar : false;
+	    this.className = options.className ? options.className : null;
 	    this.wrapper = null;
 	    this.leftEar = null;
 	    this.rightEar = null;
@@ -125,7 +126,7 @@ this.BX = this.BX || {};
 	      var _this4 = this;
 
 	      return this.cache.remember('wrapper', function () {
-	        return main_core.Tag.render(_templateObject(), _this4.smallSize ? ' ui-ears-wrapper-sm' : '', _this4.getLeftEar(), _this4.getRightEar(), _this4.container);
+	        return main_core.Tag.render(_templateObject(), _this4.smallSize ? ' ui-ears-wrapper-sm' : '', _this4.className ? _this4.className : '', _this4.getLeftEar(), _this4.getRightEar(), _this4.container);
 	      });
 	    }
 	  }, {

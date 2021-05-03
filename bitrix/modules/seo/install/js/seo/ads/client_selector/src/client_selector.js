@@ -1,5 +1,5 @@
-import {Loc, Tag, Type, Dom, Event} from "main.core";
-import {Loader} from "main.loader";
+import { Dom, Event, Loc, Tag, Type } from "main.core";
+import { Loader } from "main.loader";
 import "./client_selector.css";
 
 export class ClientSelector
@@ -184,6 +184,7 @@ export class ClientSelector
 				onclick: this.onSelectItem.bind(this, item)
 			});
 		}
+
 		if (this.canUnSelectItem)
 		{
 			menuItems.push(

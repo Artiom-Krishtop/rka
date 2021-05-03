@@ -13,10 +13,6 @@ import {PullClient, PULL as pull} from "pull.client";
 
 export class BitrixVue
 {
-	/**
-	 * @deprecated
-	 * @type {boolean}
-	 */
 	static developerMode = false;
 
 	constructor(VueVendor)
@@ -66,7 +62,7 @@ export class BitrixVue
 
 		instance.mount = function(rootContainer: string|Element): object
 		{
-			this.$mount(rootContainer);
+			return this.$mount(rootContainer);
 		}
 
 		return instance;

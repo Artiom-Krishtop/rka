@@ -31,7 +31,7 @@ if(typeof BX.UI.EntityUserFieldManager === "undefined")
 		this._enableSelection = true;
 		this._enableCreation = false;
 		this._creationSignature = "";
-		this._creationUrl = "";
+		this._creationPageUrl = "";
 		this._activeFields = {};
 		this._validationEnabled = true;
 		this._validationResult = null;

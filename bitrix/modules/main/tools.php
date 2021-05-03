@@ -7,6 +7,7 @@
  */
 
 use Bitrix\Main;
+use Bitrix\Main\Text;
 use Bitrix\Main\Application;
 use Bitrix\Main\Context;
 use Bitrix\Main\Security;
@@ -4210,7 +4211,9 @@ function check_email($email, $bStrict=false)
 	{
 		$email = trim($email);
 		if(preg_match("#.*?[<\\[\\(](.*?)[>\\]\\)].*#i", $email, $arr) && $arr[1] <> '')
+		{
 			$email = $arr[1];
+		}
 	}
 
 	//http://tools.ietf.org/html/rfc2821#section-4.5.3.1
@@ -4220,13 +4223,26 @@ function check_email($email, $bStrict=false)
 		return false;
 	}
 
+	//convert to UTF to use extended regular expressions
+	static $encoding = null;
+	if($encoding === null)
+	{
+		$encoding = strtolower(Context::getCurrent()->getCulture()->getCharset());
+	}
+	if($encoding <> "utf-8")
+	{
+		$email = Text\Encoding::convertEncoding($email, $encoding, "UTF-8");
+	}
+
 	//http://tools.ietf.org/html/rfc2822#section-3.2.4
 	//3.2.4. Atom
-	static $atom = "=_0-9a-z+~'!\$&*^`|\\#%/?{}-";
+	//added \p{L} for international symbols
+	static $atom = "\\p{L}=_0-9a-z+~'!\$&*^`|\\#%/?{}-";
+	static $domain = "\\p{L}a-z0-9-";
 
 	//"." can't be in the beginning or in the end of local-part
 	//dot-atom-text = 1*atext *("." 1*atext)
-	if(preg_match("#^[".$atom."]+(\\.[".$atom."]+)*@(([-0-9a-z]+\\.)+)([a-z0-9-]{2,20})$#i", $email))
+	if(preg_match("#^[{$atom}]+(\\.[{$atom}]+)*@(([{$domain}]+\\.)+)([{$domain}]{2,20})$#ui", $email))
 	{
 		return true;
 	}
@@ -6058,14 +6074,14 @@ function NormalizePhone($number, $minLength = 10)
 	return $number;
 }
 
-function bxmail($to, $subject, $message, $additional_headers="", $additional_parameters="", \Bitrix\Main\Mail\Context $context=null)
+function bxmail($to, $subject, $message, $additional_headers="", $additional_parameters="", Main\Mail\Context $context = null)
 {
 	if (empty($context))
 	{
-		$context = new \Bitrix\Main\Mail\Context();
+		$context = new Main\Mail\Context();
 	}
 
-	$event = new \Bitrix\Main\Event(
+	$event = new Main\Event(
 		'main',
 		'OnBeforePhpMail',
 		array(
@@ -6082,10 +6098,14 @@ function bxmail($to, $subject, $message, $additional_headers="", $additional_par
 	$event->send();
 
 	if(function_exists("custom_mail"))
+	{
 		return custom_mail($to, $subject, $message, $additional_headers, $additional_parameters, $context);
+	}
 
 	if($additional_parameters!="")
+	{
 		return @mail($to, $subject, $message, $additional_headers, $additional_parameters);
+	}
 
 	return @mail($to, $subject, $message, $additional_headers);
 }

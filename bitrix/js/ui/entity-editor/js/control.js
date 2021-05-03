@@ -904,6 +904,9 @@ if(typeof BX.UI.EntityEditorControl === "undefined")
 		onContextMenuClose: function()
 		{
 			BX.PopupMenu.destroy(this._id);
+		},
+		onPopupDestroy: function()
+		{
 			this._isContextMenuOpened = false;
 		},
 		createContextMenuButton: function()
@@ -954,7 +957,8 @@ if(typeof BX.UI.EntityEditorControl === "undefined")
 						events:
 							{
 								onPopupShow: BX.delegate(this.onContextMenuShow, this),
-								onPopupClose: BX.delegate(this.onContextMenuClose, this)
+								onPopupClose: BX.delegate(this.onContextMenuClose, this),
+								onPopupDestroy: BX.delegate(this.onPopupDestroy, this)
 							}
 					}
 				);
@@ -3529,6 +3533,7 @@ if(typeof BX.UI.EntityEditorSection === "undefined")
 	};
 	BX.UI.EntityEditorSection.prototype.doSetMode = function(mode)
 	{
+		this.removeFieldConfigurator();
 		if(this._titleMode === BX.UI.EntityEditorMode.edit)
 		{
 			this.toggleTitleMode();

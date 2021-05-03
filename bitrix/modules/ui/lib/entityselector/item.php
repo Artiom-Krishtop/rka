@@ -27,12 +27,16 @@ class Item implements \JsonSerializable
 	protected $avatar;
 
 	/** @var string */
+	protected $textColor;
+
+	/** @var string */
 	protected $link;
 
 	/** @var TextNode */
 	protected $linkTitle;
 	protected $badges;
 
+	protected $selected = false;
 	protected $searchable = true;
 	protected $saveable = true;
 	protected $deselectable = true;
@@ -86,6 +90,11 @@ class Item implements \JsonSerializable
 			$this->setAvatar($options['avatar']);
 		}
 
+		if (isset($options['textColor']) && is_string($options['textColor']))
+		{
+			$this->setTextColor($options['textColor']);
+		}
+
 		if (isset($options['link']) && is_string($options['link']))
 		{
 			$this->setLink($options['link']);
@@ -106,6 +115,11 @@ class Item implements \JsonSerializable
 		if (isset($options['searchable']) && is_bool($options['searchable']))
 		{
 			$this->setSearchable($options['searchable']);
+		}
+
+		if (isset($options['selected']) && is_bool($options['selected']))
+		{
+			$this->setSelected($options['selected']);
 		}
 
 		if (isset($options['saveable']) && is_bool($options['saveable']))
@@ -259,9 +273,11 @@ class Item implements \JsonSerializable
 		return $this;
 	}
 
-	public function setCaptionOptions(array $captionOptions)
+	public function setCaptionOptions(array $captionOptions): self
 	{
 		$this->getCaptionOptions()->setValues($captionOptions);
+
+		return $this;
 	}
 
 	/**
@@ -287,6 +303,21 @@ class Item implements \JsonSerializable
 		if (is_string($avatar) || $avatar === null)
 		{
 			$this->avatar = $avatar;
+		}
+
+		return $this;
+	}
+
+	public function getTextColor(): ?string
+	{
+		return $this->textColor;
+	}
+
+	public function setTextColor(?string $textColor): self
+	{
+		if (is_string($textColor) || $textColor === null)
+		{
+			$this->textColor = $textColor;
 		}
 
 		return $this;
@@ -353,9 +384,11 @@ class Item implements \JsonSerializable
 		return $this;
 	}
 
-	public function setBadgesOptions(array $badgesOptions)
+	public function setBadgesOptions(array $badgesOptions): self
 	{
 		$this->getBadgesOptions()->setValues($badgesOptions);
+
+		return $this;
 	}
 
 	/**
@@ -400,7 +433,7 @@ class Item implements \JsonSerializable
 		return $this->children;
 	}
 
-	public function addChildren(array $children)
+	public function addChildren(array $children): self
 	{
 		foreach ($children as $childOptions)
 		{
@@ -409,23 +442,29 @@ class Item implements \JsonSerializable
 			$child = new Item($childOptions);
 			$this->addChild($child);
 		}
+
+		return $this;
 	}
 
-	public function addChild(Item $item)
+	public function addChild(Item $item): self
 	{
 		$success = $this->getChildren()->add($item);
 		if ($success && $this->getDialog())
 		{
 			$this->getDialog()->handleItemAdd($item);
 		}
+
+		return $this;
 	}
 
-	public function setNodeOptions(array $nodeOptions)
+	public function setNodeOptions(array $nodeOptions): self
 	{
 		$this->getNodeOptions()->setValues($nodeOptions);
+
+		return $this;
 	}
 
-	public function getNodeOptions()
+	public function getNodeOptions(): Dictionary
 	{
 		if ($this->nodeOptions === null)
 		{
@@ -435,12 +474,14 @@ class Item implements \JsonSerializable
 		return $this->nodeOptions;
 	}
 
-	public function setTagOptions(array $nodeOptions)
+	public function setTagOptions(array $nodeOptions): self
 	{
 		$this->getTagOptions()->setValues($nodeOptions);
+
+		return $this;
 	}
 
-	public function getTagOptions()
+	public function getTagOptions(): Dictionary
 	{
 		if ($this->tagOptions === null)
 		{
@@ -448,6 +489,18 @@ class Item implements \JsonSerializable
 		}
 
 		return $this->tagOptions;
+	}
+
+	public function isSelected(): bool
+	{
+		return $this->selected;
+	}
+
+	public function setSelected(bool $flag = true): self
+	{
+		$this->selected = $flag;
+
+		return $this;
 	}
 
 	public function isSearchable(): bool
@@ -510,9 +563,11 @@ class Item implements \JsonSerializable
 		return $this;
 	}
 
-	public function setCustomData(array $customData)
+	public function setCustomData(array $customData): self
 	{
 		$this->getCustomData()->setValues($customData);
+
+		return $this;
 	}
 
 	/**
@@ -528,9 +583,11 @@ class Item implements \JsonSerializable
 		return $this->customData;
 	}
 
-	public function setSort(?int $sort)
+	public function setSort(?int $sort): self
 	{
 		$this->sort = $sort;
+
+		return $this;
 	}
 
 	public function getSort(): ?int
@@ -538,9 +595,11 @@ class Item implements \JsonSerializable
 		return $this->sort;
 	}
 
-	public function setContextSort(?int $sort)
+	public function setContextSort(?int $sort): self
 	{
 		$this->contextSort = $sort;
+
+		return $this;
 	}
 
 	public function getContextSort(): ?int
@@ -548,9 +607,11 @@ class Item implements \JsonSerializable
 		return $this->contextSort;
 	}
 
-	public function setGlobalSort(?int $sort)
+	public function setGlobalSort(?int $sort): self
 	{
 		$this->globalSort = $sort;
+
+		return $this;
 	}
 
 	public function getGlobalSort(): ?int
@@ -558,9 +619,11 @@ class Item implements \JsonSerializable
 		return $this->globalSort;
 	}
 
-	public function setDialog(Dialog $dialog)
+	public function setDialog(Dialog $dialog): self
 	{
 		$this->dialog = $dialog;
+
+		return $this;
 	}
 
 	public function getDialog(): ?Dialog
@@ -617,6 +680,11 @@ class Item implements \JsonSerializable
 		if ($this->getLinkTitleNode() !== null)
 		{
 			$json['linkTitle'] = $this->getLinkTitleNode()->jsonSerialize();
+		}
+
+		if ($this->isSelected())
+		{
+			$json['selected'] = true;
 		}
 
 		if (!$this->isSearchable())
@@ -682,6 +750,7 @@ class Item implements \JsonSerializable
 		foreach ([
 			'entityType',
 			'avatar',
+			'textColor',
 			'link',
 			'contextSort',
 			'globalSort',

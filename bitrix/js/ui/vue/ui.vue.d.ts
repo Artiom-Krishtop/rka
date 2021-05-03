@@ -7,11 +7,11 @@ declare module 'ui.vue'
 	namespace $Bitrix
 	{
 		const Application: $BitrixApplication;
+		const Loc: $BitrixLoc;
 		const Data: $BitrixData;
+		const eventEmitter: EventEmitter;
 		const RestClient: $BitrixRestClient;
 		const PullClient: $BitrixPullClient;
-		const Loc: $BitrixLoc;
-		const eventEmitter: EventEmitter;
 	}
 
 	class $BitrixApplication {
@@ -40,17 +40,17 @@ declare module 'ui.vue'
 
 	namespace BitrixVue
 	{
-		function createApp(rootComponent: object, rootProps?: {[key: string]: unknown}|null): VueCreateAppResult;
+		function createApp(props?: {[key: string]: unknown}|null): VueCreateAppResult;
 		function component(name: string, definition: object, options?: BitrixVueComponentOptions): boolean;
 		function localComponent(name: string, definition: object, options?: BitrixVueComponentOptions): object;
-		function cloneComponent(name: string, source: string, mutations: object): boolean;
 		function mutateComponent(name: string, mutations: object): BitrixVueRevertHandle;
-		function directive(name: string, definition: object): boolean;
+		function cloneComponent(name: string, source: string, mutations: object): boolean;
 		function isComponent(name: string): boolean;
 		function isLocal(name: string): boolean;
 		function isMutable(name: string): boolean;
-		function testNode(object: object, params: object): boolean;
+		function directive(name: string, definition: object): boolean;
 		function getFilteredPhrases(phrasePrefix: string|Array<string>, phrases: object|null): ReadonlyArray<any>;
+		function testNode(object: object, params: object): boolean;
 		const events: EventsList;
 	}
 
@@ -64,6 +64,7 @@ declare module 'ui.vue'
 		directive(name: string, definition: object): VueCreateAppResult;
 		use(plugin: Object|Function): VueCreateAppResult;
 		mixin(mixin: object): VueCreateAppResult;
+		mount(element: Element|string): VueCreateAppResult;
 	}
 
 	interface BitrixVueComponentOptions {

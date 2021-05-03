@@ -1678,7 +1678,10 @@ if(typeof BX.UI.EntityEditor === "undefined")
 			}
 			for(var i = 0, length = this._controllers.length; i < length; i++)
 			{
-				data = this._controllers[i].onBeforesSaveControl(data);
+				if (BX.Type.isFunction(this._controllers[i].onBeforesSaveControl))
+				{
+					data = this._controllers[i].onBeforesSaveControl(data);
+				}
 			}
 			return data;
 		},

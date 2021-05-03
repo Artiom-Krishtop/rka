@@ -1,4 +1,5 @@
 import {Event, Dom} from "main.core";
+import 'ui.forms';
 
 export class LayoutForm
 {
