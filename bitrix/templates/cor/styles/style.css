@@ -633,7 +633,7 @@ form#user-login-form tbody{
 
 	display:block;
 	font-size: 1rem;
-	float: left;
+	/*float: left;*/
 	line-height: 1.5rem;
 
 	/*clear: right;*/
@@ -2301,4 +2301,29 @@ form .licence_block.bx_filter {
 	left: 0;
 	top: 0;
 	z-index: 2999;
+}
+.blog-main {
+	margin-top: 2.5rem;
+}
+.blog-post {
+	margin-bottom: 2rem;
+}
+.mb-4 {
+	margin-bottom: 1.5rem!important;
+}
+.pb-3 {
+	padding-bottom: 1rem!important;
+}
+.blog-post-title {
+	margin-bottom: .25rem;
+	font-size: 1.25rem;
+}
+.blog-post-body {
+	margin-bottom: 1.25rem;
+}
+.body-info.with_img_left {
+	padding-left: 120px;
+}
+.body-info p {
+	margin-bottom: 0;
 }

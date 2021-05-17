@@ -21,4 +21,4 @@ div.news-detail img.detail_picture
     height: auto;*/
     padding: 5px;
 }
-.detail-text{margin: 20px 0;}
+.detail-text{margin: 2.5rem 225px 2.5rem 0; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(0,0,0,.1);}
