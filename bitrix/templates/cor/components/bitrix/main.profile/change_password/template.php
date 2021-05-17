@@ -116,7 +116,7 @@ new BX.PhoneAuth({
 <script type="text/javascript">
 <!--
 var opened_sections = [<?
-$arResult["opened"] = $_COOKIE[$arResult["COOKIE_PREFIX"]."_user_profile_open"];
+/*$arResult["opened"] = $_COOKIE[$arResult["COOKIE_PREFIX"]."_user_profile_open"];
 $arResult["opened"] = preg_replace("/[^a-z0-9_,]/i", "", $arResult["opened"]);
 if (strlen($arResult["opened"]) > 0)
 {
@@ -126,18 +126,22 @@ else
 {
 	$arResult["opened"] = "reg";
 	echo "'reg'";
-}
+}*/
 ?>];
-//-->
+-->
 
 var cookie_prefix = '<?=$arResult["COOKIE_PREFIX"]?>';
 </script>
-
+<?//p($arResult["arUser"]);?>
 <?/*<form method="post" name="form1" action="<?=$arResult["FORM_TARGET"]?>" enctype="multipart/form-data">*/?>
     <form method="post" id="change_pass" name="form1" action="<?=$arResult["FORM_TARGET"]?>?" enctype="multipart/form-data">
         <?=$arResult["BX_SESSION_CHECK"]?>
         <input type="hidden" name="LOGIN" maxlength="50" value="<?=$arResult["arUser"]["LOGIN"]?>" />
         <input type="hidden" name="EMAIL" maxlength="50" placeholder="name@company.ru" value="<?=$arResult["arUser"]["EMAIL"]?>" />
+        <input type="hidden" name="NAME" value="<?=$arResult["arUser"]["NAME"]?>" />
+        <input type="hidden" name="LAST_NAME" value="<?=$arResult["arUser"]["LAST_NAME"]?>" />
+        <input type="hidden" name="SECOND_NAME" value="<?=$arResult["arUser"]["SECOND_NAME"]?>" />
+        <input type="hidden" name="PERSONAL_PHOTO" value="<?=$arResult["arUser"]["PERSONAL_PHOTO"]?>" />
 
         <input type="hidden" name="lang" value="<?=LANG?>" />
         <input type="hidden" name="ID" value=<?=$arResult["ID"]?> />

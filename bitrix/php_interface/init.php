@@ -387,6 +387,7 @@ class EventHandlerClass
     }
 }
 
+// Обновление данных адвоката в инфоблоке 17, при редактировании своего профиля из раздела /personal/
 AddEventHandler("main", "OnAfterUserUpdate", Array("MyClassUp", "OnAfterUserUpdateHandler"));
 class MyClassUp
 {
@@ -394,31 +395,48 @@ class MyClassUp
     function OnAfterUserUpdateHandler(&$arFields)
     {
         if($arFields["RESULT"] && (in_array(10, CUser::GetUserGroup($arFields["ID"])) || in_array(1, CUser::GetUserGroup($arFields["ID"]))))
+        {
+            CModule::IncludeModule("iblock");
+            $arSelect = Array("ID", "NAME", "DATE_ACTIVE_FROM");
+            $arFilter = Array("IBLOCK_ID"=>17, "PROPERTY_USER"=>$arFields["ID"]);
+            $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
+            $count = $res->SelectedRowsCount();
+            if ($count>0)
             {
-                CModule::IncludeModule("iblock");
-                $arSelect = Array("ID", "NAME", "DATE_ACTIVE_FROM");
-                $arFilter = Array("IBLOCK_ID"=>17, "PROPERTY_USER"=>$arFields["ID"]);
-                $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
-                $count = $res->SelectedRowsCount();
-                if ($count>0) {
                 $ob = $res->GetNextElement();
                 $arFieldsElement = $ob->GetFields();
-                if ($arFieldsElement['ID']>0) {
+                if ($arFieldsElement['ID'] > 0)
+                {
+                    global $USER;
                     $el = new CIBlockElement;
+
                     $logo='';
-                    if ($arFields['PERSONAL_PHOTO']>0) $logo = CFile::GetFileArray($arFields['PERSONAL_PHOTO']);
-                     $arLoadProductArray = Array(
-                      "IBLOCK_ID"      => 17,
-                      "NAME"           => $arFields['LAST_NAME'].' '.$arFields['NAME'].' '.$arFields['SECOND_NAME'],
-                      "DETAIL_PICTURE"  => CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"].$logo["SRC"]),
-                      "PREVIEW_PICTURE" => CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"].$logo["SRC"]),
+                    if ($arFields['PERSONAL_PHOTO'] > 0)
+                    {
+                        $arFile = CFile::GetFileArray($arFields['PERSONAL_PHOTO']);
+                        $logo = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"].$arFile["SRC"]);
+                    }
+
+                    if(strlen(trim($arFieldsElement["NAME"])))
+                        $name = $arFieldsElement["NAME"];
+                    elseif(strlen(trim($arFields["NAME"])) || strlen(trim($arFields["LAST_NAME"])) || strlen(trim($arFields["SECOND_NAME"])))
+                        $name = $arFields["LAST_NAME"].' '.$arFields["NAME"].' '.$arFields["SECOND_NAME"];
+                    else
+                        $name = $arFields["LOGIN"];
+
+                    $arLoadProductArray = Array(
+                        "IBLOCK_ID" => 17,
+                        "MODIFIED_BY" => $USER->GetID(),
+                        "NAME" => $name,
+                        "DETAIL_PICTURE" => $logo,
+                        "PREVIEW_PICTURE" => $logo,
                     );
-                    
+
                     $el->Update($arFieldsElement['ID'], $arLoadProductArray);
                 }
-                }
-                
             }
+
+        }
     }
 }
 

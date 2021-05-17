@@ -14,7 +14,7 @@ $this->setFrameMode(true);
 ?>
 <div class="view-header">
       <br>
-<a class="button" href="/news/">Новости белорусской адвокатуры</a> <a class="button" href="/news/neighbornews/">Новости наших соседей</a> <a class="button" href="/news/smi/">СМИ об адвокатах</a>
+<a class="button" href="/news/">Новости белорусской адвокатуры</a> <a class="button" href="/news/neighbornews/">Новости наших соседей</a><!-- <a class="button" href="/news/smi/">СМИ об адвокатах</a>-->
 <br><br>    </div>
 <?if($arParams["USE_RSS"]=="Y"):?>
 	<?
