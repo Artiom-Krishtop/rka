@@ -1,36 +1,43 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Белорусская Республиканская коллегия адвокатов | консультации адвокатов, правовая помощь и юридические услуги");
-?>
-
-<section class="asidenews">
-	<div class="region region-intro">
-		<div id="block-block-4" class="block block-block contextual-links-region first odd">
-			<h2 class="block-title">Юрыдычная анлайн-кансультацыя</h2>
-			<p></p>
-			<p>Анлайн-кансультацыя - гэта магчымасць атрымаць папярэднюю бясплатную юрыдычную кансультацыю на сайце. Задаць пытанне можна ў любой, зручнай для вас інтэрактыўнай форме.</p>
-			<p>Анлайн-кансультацыя – гэта аператыўныя адказы на хвалюючыя вас пытанні адвакатаў-прафесіяналаў. Своечасовая кансультацыя адваката дапаможа выбраць правільную пазіцыю і папярэдзіць прыняцце неабдуманых рашэнняў, якія ў будучым могуць негатыўна паўплываць на зыход справы.</p>
-			<p>Акрамя таго, анлайн-кансультацыя – гэта яшчэ і магчымасць выбраць свайго адваката шляхам непасрэдных зносін</p>
-			<p><a href="/faq_ask/" class="ask" rel="nofollow" style="text-decoration: line-through !important;">Задать вопрос</a></p>
-		</div><!-- /.block -->
-		<div id="block-block-17" class="block block-block contextual-links-region last even">
-			<h2 class="block-title">Правілы анлайн-кансультацыi</h2>
-			<p></p>
-			<p>Звяртаем вашу ўвагу на тое, што пытанне, накіраванае ў анлайн-кансультацыю, павінна адпавядаць наступным патрабаванням:</p>
-			<ul><li>павінна быць сфармулявана па канкрэтнай праблеме;</li>
-				<li>не павінна утрымліваць персаніфікаваных дадзеных;</li>
-				<li>аб'ем пытання не павінен перавышаць больш за 15 радкоў тэксту.</li>
-			</ul>
-			<p>З правіламі работы анлайн-кансультацыi вы можаце азнаеміцца  <a href="/pravila-online-konsultacii/" rel="nofollow">тут</a>.</p>
-			<p><strong>Калі ваша пытанне не адпавядае <a href="/pravila-online-konsultacii/" rel="nofollow"></a> правілам, што размешчаны вышэй, рэкамендуем звярнуцца да адваката на асабісты прыем.</strong></p>
-		</div><!-- /.block -->
-	</div><!-- /.region -->			
-</section>
+?><section class="asidenews">
+<div class="region region-intro">
+	<div id="block-block-4" class="block block-block contextual-links-region first odd">
+		<h2 class="block-title"><span style="font-size: 20pt; font-family: &quot;Times New Roman&quot;, Times;"><b>Юрыдычная анлайн-кансультацыя</b></span></h2>
+ <span style="font-family: &quot;Times New Roman&quot;, Times;"> </span>
+		<p>
+ <span style="font-family: &quot;Times New Roman&quot;, Times;"> </span>
+		</p>
+ <span style="font-family: &quot;Times New Roman&quot;, Times;"> </span>
+		<p>
+ <span style="font-size: 16pt; font-family: &quot;Times New Roman&quot;, Times;">&nbsp; &nbsp;Анлайн-кансультацыя - гэта магчымасць атрымаць папярэднюю бясплатную юрыдычную кансультацыю на сайце. Задаць пытанне можна ў любой, зручнай для вас інтэрактыўнай форме.</span><span style="font-family: &quot;Times New Roman&quot;, Times;"> </span>
+		</p>
+ <span style="font-family: &quot;Times New Roman&quot;, Times;"> </span><span style="font-size: 16pt; font-family: &quot;Times New Roman&quot;, Times;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times;"> </span>
+		<p>
+ <span style="font-size: 16pt; font-family: &quot;Times New Roman&quot;, Times;">&nbsp; &nbsp;Анлайн-кансультацыя – гэта аператыўныя адказы на хвалюючыя вас пытанні адвакатаў-прафесіяналаў. Своечасовая кансультацыя адваката дапаможа выбраць правільную пазіцыю і папярэдзіць прыняцце неабдуманых рашэнняў, якія ў будучым могуць негатыўна паўплываць на зыход справы.</span><span style="font-family: &quot;Times New Roman&quot;, Times;"> </span>
+		</p>
+ <span style="font-family: &quot;Times New Roman&quot;, Times;"> </span><span style="font-size: 16pt; font-family: &quot;Times New Roman&quot;, Times;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times;"> </span>
+		<p>
+ <span style="font-size: 16pt; font-family: &quot;Times New Roman&quot;, Times;">&nbsp; &nbsp;Акрамя таго, анлайн-кансультацыя – гэта яшчэ і магчымасць выбраць свайго адваката шляхам непасрэдных зносін.</span>
+		</p>
+		<p>
+ <a href="/faq_ask/" class="ask" rel="nofollow" style="text-decoration: line-through !important;">Задать вопрос</a>
+		</p>
+	</div>
+	 <!-- /.block -->
+	<div id="block-block-17" class="block block-block contextual-links-region last even">
+		<h2 class="block-title"><br>
+ </h2>
+	</div>
+	 <!-- /.block -->
+</div>
+ <!-- /.region --> </section>
 <div class="region region-news">
-<?$APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"quest_front", 
-	array(
+	 <?$APPLICATION->IncludeComponent(
+	"bitrix:news.list",
+	"quest_front",
+	Array(
 		"ACTIVE_DATE_FORMAT" => "",
 		"ADD_SECTIONS_CHAIN" => "N",
 		"AJAX_MODE" => "N",
@@ -62,12 +69,7 @@ $APPLICATION->SetTitle("Белорусская Республиканская к
 		"DISPLAY_PICTURE" => "Y",
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "PREVIEW_TEXT",
-			1 => "DETAIL_PICTURE",
-			2 => "DATE_ACTIVE_FROM",
-			3 => "",
-		),
+		"FIELD_CODE" => array(0=>"PREVIEW_TEXT",1=>"DETAIL_PICTURE",2=>"DATE_ACTIVE_FROM",3=>"",),
 		"FILTER_NAME" => "",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "16",
@@ -86,11 +88,7 @@ $APPLICATION->SetTitle("Белорусская Республиканская к
 		"PARENT_SECTION" => "",
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "USER",
-			1 => "LINK",
-			2 => "",
-		),
+		"PROPERTY_CODE" => array(0=>"USER",1=>"LINK",2=>"",),
 		"SET_BROWSER_TITLE" => "N",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "N",
@@ -104,17 +102,16 @@ $APPLICATION->SetTitle("Белорусская Республиканская к
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N"
 	),
-	false,
-	array(
-		"ACTIVE_COMPONENT" => $MSPartners
-	)
-);?>   
+false,
+Array(
+	'ACTIVE_COMPONENT' => '={$MSPartners}'
+)
+);?>
 </div>
-</section>
-<section class="main">	
+ <section class="main">
 <div class="region region-online">
-    <div id="block-views-month-active-block" class="block block-views contextual-links-region first last odd">
-<?global $arrFilters; 
+	<div id="block-views-month-active-block" class="block block-views contextual-links-region first last odd">
+		 <?global $arrFilters; 
 
 /*date_default_timezone_set('UTC'); //should be set in your script or in your php.ini
 $date = new DateTime('FIRST DAY OF PREVIOUS MONTH');
@@ -147,12 +144,10 @@ print "</pre>";  */
 //$arrSorter = getSortAdvokat();
 $ussersid = getActiveAdvokat();
 $arrFilters = array("PROPERTY_USER" => array_keys($ussersid));
-?> 	     
-<?$APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"active_advo", 
-	array(
-    "USERS_ID"=>$ussersid,
+?> <?$APPLICATION->IncludeComponent(
+	"bitrix:news.list",
+	"active_advo",
+	Array(
 		"ACTIVE_DATE_FORMAT" => "",
 		"ADD_SECTIONS_CHAIN" => "N",
 		"AJAX_MODE" => "N",
@@ -184,12 +179,7 @@ $arrFilters = array("PROPERTY_USER" => array_keys($ussersid));
 		"DISPLAY_PICTURE" => "Y",
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "PREVIEW_TEXT",
-			1 => "DETAIL_PICTURE",
-			2 => "DATE_ACTIVE_FROM",
-			3 => "",
-		),
+		"FIELD_CODE" => array(0=>"PREVIEW_TEXT",1=>"DETAIL_PICTURE",2=>"DATE_ACTIVE_FROM",3=>"",),
 		"FILTER_NAME" => "arrFilters",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "17",
@@ -208,12 +198,7 @@ $arrFilters = array("PROPERTY_USER" => array_keys($ussersid));
 		"PARENT_SECTION" => "",
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "USER",
-			1 => "PUBLIC_DATE",
-			2 => "LINK",
-			3 => "",
-		),
+		"PROPERTY_CODE" => array(0=>"USER",1=>"PUBLIC_DATE",2=>"LINK",3=>"",),
 		"SET_BROWSER_TITLE" => "N",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "N",
@@ -225,22 +210,23 @@ $arrFilters = array("PROPERTY_USER" => array_keys($ussersid));
 		"SORT_BY2" => "",
 		"SORT_ORDER1" => "",
 		"SORT_ORDER2" => "",
+		"STRICT_SECTION_CHECK" => "N",
 		"TITLE_BLOCK" => "Самые активные адвокаты РБ по итогам июня 2019 года",
-		"STRICT_SECTION_CHECK" => "N"
+		"USERS_ID" => $ussersid
 	),
-	false,
-	array(
-		"ACTIVE_COMPONENT" => $MSPartners
-	)
-);?>       
-    </div>
+false,
+Array(
+	'ACTIVE_COMPONENT' => '={$MSPartners}'
+)
+);?>
+	</div>
 </div>
 <div class="region region-recentfaq">
-    <div id="block-views-news-on-mainpage-block" class="block block-views contextual-links-region first last odd">
- <?$APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"news_front", 
-	array(
+	<div id="block-views-news-on-mainpage-block" class="block block-views contextual-links-region first last odd">
+		 <?$APPLICATION->IncludeComponent(
+	"bitrix:news.list",
+	"news_front",
+	Array(
 		"ACTIVE_DATE_FORMAT" => "",
 		"ADD_SECTIONS_CHAIN" => "N",
 		"AJAX_MODE" => "N",
@@ -272,10 +258,7 @@ $arrFilters = array("PROPERTY_USER" => array_keys($ussersid));
 		"DISPLAY_PICTURE" => "Y",
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
+		"FIELD_CODE" => array(0=>"",1=>"",),
 		"FILTER_NAME" => "",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "23",
@@ -294,12 +277,7 @@ $arrFilters = array("PROPERTY_USER" => array_keys($ussersid));
 		"PARENT_SECTION" => "",
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "",
-			1 => "PUBLIC_DATE",
-			2 => "LINK",
-			3 => "",
-		),
+		"PROPERTY_CODE" => array(0=>"",1=>"PUBLIC_DATE",2=>"LINK",3=>"",),
 		"SET_BROWSER_TITLE" => "N",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "N",
@@ -313,21 +291,20 @@ $arrFilters = array("PROPERTY_USER" => array_keys($ussersid));
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N"
 	),
-	false,
-	array(
-		"ACTIVE_COMPONENT" => $MSPartners
-	)
-);?>   
-		</div>
+false,
+Array(
+	'ACTIVE_COMPONENT' => '={$MSPartners}'
+)
+);?>
 	</div>
- </section>   
-<section class="main">	
+</div>
+ </section> <section class="main">
 <div class="region region-blogs">
-    <div id="block-views-news-on-mainpage-block-1" class="block block-views contextual-links-region first last odd">
-<?$APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"blog_front", 
-	array(
+	<div id="block-views-news-on-mainpage-block-1" class="block block-views contextual-links-region first last odd">
+		 <?$APPLICATION->IncludeComponent(
+	"bitrix:news.list",
+	"blog_front",
+	Array(
 		"ACTIVE_DATE_FORMAT" => "",
 		"ADD_SECTIONS_CHAIN" => "N",
 		"AJAX_MODE" => "N",
@@ -359,10 +336,7 @@ $arrFilters = array("PROPERTY_USER" => array_keys($ussersid));
 		"DISPLAY_PICTURE" => "Y",
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
+		"FIELD_CODE" => array(0=>"",1=>"",),
 		"FILTER_NAME" => "",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "14",
@@ -381,14 +355,7 @@ $arrFilters = array("PROPERTY_USER" => array_keys($ussersid));
 		"PARENT_SECTION" => "",
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "PUBLIC_DATE",
-			1 => "USER",
-			2 => "OT_PRAVO",
-			3 => "OLD_ID",
-			4 => "LINK",
-			5 => "",
-		),
+		"PROPERTY_CODE" => array(0=>"PUBLIC_DATE",1=>"USER",2=>"OT_PRAVO",3=>"OLD_ID",4=>"LINK",5=>"",),
 		"SET_BROWSER_TITLE" => "N",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "N",
@@ -402,36 +369,30 @@ $arrFilters = array("PROPERTY_USER" => array_keys($ussersid));
 		"SORT_ORDER2" => "DESC",
 		"STRICT_SECTION_CHECK" => "N"
 	),
-	false,
-	array(
-		"ACTIVE_COMPONENT" => $MSPartners
-	)
+false,
+Array(
+	'ACTIVE_COMPONENT' => '={$MSPartners}'
+)
 );?>
+	</div>
 </div>
-</div>
-</section>
-<section class="main">	
-<section class="page-content">
-	<div class="region region-main-page-second">
-    <div id="block-block-6" class="block block-block contextual-links-region first odd">
-			<?$APPLICATION->IncludeFile(
+ </section> <section class="main"> <section class="page-content">
+<div class="region region-main-page-second">
+	<div id="block-block-6" class="block block-block contextual-links-region first odd">
+		 <?$APPLICATION->IncludeFile(
 						$APPLICATION->GetTemplatePath("include_areas/ob_advokat.php"),
 						Array(),
 						Array("MODE"=>"html")
-			);?>	    
-	</div><!-- /.block -->
-<div id="block-views-banners-block" class="block block-views contextual-links-region last even">
-
-      
-  <div class="view view-banners view-id-banners view-display-id-block slider-container view-dom-id-825ff0814b651951bf656ed4992115f3">
-        
-  
-  
-      <div class="view-content">
-<?$APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"partners", 
-	array(
+			);?>
+	</div>
+	 <!-- /.block -->
+	<div id="block-views-banners-block" class="block block-views contextual-links-region last even">
+		<div class="view view-banners view-id-banners view-display-id-block slider-container view-dom-id-825ff0814b651951bf656ed4992115f3">
+			<div class="view-content">
+				 <?$APPLICATION->IncludeComponent(
+	"bitrix:news.list",
+	"partners",
+	Array(
 		"ACTIVE_DATE_FORMAT" => "",
 		"ADD_SECTIONS_CHAIN" => "N",
 		"AJAX_MODE" => "N",
@@ -463,10 +424,7 @@ $arrFilters = array("PROPERTY_USER" => array_keys($ussersid));
 		"DISPLAY_PICTURE" => "Y",
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
+		"FIELD_CODE" => array(0=>"",1=>"",),
 		"FILTER_NAME" => "",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"IBLOCK_ID" => "11",
@@ -485,10 +443,7 @@ $arrFilters = array("PROPERTY_USER" => array_keys($ussersid));
 		"PARENT_SECTION" => "",
 		"PARENT_SECTION_CODE" => "",
 		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "LINK",
-			1 => "",
-		),
+		"PROPERTY_CODE" => array(0=>"LINK",1=>"",),
 		"SET_BROWSER_TITLE" => "N",
 		"SET_LAST_MODIFIED" => "N",
 		"SET_META_DESCRIPTION" => "N",
@@ -502,24 +457,14 @@ $arrFilters = array("PROPERTY_USER" => array_keys($ussersid));
 		"SORT_ORDER2" => "ASC",
 		"STRICT_SECTION_CHECK" => "N"
 	),
-	false,
-	array(
-		"ACTIVE_COMPONENT" => $MSPartners
-	)
+false,
+Array(
+	'ACTIVE_COMPONENT' => '={$MSPartners}'
+)
 );?>
-	  
-	  </div>
-  
-  
-  
-  
-  
-  
+			</div>
+		</div>
 	</div>
-	</div><!-- /.block -->
-  </div><!-- /.region -->
-  
-				  
-				  				  				
-</section>
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+	 <!-- /.block -->
+</div>
+ <!-- /.region --></section> </section><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

@@ -89,25 +89,25 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/jquery.fancybox.css')
 				false
 			);?>			
 </section>
-            <?$APPLICATION->IncludeComponent("diera:events.calendar", "calle", Array(
-                "IBLOCK_TYPE" => "news",	// Тип инфоблока
-                "LAST_YEAR" => "Y",
-                "IBLOCK_ID" => "3",	// Инфоблок
-                "DATE_START" => "DATE_ACTIVE_FROM",	// Свойство для даты начала события
-                "DATE_END" => "",	// Свойство для даты окончания события
-                "DETAIL_URL" => "",	// URL детальной страницы события
-                "CACHE_TYPE" => "A",	// Тип кеширования
-                "CACHE_TIME" => "360000",	// Время кеширования (сек.)
-                "CACHE_NOTES" => "",
-                "COMPONENT_TEMPLATE" => ".default",
-                "COMPOSITE_FRAME_MODE" => "N",
-                "COMPOSITE_FRAME_TYPE" => "AUTO"
-            ),
-                false,
-                array(
-                    "ACTIVE_COMPONENT" => "Y"
-                )
-            );?>
+            <?$APPLICATION->IncludeComponent("diera:events.calendar", "calle", array(
+	"IBLOCK_TYPE" => "news",
+		"LAST_YEAR" => "Y",
+		"IBLOCK_ID" => "3",
+		"DATE_START" => "DATE_ACTIVE_FROM",
+		"DATE_END" => "",
+		"DETAIL_URL" => "",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "360000",
+		"CACHE_NOTES" => "",
+		"COMPONENT_TEMPLATE" => ".default",
+		"COMPOSITE_FRAME_MODE" => "N",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
+	),
+	false,
+	array(
+	"ACTIVE_COMPONENT" => "N"
+	)
+);?>
 			<?$APPLICATION->IncludeFile(
 						$APPLICATION->GetTemplatePath("include_areas/brk_vk.php"),
 						Array(),

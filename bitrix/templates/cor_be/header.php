@@ -175,15 +175,15 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/jquery.fancybox.css')
 						Array(),
 						Array("MODE"=>"html")
 			);?>
-			<?$APPLICATION->IncludeComponent("diera:events.calendar", "calle", Array(
-	"IBLOCK_TYPE" => "news",	// Тип инфоблока
+			<?$APPLICATION->IncludeComponent("diera:events.calendar", "calle", array(
+	"IBLOCK_TYPE" => "news",
 		"LAST_YEAR" => "Y",
-		"IBLOCK_ID" => "3",	// Инфоблок
-		"DATE_START" => "DATE_ACTIVE_FROM",	// Свойство для даты начала события
-		"DATE_END" => "",	// Свойство для даты окончания события
-		"DETAIL_URL" => "",	// URL детальной страницы события
-		"CACHE_TYPE" => "A",	// Тип кеширования
-		"CACHE_TIME" => "360000",	// Время кеширования (сек.)
+		"IBLOCK_ID" => "3",
+		"DATE_START" => "DATE_ACTIVE_FROM",
+		"DATE_END" => "",
+		"DETAIL_URL" => "",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "360000",
 		"CACHE_NOTES" => "",
 		"COMPONENT_TEMPLATE" => ".default",
 		"COMPOSITE_FRAME_MODE" => "N",
@@ -191,7 +191,7 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/jquery.fancybox.css')
 	),
 	false,
 	array(
-	"ACTIVE_COMPONENT" => "Y"
+	"ACTIVE_COMPONENT" => "N"
 	)
 );?>
 <section class="regions" style="margin-top:30px;">
