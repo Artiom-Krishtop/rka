@@ -1,11 +1,11 @@
 jQuery(document).ready(function(){
  jQuery('#partners.flexslider').flexslider({
-    animation: "slide",
-    itemWidth: 180,
-    itemMargin: 0,
-	minItems: 3,
-    maxItems: 10, 
-	controlNav:false,	 
+     animation: "slide",
+     itemWidth: 145,
+     itemMargin: 3,
+     minItems: 3,
+     maxItems: 5,
+     controlNav:false
  });
 });
 jQuery(document).ready(function(){

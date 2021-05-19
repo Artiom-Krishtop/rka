@@ -1,6 +1,6 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <!DOCTYPE html>
-<html class="js">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=LANGUAGE_ID?>" lang="<?=LANGUAGE_ID?>" class="js">
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title><?$APPLICATION->ShowTitle()?></title>

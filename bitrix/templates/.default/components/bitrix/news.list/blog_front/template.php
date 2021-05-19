@@ -12,7 +12,15 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<h2 class="block-title">Артыкулы адвакатаў</h2>
+<h2 class="block-title"><?$APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        ".default",
+        Array(
+            "AREA_FILE_SHOW" => "file",
+            "PATH" => SITE_DIR."include/main_blog.php",
+            "EDIT_TEMPLATE" => ""
+        )
+    );?></h2>
   <div class="view view-news-on-mainpage view-id-news_on_mainpage view-display-id-block_1 view-dom-id-b0aa2628ef30d14948bc8a1b6b84081f">
 <div class="news-list view-content">
 <?if($arParams["DISPLAY_TOP_PAGER"]):?>
@@ -20,19 +28,15 @@ $this->setFrameMode(true);
 <?endif;?>
 <ul>
 <?foreach($arResult["ITEMS"] as $arItem):?>
-
 	<?
-if($arItem["PROPERTIES"]["USER"]["VALUE"]==1){continue;}
 	$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
 	$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
-   
- 	  $rImage = CFile::GetPath($arItem["US_ID"]["PERSONAL_PHOTO"]);
-      $renderImage = CFile::ResizeImageGet($arItem["US_ID"]["PERSONAL_PHOTO"], Array("width" => 105, "height" => '100%'), BX_RESIZE_IMAGE_EXACT, false); 		   
+      $renderImage = CFile::ResizeImageGet($arItem["FOTO"], Array("width" => 105, "height" => '100%'), BX_RESIZE_IMAGE_EXACT, false);
 	?>
 	<li class="news-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
 		<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arItem["PREVIEW_PICTURE"])):?>
 			<?if(!$arParams["HIDE_LINK_WHEN_NO_DETAIL"] || ($arItem["DETAIL_TEXT"] && $arResult["USER_HAVE_ACCESS"])):?>
-				<a href="<?=str_replace("/be/","/",$arItem["DETAIL_PAGE_URL"])?>"><img
+				<a href="<?=$arItem["DETAIL_PAGE_URL"]?>"><img
 						class="preview_picture"
 						border="0"
 						src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"
@@ -42,7 +46,7 @@ if($arItem["PROPERTIES"]["USER"]["VALUE"]==1){continue;}
 						title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>"
 						style="float:left"
 						/>
-<img width="45%" src="<?=CFile::GetPath($arItem["US_ID"]['PERSONAL_PHOTO'])?>" alt="<?=$arItem["US_ID"]['LOGIN']?>">                       
+<img width="45%" src="<?=CFile::GetPath($arItem["FOTO"])?>" alt="<?=$arItem["NAME_ADVO"]?>">
                         </a>
 			<?else:?>
 				<img
@@ -57,44 +61,20 @@ if($arItem["PROPERTIES"]["USER"]["VALUE"]==1){continue;}
 					/>
 			<?endif;?>
 		<?endif?>
-		<?/*if($arParams["DISPLAY_DATE"]!="N" && $arItem["DISPLAY_ACTIVE_FROM"]):?>
-			<span class="news-date-time"><?echo $arItem["DISPLAY_ACTIVE_FROM"]?></span>
-		<?endif*/?>
 		<?if($arParams["DISPLAY_NAME"]!="N" && $arItem["NAME"]):?>
 			<?if(!$arParams["HIDE_LINK_WHEN_NO_DETAIL"] || ($arItem["DETAIL_TEXT"] && $arResult["USER_HAVE_ACCESS"])):?>
-				<a href="<?=str_replace("/be/","/",$arItem["DETAIL_PAGE_URL"])?>">
- <img  src="<?=$renderImage['src']?>" alt="<?=$arItem["US_ID"]['LOGIN']?>">               
+				<a href="<?echo $arItem["DETAIL_PAGE_URL"]?>">
+                <img  src="<?=$renderImage['src']?>" alt="<?=$arItem["NAME_ADVO"]?>">
                 <b><?echo $arItem["NAME"]?></b></a><br />
 			<?else:?>
 				<b><?echo $arItem["NAME"]?></b><br />
 			<?endif;?>
 		<?endif;?>
-		<?/*if($arParams["DISPLAY_PREVIEW_TEXT"]!="N" && $arItem["PREVIEW_TEXT"]):?>
-			<?echo $arItem["PREVIEW_TEXT"];?>
-		<?endif;*/?>
 		<?if($arParams["DISPLAY_PICTURE"]!="N" && is_array($arItem["PREVIEW_PICTURE"])):?>
 			<div style="clear:both"></div>
 		<?endif?>
-		<?/*foreach($arItem["FIELDS"] as $code=>$value):?>
-			<small>
-			<?=GetMessage("IBLOCK_FIELD_".$code)?>:&nbsp;<?=$value;?>
-			</small><br />
-		<?endforeach;?>
-		<?foreach($arItem["DISPLAY_PROPERTIES"] as $pid=>$arProperty):?>
-			<small>
-			<?=$arProperty["NAME"]?>:&nbsp;
-			<?if(is_array($arProperty["DISPLAY_VALUE"])):?>
-				<?=implode("&nbsp;/&nbsp;", $arProperty["DISPLAY_VALUE"]);?>
-			<?else:?>
-				<?=$arProperty["DISPLAY_VALUE"];?>
-			<?endif?>
-			</small><br />
-		<?endforeach;*/?>
 	</li>
 <?endforeach;?>
 </ul>
-<?/*if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
-	<br /><?=$arResult["NAV_STRING"]?>
-<?endif;*/?>
 </div>
 </div>

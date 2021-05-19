@@ -55,7 +55,11 @@ hr
 	/*background-color: #d1d0d0;*/
 	margin:8px 0
 }
-
+.flexslider .slides img{width: 100%;padding-bottom: 10px;}
+.flexslider .slides li{
+	/*padding-left: 10px;
+	padding-right: 10px;*/
+}
 #header
 {
 	position:relative; /*containing block*/

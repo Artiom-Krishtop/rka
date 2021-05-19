@@ -1,0 +1,43 @@
+<?  
+//function cmp($a, $b) {
+
+    foreach ($arParams["USERS_ID"] as $grade=>$val) {
+      foreach ($arResult["ITEMS"] as $arItem) {    
+        if (isset($arItem["PROPERTIES"]["USER"]["VALUE"]) && $arItem["PROPERTIES"]["USER"]["VALUE"] == $grade) {
+           $arResult["NEWITEMS"][] = $arItem;  
+        } 
+      }
+    }
+$arResult["ITEMS"] = $arResult["NEWITEMS"];
+//}  
+
+//$arFilter['>=DATE_ACTIVE_FROM'] = date('d.m.Y H:i:s');
+//$arFilter = array(
+//"IBLOCK_ID"=>16,
+    //">=DATE_ACTIVE_FROM" => trim(CDatabase::CharToDateFunction($minDateCall),"\'"),
+    //"<=DATE_ACTIVE_FROM" => trim(CDatabase::CharToDateFunction($maxDateCall),"\'"),
+    // ">=DATE_ACTIVE_FROM" => $minDateCall,
+   // "<=DATE_ACTIVE_FROM" => $maxDateCall,   
+//);				 
+                        
+                        
+                    //print_r($arFilter);
+                    //$rest = CIBlockElement::GetList(Array('SORT' => 'ASC', 'ID' => 'DESC'),$arFilter, false, array(/*"nTopCount" => 40,*//*"nPageSize" => 10*/), Array("DATE_ACTIVE_FROM","PROPERTY_PUBLIC_DATE","PROPERTY_USER", "ID", "IBLOCK_ID"));
+					//$navStr = $rest->GetPageNavStringEx($navComponentObject, "Ответы:", ".default");	
+                    //$navCount = $rest->SelectedRowsCount(); 	
+//echo $navCount;                    
+					/*while ($ob = $rest->GetNextElement()){
+                       
+						$arFields = $ob->GetFields(); // поля элемента
+						$arResult["counter"][$arFields["PROPERTY_USER_VALUE"]]++;								
+                    }
+arsort($arResult["counter"]);  
+$arResult["counter"]=array_slice($arResult["counter"],0,7,TRUE);                            
+$arrKeys = array_keys($arResult["counter"]);               
+ 
+print "<pre>";
+print_r($arrKeys);
+print "</pre>"; */           
+                
+                 
+?> 

@@ -12,7 +12,15 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
-<h2 class="block-title">Навіны адвакатуры</h2>
+<h2 class="block-title"><?$APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        ".default",
+        Array(
+            "AREA_FILE_SHOW" => "file",
+            "PATH" => SITE_DIR."include/main_news.php",
+            "EDIT_TEMPLATE" => ""
+        )
+    );?></h2>
     
   <div class="view view-news-on-mainpage view-id-news_on_mainpage view-display-id-block view-dom-id-02d3cd7afa0f44a2fd931e51cd0f005a">
 
