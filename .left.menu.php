@@ -8,7 +8,7 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Онлайн-консультация", 
+		"Оnline-консультация", 
 		"/faq_ask/", 
 		Array(), 
 		Array("IMG"=>"/bitrix/templates/cor/images/ask.png"), 
@@ -50,14 +50,14 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Электронное обращение", 
+		"Электрон. обращение", 
 		"/electronic-appeal/", 
 		Array(), 
 		Array("IMG"=>"/bitrix/templates/cor/images/letter.png"), 
 		"" 
 	),
 	Array(
-		"Правила консультации", 
+		"Правила OK", 
 		"pravila-online-konsultacii", 
 		Array(), 
 		Array(), 
