@@ -490,7 +490,9 @@ function listLawyersCSV()
     if(CModule::IncludeModule("iblock"))
     {
         global $APPLICATION;
-        $expUsersFile = 'lawyers.csv';
+        $hash = md5(microtime());
+        $baseUrl = '/upload/get-lawyers/';
+        $expUsersFile = $hash . '.csv';
         $strDlmtr = ';';
         $lineDlmtr = "\n";
         $arUsers = array('#;ФИО;Номер лицензии;Дата выдачи лицензии;Коллегия;Место работы;Основной номер телефона;Дополнительные номера телефонов;Мессенджеры;Электронная почта;Адрес: Область;Адрес: Район;Адрес: Населенный пункт;Адрес: Улица;Адрес: Номер дома;Адрес: корпус;Адрес: Номер помещения;График работы;Основные отрасли права;Ссылка на фото;gps-координаты');
@@ -749,7 +751,20 @@ function listLawyersCSV()
         unset($rsResCat, $arItemCat);
 
         $strUsers = implode($lineDlmtr, $arUsers);
-        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/'.$expUsersFile, $strUsers, LOCK_EX);
+
+        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/lawyers.csv', $strUsers, LOCK_EX);
+
+        /* generate file for secret link */
+        if(file_put_contents($_SERVER['DOCUMENT_ROOT'].$baseUrl.$expUsersFile, $strUsers, LOCK_EX))
+        {
+            $arr = file($_SERVER['DOCUMENT_ROOT'] . $baseUrl . 'get_url.txt');
+            for ($i = 0; count($arr) > $i; $i++)
+                if ($url = rtrim($arr[$i]))
+                    if(file_exists($_SERVER['DOCUMENT_ROOT'].$url))
+                        unlink($_SERVER['DOCUMENT_ROOT'].$url);
+
+            file_put_contents($_SERVER['DOCUMENT_ROOT'] . $baseUrl . 'get_url.txt', $baseUrl . $expUsersFile, LOCK_EX);
+        }
     }
 
     return "listLawyersCSV();";
