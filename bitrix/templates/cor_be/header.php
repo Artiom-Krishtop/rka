@@ -59,9 +59,7 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/jquery.fancybox.css')
 </head>
 
 <body class="html front not-logged-in one-sidebar sidebar-first page-node i18n-ru fb_processed <?global $USER; if ($USER->IsAdmin()):?>admined-body<?endif;?> ">
-<!--<p id="skip-link">
-      <a href="#main-menu" class="element-invisible element-focusable">Jump to navigation</a>
-</p>-->
+<!--<p id="skip-link"><a href="#main-menu" class="element-invisible element-focusable">Jump to navigation</a></p>-->
 <div id="panel"><?$APPLICATION->ShowPanel();?></div>
 <div class="container">
     <aside>
@@ -117,6 +115,16 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/jquery.fancybox.css')
                 false
             );?>
         </section><br>
+        <?/*$APPLICATION->IncludeFile(
+						$APPLICATION->GetTemplatePath("include_areas/journal_arhive.php"),
+						Array(),
+						Array("MODE"=>"html")
+			);*/?>
+        <?$APPLICATION->IncludeFile(
+            $APPLICATION->GetTemplatePath("include_areas/poem.php"),
+            Array(),
+            Array("MODE"=>"html")
+        );?>
         <div id="block-block-22" class="block block-block contextual-links-region odd" style="margin-bottom:10px;">
             <?$APPLICATION->IncludeComponent(
                 "bitrix:news.list",
@@ -190,16 +198,6 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/jquery.fancybox.css')
                 false
             );?>
         </div>
-        <?/*$APPLICATION->IncludeFile(
-						$APPLICATION->GetTemplatePath("include_areas/journal_arhive.php"),
-						Array(),
-						Array("MODE"=>"html")
-			);*/?>
-        <?$APPLICATION->IncludeFile(
-            $APPLICATION->GetTemplatePath("include_areas/poem.php"),
-            Array(),
-            Array("MODE"=>"html")
-        );?>
         <?$APPLICATION->IncludeComponent(
             "diera:events.calendar",
             "calle",
@@ -237,10 +235,10 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/jquery.fancybox.css')
         <div id="header" class="region region-navigation">
             <div id="header_menu">
                 <?/*$APPLICATION->IncludeFile(
-			$APPLICATION->GetTemplatePath("include_areas/header_icons.php"),
-			Array(),
-			Array("MODE"=>"php")
-		);*/?>
+                    $APPLICATION->GetTemplatePath("include_areas/header_icons.php"),
+                    Array(),
+                    Array("MODE"=>"php")
+                );*/?>
                 <?$APPLICATION->IncludeComponent(
                     "bitrix:menu",
                     "horizontal_multilevel",
@@ -262,17 +260,17 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/jquery.fancybox.css')
                 );?>
             </div>
             <?/*$APPLICATION->IncludeComponent(
-	"bitrix:system.auth.form",
-	"auth_advo",
-	array(
-		"FORGOT_PASSWORD_URL" => "",
-		"REGISTER_URL" => "/auth/",
-		"PROFILE_URL" => "/personal/profile/",
-		"SHOW_ERRORS" => "N",
-		"COMPONENT_TEMPLATE" => "auth_advo"
-	),
-	false
-);*/?>
+                "bitrix:system.auth.form",
+                "auth_advo",
+                array(
+                    "FORGOT_PASSWORD_URL" => "",
+                    "REGISTER_URL" => "/auth/",
+                    "PROFILE_URL" => "/personal/profile/",
+                    "SHOW_ERRORS" => "N",
+                    "COMPONENT_TEMPLATE" => "auth_advo"
+                ),
+                false
+            );*/?>
             <div class="text_main">
                 <?$APPLICATION->IncludeFile(
                     $APPLICATION->GetTemplatePath("include_areas/header_menu.php"),
@@ -282,24 +280,23 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/jquery.fancybox.css')
 
             </div>
             <?/*if (($APPLICATION->GetCurPage() == "/be/about/")){?>
-<section class="about">
-	<div class="region region-intro">
-    <div id="block-block-8" class="block block-block contextual-links-region first last odd">
-		<?$APPLICATION->IncludeComponent(
-			"bitrix:main.include",
-			".default",
-			Array(
-				"AREA_FILE_SHOW" => "file",
-				"PATH" => "/include/about_text.php",
-				"EDIT_TEMPLATE" => ""
-			)
-		);
-				?>
-        </div><!-- /.block -->
-   </div><!-- /.region -->
-</section>
-<?}*/?>
-
+            <section class="about">
+                <div class="region region-intro">
+                <div id="block-block-8" class="block block-block contextual-links-region first last odd">
+                    <?$APPLICATION->IncludeComponent(
+                        "bitrix:main.include",
+                        ".default",
+                        Array(
+                            "AREA_FILE_SHOW" => "file",
+                            "PATH" => "/include/about_text.php",
+                            "EDIT_TEMPLATE" => ""
+                        )
+                    );
+                            ?>
+                    </div><!-- /.block -->
+               </div><!-- /.region -->
+            </section>
+            <?}*/?>
             <?if (($APPLICATION->GetCurPage() != "/be/")){?>
             <section class="page-content">
                 <div id="navigation" class="breadcrumb"><?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "main", Array(
@@ -310,47 +307,40 @@ $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles/jquery.fancybox.css')
                     ),
                         false
                     );?> </div>
-
                 <h1 id="page-title" class="title"><?$APPLICATION->ShowTitle(false)?></h1>
                 <?}?>
-
-			<!--<section class="page-content">
-				  <a id="main-content"></a>
-					<h1 class="title" id="page-title"></h1>
-					<ul class="action-links"></ul>
-			</section>-->
-
-<?/*<!--<table id="content">
-  <tbody>
-    <tr><td class="left-column">	
-<div class="content-block">
-	<div class="content-block-head">Подписка на рассылку</div>
-		<div class="content-block-body"><?$APPLICATION->IncludeComponent(
-			"bitrix:subscribe.form",
-			".default",
-			Array(
-				"PAGE" => "#SITE_DIR#personal/subscribe/subscr_edit.php",
-				"SHOW_HIDDEN" => "N",
-				"USE_PERSONALIZATION"	=>	"N",
-				"CACHE_TYPE" => "A",
-				"CACHE_TIME" => "3600"
-			)
-			);?>
-	</div>
-</div>
-      
-
-        </div>
-      </td><td class="main-column">
- <div id="navigation"><?$APPLICATION->IncludeComponent(
-	"bitrix:breadcrumb",
-	".default",
-	Array(
-		"START_FROM" => "0", 
-		"PATH" => "", 
-		"SITE_ID" => "" 
-	)
-);?> </div>
-      
-        <h1 id="pagetitle"><?$APPLICATION->ShowTitle(false)?></h1>-->*/?>
-      
+                <!--<section class="page-content">
+                      <a id="main-content"></a>
+                        <h1 class="title" id="page-title"></h1>
+                        <ul class="action-links"></ul>
+                </section>-->
+                <?/*<!--<table id="content">
+                  <tbody>
+                    <tr><td class="left-column">
+                        <div class="content-block">
+                            <div class="content-block-head">Подписка на рассылку</div>
+                                <div class="content-block-body"><?$APPLICATION->IncludeComponent(
+                                    "bitrix:subscribe.form",
+                                    ".default",
+                                    Array(
+                                        "PAGE" => "#SITE_DIR#personal/subscribe/subscr_edit.php",
+                                        "SHOW_HIDDEN" => "N",
+                                        "USE_PERSONALIZATION"	=>	"N",
+                                        "CACHE_TYPE" => "A",
+                                        "CACHE_TIME" => "3600"
+                                    )
+                                    );?>
+                                </div>
+                            </div>
+                        </div>
+                      </td><td class="main-column">
+                         <div id="navigation"><?$APPLICATION->IncludeComponent(
+                            "bitrix:breadcrumb",
+                            ".default",
+                            Array(
+                                "START_FROM" => "0",
+                                "PATH" => "",
+                                "SITE_ID" => ""
+                            )
+                        );?> </div>
+                        <h1 id="pagetitle"><?$APPLICATION->ShowTitle(false)?></h1>-->*/?>

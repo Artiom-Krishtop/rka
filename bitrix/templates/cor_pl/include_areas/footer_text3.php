@@ -1,4 +1,1 @@
-			<h3 class="block-title">Contact technical support site for lawyers</h3>
-			<p><a title="submit your application" href="http://help.artismedia.by/" target="_blank" rel="nofollow">submit your application</a></p>
-            <p><a title="How to create a request?" href="/upload/docs/Kak-sozdat-zayavku.pdf" target="_blank" rel="nofollow">How to create a request?</a></p>
-            <p><a title="How to check the application?" href="/upload/docs/Kak-proverit-zayavku.pdf" target="_blank" rel="nofollow">How to check the application?</a></p>
+<h3 class="block-title">Contact technical support site for lawyers <a href="http://help.itg-soft.by/" target="_blank" style="white-space: nowrap;">help.itg-soft.by</a></h3>
