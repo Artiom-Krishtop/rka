@@ -1,5 +1,5 @@
 <?
-// http://rka.by.local/get-lawyers/index.php?hash=2998a57c22387214d784204764aee9bc
+// https://rka.by/get-lawyers/index.php?hash=2998a57c22387214d784204764aee9bc
 //$hashUrl = md5(date('lF'));
 $hash = $_GET['hash'];
 if (strlen($hash) === 32 && md5(date('lF')) === $hash)

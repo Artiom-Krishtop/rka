@@ -1,1 +1,1 @@
-French-speaking advocates
+Аvocats francophones

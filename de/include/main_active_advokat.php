@@ -1,1 +1,1 @@
-German-speaking advocates
+Deutschsprachige Anwälte

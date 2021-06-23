@@ -1,4 +1,5 @@
-<h2 class="block-title">Adwokaci i organy państwowe Republiki Białoruś</h2>
+<h2 class="block-title">Współpraca Białoruskiego Republikańskiego Kolegium Adwokatów</h2>
+ <pre></pre>
 <p>
-Adwokaci Republiki Białoruś aktywnie współdziałają z rozmaitymi organami państwowymi, a także organizacjami społecznymi.
+	Białoruskie Republikańskie Kolegium Adwokatów oficjalnie współpracuje z wieloma organami państwowymi i organizacjami publicznymi Republiki Białorusi.
 </p>

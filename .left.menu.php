@@ -1,59 +1,24 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"Новости", 
-		"/news/", 
-		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_241.png"), 
-		"" 
-	),
-	Array(
-		"Оnline-консультация", 
-		"/faq_ask/", 
-		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/ask.png"), 
-		"" 
-	),
-	Array(
-		"Найти адвоката", 
-		"/search_adv/", 
-		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_2321.png"), 
-		"" 
-	),
-	Array(
 		"Об адвокатуре", 
-		"/about/", 
-		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_265.png"), 
-		"" 
-	),
-	Array(
-		"Юридическая помощь", 
-		"https://rka.by/about/poryadok-i-usloviya-okazaniya/", 
+		"https://www.rka.by/about/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Медиация", 
-		"/mediaciya/", 
+		"БРКА", 
+		"https://www.rka.by/kollegies/respublikanskaya/", 
 		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_1966.png"), 
+		Array(), 
 		"" 
 	),
 	Array(
-		"Адвокаты - детям", 
-		"/advokaty-detyam/", 
+		"Контакты/приём", 
+		"https://www.rka.by/grafik-priyoma-grazhdan/", 
 		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_7580.png"), 
-		"" 
-	),
-	Array(
-		"Электрон. обращение", 
-		"/electronic-appeal/", 
 		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/letter.png"), 
 		"" 
 	),
 	Array(
@@ -71,10 +36,17 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Виртуальный музей", 
-		"/museum/", 
+		"Форумы адвокатов", 
+		"https://www.rka.by/forum/", 
 		Array(), 
-		Array("IMG"=>"/bitrix/templates/cor/images/menu_icon_266.png"), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Виртуальный музей", 
+		"https://www.rka.by/museum/", 
+		Array(), 
+		Array(), 
 		"" 
 	)
 );

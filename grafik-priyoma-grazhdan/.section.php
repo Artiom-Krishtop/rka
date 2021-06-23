@@ -1,6 +1,6 @@
 <?
-$sSectionName = "График приёма";
-$arDirProperties = Array(
+$sSectionName = "Контакты/График приёма граждан";
+$arDirProperties = array(
 
 );
 ?>

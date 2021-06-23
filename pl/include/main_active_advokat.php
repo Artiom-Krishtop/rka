@@ -1,1 +1,1 @@
-Polish-speaking advocates
+Рolskojęzyczni prawnicy
