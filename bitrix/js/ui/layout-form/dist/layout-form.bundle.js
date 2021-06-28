@@ -17,6 +17,7 @@ this.BX = this.BX || {};
 
 	      for (var i = 0; i < this.nodes.length; i++) {
 	        main_core.Event.bind(this.nodes[i], "click", this.onClick.bind(this));
+	        this.nodes[i].querySelector('.ui-ctl-element[type="checkbox"]').style.pointerEvents = 'none';
 	        this.checkInitialBlockVisibility(this.nodes[i]);
 	      }
 	    }
@@ -34,7 +35,7 @@ this.BX = this.BX || {};
 	  }, {
 	    key: "onClick",
 	    value: function onClick(event) {
-	      event.preventDefault();
+	      // event.preventDefault();
 	      var checkbox = event.currentTarget.querySelector('.ui-ctl-element[type="checkbox"]');
 	      var hiddenBlock = event.currentTarget.nextElementSibling;
 	      var height = hiddenBlock.scrollHeight;

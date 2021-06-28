@@ -55,12 +55,12 @@ if($arLang["CULTURE_ID"] == '')
 $lang = $arLang["LID"];
 if (!defined("SITE_ID"))
 	define("SITE_ID", $arLang["LID"]);
-define("SITE_DIR", $arLang["DIR"]);
-define("SITE_SERVER_NAME", $arLang["SERVER_NAME"]);
+define("SITE_DIR", ($arLang["DIR"] ?? ''));
+define("SITE_SERVER_NAME", ($arLang["SERVER_NAME"] ?? ''));
 define("SITE_CHARSET", $arLang["CHARSET"]);
 define("FORMAT_DATE", $arLang["FORMAT_DATE"]);
 define("FORMAT_DATETIME", $arLang["FORMAT_DATETIME"]);
-define("LANG_DIR", $arLang["DIR"]);
+define("LANG_DIR", ($arLang["DIR"] ?? ''));
 define("LANG_CHARSET", $arLang["CHARSET"]);
 define("LANG_ADMIN_LID", $arLang["LANGUAGE_ID"]);
 define("LANGUAGE_ID", $arLang["LANGUAGE_ID"]);
@@ -103,15 +103,10 @@ require_once(__DIR__."/filter_tools.php");
 
 define('BX_AJAX_PARAM_ID', 'bxajaxid');
 
-/*ZDUyZmZMjc5MDQ4N2VlZGFkMjM2YTFmNDdiNjMwNDgxOTQ4NDQ=*/$GLOBALS['____2067626069']= array(base64_decode(''.'ZG'.'Vma'.'W5l'));if(!function_exists(__NAMESPACE__.'\\___1027925313')){function ___1027925313($_1145182441){static $_1693627870= false; if($_1693627870 == false) $_1693627870=array('R'.'U5DT0RF','WQ='.'=');return base64_decode($_1693627870[$_1145182441]);}};class CBXFeatures{ public static function IsFeatureEnabled($_380804391){ return true;} public static function IsFeatureEditable($_380804391){ return true;} public static function SetFeatureEnabled($_380804391, $_1321489397= true){} public static function SaveFeaturesSettings($_944537083, $_1810760300){} public static function GetFeaturesList(){ return array();} public static function InitiateEditionsSettings($_1117469723){} public static function ModifyFeaturesSettings($_1117469723, $_1066605866){} public static function IsFeatureInstalled($_380804391){ return true;}} $GLOBALS['____2067626069'][0](___1027925313(0), ___1027925313(1));/**/			//Do not remove this
+/*ZDUyZmZYjE2NWI2MjNjMTkyZTc3YThmOTVhNDBjNTliOTk1ZWQ=*/$GLOBALS['____1525440742']= array(base64_decode('ZGVm'.'a'.'W5l'));if(!function_exists(__NAMESPACE__.'\\___778781901')){function ___778781901($_2130804482){static $_1660012820= false; if($_1660012820 == false) $_1660012820=array('R'.'U5DT0RF','W'.'Q==');return base64_decode($_1660012820[$_2130804482]);}};class CBXFeatures{ public static function IsFeatureEnabled($_1194473869){ return true;} public static function IsFeatureEditable($_1194473869){ return true;} public static function SetFeatureEnabled($_1194473869, $_1897500354= true){} public static function SaveFeaturesSettings($_1853847367, $_1509744354){} public static function GetFeaturesList(){ return array();} public static function InitiateEditionsSettings($_1590289555){} public static function ModifyFeaturesSettings($_1590289555, $_418235941){} public static function IsFeatureInstalled($_1194473869){ return true;}} $GLOBALS['____1525440742'][0](___778781901(0), ___778781901(1));/**/			//Do not remove this
 
 //component 2.0 template engines
 $GLOBALS["arCustomTemplateEngines"] = [];
-
-/**
- * Defined in dbconn.php
- * @param string $DBType
- */
 
 require_once(__DIR__."/autoload.php");
 require_once(__DIR__."/classes/general/menu.php");
@@ -422,6 +417,12 @@ if(!defined("ADMIN_SECTION") || ADMIN_SECTION !== true)
 	}
 	define("SITE_TEMPLATE_ID", $siteTemplate);
 	define("SITE_TEMPLATE_PATH", getLocalPath('templates/'.SITE_TEMPLATE_ID, BX_PERSONAL_ROOT));
+}
+else
+{
+	// prevents undefined constants
+	define('SITE_TEMPLATE_ID', '.default');
+	define('SITE_TEMPLATE_PATH', '/bitrix/templates/.default');
 }
 
 //magic parameters: show page creation time

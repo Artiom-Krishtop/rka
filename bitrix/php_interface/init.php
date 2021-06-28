@@ -669,7 +669,16 @@ function listLawyersCSV()
 
                 $photo = '';
                 if(isset($u["PERSONAL_PHOTO"]) && !empty($u["PERSONAL_PHOTO"]))
-                    $photo = ((\Bitrix\Main\Context::getCurrent()->getRequest()->isHttps()) ? 'https://rka.by' : 'http://rka.by').CFile::GetPath($u["PERSONAL_PHOTO"]);
+                {
+                    $arPhoto = CFile::GetFileArray($u["PERSONAL_PHOTO"]);
+                    if($arPhoto["FILE_NAME"] != 'picture-default.jpg')
+                    {
+                        $arPhotoResize = CFile::ResizeImageGet($arPhoto, array("width" => 300, "height" => 300), BX_RESIZE_IMAGE_EXACT, true);
+                        $photo = ((\Bitrix\Main\Context::getCurrent()->getRequest()->isHttps()) ? 'https://rka.by' : 'http://rka.by') . $arPhotoResize["src"];
+                        unset($arPhotoResize);
+                    }
+                    unset($arPhoto);
+                }
 
                 $sferaPrava = '';
                 if(is_array($arProps["SFERA_DET"]["VALUE"]))

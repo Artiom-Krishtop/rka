@@ -1,4 +1,4 @@
-<?
+<?php
 $MESS["interface_grid_act"] = "Дії";
 $MESS["interface_grid_actions"] = "Колонка дій";
 $MESS["interface_grid_actions_list"] = "— дії —";
@@ -24,6 +24,7 @@ $MESS["interface_grid_common_default_apply"] = "Замінити всі нала
 $MESS["interface_grid_confirm_apply"] = "Підтвердити";
 $MESS["interface_grid_confirm_cancel"] = "Скасувати";
 $MESS["interface_grid_confirm_for_all_message"] = "Дія буде застосована для всіх елементів, у тому числі й на інших сторінках";
+$MESS["interface_grid_confirm_for_all_message_v2"] = "Дія буде застосована до всіх обраних за фільтром елементів, враховуючи елементи й на інших сторінках";
 $MESS["interface_grid_confirm_message"] = "Підтвердіть дію для зазначених елементів";
 $MESS["interface_grid_date"] = "Вибрати дату в календарі";
 $MESS["interface_grid_dblclick"] = "Подвійне натискання —";
@@ -134,4 +135,3 @@ $MESS["interface_grid_views_setup"] = "Налаштувати список...";
 $MESS["interface_grid_views_setup_title"] = "На латинице";
 $MESS["interface_grid_views_title"] = "Управління поданнями";
 $MESS["interface_grid_yes"] = "Так";
-?>

@@ -1,9 +1,10 @@
-<?
-use Bitrix\Main,
-	Bitrix\Main\Loader,
-	Bitrix\Main\ModuleManager,
-	Bitrix\Iblock,
-	Bitrix\Catalog;
+<?php
+
+use Bitrix\Main;
+use Bitrix\Main\Loader;
+use Bitrix\Main\ModuleManager;
+use Bitrix\Iblock;
+use Bitrix\Catalog;
 
 IncludeModuleLangFile(__FILE__);
 
@@ -50,6 +51,9 @@ class CAllIBlockElement
 	protected $userExists = null;
 	protected $userId = null;
 
+	protected $iblock;
+	protected $iblockLanguage;
+
 	protected $indexedProperties = array();
 
 	protected $offerProperties = array();
@@ -64,6 +68,29 @@ class CAllIBlockElement
 		$this->searchIncluded = Loader::includeModule('search');
 		$this->userExists = isset($USER) && $USER instanceof \CUser;
 		$this->userId = ($this->userExists ? (int)$USER->GetID() : 0);
+		$this->iblock = null;
+		$this->iblockLanguage = null;
+	}
+
+	public function setIblock(?int $iblockId): void
+	{
+		$iblock = null;
+		$language = null;
+		if ($iblockId !== null)
+		{
+			$iblock = CIBlock::GetArrayByID($iblockId);
+			if (!is_array($iblock))
+			{
+				$iblock = null;
+			}
+			else
+			{
+				$iblock['ID'] = (int)$iblock['ID'];
+				$language = static::getIblockLanguage($iblock['ID']);
+			}
+		}
+		$this->iblock = $iblock;
+		$this->iblockLanguage = $language;
 	}
 
 	/**
@@ -109,7 +136,7 @@ class CAllIBlockElement
 		$this->bWF_SetMove = false;
 	}
 
-	function WF_Restore($ID)
+	public static function WF_Restore($ID)
 	{
 		$obElement = new CIBlockElement;
 		$rsElement = $obElement->GetByID($ID);
@@ -163,7 +190,7 @@ class CAllIBlockElement
 	///////////////////////////////////////////////////////////////////
 	// Clear history
 	///////////////////////////////////////////////////////////////////
-	function WF_CleanUpHistory()
+	public static function WF_CleanUpHistory()
 	{
 		if (CModule::IncludeModule("workflow"))
 		{
@@ -430,7 +457,7 @@ class CAllIBlockElement
 	///////////////////////////////////////////////////////////////////
 	// Clears the last or old records in history using parameters from workflow module
 	///////////////////////////////////////////////////////////////////
-	function WF_CleanUpHistoryCopies($ELEMENT_ID=false, $HISTORY_COPIES=false)
+	public static function WF_CleanUpHistoryCopies($ELEMENT_ID=false, $HISTORY_COPIES=false)
 	{
 		if(CModule::IncludeModule("workflow"))
 		{
@@ -682,6 +709,21 @@ class CAllIBlockElement
 			{
 				$arFilter[mb_substr($key, 0, $p)."PROPERTY"][mb_substr($key, $p + 9)] = $val;
 				unset($arFilter[$key]);
+			}
+			else
+			{
+				$p = strpos($key, 'SUBQUERY');
+				if ($p !== false && $p <4)
+				{
+					if (!empty($val) && is_array($val))
+					{
+						$arFilter[substr($key, 0, $p).'ID'] = static::SubQuery(
+							$val['FIELD'],
+							$val['FILTER']
+						);
+					}
+					unset($arFilter[$key]);
+				}
 			}
 		}
 
@@ -3093,6 +3135,7 @@ class CAllIBlockElement
 
 			if(
 				$arDef["FROM_DETAIL"] === "Y"
+				&& isset($arFields["DETAIL_PICTURE"])
 				&& is_array($arFields["DETAIL_PICTURE"])
 				&& $arFields["DETAIL_PICTURE"]["size"] > 0
 				&& (
@@ -3116,7 +3159,7 @@ class CAllIBlockElement
 			}
 
 			if(
-				array_key_exists("PREVIEW_PICTURE", $arFields)
+				isset($arFields["PREVIEW_PICTURE"])
 				&& is_array($arFields["PREVIEW_PICTURE"])
 				&& $arDef["SCALE"] === "Y"
 			)
@@ -3135,7 +3178,7 @@ class CAllIBlockElement
 			}
 
 			if(
-				array_key_exists("PREVIEW_PICTURE", $arFields)
+				isset($arFields["PREVIEW_PICTURE"])
 				&& is_array($arFields["PREVIEW_PICTURE"])
 				&& $arDef["USE_WATERMARK_FILE"] === "Y"
 			)
@@ -3166,7 +3209,7 @@ class CAllIBlockElement
 			}
 
 			if(
-				array_key_exists("PREVIEW_PICTURE", $arFields)
+				isset($arFields["PREVIEW_PICTURE"])
 				&& is_array($arFields["PREVIEW_PICTURE"])
 				&& $arDef["USE_WATERMARK_TEXT"] === "Y"
 			)
@@ -3200,7 +3243,7 @@ class CAllIBlockElement
 			$arDef = $arIBlock["FIELDS"]["DETAIL_PICTURE"]["DEFAULT_VALUE"];
 
 			if(
-				array_key_exists("DETAIL_PICTURE", $arFields)
+				isset($arFields["DETAIL_PICTURE"])
 				&& is_array($arFields["DETAIL_PICTURE"])
 				&& $arDef["SCALE"] === "Y"
 			)
@@ -3219,7 +3262,7 @@ class CAllIBlockElement
 			}
 
 			if(
-				array_key_exists("DETAIL_PICTURE", $arFields)
+				isset($arFields["DETAIL_PICTURE"])
 				&& is_array($arFields["DETAIL_PICTURE"])
 				&& $arDef["USE_WATERMARK_FILE"] === "Y"
 			)
@@ -3250,7 +3293,7 @@ class CAllIBlockElement
 			}
 
 			if(
-				array_key_exists("DETAIL_PICTURE", $arFields)
+				isset($arFields["DETAIL_PICTURE"])
 				&& is_array($arFields["DETAIL_PICTURE"])
 				&& $arDef["USE_WATERMARK_TEXT"] === "Y"
 			)
@@ -3360,6 +3403,7 @@ class CAllIBlockElement
 				$arFields["WF_NEW"] = "";
 		}
 
+		$arFields["NAME"] = (string)$arFields["NAME"];
 		$arFields["SEARCHABLE_CONTENT"] = false;
 		if ($this->searchIncluded)
 		{
@@ -3608,7 +3652,7 @@ class CAllIBlockElement
 		return $Result;
 	}
 
-	function DeleteFile($FILE_ID, $ELEMENT_ID, $TYPE = false, $PARENT_ID = -1, $IBLOCK_ID = false, $bCheckOnly = false)
+	public static function DeleteFile($FILE_ID, $ELEMENT_ID, $TYPE = false, $PARENT_ID = -1, $IBLOCK_ID = false, $bCheckOnly = false)
 	{
 		global $DB;
 
@@ -3797,16 +3841,17 @@ class CAllIBlockElement
 		global $DB, $APPLICATION, $USER;
 		$USER_ID = is_object($USER)? (int)$USER->GetID() : 0;
 		$ID = (int)$ID;
+		if ($ID <= 0)
+		{
+			return false;
+		}
 
 		$APPLICATION->ResetException();
 		foreach (GetModuleEvents("iblock", "OnBeforeIBlockElementDelete", true) as $arEvent)
 		{
 			if(ExecuteModuleEventEx($arEvent, array($ID))===false)
 			{
-				if (is_object($USER) && $USER->IsAdmin())
-					$err = GetMessage("MAIN_BEFORE_DEL_ERR").' '.$arEvent['TO_NAME'];
-				else
-					$err = "";
+				$err = "";
 				$err_id = false;
 				if($ex = $APPLICATION->GetException())
 				{
@@ -4619,7 +4664,7 @@ class CAllIBlockElement
 	 * @param mixed $PROPERTY_VALUE
 	 * @return bool
 	 */
-	function SetPropertyValueCode($ELEMENT_ID, $PROPERTY_CODE, $PROPERTY_VALUE)
+	public static function SetPropertyValueCode($ELEMENT_ID, $PROPERTY_CODE, $PROPERTY_VALUE)
 	{
 		$IBLOCK_ID = CIBlockElement::GetIBlockByID($ELEMENT_ID);
 		if (!$IBLOCK_ID)
@@ -4845,7 +4890,7 @@ class CAllIBlockElement
 	//////////////////////////////////////////////////////////////////////////
 	//
 	//////////////////////////////////////////////////////////////////////////
-	function SetElementSection($ID, $arSections, $bNew = false, $bRightsIBlock = 0, $sectionId = null)
+	public static function SetElementSection($ID, $arSections, $bNew = false, $bRightsIBlock = 0, $sectionId = null)
 	{
 		global $DB;
 		$ID = intval($ID);
@@ -6146,7 +6191,7 @@ class CAllIBlockElement
 			return 1;
 	}
 
-	function DeletePropertySQL($property, $iblock_element_id)
+	public static function DeletePropertySQL($property, $iblock_element_id)
 	{
 		global $DB;
 
@@ -6984,7 +7029,7 @@ class CAllIBlockElement
 		return $strResult;
 	}
 
-	protected function __GetDescriptionUpdateSql($iblock_id, $property_id, $description = false)
+	protected static function __GetDescriptionUpdateSql($iblock_id, $property_id, $description = false)
 	{
 		global $DB;
 		$tableFields = $DB->GetTableFields("b_iblock_element_prop_s".$iblock_id);
@@ -7256,5 +7301,208 @@ class CAllIBlockElement
 			}
 		}
 		return (!empty($this->offerProperties[$iblockId]) ? $this->offerProperties[$iblockId] : null);
+	}
+
+	public function generateMnemonicCode(string $name, int $iblockId, array $options = []): ?string
+	{
+		if ($name === '' || $iblockId <= 0)
+		{
+			return null;
+		}
+
+		if ($this->iblock !== null && $this->iblock['ID'] === $iblockId)
+		{
+			$iblock = $this->iblock;
+			$language = $this->iblockLanguage;
+		}
+		else
+		{
+			$iblock = CIBlock::GetArrayByID($iblockId);
+			if (empty($iblock))
+			{
+				$iblock = null;
+				$language = null;
+			}
+			else
+			{
+				$iblock['ID'] = (int)$iblock['ID'];
+				$language = static::getIblockLanguage($iblock['ID']);
+			}
+		}
+
+		if (empty($iblock))
+		{
+			return null;
+		}
+
+		$result = null;
+		if (isset($iblock['FIELDS']['CODE']['DEFAULT_VALUE']))
+		{
+			if ($iblock['FIELDS']['CODE']['DEFAULT_VALUE']['TRANSLITERATION'] === 'Y'
+				&& $iblock['FIELDS']['CODE']['DEFAULT_VALUE']['USE_GOOGLE'] === 'N'
+			)
+			{
+				$config = $iblock['FIELDS']['CODE']['DEFAULT_VALUE'];
+				$config['LANGUAGE_ID'] = $language;
+				$config = array_merge($config, $options);
+
+				if ($config['LANGUAGE_ID'] !== null)
+				{
+					$settings = [
+						'max_len' => $config['TRANS_LEN'],
+						'change_case' => $config['TRANS_CASE'],
+						'replace_space' => $config['TRANS_SPACE'],
+						'replace_other' => $config['TRANS_OTHER'],
+						'delete_repeat_replace' => ($config['TRANS_EAT'] == 'Y'),
+					];
+
+					$result = CUtil::translit($name, $config['LANGUAGE_ID'], $settings);
+				}
+			}
+		}
+
+		return $result;
+	}
+
+	public function isExistsMnemonicCode(string $code, ?int $elementId, int $iblockId): bool
+	{
+		if ($code === '')
+		{
+			return false;
+		}
+		$filter = [
+			'=IBLOCK_ID' => $iblockId,
+			'=CODE' => $code,
+			'=WF_STATUS_ID' => 1,
+			'==WF_PARENT_ELEMENT_ID' => null,
+		];
+		if ($elementId !== null)
+		{
+			$filter['!=ID'] = $elementId;
+		}
+
+		$row = Iblock\ElementTable::getList([
+			'select' => ['ID'],
+			'filter' => $filter,
+			'limit' => 1,
+		])->fetch();
+
+		return !empty($row);
+	}
+
+	public function createMnemonicCode(array $element, array $options = []): ?string
+	{
+		if (!isset($element['NAME']) || $element['NAME'] === '')
+		{
+			return null;
+		}
+		$iblockId = $element['IBLOCK_ID'] ?? 0;
+		if ($iblockId !== null)
+		{
+			$iblockId = (int)$iblockId;
+		}
+		if ($iblockId <= 0)
+		{
+			return null;
+		}
+
+		if ($this->iblock !== null && $this->iblock['ID'] === $iblockId)
+		{
+			$iblock = $this->iblock;
+		}
+		else
+		{
+			$iblock = CIBlock::GetArrayByID($iblockId);
+		}
+
+		if (empty($iblock))
+		{
+			return null;
+		}
+
+		$code = null;
+		if (isset($iblock['FIELDS']['CODE']['DEFAULT_VALUE']))
+		{
+			$code = $this->generateMnemonicCode($element['NAME'], $iblockId, $options);
+			if ($code === null)
+			{
+				return null;
+			}
+
+			if ($iblock['FIELDS']['CODE']['DEFAULT_VALUE']['TRANSLITERATION'] === 'Y'
+				&& (
+					$iblock['FIELDS']['CODE']['DEFAULT_VALUE']['UNIQUE'] === 'Y'
+					|| (isset($options['CHECK_UNIQUE']) || $options['CHECK_UNIQUE'] === 'Y')
+				)
+			)
+			{
+				$id = (int)$element['ID'] ?? null;
+				if (!$this->isExistsMnemonicCode($code, $id, $iblockId))
+				{
+					return $code;
+				}
+
+				$checkSimilar = (isset($options['CHECK_SIMILAR']) && $options['CHECK_SIMILAR'] === 'Y');
+
+				$list = [];
+				$iterator = Iblock\ElementTable::getList([
+					'select' => ['ID', 'CODE'],
+					'filter' => [
+						'=IBLOCK_ID' => $iblockId,
+						'%=CODE' => $code . '%',
+						'=WF_STATUS_ID' => 1,
+						'==WF_PARENT_ELEMENT_ID' => null,
+					],
+				]);
+				while ($row = $iterator->fetch())
+				{
+					if ($checkSimilar && $id === (int)$row['ID'])
+					{
+						return null;
+					}
+					$list[$row['CODE']] = true;
+				}
+				unset($iterator, $row);
+
+				if (isset($list[$code]))
+				{
+					$code .= '_';
+					$i = 1;
+					while (isset($list[$code . $i]))
+					{
+						$i++;
+					}
+
+					$code .= $i;
+				}
+				unset($list);
+			}
+		}
+
+		return $code;
+	}
+
+	protected static function getIblockLanguage(int $iblockId): ?string
+	{
+		$result = [];
+		$iterator = Iblock\IblockSiteTable::getList([
+			'select' => ['LANGUAGE_ID' => 'SITE.LANGUAGE_ID'],
+			'filter' => ['=IBLOCK_ID' => $iblockId],
+		]);
+		while ($row = $iterator->fetch())
+		{
+			$result[$row['LANGUAGE_ID']] = true;
+		}
+		unset($iterator, $row);
+
+		return count($result) === 1 ? key($result) : null;
+	}
+
+	public static function getPublicElementsOrmFilter(array $filter): array
+	{
+		$filter['=WF_STATUS_ID'] = 1;
+		$filter['==WF_PARENT_ELEMENT_ID'] = null;
+
+		return $filter;
 	}
 }

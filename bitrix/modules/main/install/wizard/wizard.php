@@ -183,7 +183,7 @@ class AgreementStep4VM extends CWizardStep
 
 	public function CheckShortInstall()
 	{
-		global $DB, $DBType, $DBHost, $DBLogin, $DBPassword, $DBName, $DBDebug;
+		$DBType = "mysql";
 
 		//PHP
 		$requireStep = new RequirementStep;
@@ -203,32 +203,16 @@ class AgreementStep4VM extends CWizardStep
 		$application = \Bitrix\Main\HttpApplication::getInstance();
 		$application->initializeBasicKernel();
 		$conPool = $application->getConnectionPool();
-
-		$DBType = strtolower($DBType);
-		if(defined("BX_USE_MYSQLI") && BX_USE_MYSQLI === true)
-		{
-			$dbClassName = "\\Bitrix\\Main\\DB\\MysqliConnection";
-		}
-		else
-		{
-			$dbClassName = "\\Bitrix\\Main\\DB\\MysqlConnection";
-		}
-
-		$conPool->setConnectionParameters(
-			\Bitrix\Main\Data\ConnectionPool::DEFAULT_CONNECTION_NAME,
-			array(
-				'className' => $dbClassName,
-				'host' => $DBHost,
-				'database' => $DBName,
-				'login' => $DBLogin,
-				'password' => $DBPassword,
-				'options' => 2
-			)
-		);
+		$connection = $conPool->getConnection();
 
 		$conPool->useMasterOnly(true);
 
 		$DB = new CDatabase;
+
+		$DBHost = $connection->getHost();
+		$DBName = $connection->getDatabase();
+		$DBLogin = $connection->getLogin();
+		$DBPassword = $connection->getPassword();
 
 		if (!$DB->Connect($DBHost, $DBName, $DBLogin, $DBPassword))
 			$this->SetError(InstallGetMessage("COULD_NOT_CONNECT")." ".$DB->db_Error);
@@ -300,7 +284,7 @@ class AgreementStep4VM extends CWizardStep
 		}
 
 		//Create after_connect.php if not exists
-		if (!file_exists($_SERVER["DOCUMENT_ROOT"].BX_PERSONAL_ROOT."/php_interface/after_connect.php") && $databaseStep->CreateAfterConnect() === false)
+		if (!file_exists($_SERVER["DOCUMENT_ROOT"].BX_PERSONAL_ROOT."/php_interface/after_connect_d7.php") && $databaseStep->CreateAfterConnect() === false)
 			$this->SetError($databaseStep->GetErrors());
 
 		if (!$databaseStep->CheckDBOperation())
@@ -1774,27 +1758,13 @@ class CreateDBStep extends CWizardStep
 			return false;
 		}
 
-		$iconv='';
-		if (function_exists('iconv'))
-		{
-			if (iconv("UTF-8", "WINDOWS-1251"."//IGNORE", "\xD0\xBC\xD0\xB0\xD0\xBC\xD0\xB0")!="\xEC\xE0\xEC\xE0")
-				$iconv = "\n".'define("BX_ICONV_DISABLE", true);'."\n";
-		}
-
-		// Connection params
-		$fileContent = "<"."?\n".
+		// Various params
+		$fileContent = "<"."?php\n".
 			(extension_loaded('mysqli')? "define(\"BX_USE_MYSQLI\", true);\n": '').
-			"define(\"DBPersistent\", false);\n".
-			"$"."DBType = \"".$this->dbType."\";\n".
-			"$"."DBHost = \"".$this->dbHost."\";\n".
-			"$"."DBLogin = \"".$this->dbUser."\";\n".
-			"$"."DBPassword = \"".EscapePHPString($this->dbPassword)."\";\n".
-			"$"."DBName = \"".$this->dbName."\";\n".
 			"$"."DBDebug = false;\n".
 			"$"."DBDebugToFile = false;\n".
 			($this->createDBType=='innodb'?'define("MYSQL_TABLE_TYPE", "INNODB");'."\n":'').
 			"\n".
-			"define(\"DELAY_DB_CONNECT\", true);\n".
 			"define(\"CACHED_b_file\", 3600);\n".
 			"define(\"CACHED_b_file_bucket_size\", 10);\n".
 			"define(\"CACHED_b_lang\", 3600);\n".
@@ -1804,7 +1774,6 @@ class CreateDBStep extends CWizardStep
 			"define(\"CACHED_b_event\", 3600);\n".
 			"define(\"CACHED_b_agent\", 3660);\n".
 			"define(\"CACHED_menu\", 3600);\n".
-			$iconv.
 			"\n";
 
 		$umask = array();
@@ -1822,7 +1791,7 @@ class CreateDBStep extends CWizardStep
 
 		if($umask)
 		{
-			$fileContent .= "@umask(~(".implode("|", $umask).")&0777);\n";
+			$fileContent .= "@umask(~(".implode(" | ", $umask).") & 0777);\n";
 		}
 
 		if(file_exists($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/intranet"))
@@ -1860,8 +1829,6 @@ class CreateDBStep extends CWizardStep
 				"mb_internal_encoding(\"Windows-1251\");\n";
 		}
 
-		$fileContent .= "?".">";
-
 		if (!$fp = @fopen($filePath, "wb"))
 		{
 			$this->SetError(str_replace("#ROOT#", $_SERVER["DOCUMENT_ROOT"], InstallGetMessage("ERR_C_SAVE_DBCONN")));
@@ -1894,43 +1861,20 @@ class CreateDBStep extends CWizardStep
 				$codePage = $this->createCharset;
 		}
 
-		$after_conn = "<"."?\n".
-			($codePage <> '' ? "$"."DB->Query(\"SET NAMES '".$codePage."'\");\n" : "").
-			($this->sqlMode !== false ? "$"."DB->Query(\"SET sql_mode='".$this->sqlMode."'\");\n" : "").
-			($this->utf8 ? "$"."DB->Query('SET collation_connection = \"utf8_unicode_ci\"');\n" : "").
-			"?".">";
-		$after_connNew = "<"."?\n".
+		$after_connNew = "<"."?php\n".
 			"$"."connection = \\Bitrix\\Main\\Application::getConnection();\n".
 			($codePage <> '' ? "$"."connection->queryExecute(\"SET NAMES '".$codePage."'\");\n" : "").
 			($this->sqlMode !== false ? "$"."connection->queryExecute(\"SET sql_mode='".$this->sqlMode."'\");\n" : "").
-			($this->utf8 ? "$"."connection->queryExecute('SET collation_connection = \"utf8_unicode_ci\"');\n" : "").
-			"?".">";
+			($this->utf8 ? "$"."connection->queryExecute('SET collation_connection = \"utf8_unicode_ci\"');\n" : "")
+		;
 
-		$filePath = $_SERVER["DOCUMENT_ROOT"].BX_PERSONAL_ROOT."/php_interface/after_connect.php";
 		$filePathNew = $_SERVER["DOCUMENT_ROOT"].BX_PERSONAL_ROOT."/php_interface/after_connect_d7.php";
 
-		if (!BXInstallServices::CheckDirPath($filePath, octdec($this->folderPermission)))
+		if (!BXInstallServices::CheckDirPath($filePathNew, octdec($this->folderPermission)))
 		{
 			$this->SetError(str_replace("#ROOT#", BX_PERSONAL_ROOT."/", InstallGetMessage("ERR_C_SAVE_DBCONN")));
 			return false;
 		}
-
-		if (!$fp = @fopen($filePath, "wb"))
-		{
-			$this->SetError(str_replace("#ROOT#", $_SERVER["DOCUMENT_ROOT"], InstallGetMessage("ERR_C_SAVE_DBCONN")));
-			return false;
-		}
-
-		if (!fwrite($fp, $after_conn))
-		{
-			$this->SetError(str_replace("#ROOT#", $_SERVER["DOCUMENT_ROOT"], InstallGetMessage("ERR_C_SAVE_DBCONN")));
-			return false;
-		}
-
-		@fclose($fp);
-		if ($this->filePermission > 0)
-			@chmod($filePath, octdec($this->filePermission));
-
 
 		if (!$fp = @fopen($filePathNew, "wb"))
 		{
@@ -2196,7 +2140,6 @@ class CreateModulesStep extends CWizardStep
 		}
 
 		$this->singleSteps = Array(
-			"remove_mysql" => InstallGetMessage("INST_REMOVE_TEMP_FILES")." (MySQL)",
 			"remove_mssql" => InstallGetMessage("INST_REMOVE_TEMP_FILES")." (MS SQL Server)",
 			"remove_oracle" => InstallGetMessage("INST_REMOVE_TEMP_FILES")." (Oracle)",
 			"remove_misc" => InstallGetMessage("INST_REMOVE_TEMP_FILES"),
@@ -2259,7 +2202,9 @@ class CreateModulesStep extends CWizardStep
 		}
 		closedir($handle);
 
-		uasort($arModules, create_function('$a, $b', 'return strcasecmp($a, $b);'));
+		uasort($arModules, function ($a, $b) {
+			return strcasecmp($a, $b);
+		});
 		array_unshift($arModules, "main");
 
 		return $arModules;
@@ -2348,15 +2293,14 @@ class CreateModulesStep extends CWizardStep
 
 	function InstallSingleStep($code)
 	{
-		global $DBType;
-		require_once($_SERVER["DOCUMENT_ROOT"].BX_PERSONAL_ROOT."/php_interface/dbconn.php");
-
-		if ($code == "remove_mysql" && $DBType != "mysql")
-			BXInstallServices::DeleteDbFiles("mysql");
-		elseif ($code == "remove_mssql" && $DBType != "mssql")
+		if ($code == "remove_mssql")
+		{
 			BXInstallServices::DeleteDbFiles("mssql");
-		elseif ($code == "remove_oracle" && $DBType != "oracle")
+		}
+		elseif ($code == "remove_oracle")
+		{
 			BXInstallServices::DeleteDbFiles("oracle");
+		}
 		elseif ($code == "remove_misc")
 		{
 			BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/bitrix/httest");
@@ -2895,7 +2839,7 @@ class SelectWizardStep extends CWizardStep
 			$u = "/index.php";
 			if (defined("WIZARD_DEFAULT_SITE_ID"))
 			{
-				$rsSite = CSite::GetList($by="sort", $order="asc", array("ID" => WIZARD_DEFAULT_SITE_ID));
+				$rsSite = CSite::GetList("sort", "asc", array("ID" => WIZARD_DEFAULT_SITE_ID));
 				$arSite = $rsSite->GetNext();
 
 				$u = "";
@@ -3256,7 +3200,7 @@ class LoadModuleActionStep extends CWizardStep
 					$u = "/index.php";
 					if (defined("WIZARD_DEFAULT_SITE_ID"))
 					{
-						$rsSite = CSite::GetList($by="sort", $order="asc", array("ID" => WIZARD_DEFAULT_SITE_ID));
+						$rsSite = CSite::GetList("sort", "asc", array("ID" => WIZARD_DEFAULT_SITE_ID));
 						$arSite = $rsSite->GetNext();
 
 						$u = "";
@@ -3551,7 +3495,7 @@ class SelectWizard1Step extends SelectWizardStep
 			$u = "/index.php";
 			if (defined("WIZARD_DEFAULT_SITE_ID"))
 			{
-				$rsSite = CSite::GetList($by="sort", $order="asc", array("ID" => WIZARD_DEFAULT_SITE_ID));
+				$rsSite = CSite::GetList("sort", "asc", array("ID" => WIZARD_DEFAULT_SITE_ID));
 				$arSite = $rsSite->GetNext();
 
 				$u = "";

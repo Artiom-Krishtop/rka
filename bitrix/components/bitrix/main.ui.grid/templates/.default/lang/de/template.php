@@ -1,4 +1,4 @@
-<?
+<?php
 $MESS["interface_grid_act"] = "Aktionen";
 $MESS["interface_grid_actions"] = "Aktionenspalte";
 $MESS["interface_grid_actions_list"] = "- Aktionen -";
@@ -24,6 +24,7 @@ $MESS["interface_grid_common_default_apply"] = "Einstellungen aller Nutzer durch
 $MESS["interface_grid_confirm_apply"] = "Bestätigen";
 $MESS["interface_grid_confirm_cancel"] = "Abbrechen";
 $MESS["interface_grid_confirm_for_all_message"] = "Aktion wird auf alle Elemente angewendet, inkl. Solcher, die sich auf anderen Seiten befinden";
+$MESS["interface_grid_confirm_for_all_message_v2"] = "Aktion wird auf alle im Filter ausgewählten Elemente angewendet, inkl. Elemente auf anderen Seiten";
 $MESS["interface_grid_confirm_message"] = "Aktion für ausgewählte Elemente bestätigen";
 $MESS["interface_grid_date"] = "Datum im Kalender auswählen";
 $MESS["interface_grid_dblclick"] = "Doppel-Klick";
@@ -134,4 +135,3 @@ $MESS["interface_grid_views_setup"] = "Liste bearbeiten...";
 $MESS["interface_grid_views_setup_title"] = "Aktuelle Listenansicht definieren";
 $MESS["interface_grid_views_title"] = "Ansichten verwalten";
 $MESS["interface_grid_yes"] = "Ja";
-?>

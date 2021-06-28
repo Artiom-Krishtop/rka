@@ -39,8 +39,15 @@ $application->initializeBasicKernel();
 //Defined in dbconn.php
 global $DBType, $DBDebug, $DBDebugToFile, $DBHost, $DBName, $DBLogin, $DBPassword;
 
-//read database connection parameters
+//read various parameters
 require_once($_SERVER["DOCUMENT_ROOT"].BX_PERSONAL_ROOT."/php_interface/dbconn.php");
+
+// not used anymore
+$DBType = "mysql";
+$DBHost = "";
+$DBLogin = "";
+$DBPassword = "";
+$DBName = "";
 
 if(defined('BX_UTF'))
 {
@@ -74,7 +81,7 @@ if(!defined("CACHED_b_group_subordinate")) define("CACHED_b_group_subordinate", 
 if(!defined("CACHED_b_smile")) define("CACHED_b_smile", 31536000);
 if(!defined("TAGGED_user_card_size")) define("TAGGED_user_card_size", 100);
 
-//connect to database, from here global variable $DB is available (CDatabase class)
+// From here global variable $DB is available (CDatabase class)
 require_once(__DIR__."/classes/mysql/database.php");
 
 $GLOBALS["DB"] = new CDatabase;
@@ -101,12 +108,6 @@ if ($show_sql_stat == "Y")
 {
 	$GLOBALS["DB"]->ShowSqlStat = true;
 	$application->getConnection()->startTracker();
-}
-
-if(!($GLOBALS["DB"]->Connect($DBHost, $DBName, $DBLogin, $DBPassword)))
-{
-	CDatabase::showConnectionError();
-	die();
 }
 
 //licence key

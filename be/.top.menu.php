@@ -2,7 +2,7 @@
 $aMenuLinks = Array(
 	Array(
 		"Навіны", 
-		"https://www.rka.by/news/", 
+		"https://www.rka.by/be/news/", 
 		Array(), 
 		Array(), 
 		"" 
