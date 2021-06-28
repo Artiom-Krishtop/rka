@@ -3,7 +3,7 @@ IncludeModuleLangFile(__FILE__);
 
 class CCustomTypeHtml extends CUserTypeString
 {
-	function GetUserTypeDescription()
+    static function GetUserTypeDescription()
 	{
 		return array(
 			"USER_TYPE_ID" => "customhtml",
