@@ -8,6 +8,9 @@ $APPLICATION->SetTitle("Belarusian National Bar Association");
 	</div>
 </div>
  <br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 16pt;"><br>
+</span><br>
+<br>
 <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 16pt;">"Toda persona tiene derecho a la asistencia jurídica para el ejercicio y la protección de los derechos y libertades, incluido el derecho a utilizar en cualquier momento la asistencia de abogados y sus otros representantes en los tribunales, otros órganos estatales, órganos de gobierno local, empresas, instituciones organizaciones, asociaciones públicas y en las relaciones con funcionarios y ciudadanos. Se prohíbe la oposición a la prestación de asistencia jurídica en la República de Belarús "(artículo 62 de la Constitución de la República de Belarús). </span><br>
  <br>
  <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 16pt;">Los abogados de la República de Bielorrusia brindan asistencia legal calificada a los ciudadanos y entidades legales de la República de Bielorrusia y otros estados. </span><br>

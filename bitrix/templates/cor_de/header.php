@@ -3,6 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?=LANGUAGE_ID?>" lang="<?=LANGUAGE_ID?>" class="js">
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta property="og:title" content="<?$APPLICATION->ShowTitle()?>" />
+    <?if (strpos($APPLICATION->GetCurPage(), 'news') !== false || strpos($APPLICATION->GetCurPage(), 'blogs') !== false || strpos($APPLICATION->GetCurPage(), 'faq_ask') !== false):?>
+        <meta property="og:type" content="article" />
+    <?else:?>
+        <meta property="og:type" content="website" />
+    <?endif;?>
+    <meta property="og:url" content="<?=( ((CMain::IsHTTPS()) ? "https://rka.by" : "http://rka.by") . $APPLICATION->GetCurPage() );?>" />
+    <meta property="og:image" content="https://rka.by<?=SITE_TEMPLATE_PATH;?>/images/og-logo.jpg" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="<?=$_SERVER['SERVER_NAME']?>" />
 <title><?$APPLICATION->ShowTitle()?></title>
 <?$APPLICATION->ShowHead()?>
 

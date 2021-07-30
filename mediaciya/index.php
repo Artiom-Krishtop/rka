@@ -8,13 +8,14 @@ $APPLICATION->SetTitle("Медиация");
  <b><span style="font-size: 13pt; font-family: &quot;Times New Roman&quot;, Times;">Какие споры могут быть разрешены с помощью медиации? </span></b><br>
  <span style="font-size: 13pt; font-family: &quot;Times New Roman&quot;, Times;">В частности, это могут быть следующие споры: </span><br>
  <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> в сфере бизнеса – неисполнение договора, раздел бизнеса, конфликты в управлении компанией и т.д., <br>
- </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">&nbsp;в семейных делах – вопросы расторжения брака, раздела имущества, споры о воспитании детей, конфликты между родственниками, споры о наследстве и т.д., <br>
-</span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">в гражданских делах – споры о земельных участках, о защите прав потребителей, споры в сфере жилищных отношений, споры по исполнению гражданско-правовых договоров и т.д., <br>
- </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">&nbsp;в трудовых отношениях – конфликты между нанимателями и работниками.<br>
- </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"><br>
- </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Подробнее&nbsp;о медиации Вы можете прочитать в Законе Республики Беларусь от 12.07.2013 N 58-З </span><a target="_blank" href="https://pravo.by/document/?guid=3871&p0=H11300058"><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">"О медиации"</span></a><br>
+ </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">в семейных делах – вопросы расторжения брака, раздела имущества, споры о воспитании детей, конфликты между родственниками, споры о наследстве и т.д., <br>
+ </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">в гражданских делах – споры о земельных участках, о защите прав потребителей, споры в сфере жилищных отношений, споры по исполнению гражданско-правовых договоров и т.д., <br>
+ </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">в трудовых отношениях – конфликты между нанимателями и работниками.<br>
+ Также стало возможным примирение обвиняемого с потерпевшим по уголовному делу&nbsp;путем заключения медиативного соглашения.<br>
  <br>
- <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Подробнее о медиации Вы можете прочитать в Законе Республики Беларусь от 12.07.2013 N 58-З </span><a target="_blank" href="https://pravo.by/document/?guid=3871&p0=H11300058"><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">"О медиации"</span></a><br>
+ <br>
+ <br>
  <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
 &nbsp; &nbsp;</span><?$APPLICATION->IncludeComponent(
 	"bitrix:menu",
@@ -48,4 +49,5 @@ $APPLICATION->SetTitle("Медиация");
 		"ROOT_MENU_TYPE" => "mediacsub",
 		"USE_EXT" => "Y"
 	)
-);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+);?><br>
+</span><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
