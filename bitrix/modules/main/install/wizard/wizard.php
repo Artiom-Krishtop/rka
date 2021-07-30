@@ -530,14 +530,15 @@ class DBTypeStep extends CWizardStep
 
 class RequirementStep extends CWizardStep
 {
-	var $memoryMin = 64;
-	var $memoryRecommend = 256;
-	var $diskSizeMin = 500;
+	protected $memoryMin = 64;
+	protected $memoryRecommend = 256;
+	protected $diskSizeMin = 500;
 
-	var $phpMinVersion = "7.1.0";
-	var $apacheMinVersion = "1.3";
+	protected $phpMinVersion = "7.3.0";
+	protected $apacheMinVersion = "2.0";
+	protected $bitrixVmMinVersion = '7.5.0';
 
-	var $arCheckFiles = Array();
+	protected $arCheckFiles = Array();
 
 	function InitStep()
 	{
@@ -700,28 +701,40 @@ class RequirementStep extends CWizardStep
 
 	function CheckServerVersion(&$serverName, &$serverVersion, &$serverMinVersion)
 	{
-		$serverSoftware = $_SERVER["SERVER_SOFTWARE"];
-		if ($serverSoftware == '')
-			$serverSoftware = $_SERVER["SERVER_SIGNATURE"];
-		$serverSoftware = trim($serverSoftware);
-
 		$serverName = "";
 		$serverVersion = "";
 		$serverMinVersion = "";
 
-		if (!function_exists("preg_match") || !preg_match("#^([a-zA-Z-]+).*?([\\d]+\\.[\\d]+(\\.[\\d]+)?)#i", $serverSoftware, $arMatch))
-			return null;
-
-		$serverName = $arMatch[1];
-		$serverVersion = $arMatch[2];
-
-		if (strtoupper($serverName) == "APACHE")
+		if (isset($_SERVER['BITRIX_VA_VER']))
 		{
-			$serverMinVersion = $this->apacheMinVersion;
-			return BXInstallServices::VersionCompare($serverVersion, $this->apacheMinVersion);
-		}
+			// Bitrix VM on board
+			$serverName = 'Bitrix VM';
+			$serverVersion = $_SERVER['BITRIX_VA_VER'];
+			$serverMinVersion = $this->bitrixVmMinVersion;
 
-		return null;
+			return BXInstallServices::VersionCompare($serverVersion, $serverMinVersion);
+		}
+		else
+		{
+			$serverSoftware = $_SERVER["SERVER_SOFTWARE"];
+			if ($serverSoftware == '')
+				$serverSoftware = $_SERVER["SERVER_SIGNATURE"];
+			$serverSoftware = trim($serverSoftware);
+
+			if (!function_exists("preg_match") || !preg_match("#^([a-zA-Z-]+).*?([\\d]+\\.[\\d]+(\\.[\\d]+)?)#i", $serverSoftware, $arMatch))
+				return null;
+
+			$serverName = $arMatch[1];
+			$serverVersion = $arMatch[2];
+
+			if (strtoupper($serverName) == "APACHE")
+			{
+				$serverMinVersion = $this->apacheMinVersion;
+				return BXInstallServices::VersionCompare($serverVersion, $serverMinVersion);
+			}
+
+			return null;
+		}
 	}
 
 	function CheckPHPVersion()
@@ -1214,9 +1227,9 @@ RewriteRule ^.+\.php$ /bitrix/httest/404.php
 		</tr>
 		<tr>
 			<td valign="top">'.InstallGetMessage("SC_SHOW_ERRORS").' (display_errors)</td>
-			<td valign="top">'.InstallGetMessage("SC_TURN_ON1").'</td>
+			<td valign="top">'.InstallGetMessage("SC_TURN_OFF1").'</td>
 			<td valign="top">
-					'.($this->GetPHPSetting("display_errors")=="ON" ? $this->ShowResult(InstallGetMessage("SC_TURN_ON1"), "OK") : $this->ShowResult(InstallGetMessage("SC_TURN_OFF1"), "ERROR")).'
+					'.($this->GetPHPSetting("display_errors")=="ON" ? $this->ShowResult(InstallGetMessage("SC_TURN_ON1"), "ERROR") : $this->ShowResult(InstallGetMessage("SC_TURN_OFF1"), "OK")).'
 			</td>
 		</tr>
 		<tr>

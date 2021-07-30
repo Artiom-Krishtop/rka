@@ -15,7 +15,7 @@ if (!isset($agreement))
 		'ACTIVE' => 'Y'
 	];
 }
-if (!isset($id))
+if (!isset($id) || preg_match('/[^a-z0-9_]/i', $id))
 {
 	$id = strtolower(\randString(5));
 }
