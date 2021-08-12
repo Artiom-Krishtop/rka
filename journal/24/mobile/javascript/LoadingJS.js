@@ -1,376 +1,294 @@
-function LoadingJS(){
-	
-	this.loadBookConfig();   //#1F2232,#DDDDDD
-	
-	this.body = $("body");
+document.write("<style>"+
+	"@keyframes loadingAnimate{from {-webkit-transform: rotateY(0deg) scale(0.8);-o-transform: rotateY(0deg) scale(0.8);-ms-transform: rotateY(0deg) scale(0.8);-moz-transform: rotateY(0deg) scale(0.8);transform: rotateY(0deg) scale(0.8);}to {-webkit-transform: rotateY(-180deg) scale(0.8);-o-transform: rotateY(-180deg) scale(0.8);-ms-transform: rotateY(-180deg) scale(0.8);-moz-transform: rotateY(-180deg) scale(0.8);transform: rotateY(-180deg) scale(0.8);}}"+
+	"@-webkit-keyframes loadingAnimate{from {-webkit-transform: rotateY(0deg) scale(0.8);-o-transform: rotateY(0deg) scale(0.8);-ms-transform: rotateY(0deg) scale(0.8);-moz-transform: rotateY(0deg) scale(0.8);transform: rotateY(0deg) scale(0.8);}to {-webkit-transform: rotateY(-180deg) scale(0.8);-o-transform: rotateY(-180deg) scale(0.8);-ms-transform: rotateY(-180deg) scale(0.8);-moz-transform: rotateY(-180deg) scale(0.8);transform: rotateY(-180deg) scale(0.8);}}"+
+	".loadingRun{-webkit-animation : loadingAnimate 1.2s infinite;animation : loadingAnimate 1.2s infinite;}</style>");
 
-  this.instance = $("<div id='loading_bg'></div>");
-  this.proTitle = $("<div id='progress_title'></div>");
-  this.stepTitle = $("<div id='step_title'></div>");
-  this.loadingBG = $("<div id='loading_progres'></div>");
-  this.loadingItem = $("<div id='loading_progress_item'></div>"); 
+window.waitForLoading = true;
+var LoadingJS = function(){
+	this.initConfig();
+	this.initHtml();
+	this.initCss();
+	this.startLoading();
 
-  this.instance.css({
-  	"display" : "none",
-  	"position" : "absolute",
-  	"width" : "480px",
-  	"height" : "70px",
-  	'top' : '50%',
-  	'left' : '50%',
-  	'margin-left' : '-240px',
-  	'margin-top' : '-35px',
-  	"z-index" : 10000,
-  	"background-color" : "transparent"
-  });
-  //this.addGradient(this.instance,"#B3B3B3","white");
-  
-  /*
-  	"background-color" : "#1F2232",
-  	"border-radius" : "3px",
-  	"border":"1px solid #DCDCDC",
-  	"box-shadow" : "2px 2px 2px #333333",
-  	"-mz-box-shadow" : "2px 2px 2px #333333",
-  	"-ms-box-shadow" : "2px 2px 2px #333333",
-  	"-webkit-box-shadow" : "2px 2px 2px #333333",
-  	"-o-box-shadow" : "2px 2px 2px #333333"
-  */
+	this.onResize();
+	var self = this;
+	window.onresize =function(){
+		self.onResize();
+	};
 
-  this.proTitle.css({
-  	"position" : "absolute",
-  	"left" : "10px",
-  	"top" : "10px",
-  	"width" : "460px",
-  	"text-align" : "center",
-  	"font-family" : "Tahoma",
-  	"font-size" : "24px",
-  	"color" : "white",
-  	"word-break" : "keep-all",
-  	"white-space" : "nowrap",
-  	"overflow" : "hidden",
-  	"text-overflow" : "ellipsis"
-  	
-  });
-  
-  this.proTitle.css({"text-shadow":"0 0 5px #8c97cb, 0 0 10px #8c97cb,0 0 15px #8c97cb"});	 
-  
-  this.loadingBG.css({
-    "position" : "absolute",
-    "width" : "280px",
-    "height" : "10px",
-    "left" : "10px",
-    "top" : "35px",
-    "background-color" : "#F3F4F9",
-    "border-radius" : "2px",
-    "display":"none"
-  });
-  
-  this.loadingItem.css({
-  	"position" : "absolute",
-  	"width" : "0px",
-  	"height" : "10px",
-  	"left" : "0px",
-  	"top" : "0px",
-  	"background-color" : "#3FB5F2",
-  	"border-radius" : "2px",
-  	"display":"none"
-  });
-  
-  this.stepTitle.css({
-  	"position" : "absolute",
-  	"left" : "10px",
-  	"top" : "50px",
-  	"width" : "460px",
-  	"text-align" : "center",
-  	"font-family" : "Tahoma",
-  	"font-size" : "12px",
-  	"color" : this.loadingCaptionColor,
-  	"word-break" : "keep-all",
-  	"white-space" : "nowrap",
-  	"overflow" : "hidden",
-  	"text-overflow" : "ellipsis"
-  });
-  
-  //this.body.css({"background-color":this.backgroundColor});
-  this.initBackground();
-  
-  this.body.append(this.instance);
-  this.instance.append(this.proTitle);
-  this.instance.append(this.loadingBG);
-  this.instance.append(this.stepTitle);
-  this.loadingBG.append(this.loadingItem);
-  
-  this.init();  
-  this.addLoadingImage();
-  
-  this.show();
+	window.setTimeout(function(){window.waitForLoading = false;},250);
 }
 
 LoadingJS.prototype = {
-	loadBookConfig : function(){
-	
-		this.loadingCaption, this.loadingCaptionColor, this.hasLoadingPicture, this.loadingPicture;
-		
-	  try{
-	  	this.loadingCaption = bookConfig.loadingCaption?bookConfig.loadingCaption:"Loading";
-	  	this.loadingCaptionColor = bookConfig.loadingCaptionColor?bookConfig.loadingCaptionColor:"#DDDDDD";
-	  	this.loadingBackground = bookConfig.loadingBackground?bookConfig.loadingBackground:"#1F2232";
-	  	
-	  	this.loadingPicture = bookConfig.loadingPicture?bookConfig.loadingPicture:"";
-	  	this.hasLoadingPicture = (this.loadingPicture != "");
-	  }catch(err){
-	  	this.loadingCaption = "Loading";
-	  	this.loadingCaptionColor = "#DDDDDD";
-	  	
-	  	this.hasLoadingPicture = false;
-	  	this.loadingPicture = "";
-	  }
-	  
-	  //console.log("loadingPicture:%s", this.loadingPicture);
-	  
-	},
-	
-	init: function(){
-		var doc = $(document);
-		
-		var windowWidth = doc.width(), windowHeight = Math.max(doc.height(),400), progressWidth = 480, progressHeight = 70;
-		
-		var progressLeft = (windowWidth - progressWidth) / 2, progressTop = (windowHeight - progressHeight) / 2;
-		
-		// this.instance.css({"left":progressLeft + "px", "top":progressTop + "px"});
-		
-		this.proTitle.text($(document).attr("title"));
-		this.stepTitle.text(this.loadingCaption + "...");
-		
-		var self = this,iWidth = 0,iStep = 2;
-		var oldColor = this.colorSplit("#3FB5F2");
-		this.timer = window.setInterval(function(){
 
-				/*var pAddR = Math.floor((255 - oldColor.r) * iWidth / 280),
-				    pAddG = Math.floor((255 - oldColor.g) * iWidth / 280),
-				    pAddB = Math.floor((255 - oldColor.b) * iWidth / 280);
-				
-				var newEndColor = self.colorAdd("#3FB5F2",pAddR,pAddG,pAddB);
-				self.addGradient(self.loadingItem,"#3FB5F2",newEndColor);
+	initHtml : function(){
+		this.stop = false;
 
-				self.loadingItem.css({width : iWidth +"px"});
-				iWidth += iStep;
-				if(iWidth == 280) iWidth = 0; */
-				
-				iWidth += iStep;
-				var iCount = Math.floor(iWidth / 50) % 3;
-				
-				switch(iCount){
-					case 0:{self.stepTitle.text(self.loadingCaption + ".  ");break;}
-					case 1:{self.stepTitle.text(self.loadingCaption + ".. ");break;}
-					case 2:{self.stepTitle.text(self.loadingCaption + "...");break;}
-					default:break;
-				}
-				
-				
-			},40);
-	},
-	show: function(){
-		this.instance.css({"display":"block"});
-	},
-	
-	addLoadingImage : function(){
-		if(this.hasLoadingPicture == false) return;
-		
-		this.loadingImg = $("<img style='display:none;position:absolute;z-index:10000'></img>");
+		this.instance = document.createElement("div");
+		this.image = document.createElement("img");
+		this.image.src = this.loadingPicture;
+		this.title = document.createElement("p");
+		this.copyright = document.createElement("p");
+		this.copyright.setAttribute("style", "position:absolute;bottom:5%;font-size:1.1rem;width:100%;text-align:center;");
+		if(window.userInfo && window.userInfo.copyright) this.copyright.innerHTML = window.userInfo.copyright;
 
-  	var self = this;
-  	this.loadingImg.load(function(){
-  		
-  		var doc = $(document), windowWidth = doc.width() , oImage = self.loadingImg[0];
-  		var iImageWidth = oImage.naturalWidth, iImageHeight = oImage.naturalHeight;
-  		
-  		var iInstanceTop;
-  		try{
-  			iInstanceTop = parseInt(self.instance.css("top").replace("px","")) + parseInt(self.instance.css("margin-top").replace("px",""));
-  	  }catch(err){
-  	  	iInstanceTop = iImageHeight;
-  	  }
-  	  
-  		var iLeft = (windowWidth - iImageWidth) / 2, iTop = iInstanceTop - iImageHeight;
-  		
-  		//console.log("image loaded, left:%d,top:%d,width:%d,height:%d",iLeft,iTop,iImageWidth,iImageHeight);
+		this.bg = document.createElement("div");
+		this.bg.setAttribute("style", "transform:scale(1);");
 
-  		self.loadingImg.css({
-  			"left" : iLeft + "px",
-  			"top" : iTop + "px",
-  			"width": iImageWidth + "px",
-  			"height": iImageHeight + "px",
-  			"display":"block"
-  		});
-  	});
-  	
-  	this.loadingImg.attr("src", this.loadingPicture);
-  	this.body.append(this.loadingImg);
+		if(this.loadingPicture) this.instance.appendChild(this.image);
+
+		this.initAnimationHtml();
+
+		this.instance.appendChild(this.title);
+		this.instance.appendChild(this.copyright);
+		this.bg.appendChild(this.instance);
+		document.body.appendChild(this.bg);
 	},
-	
-	destroy: function(){
-		window.clearInterval(this.timer);
-		this.body.css({"background-color":""});
-		this.instance.css({"display":"none","z-index":1});
-		this.instance.empty();
-		this.instance.remove();
-		
-		if(this.loadingImg){
-			this.loadingImg.css({"display":"none","z-index":1});
-			this.loadingImg.remove();
+
+	loadingSvg: function(){
+		// this.loadImageUrl = "<svg t=\"1525916222299\" class=\"icon\" style=\"\" viewBox=\"130 0 800 1024\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" p-id=\"2478\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"49\" height=\"56\"><defs><style type=\"text/css\"></style></defs><path d=\"M835.55027 48.761905C876.805122 48.761905 910.222223 81.441158 910.222223 121.753604L910.222223 902.095C910.222223 902.095 910.222223 942.409011 876.805 975.238095L113.777778 975.238095 113.777778 24.380952 88.888889 48.761905 835.55027 48.761905ZM64 0 64 24.380952 64 1024L960 1024C835.55027 1024 904.277615 1024 960 969.325498L960 54.49204C960 54.49204 904.277615 0 835.55027 0L88.888889 0 64 0Z\" p-id=\"2479\"></path><path d=\"M775.164361 219.428572C788.910114 219.428572 800.05325 208.512847 800.05325 195.047619 800.05325 181.582391 788.910114 170.666667 775.164361 170.666667L263.111111 170.666667C249.365357 170.666667 238.222222 181.582391 238.222222 195.047619 238.222222 208.512847 249.365357 219.428572 263.111111 219.428572L775.164361 219.428572Z\" p-id=\"2481\"></path><path d=\"M775.164361 365.714285C788.910114 365.714285 800.05325 354.798562 800.05325 341.333333 800.05325 327.868105 788.910114 316.952382 775.164361 316.952382L263.111111 316.952382C249.365357 316.952382 238.222222 327.868105 238.222222 341.333333 238.222222 354.798562 249.365357 365.714285 263.111111 365.714285L775.164361 365.714285Z\" p-id=\"2482\"></path><path d=\"M775.164361 536.380951C788.910114 536.380951 800.05325 525.465229 800.05325 512 800.05325 498.534771 788.910114 487.619049 775.164361 487.619049L263.111111 487.619049C249.365357 487.619049 238.222222 498.534771 238.222222 512 238.222222 525.465229 249.365357 536.380951 263.111111 536.380951L775.164361 536.380951Z\" p-id=\"2483\"></path></svg>";
+
+		var loadImageUrl = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
+		loadImageUrl.setAttribute("t", "1525916222299");
+		loadImageUrl.setAttribute("class", "icon");
+		loadImageUrl.setAttribute("style", "");
+		loadImageUrl.setAttribute("viewBox", "130 0 800 1024");
+		loadImageUrl.setAttribute("version", "1.1");
+		loadImageUrl.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+		loadImageUrl.setAttribute("p-id", "2478");
+		loadImageUrl.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+		loadImageUrl.setAttribute("width", "49");
+		loadImageUrl.setAttribute("height", "56");
+
+		var defs = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
+		var style = document.createElementNS("http://www.w3.org/2000/svg", 'style');
+		style.setAttribute("type", "text/css");
+		var path1 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+		path1.setAttribute("d", "M835.55027 48.761905C876.805122 48.761905 910.222223 81.441158 910.222223 121.753604L910.222223 902.095C910.222223 902.095 910.222223 942.409011 876.805 975.238095L113.777778 975.238095 113.777778 24.380952 88.888889 48.761905 835.55027 48.761905ZM64 0 64 24.380952 64 1024L960 1024C835.55027 1024 904.277615 1024 960 969.325498L960 54.49204C960 54.49204 904.277615 0 835.55027 0L88.888889 0 64 0Z");
+		path1.setAttribute("p-id", "2479");
+
+		var path2 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+		path2.setAttribute("d", "M775.164361 219.428572C788.910114 219.428572 800.05325 208.512847 800.05325 195.047619 800.05325 181.582391 788.910114 170.666667 775.164361 170.666667L263.111111 170.666667C249.365357 170.666667 238.222222 181.582391 238.222222 195.047619 238.222222 208.512847 249.365357 219.428572 263.111111 219.428572L775.164361 219.428572Z");
+		path2.setAttribute("p-id", "2481");
+
+		var path3 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+		path3.setAttribute("d", "M775.164361 365.714285C788.910114 365.714285 800.05325 354.798562 800.05325 341.333333 800.05325 327.868105 788.910114 316.952382 775.164361 316.952382L263.111111 316.952382C249.365357 316.952382 238.222222 327.868105 238.222222 341.333333 238.222222 354.798562 249.365357 365.714285 263.111111 365.714285L775.164361 365.714285Z");
+		path3.setAttribute("p-id", "2482");
+
+		var path4 = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+		path4.setAttribute("d", "M775.164361 536.380951C788.910114 536.380951 800.05325 525.465229 800.05325 512 800.05325 498.534771 788.910114 487.619049 775.164361 487.619049L263.111111 487.619049C249.365357 487.619049 238.222222 498.534771 238.222222 512 238.222222 525.465229 249.365357 536.380951 263.111111 536.380951L775.164361 536.380951Z");
+		path4.setAttribute("p-id", "2483");
+
+		defs.appendChild(style);
+		loadImageUrl.appendChild(defs);
+		loadImageUrl.appendChild(path1);
+		loadImageUrl.appendChild(path2);
+		loadImageUrl.appendChild(path3);
+		loadImageUrl.appendChild(path4);
+
+		return loadImageUrl;
+	},
+
+	initAnimationHtml : function(){
+		if(!document.createElementNS) return;
+
+		this.loadBox = document.createElement("div");
+		var img1 = this.loadingSvg();
+		var img2 = this.loadingSvg();
+		this.img3 = this.loadingSvg();
+		this.img3.setAttribute("class", "loadingRun");
+
+		this.img3.setAttribute("style", (
+			"position : absolute;" +
+			"left : 20px;" +
+			"top : 0;" +
+			"z-index : -1;" +
+			"-webkit-transform-origin : 0 0;" +
+			"-o-transform-origin : 0 0;" +
+			"-ms-transform-origin : 0 0;" +
+			"-moz-transform-origin : 0 0;" +
+			"transform-origin : 0 0;" +
+			"fill :"  + this.loadingCaptionColor + ";"
+		));
+
+		img2.setAttribute("style", (
+			"position : absolute;" +
+			"left : 20px;" +
+			"top : 0;" +
+			"-webkit-transform:rotateY(180deg) scale(0.8);" +
+			"-o-transform:rotateY(180deg) scale(0.8);" +
+			"-ms-transform:rotateY(180deg) scale(0.8);" +
+			"-moz-transform:rotateY(180deg) scale(0.8);" +
+			"transform:rotateY(180deg) scale(0.8);" +
+			"-webkit-transform-origin : 0 0;" +
+			"-o-transform-origin : 0 0;" +
+			"-ms-transform-origin : 0 0;" +
+			"-moz-transform-origin : 0 0;" +
+			"transform-origin : 0 0;" +
+			"fill : " + this.loadingCaptionColor + ";"
+		));
+
+		img1.setAttribute("style", (
+			"position : absolute;" +
+			"left : 20px;" +
+			"top : 0;" +
+			"-webkit-transform:rotateY(0) scale(0.8);" +
+			"-o-transform:rotateY(0) scale(0.8);" +
+			"-ms-transform:rotateY(0) scale(0.8);" +
+			"-moz-transform:rotateY(0) scale(0.8);" +
+			"transform:rotateY(0) scale(0.8);" +
+			"-webkit-transform-origin : 0 0;" +
+			"-o-transform-origin : 0 0;" +
+			"-ms-transform-origin : 0 0;" +
+			"-moz-transform-origin : 0 0;" +
+			"transform-origin : 0 0;" +
+			"fill : " + this.loadingCaptionColor + ";"
+		));
+
+		this.loadBox.appendChild(img1);
+		this.loadBox.appendChild(img2);
+		this.loadBox.appendChild(this.img3);
+		this.instance.appendChild(this.loadBox);
+	},
+
+	initConfig : function(){
+		  this.loadingCaption, this.loadingCaptionColor, this.loadingPicture;
+		  try{
+		  	this.loadingCaption = bookConfig.loadingCaption ? bookConfig.loadingCaption : "Loading";
+		  	this.loadingCaptionColor = bookConfig.loadingCaptionColor ? bookConfig.loadingCaptionColor : "#DDDDDD";
+		  	this.loadingBackground = bookConfig.loadingBackground ? bookConfig.loadingBackground : "#1F2232";
+		  	this.loadingPicture = bookConfig.loadingPicture ? bookConfig.loadingPicture : "";
+		  }catch(err){
+		  	this.loadingCaption = "Loading";
+		  	this.loadingCaptionColor = "#BDBDBD";
+		  	this.loadingBackground = "#1F2233";
+		  	this.loadingPicture = "";
+		  }
+	},
+
+	startLoading : function(){
+		this.title.innerHTML = document.title;
+	},
+
+	destroy : function(){
+		if(global.isIE8()||global.isIE9()){
+			$(this.bg).animate({"opacity":"0"},0.6,function(){
+				$("body>style").html("");
+				$(this.bg).remove();
+				$("body").css({"background-color" : ""});
+			}.bind(this));
+		}else{
+			animateOnce($(this.bg) , {"opacity":"0"} , 0.6 ,function(){
+				$(this.img3).attr("class", "");
+				$("body>style").html("");
+				$(this.bg).remove();
+				$(this.image).attr("src", "");
+				$("body").css({"background-color" : ""});
+			}.bind(this));
 		}
-	},
-	getBrowserType : function(){
-		
-		var isIE11 = function(){
-			var userAgent = navigator.userAgent.toLowerCase();
-			return (!$.browser.msie) && (userAgent.indexOf("trident") > 0);
-		};
-		
-		var browserType = 0;
-		
-		if($.browser.msie || isIE11()) {
-			browserType = 3;
-		} else if($.browser.mozilla && !isIE11()) {
-			browserType = 2;
-		} else if($.browser.safari) {
-			browserType = 1;
-		} else if($.browser.opera) {
-			browserType = 4;
-		};
-		
-		return browserType;
-	},
-	addGradient : function(item,beginColor, endColor){
-		
 
-		var browserType = this.getBrowserType();
+	},
 
-		var sLeft = "",sMsLeft="0";
-		var horz = true;
-		if(horz) {sLeft = "left,";sMsLeft="1";}
-		
-		item.css({background: "linear-gradient("+ sLeft + beginColor +", "+ endColor +")"});
-		switch(browserType){
-			case 1:{
-				item.css({background: "-webkit-linear-gradient("+ sLeft + beginColor +", "+ endColor +")"});
-				break;
-			}
-			case 2:{
-				item.css({background: "-moz-linear-gradient("+ sLeft + beginColor +", "+ endColor +")"});
-				break;
-			}
-			case 3:{
-				item.css({background: "-ms-linear-gradient("+ sLeft + beginColor +", "+ endColor +")"});
-				item.css("filter", "progid:DXImageTransform.Microsoft.Gradient(GradientType="+ sMsLeft +", EndColorStr=" +
-			endColor + ", StartColorStr=" + beginColor + ")");					
-				break;
-			}
-			case 4:{
-				item.css({background: "-o-linear-gradient("+ sLeft + beginColor +", "+ endColor +")"});
-				break;
-		
-			}
-		}	
-	
-		
+	initCss : function(){
+		document.getElementsByTagName("html")[0].setAttribute("style",(
+			"margin : 0;" +
+			"padding : 0;" +
+			"width : 100%;" +
+			"height : 100%;"
+		));
+
+		document.body.setAttribute("style", (
+			"margin : 0;" +
+			"padding : 0;" +
+			"width : 100%;" +
+			"height : 100%;" +
+			"position : fixed;" +
+			"background-color :" + this.loadingBackground + ";"
+		));
+
+		this.bg.setAttribute("style", (
+			"margin : 0;" +
+			"padding : 0;" +
+			"width : 100%;" +
+			"height : 100%;" +
+			"position : fixed;" +
+			"background-color:"  + this.loadingBackground + ";"
+		));
+
+		this.instance.setAttribute("style", (
+			"width : 100%;" +
+			"height : 100%;" +
+			"color :" +  this.loadingCaptionColor + ";" +
+			"text-align : center;" +
+			"vertical-align : middle;" +
+			"font-family : Tahoma;" +
+		  "position : relative;"
+
+		));
+
+		this.image.setAttribute("style", (
+			"position : absolute;" +
+			"bottom : 75%;" +
+			"left : 50%;" +
+			"-webkit-transform : translate(-50% , 50%);" +
+		  "-moz-transform : translate(-50% , 50%);" +
+		  "-ms-transform : translate(-50% , 50%);" +
+		  "-o-transform : translate(-50% , 50%);" +
+			"transform : translate(-50% , 50%);" +
+			"margin-bottom : 28px;" +
+			"max-width : 40%;" +
+			"max-height : 30%;"
+		));
+
+		if(window.innerHeight <= 300) this.image.style.display = "none";
+
+		var titleTran = "translate(-50%, 20px)";
+		var loadingBoxTran = "translate(-50% , -48.8px)";
+
+		// if(this.loadingPicture) {
+			// var titleTran = "translate(-50%, 40px)";
+			// var loadingBoxTran = "translate(-50% , -50%)";
+		// }
+
+		this.title.setAttribute("style", (
+			"font-family:Arial,Helvetica,sans serif;" +
+		  "font-size : 28px;" +
+		  "position : absolute;" +
+		  "top : 50%;" +
+		  "left : 50%;" +
+		  "-webkit-transform :"  + titleTran + ";" +
+		  "-moz-transform :"  + titleTran + ";" +
+		  "-ms-transform :" + titleTran + ";" +
+		  "-o-transform :" + titleTran + ";" +
+			"transform :"  +titleTran + ";" +
+		  "margin : 0;" +
+		  "padding : 0;"
+		));
+
+		if(this.loadBox) this.loadBox.setAttribute("style", (
+			"position:relative;" +
+			"perspective:200px;" +
+			"-webkit-transform-style:preserve-3d;" +
+			"-o-transform-style:preserve-3d;" +
+			"-ms-transform-style:preserve-3d;" +
+			"-moz-transform-style:preserve-3d;" +
+			"transform-style:preserve-3d;" +
+			"position : absolute;" +
+			"width : 39.2px;" +
+			"height : 44.8px;" +
+			"left : 50%;" +
+			"top : 50%;" +
+			"-webkit-transform : " +loadingBoxTran + ";" +
+		  "-moz-transform : " +loadingBoxTran + ";" +
+		  "-ms-transform : " +loadingBoxTran + ";" +
+		  "-o-transform : " +loadingBoxTran + ";" +
+			"transform : " + loadingBoxTran + ";" +
+		  "padding : 0;"
+		));
 	},
-	colorSplit : function(color){
-		var colorRGB = {r : 0, g : 0, b : 0};
-		
-		var red = "FF",green ="FF",blue = "FF";
-		
-		if(color.length == 7){
-	
-			red = color.substr(1, 2);
-			green = color.substr(3, 2);
-			blue = color.substr(5, 2);		
-		
-		}else if(color.length == 4){
-			
-			red = color.substr(1, 1);
-			green = color.substr(2, 1);
-			blue = color.substr(3, 1);
-			
-			red += red;
-			green += green;
-			blue += blue;
-	
-		}
-		colorRGB.r = parseInt(red,16);
-		colorRGB.g = parseInt(green,16);
-		colorRGB.b = parseInt(blue,16);
-		
-		return colorRGB;
-	},
-	
-	colorAdd :function(color, addR, addG, addB){
-		var colorRGB = this.colorSplit(color);
-		colorRGB.r = Math.min(colorRGB.r + addR, 255).toString(16);
-		colorRGB.g = Math.min(colorRGB.g + addG, 255).toString(16);
-		colorRGB.b = Math.min(colorRGB.b + addB, 255).toString(16);
-		colorRGB.r = (colorRGB.r.length <= 1) ? '0' + colorRGB.r : colorRGB.r;
-		colorRGB.g = (colorRGB.g.length <= 1) ? '0' + colorRGB.g : colorRGB.g;
-		colorRGB.b = (colorRGB.b.length <= 1) ? '0' + colorRGB.b : colorRGB.b;
-		return '#' + colorRGB.r + colorRGB.g + colorRGB.b;
-	},
-	initStatus : function(){
-		window.clearInterval(this.timer);
-		//this.stepTitle.text("Initialization...");
-	},
-	initBackground : function(){
-		
-		this.body.css({"background-color":this.loadingBackground});
-		
-		/*var beginColor,endColor,angle;
-		
-		try{
-			beginColor = bookConfig.bgBeginColor;
-			endColor = bookConfig.bgEndColor;
-			angle = bookConfig.bgMRotation;
-		}catch(err){
-			beginColor = "#1F2232";
-			endColor = "#1F2232";
-			angle = 90;
-		}
-		
-		if(beginColor == undefined) beginColor = "#1F2232";
-		if(endColor == undefined) endColor = "#1F2232";
-		if(angle == undefined) angle = 90;
-		
-		var angleStr = "0% 0%,100% 0%";
-		switch(angle) {
-			case 45:
-				angleStr = "0% 0%,100% 100%";
-				break;
-			case 90:
-				angleStr = "0% 0%,0% 100%";
-				break;
-			case 135:
-				angleStr = "100% 0%,0% 100%";
-				break;
-			case 180:
-				angleStr = "100% 0%,0% 0%";
-			case 0:
-				angleStr = "0% 0%,100% 0%";
-				break;
-		}
-		
-		var browserType = this.getBrowserType();
-		
-		
-		if(browserType == 1) {
-			this.body.css("background-image", "-webkit-gradient(linear," + angleStr + ",from(" + beginColor + "),to(" + endColor + "))");
-			
-		} else if(browserType == 2) {
-			this.body.css("background-image", "-moz-linear-gradient(left " + _angle + "deg," + beginColor + "," + endColor + ")");
-	
-		} else if(browserType == 3) {
-			this.body.css("filter", "progid:DXImageTransform.Microsoft.Gradient(GradientType=1, EndColorStr=" +
-				endColor + ", StartColorStr=" + beginColor + ");");
-		};*/
-		
-	}
-};
+
+	onResize : function(){}
+
+}
 
 var jsLoadingBar = new LoadingJS();

@@ -148,9 +148,13 @@
                 false
             );?>
         </section>
-
         <?$APPLICATION->IncludeFile(
-            $APPLICATION->GetTemplatePath("include_areas/journal_arhive.php"),
+            $APPLICATION->GetTemplatePath("include_areas/brk_facebook.php"),
+            Array(),
+            Array("MODE"=>"html")
+        );?>
+        <?$APPLICATION->IncludeFile(
+            $APPLICATION->GetTemplatePath("include_areas/brk_vk.php"),
             Array(),
             Array("MODE"=>"html")
         );?>
@@ -252,12 +256,7 @@
             )
         );?>
         <?$APPLICATION->IncludeFile(
-            $APPLICATION->GetTemplatePath("include_areas/brk_vk.php"),
-            Array(),
-            Array("MODE"=>"html")
-        );?>
-        <?$APPLICATION->IncludeFile(
-            $APPLICATION->GetTemplatePath("include_areas/brk_facebook.php"),
+            $APPLICATION->GetTemplatePath("include_areas/journal_arhive.php"),
             Array(),
             Array("MODE"=>"html")
         );?>
@@ -266,10 +265,10 @@
         <div id="header" class="region region-navigation">
             <div id="header_menu">
                 <?/*$APPLICATION->IncludeFile(
-			$APPLICATION->GetTemplatePath("include_areas/header_icons.php"),
-			Array(),
-			Array("MODE"=>"php")
-		);*/?>
+			        $APPLICATION->GetTemplatePath("include_areas/header_icons.php"),
+			        Array(),
+			        Array("MODE"=>"php")
+		        );*/?>
                 <?$APPLICATION->IncludeComponent(
                     "bitrix:menu",
                     "horizontal_multilevel",
@@ -328,17 +327,18 @@
         <?}?>
         <?if (($APPLICATION->GetCurPage() != "/")){?>
 			<section class="page-content">
- <div id="navigation" class="breadcrumb"><?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "main", Array(
-	"START_FROM" => "0",	// Номер пункта, начиная с которого будет построена навигационная цепочка
-		"PATH" => "",	// Путь, для которого будет построена навигационная цепочка (по умолчанию, текущий путь)
-		"SITE_ID" => "s1",	// Cайт (устанавливается в случае многосайтовой версии, когда DOCUMENT_ROOT у сайтов разный)
-		"COMPONENT_TEMPLATE" => ".default"
-	),
-	false
-);?> </div>			
-
-<h1 id="page-title" class="title"><?$APPLICATION->ShowTitle(false)?></h1>
-<?}?>
+                <div id="navigation" class="breadcrumb">
+                    <?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "main", Array(
+                        "START_FROM" => "0",	// Номер пункта, начиная с которого будет построена навигационная цепочка
+                        "PATH" => "",	// Путь, для которого будет построена навигационная цепочка (по умолчанию, текущий путь)
+                        "SITE_ID" => "s1",	// Cайт (устанавливается в случае многосайтовой версии, когда DOCUMENT_ROOT у сайтов разный)
+                        "COMPONENT_TEMPLATE" => ".default"
+                    ),
+                        false
+                    );?>
+                </div>
+                <h1 id="page-title" class="title"><?$APPLICATION->ShowTitle(false)?></h1>
+        <?}?>
                 <!--<section class="page-content">
 				  <a id="main-content"></a>
 					<h1 class="title" id="page-title"></h1>
