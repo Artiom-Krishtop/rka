@@ -6,7 +6,7 @@ $APPLICATION->SetTitle("Контакты / График приёма гражд�
 <tr>
 	<td>
  <b><span style="font-family: 'Times New Roman', Times; font-size: 16pt;">Адрес: <br>
-		</span></b><b><span style="font-family: 'Times New Roman', Times; font-size: 16pt;"><br>
+ </span></b><b><span style="font-family: 'Times New Roman', Times; font-size: 16pt;"><br>
  </span></b> <span style="font-family: 'Times New Roman', Times; font-size: 16pt;">220004, г.Минск, ул.Коллекторная, 10<br>
  <br>
  <b><span style="font-family: 'Times New Roman', Times; font-size: 16pt;">Контакты:</span></b><span style="font-family: 'Times New Roman', Times; font-size: 16pt;"> </span><br>
@@ -14,7 +14,7 @@ $APPLICATION->SetTitle("Контакты / График приёма гражд�
  <span style="font-family: 'Times New Roman', Times; font-size: 16pt;"> <span style="font-family: 'Times New Roman', Times; font-size: 16pt;">Секретарь БРКА - </span><br>
  <span style="font-family: 'Times New Roman', Times; font-size: 16pt;">8(017)2005534, </span><a href="mailto:info@rka.by"><span style="font-family: 'Times New Roman', Times; font-size: 16pt;">info@rka.by</span></a><span style="font-family: 'Times New Roman', Times; font-size: 16pt;">&nbsp;</span><br>
  <span style="font-family: 'Times New Roman', Times; font-size: 16pt;"> </span><br>
- <span style="font-family: 'Times New Roman', Times; font-size: 16pt;">Пресс-служба БРКА - 8(029)1471969,&nbsp;</span><a href="mailto:brka.press@gmail.com"><span style="font-family: 'Times New Roman', Times; font-size: 16pt;">brka.press@gmail.com</span></a><br>
+ <span style="font-family: 'Times New Roman', Times; font-size: 16pt;">Пресс-служба БРКА - 8(029)1471969</span><br>
  <span style="font-family: 'Times New Roman', Times; font-size: 16pt;"> </span></span><br>
  <span style="font-family: Georgia, serif; font-size: 15pt;"><span style="font-family: 'Times New Roman', Times; font-size: 16pt;">Помощник председателя/вопросы по наполнению сайта БРКА - </span><br>
  <span style="font-family: 'Times New Roman', Times; font-size: 16pt;">8(017) 2264164, </span><a href="mailto:belcollegium@gmail.com"><span style="font-family: 'Times New Roman', Times; font-size: 16pt;">belcollegium@gmail.com</span></a> </span> </span>
