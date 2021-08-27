@@ -8,28 +8,28 @@
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td><a href="/journal/26" title="Журнал Адвокат №4(26) / 2020" target="_blank" rel="nofollow">№26 / 2020</a></td>
+            <td><a href="/journal/27" title="Журнал Адвокат №1(27) / 2021" target="_blank" rel="nofollow">№27 / 2021</a></td>
             <td><a href="/journal/28" title="Журнал Адвокат №2(28) / 2021" target="_blank" rel="nofollow">№28 / 2021</a></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td><a href="/journal/24" title="Журнал Адвокат №2(24) / 2020" target="_blank" rel="nofollow">№24 / 2020</a></td>
             <td><a href="/journal/25" title="Журнал Адвокат №3(25) / 2020" target="_blank" rel="nofollow">№25 / 2020</a></td>
+            <td><a href="/journal/26" title="Журнал Адвокат №4(26) / 2020" target="_blank" rel="nofollow">№26 / 2020</a></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td><a href="/journal/22" title="Журнал Адвокат №4(22) / 2019" target="_blank" rel="nofollow">№22 / 2019</a></td>
             <td><a href="/journal/23" title="Журнал Адвокат №1(23) / 2020" target="_blank" rel="nofollow">№23 / 2020</a></td>
+            <td><a href="/journal/24" title="Журнал Адвокат №2(24) / 2020" target="_blank" rel="nofollow">№24 / 2020</a></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td><a href="/journal/20" title="Журнал Адвокат №2(20) / 2019" target="_blank" rel="nofollow">№20 / 2019</a></td>
             <td><a href="/journal/21" title="Журнал Адвокат №3(21) / 2019" target="_blank" rel="nofollow">№21 / 2019</a></td>
+            <td><a href="/journal/22" title="Журнал Адвокат №4(22) / 2019" target="_blank" rel="nofollow">№22 / 2019</a></td>
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td><a href="/journal/18" title="Журнал Адвокат №4(18) / 2018" target="_blank" rel="nofollow">№18 / 2018</a></td>
             <td><a href="/journal/19" title="Журнал Адвокат №1(19) / 2019" target="_blank" rel="nofollow">№19 / 2019</a></td>
+            <td><a href="/journal/20" title="Журнал Адвокат №2(20) / 2019" target="_blank" rel="nofollow">№20 / 2019</a></td>
         </tr>
         <tr>
             <td>&nbsp;</td>

@@ -4,6 +4,7 @@ $APPLICATION->SetTitle("Архив журналов");
 ?>
     <ul style="list-style-type: none; padding: 0;">
         <li><a href="/journal/28" title="Журнал Адвокат №2(28) / 2021" target="_blank">№ 2(28) / 2021</a></li>
+        <li><a href="/journal/27" title="Журнал Адвокат №1(27) / 2021" target="_blank">№ 1(27) / 2021</a></li>
         <li><a href="/journal/26" title="Журнал Адвокат №4(26) / 2020" target="_blank">№ 4(26) / 2020</a></li>
         <li><a href="/journal/25" title="Журнал Адвокат №3(25) / 2020" target="_blank">№ 3(25) / 2020</a></li>
         <li><a href="/journal/24" title="Журнал Адвокат №2(24) / 2020" target="_blank">№ 2(24) / 2020</a></li>
