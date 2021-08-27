@@ -1,4 +1,4 @@
-<?
+<?php
 $MESS["LANDING_TPL_ACCEPT"] = "Я згоден";
 $MESS["LANDING_TPL_ACCEPTED"] = "Ви вже надали згоду";
 $MESS["LANDING_TPL_ADD_PAGE"] = "Нова сторінка";
@@ -12,9 +12,11 @@ $MESS["LANDING_TPL_IMPORT_SITE_STORE"] = "Імпорт магазину";
 $MESS["LANDING_TPL_JS_PAY_TARIFF"] = "Перейти на розширений тариф";
 $MESS["LANDING_TPL_JS_PAY_TARIFF_TITLE"] = "Обмеження по тарифу";
 $MESS["LANDING_TPL_MENU_AGREEMENT"] = "Правила використання";
+$MESS["LANDING_TPL_MENU_FORMS"] = "CRM-форми";
+$MESS["LANDING_TPL_MENU_MARKETING"] = "Маркетинг";
 $MESS["LANDING_TPL_MENU_RIGHTS"] = "Права доступу";
 $MESS["LANDING_TPL_MENU_SITES"] = "Список сайтів";
 $MESS["LANDING_TPL_MENU_SITES_KNOWLEDGE"] = "База знань";
+$MESS["LANDING_TPL_MENU_TRACKING"] = "Наскрізна аналітика";
 $MESS["LANDING_TPL_SETTING_CATALOG"] = "Налаштування каталогу";
 $MESS["LANDING_TPL_SETTING_SITE"] = "Налаштування сайту";
-?>
