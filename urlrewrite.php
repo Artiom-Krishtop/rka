@@ -136,7 +136,7 @@ $arUrlRewrite=array (
     'PATH' => '/blogs/index.php',
     'SORT' => 100,
   ),
-  35 => 
+  46 => 
   array (
     'CONDITION' => '#^/forum/#',
     'RULE' => '',

@@ -91,6 +91,8 @@ $APPLICATION->SetTitle("Форумы");
 		"RSS_TN_TITLE" => "",
 		"RSS_TN_DESCRIPTION" => "",
 		"SEF_FOLDER" => "/forum/",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO",
 		"SEF_URL_TEMPLATES" => array(
 			"index" => "index.php",
 			"list" => "forum#FID#/",
