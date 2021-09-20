@@ -2,49 +2,49 @@
 $aMenuLinks = Array(
 	Array(
 		"Об адвокатуре", 
-		"https://www.rka.by/about/", 
+		"/about/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"БРКА", 
-		"https://www.rka.by/kollegies/respublikanskaya/", 
+		"/kollegies/respublikanskaya/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Контакты/приём", 
-		"https://www.rka.by/grafik-priyoma-grazhdan/", 
+		"/grafik-priyoma-grazhdan/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Онлайн-консультация", 
-		"pravila-online-konsultacii", 
+		"/pravila-online-konsultacii/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Правила сайта", 
-		"pravila-polzovaniya-saytom", 
+		"/pravila-polzovaniya-saytom/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Форумы адвокатов", 
-		"https://www.rka.by/forum/", 
+		"/forum/",
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Виртуальный музей", 
-		"https://www.rka.by/museum/", 
+		"/museum/",
 		Array(), 
 		Array(), 
 		"" 
