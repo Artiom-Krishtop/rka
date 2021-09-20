@@ -1088,4 +1088,25 @@ class ListLawAnsw
     }*/
 }
 
+
+/* Отправляем письмо на почту модератору при добавлении на форуме не активного сообщения (для премодерации)  */
+AddEventHandler('forum', 'onBeforeMailMessageSend', 'sendMailForumMessage');
+function sendMailForumMessage(&$mailTemplate, &$arForumSites, &$arFields)
+{
+    global $USER;
+    $arFields["RECIPIENT"] = $USER->GetEmail();
+    $arFields["PATH2FORUM"] = $arForumSites[SITE_ID];
+
+        Bitrix\Main\Mail\Event::send(array(
+        "EVENT_NAME" => $mailTemplate,
+        'MESSAGE_ID' => 25,
+        "LID" => SITE_ID,
+        "C_FIELDS" => $arFields,
+        "DUPLICATE" => "N",
+        "LANGUAGE_ID" => "ru",
+
+    ));
+    return $arFields;
+}
+
 ?>
