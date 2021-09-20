@@ -22,7 +22,7 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Правила OK", 
+		"Онлайн-консультация", 
 		"pravila-online-konsultacii", 
 		Array(), 
 		Array(), 
