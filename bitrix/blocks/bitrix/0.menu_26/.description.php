@@ -49,7 +49,7 @@ return [
 	],
 	'style' => [
 		'block' => [
-			'type' => ['display', 'bg', 'border-color', 'header-on-scroll', 'header-position']
+			'type' => ['display', 'bg', 'border-colors', 'header-on-scroll', 'header-position']
 		],
 		'nodes' => [
 			'.landing-block-node-navbar' => [

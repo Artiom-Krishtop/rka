@@ -4818,7 +4818,7 @@ class Block extends \Bitrix\Landing\Internals\BaseTable
 			}
 		}
 		// get actual css from block wrapper
-		if (isset($manifest['style']['block']))
+		if (!empty($manifest['style']['block']))
 		{
 			$nodesArray = $doc->getChildNodesArray();
 			$resultList = [array_pop($nodesArray)];

@@ -75,7 +75,11 @@ export class Backend
 				onsuccess: (sourceResponse) => {
 					const response = Backend.makeResponse(xhr, sourceResponse);
 
-					if (Type.isStringFilled(response.sessid) && additionalRequestCompleted)
+					if (
+						Type.isStringFilled(response.sessid) &&
+						Loc.getMessage('bitrix_sessid') !== response.sessid &&
+						additionalRequestCompleted
+					)
 					{
 						Loc.setMessage('bitrix_sessid', response.sessid);
 						additionalRequestCompleted = false;
@@ -255,6 +259,7 @@ export class Backend
 						&& requestBody.action !== 'Landing::publication'
 						&& requestBody.action !== 'Site::publication'
 						&& requestBody.action !== 'Site::moveFolder'
+						&& requestBody.action !== 'Site::markDelete'
 					)
 					{
 						const error = Type.isString(err) ? {type: 'error'} : err;

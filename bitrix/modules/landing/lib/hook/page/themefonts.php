@@ -101,24 +101,6 @@ class ThemeFonts extends Hook\Page
 		];
 	}
 
-	// protected static function getSelectOptions(): ?array
-	// {
-	// 	// todo: add OS font (SanFrancisco -> Helvetica -> Roboto -> Arial). What if Roboto use separately by g-font-roboto?
-	// 	static $options = [];
-	//
-	// 	if (!empty($options))
-	// 	{
-	// 		return $options;
-	// 	}
-	//
-	// 	foreach (Hook\Page\Fonts::DEFAULT_FONTS as $fontClass => $font)
-	// 	{
-	// 		$options[$fontClass] = $font['name'];
-	// 	}
-	//
-	// 	return $options;
-	// }
-
 	protected static function getDefaultValues(): array
 	{
 		return [
@@ -192,9 +174,7 @@ class ThemeFonts extends Hook\Page
 	 */
 	protected function setThemeFont(string $font): void
 	{
-		$fontLink = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=';
-		$fontLink .= str_replace(" ", "+", $font);
-		$fontLink .= ':wght@300;400;500;600;700;900">';
+		$fontLink = $this->getFontLink($font);
 		$assets = Assets\Manager::getInstance();
 		$assets->addString($fontLink);
 		$assets->addString(
@@ -257,9 +237,7 @@ class ThemeFonts extends Hook\Page
 	 */
 	protected function setHFontTheme(string $font): void
 	{
-		$fontLink = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=';
-		$fontLink .= str_replace(" ", "+", $font);
-		$fontLink .= ':wght@300;400;500;600;700;900">';
+		$fontLink = $this->getFontLink($font);
 		$assets = Assets\Manager::getInstance();
 		$assets->addString($fontLink);
 		$assets->addString(
@@ -487,5 +465,14 @@ class ThemeFonts extends Hook\Page
 
 			HookDataTable::delete($old['ID']);
 		}
+	}
+
+	protected function getFontLink(string $font): string
+	{
+		$fontLink = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=';
+		$fontLink .= str_replace(" ", "+", $font);
+		$fontLink .= ':wght@300;400;500;600;700;900">';
+
+		return $fontLink;
 	}
 }

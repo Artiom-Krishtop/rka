@@ -41,6 +41,10 @@
 	margin: 0;
 }
 
+.catalog-section-list-item:hover .catalog-section-list-item-inner {
+	opacity: 1;
+}
+
 .catalog-sections-list-container .catalog-section-list-item:first-child {
 	padding-left: 0;
 }
@@ -75,6 +79,7 @@
 	justify-content: center;
 	opacity: 0.9;
 	padding: 8px 36px 6px 8px;
+	transition: opacity .3s;
 }
 
 .catalog-section-list-item-inner:after {

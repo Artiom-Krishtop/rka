@@ -213,7 +213,7 @@
 
 		unload: function()
 		{
-			if (!b24form || !b24form.App || !this.formObject)
+			if (typeof b24form === 'undefined' || !b24form.App || !this.formObject)
 			{
 				return;
 			}

@@ -107,7 +107,10 @@ $pageConfig = array(
 	'NAVCHAIN_ROOT' => false,
 	'ALLOW_EXTERNAL_LINK' => true,
 
-	'ALLOW_USER_EDIT' => true
+	'ALLOW_USER_EDIT' => true,
+
+	'DEFAULT_ACTION_TYPE' => CAdminUiListRow::LINK_TYPE_URL,
+	'SKIP_URL_MODIFICATION' => false,
 );
 switch ($urlBuilder->getId())
 {
@@ -120,6 +123,7 @@ switch ($urlBuilder->getId())
 		$pageConfig['CATALOG'] = true;
 		$pageConfig['ALLOW_EXTERNAL_LINK'] = false;
 		$pageConfig['ALLOW_USER_EDIT'] = false;
+		$pageConfig['DEFAULT_ACTION_TYPE'] = CAdminUiListRow::LINK_TYPE_SLIDER;
 		break;
 	case 'CATALOG':
 		$pageConfig['LIST_ID_PREFIX'] = 'tbl_product_list_';
@@ -263,6 +267,7 @@ if ($bCatalog)
 		if ($pageConfig['USE_NEW_CARD'])
 		{
 			$pageConfig['LIST_ID'] .= '.NEW';
+			$pageConfig['SKIP_URL_MODIFICATION'] = true;
 		}
 	}
 
@@ -2951,10 +2956,17 @@ foreach (array_keys($rawRows) as $rowId)
 	{
 		$arRes["PREVIEW_PICTURE"] = $arRes["PICTURE"];
 		$row = $lAdmin->AddRow($itemType.$itemId, $arRes, $sec_list_url, GetMessage("IBLIST_A_LIST"));
+		$row->setConfig([
+			CAdminUiListRow::DEFAULT_ACTION_TYPE_FIELD => CAdminUiListRow::LINK_TYPE_URL,
+		]);
 	}
 	else // in case of element take his action
 	{
 		$row = $lAdmin->AddRow($itemType.$itemId, $arRes, $el_edit_url, GetMessage("IBLIST_A_EDIT"));
+		$row->setConfig([
+			CAdminUiListRow::DEFAULT_ACTION_TYPE_FIELD => $pageConfig['DEFAULT_ACTION_TYPE'],
+			CAdminUiListRow::SKIP_URL_MODIFY_FIELD => $pageConfig['SKIP_URL_MODIFICATION'],
+		]);
 		$arElemID[] = $itemId;
 		if ($row->arRes['VAT_ID'] === null)
 		{
@@ -5071,10 +5083,7 @@ if (Loader::includeModule('crm') && Instagram::isAvailable() && Instagram::isAct
 }
 
 $lAdmin->DisplayFilter($filterFields);
-$lAdmin->DisplayList([
-	'DEFAULT_ACTION' => $sec_list_url,
-	'SKIP_URL_MODIFICATION' => true
-]);
+$lAdmin->DisplayList();
 if($bWorkFlow || $bBizproc):
 	echo BeginNote();?>
 	<span class="adm-lamp adm-lamp-green"></span> - <?echo GetMessage("IBLIST_A_GREEN_ALT")?><br>

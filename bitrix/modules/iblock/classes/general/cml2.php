@@ -5605,17 +5605,21 @@ class CIBlockCMLExport
 						$arField,
 					)
 				);
-				while($arEnum = $rsEnum->GetNext())
+				if (is_object($rsEnum))
 				{
-					fwrite($this->fp,
-						"\t\t\t\t\t<".GetMessage("IBLOCK_XML2_CHOICE").">\n"
-						.$this->formatXMLNode(6, GetMessage("IBLOCK_XML2_ID"), $arEnum["XML_ID"])
-						.$this->formatXMLNode(6, GetMessage("IBLOCK_XML2_VALUE"), $arEnum["VALUE"])
-						.$this->formatXMLNode(6, GetMessage("IBLOCK_XML2_BY_DEFAULT"), ($arEnum["DEF"]=="Y"? "true": "false"))
-						.$this->formatXMLNode(6, GetMessage("IBLOCK_XML2_SORT"), intval($arEnum["SORT"]))
-						."\t\t\t\t\t</".GetMessage("IBLOCK_XML2_CHOICE").">\n"
-					);
+					while ($arEnum = $rsEnum->GetNext())
+					{
+						fwrite($this->fp,
+							"\t\t\t\t\t<".GetMessage("IBLOCK_XML2_CHOICE").">\n"
+							.$this->formatXMLNode(6, GetMessage("IBLOCK_XML2_ID"), $arEnum["XML_ID"])
+							.$this->formatXMLNode(6, GetMessage("IBLOCK_XML2_VALUE"), $arEnum["VALUE"])
+							.$this->formatXMLNode(6, GetMessage("IBLOCK_XML2_BY_DEFAULT"), ($arEnum["DEF"] == "Y" ? "true" : "false"))
+							.$this->formatXMLNode(6, GetMessage("IBLOCK_XML2_SORT"), intval($arEnum["SORT"]))
+							."\t\t\t\t\t</".GetMessage("IBLOCK_XML2_CHOICE").">\n"
+						);
+					}
 				}
+				unset($rsEnum);
 
 				fwrite($this->fp, "\t\t\t\t</".GetMessage("IBLOCK_XML2_CHOICE_VALUES").">\n");
 			}

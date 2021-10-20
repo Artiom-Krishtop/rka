@@ -1439,7 +1439,7 @@ class CAllIBlockElement
 		return $arSqlSearch;
 	}
 
-	function MkPropertyFilter($res, $cOperationType, $propVAL, $db_prop, &$arJoinProps, &$arSqlSearch)
+	public function MkPropertyFilter($res, $cOperationType, $propVAL, $db_prop, &$arJoinProps, &$arSqlSearch)
 	{
 		global $DB;
 
@@ -1673,7 +1673,7 @@ class CAllIBlockElement
 		}
 	}
 
-	function MkPropertyOrder($by, $order, $bSort, $db_prop, &$arJoinProps, &$arSqlOrder)
+	public function MkPropertyOrder($by, $order, $bSort, $db_prop, &$arJoinProps, &$arSqlOrder)
 	{
 		if($bSort && $db_prop["PROPERTY_TYPE"] != "L")
 			return;
@@ -1901,7 +1901,7 @@ class CAllIBlockElement
 
 	}
 
-	function MkPropertyGroup($db_prop, &$arJoinProps, $bSort = false)
+	public function MkPropertyGroup($db_prop, &$arJoinProps, $bSort = false)
 	{
 		if($db_prop["VERSION"] == 2 && $db_prop["MULTIPLE"]=="N")
 		{
@@ -1960,7 +1960,7 @@ class CAllIBlockElement
 		}
 	}
 
-	function MkPropertySelect($PR_ID, $db_prop, &$arJoinProps, $bWasGroup, $sGroupBy, &$sSelect, $bSort = false)
+	public function MkPropertySelect($PR_ID, $db_prop, &$arJoinProps, $bWasGroup, $sGroupBy, &$sSelect, $bSort = false)
 	{
 		global $DB, $DBType;
 
@@ -2541,7 +2541,7 @@ class CAllIBlockElement
 		}
 	}
 
-	function MkAlias($max_alias_len, $alias, &$arIBlockLongProps)
+	public function MkAlias($max_alias_len, $alias, &$arIBlockLongProps)
 	{
 		if($max_alias_len && mb_strlen($alias) > $max_alias_len)
 		{
@@ -2552,7 +2552,7 @@ class CAllIBlockElement
 		return $alias;
 	}
 
-	function PrepareGetList(
+	public function PrepareGetList(
 		&$arIblockElementFields,
 		&$arJoinProps,
 
@@ -3527,7 +3527,7 @@ class CAllIBlockElement
 			if(is_set($arFields, "IBLOCK_SECTION"))
 				CIBlockElement::SetElementSection($ID, $arFields["IBLOCK_SECTION"], true, $arIBlock["RIGHTS_MODE"] === "E"? $arIBlock["ID"]: 0, $IBLOCK_SECTION_ID);
 
-			if($arIBlock["RIGHTS_MODE"] === "E")
+			if ($arIBlock["RIGHTS_MODE"] === Iblock\IblockTable::RIGHTS_EXTENDED)
 			{
 				$obElementRights = new CIBlockElementRights($arIBlock["ID"], $ID);
 				if(!is_set($arFields, "IBLOCK_SECTION") || empty($arFields["IBLOCK_SECTION"]))
@@ -4146,7 +4146,7 @@ class CAllIBlockElement
 	///////////////////////////////////////////////////////////////////
 	// Checks fields before update or insert
 	///////////////////////////////////////////////////////////////////
-	function CheckFields(&$arFields, $ID=false, $bCheckDiskQuota=true)
+	public function CheckFields(&$arFields, $ID=false, $bCheckDiskQuota=true)
 	{
 		global $DB, $APPLICATION, $USER;
 		$this->LAST_ERROR = "";

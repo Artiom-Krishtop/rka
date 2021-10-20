@@ -1,7 +1,7 @@
 <section class="landing-block g-pt-30 g-pb-30">
 	<div class="container">
 		<div class="row align-items-stretch">
-			<div class="col-md-6 col-lg-4 g-mb-30 g-mb-0--lg">
+			<div class="col-md-6 col-lg-4 g-mb-30 g-mb-0--lg g-min-height-300">
 				<article class="landing-block-node-block h-100 js-animation fadeInUp text-center u-block-hover u-bg-overlay g-color-white g-bg-black-opacity-0_3--after">
 					<div class="landing-block-node-img1 h-100 w-100 g-bg-img-hero u-block-hover__main--zoom-v1"
 						style="background-image: url(https://cdn.bitrix24.site/bitrix/images/landing/business/800x867/img1.jpg);"
@@ -21,7 +21,7 @@
 					</div>
 				</article>
 			</div>
-			<div class="col-md-6 col-lg-4 g-mb-30 g-mb-0--lg">
+			<div class="col-md-6 col-lg-4 g-mb-30 g-mb-0--lg g-min-height-300">
 				<article class="landing-block-node-block h-100 js-animation fadeInUp text-center u-block-hover u-bg-overlay g-color-white g-bg-black-opacity-0_3--after">
 					<div class="landing-block-node-img2 h-100 w-100 g-bg-img-hero u-block-hover__main--zoom-v1"
 						style="background-image: url(https://cdn.bitrix24.site/bitrix/images/landing/business/800x867/img2.jpg);"

@@ -320,12 +320,20 @@ this.BX = this.BX || {};
 	    value: function isControlsEnabled() {
 	      return !main_core.Dom.hasClass(document.body, 'landing-ui-hide-controls');
 	    }
+	    /**
+	     * Set BX classes to mark this landing frame as mobile (touch) device
+	     */
+
 	  }, {
 	    key: "setTouchDevice",
 	    value: function setTouchDevice() {
 	      main_core.Dom.removeClass(document.documentElement, 'bx-no-touch');
 	      main_core.Dom.addClass(document.documentElement, 'bx-touch');
 	    }
+	    /**
+	     * Set BX classes to mark this landing frame as desktop (no touch) device
+	     */
+
 	  }, {
 	    key: "setNoTouchDevice",
 	    value: function setNoTouchDevice() {

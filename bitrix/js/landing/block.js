@@ -3514,7 +3514,10 @@
 				BX.Main.MenuManager.destroy(this.sidebarActionsMenu.id);
 			}
 
-			window.localStorage.removeItem("landingBlockId");
+			if (String(window.localStorage.getItem("landingBlockId")) === String(this.id))
+			{
+				window.localStorage.removeItem("landingBlockId");
+			}
 
 			BX.Landing.Backend.getInstance()
 				.action(

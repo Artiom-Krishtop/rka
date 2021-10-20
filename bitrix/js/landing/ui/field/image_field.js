@@ -25,6 +25,7 @@
 		BX.Landing.UI.Field.Text.apply(this, arguments);
 
 		this.dimensions = typeof data.dimensions === "object" ? data.dimensions : null;
+		this.create2xByDefault = data.create2xByDefault !== false;
 		this.uploadParams = typeof data.uploadParams === "object" ? data.uploadParams : {};
 		this.onValueChangeHandler = data.onValueChange ? data.onValueChange : (function() {});
 		this.layout.classList.add("landing-ui-field-image");
@@ -484,6 +485,7 @@
 		onFileChange: function(file)
 		{
 			this.showLoader();
+
 			this.upload(file)
 				.then(this.setValue.bind(this))
 				.then(this.hideLoader.bind(this))
@@ -750,7 +752,7 @@
 				else
 				{
 					this.input.innerText = value.src;
-					this.input2x.innerText = value.src2x;
+					this.input2x.innerText = value.src2x || '';
 					this.preview.style.backgroundImage = "url(\""+(value.src2x || value.src)+"\")";
 					this.preview.id = BX.util.getRandomString();
 					this.hiddenImage.src = value.src2x || value.src;
@@ -906,15 +908,68 @@
 
 			this.showLoader();
 
-			return this.uploader
-				.upload(file, additionalParams)
-				.then(function(result) {
-					this.hideLoader();
+			var checkSize = new Promise(function(resolve) {
+				var sizes = ['1x', '2x'];
 
-					return Object.assign({}, result[0], {
-						src2x: result[1].src,
-						id2x: result[1].id
-					})
+				if (this.create2xByDefault === false)
+				{
+					var image = new Image();
+					var objectUrl = URL.createObjectURL(file);
+					var dimensions = this.dimensions;
+					image.onload = function() {
+						URL.revokeObjectURL(objectUrl);
+						if (
+							(
+								this.width >= dimensions.width
+								|| this.height >= dimensions.height
+								|| this.width >= dimensions.maxWidth
+								|| this.height >= dimensions.maxHeight
+							) === false
+						)
+						{
+							sizes = ['1x'];
+						}
+
+						resolve(sizes);
+					};
+					image.src = objectUrl;
+				}
+				else
+				{
+					resolve(sizes);
+				}
+			}.bind(this));
+
+			return checkSize
+				.then(function(allowedSizes) {
+					var sizes = (function() {
+						if (
+							this.create2xByDefault === false
+							&& BX.Type.isArrayFilled(allowedSizes)
+						)
+						{
+							return allowedSizes;
+						}
+
+						return ['1x', '2x'];
+					}.bind(this))();
+
+					return this.uploader
+						.setSizes(sizes)
+						.upload(file, additionalParams)
+						.then(function(result) {
+							this.hideLoader();
+
+							if (sizes.length === 1)
+							{
+								return result[0];
+							}
+
+							return Object.assign({}, result[0], {
+								src2x: result[1].src,
+								id2x: result[1].id
+							});
+						}.bind(this));
 				}.bind(this));
 		}
 	}

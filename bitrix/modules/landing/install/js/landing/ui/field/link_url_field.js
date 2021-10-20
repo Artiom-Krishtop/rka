@@ -1088,7 +1088,13 @@
 		 */
 		getValue: function()
 		{
-			return this.getSelectedHrefType() + (this.value ? this.value : this.input.innerText);
+			var valueText = this.value ? this.value : this.input.innerText;
+			if (valueText.includes(':'))
+			{
+				return valueText;
+			}
+
+			return this.getSelectedHrefType() + valueText;
 		}
 	};
 })();

@@ -44,9 +44,10 @@ class Site extends \Bitrix\Landing\Internals\BaseTable
 	 * @param int[]|int $id Site id or array of ids.
 	 * @param boolean $full Return full site url with relative path.
 	 * @param boolean $hostInclude Include host name in full path.
+	 * @param boolean $previewForNotActive If true and site is not active, url will be with preview hash.
 	 * @return string|array
 	 */
-	public static function getPublicUrl($id, bool $full = true, bool $hostInclude = true)
+	public static function getPublicUrl($id, bool $full = true, bool $hostInclude = true, bool $previewForNotActive = false)
 	{
 		$paths = [];
 		$isB24 = Manager::isB24();
@@ -63,6 +64,8 @@ class Site extends \Bitrix\Landing\Internals\BaseTable
 				'SMN_SITE_ID',
 				'CODE',
 				'TYPE',
+				'ACTIVE',
+				'DELETED',
 				'ID'
 			),
 			'filter' => array(
@@ -120,10 +123,11 @@ class Site extends \Bitrix\Landing\Internals\BaseTable
 			{
 				$paths[$row['ID']] = ($hostInclude ? $hostUrl : '') . $defaultPubPath . ($full ? $row['CODE'] : '');
 			}
-
-			unset($pubPath);
+			if ($previewForNotActive && ($row['ACTIVE'] === 'N' || $row['DELETED'] === 'Y'))
+			{
+				$paths[$row['ID']] .= 'preview/' . self::getPublicHash($row['ID'], $row['DOMAIN_NAME']) . '/';
+			}
 		}
-		unset($res, $row);
 
 		if (is_array($id))
 		{
@@ -1002,6 +1006,7 @@ class Site extends \Bitrix\Landing\Internals\BaseTable
 								]
 							], ['appendMenu' => true]);
 							$block->save();
+							break 2;
 						}
 					}
 				}

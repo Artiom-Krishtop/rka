@@ -487,6 +487,7 @@ class LandingPubComponent extends LandingBaseComponent
 			// set www alias
 			if (mb_substr($serverHost, 0, 4) == 'www.')
 			{
+				$filter['=DOMAIN.ACTIVE'] = 'Y';
 				$filter['=DOMAIN.DOMAIN'] = [
 					$serverHost,
 					mb_substr($serverHost, 4)
@@ -494,6 +495,7 @@ class LandingPubComponent extends LandingBaseComponent
 			}
 			else
 			{
+				$filter['=DOMAIN.ACTIVE'] = 'Y';
 				$filter['=DOMAIN.DOMAIN'] = [
 					$serverHost,
 					'www.' . $serverHost

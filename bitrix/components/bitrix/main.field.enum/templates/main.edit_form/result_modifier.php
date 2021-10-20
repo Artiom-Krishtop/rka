@@ -107,8 +107,13 @@ if($arResult['userField']['SETTINGS']['DISPLAY'] === EnumType::DISPLAY_UI)
 	$arResult['block'] = $block;
 	$arResult['fieldNameJs'] = \CUtil::JSEscape($arResult['fieldName']);
 
+	\CJSCore::Init(['ui']);
+	\Bitrix\Main\UI\Extension::load([
+		'ui.entity-selector',
+	]);
+
 	Asset::getInstance()->addJs(
-		'/bitrix/components/bitrix/main.field.enum/templates/main.edit/desktop.js'
+		'/bitrix/components/bitrix/main.field.enum/templates/main.edit/dist/display.bundle.js'
 	);
 }
 elseif($arResult['userField']['SETTINGS']['DISPLAY'] === EnumType::DISPLAY_LIST)

@@ -51,7 +51,7 @@
 		this.input = new BX.Landing.UI.Field.Text({
 			placeholder: BX.Landing.Loc.getMessage("FIELD_LINK_TEXT_LABEL"),
 			selector: this.selector,
-			content: this.content.text,
+			content: BX.Text.decode(this.content.text),
 			textOnly: true,
 			onValueChange: function() {
 				this.onValueChangeHandler(this);
