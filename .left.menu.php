@@ -2,49 +2,49 @@
 $aMenuLinks = Array(
 	Array(
 		"Об адвокатуре", 
-		"/about/",
+		"/about/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"БРКА", 
-		"/kollegies/respublikanskaya/",
+		"/kollegies/respublikanskaya/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Контакты/приём", 
-		"/grafik-priyoma-grazhdan/",
+		"/grafik-priyoma-grazhdan/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Онлайн-консультация", 
-		"/pravila-online-konsultacii/",
+		"Online-консультация", 
+		"/pravila-online-konsultacii/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Правила сайта", 
-		"/pravila-polzovaniya-saytom/",
+		"/pravila-polzovaniya-saytom/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Форумы адвокатов", 
-		"/forum/",
+		"/forum/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
 		"Виртуальный музей", 
-		"/museum/",
+		"/museum/", 
 		Array(), 
 		Array(), 
 		"" 
