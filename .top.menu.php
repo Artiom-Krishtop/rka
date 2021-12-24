@@ -1,13 +1,6 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"Новости", 
-		"https://www.rka.by/news/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
 		"Найти адвоката", 
 		"https://www.rka.by/search_adv/", 
 		Array(), 
@@ -15,22 +8,8 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Онлайн-консультация", 
-		"https://www.rka.by/faq_ask/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Юридическая помощь", 
-		"https://rka.by/about/poryadok-i-usloviya-okazaniya/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Медиация", 
-		"https://www.rka.by/mediaciya/", 
+		"Электронное обращение", 
+		"https://www.rka.by/electronic-appeal/", 
 		Array(), 
 		Array(), 
 		"" 
@@ -50,15 +29,15 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Адвокаты - детям", 
-		"https://www.rka.by/advokaty-detyam/", 
+		"Правила онлайн-консультации БРКА", 
+		"https://www.rka.by/pravila-online-konsultacii", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Электронное обращение", 
-		"https://www.rka.by/electronic-appeal/", 
+		"Правила пользования сайтом БРКА", 
+		"https://www.rka.by/pravila-polzovaniya-saytom/", 
 		Array(), 
 		Array(), 
 		"" 

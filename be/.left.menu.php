@@ -1,6 +1,20 @@
 <?
 $aMenuLinks = Array(
 	Array(
+		"Анлайн-кансультацыя", 
+		"https://www.rka.by/faq_ask/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Навiны", 
+		"https://www.rka.by/news/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
 		"Аб адвакатуры", 
 		"/be/about/", 
 		Array(), 
@@ -15,29 +29,29 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Кантакты/прыём", 
+		"Прыём грамадзян ў БРКА", 
 		"https://www.rka.by/grafik-priyoma-grazhdan/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Правiлы АК", 
-		"https://www.rka.by/pravila-online-konsultacii/", 
+		"Юрыдычная дапамога", 
+		"https://rka.by/about/poryadok-i-usloviya-okazaniya/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Правілы сайта", 
-		"https://www.rka.by/pravila-polzovaniya-saytom/", 
+		"Медыяцыя", 
+		"https://www.rka.by/mediaciya/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Форумы адвакатаў", 
-		"https://www.rka.by/forum/", 
+		"Адвакаты - дзецям", 
+		"https://www.rka.by/advokaty-detyam/", 
 		Array(), 
 		Array(), 
 		"" 
@@ -45,6 +59,13 @@ $aMenuLinks = Array(
 	Array(
 		"Віртуальны музей", 
 		"https://www.rka.by/museum/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Форумы адвакатаў", 
+		"https://www.rka.by/forum/", 
 		Array(), 
 		Array(), 
 		"" 

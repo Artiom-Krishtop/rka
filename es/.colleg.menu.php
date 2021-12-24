@@ -1,49 +1,49 @@
 <?
 $aMenuLinks = Array(
 	Array(
-		"Brest Regional Bar",
+		"Брестская областная коллегия адвокатов", 
 		"/kollegies/brestskaya-oblastnaya/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Vitebsk Regional Bar",
+		"Витебская областная коллегия адвокатов", 
 		"/kollegies/vitebskaya-oblastnaya/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Gomel Regional Bar",
+		"Гомельская областная коллегия адвокатов", 
 		"/kollegies/gomelskaya-oblastnaya/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Grodno Regional Bar",
+		"Гродненская областная коллегия адвокатов", 
 		"http://advokat.artismedia.biz/kollegies/grodnenskaya-oblastnaya/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Minsk City Bar",
+		"Минская городская коллегия адвокатов", 
 		"/kollegies/minskaya-gorodskaya/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Minsk Regional Bar",
+		"Минская областная коллегия адвокатов", 
 		"/kollegies/minskaya-oblastnaya/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Mogilev Regional Bar",
+		"Могилевская областная коллегия адвокатов", 
 		"/kollegies/mogilevskaya-oblastnaya/", 
 		Array(), 
 		Array(), 

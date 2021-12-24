@@ -6,32 +6,26 @@ $APPLICATION->SetPageProperty("description", "Чтобы получить бес
 $APPLICATION->SetTitle("Бесплатная юридическая помощь");
 ?><div class="field-item even" property="content:encoded">
 	<p>
- <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Случаи, когда юридическая помощь предоставляется бесплатно, перечислены в статье 28 Закона «Об адвокатуре и адвокатской деятельности в Республике Беларусь». </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;">&nbsp; &nbsp;Случаи, когда юридическая помощь предоставляется бесплатно, перечислены в статье 28 Закона «Об адвокатуре и адвокатской деятельности в Республике Беларусь»:</span>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-	<blockquote>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-		<p>
-			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><strong><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Статья 28. Оказание юридической помощи за счет средств коллегий адвокатов, республиканского и (или) местного бюджетов</span></strong><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-		</p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-		<ol>
-			<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Юридическая помощь гражданам Республики Беларусь, иностранным гражданам и лицам без гражданства (далее — граждане) оказывается за счет средств коллегий адвокатов: </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-			<ul>
-				<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">истцам — в судах первой инстанции при ведении дел, связанных с трудовыми правоотношениями, о взыскании алиментов;</span></li>
-				<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">ветеранам Великой Отечественной войны — при даче устной консультации по вопросам, не связанным с предпринимательской деятельностью;</span></li>
-				<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">гражданам - при составлении заявлений о назначении пенсий и пособий;</span></li>
-				<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">инвалидам I и II группы — при даче устной консультации, не требующей ознакомления с документами;</span></li>
-				<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">несовершеннолетним — в их интересах, их родителям (опекунам, попечителям) — в интересах детей;</span></li>
-				<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">иным категориям граждан — по решению коллегии адвокатов.</span></li>
-			</ul>
-			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span></li>
-			<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Юридическая помощь по вопросам социальной защиты и реабилитации жертвам торговли людьми, а в случае недостижения ими четырнадцатилетнего возраста — их законным представителям, лицам, пострадавшим в результате акта терроризма, оказывается за счет средств республиканского бюджета.</span></li>
-			<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Юридическая помощь подозреваемому или обвиняемому оказывается за счет средств местного бюджета в случае участия адвоката в дознании, предварительном следствии и судебном разбирательстве по назначению через территориальную коллегию адвокатов по требованию органа, ведущего уголовный процесс.</span></li>
-			<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Территориальная коллегия адвокатов определяет порядок оказания юридической помощи за счет средств коллегии адвокатов, а также распределяет затраты на ее оказание между адвокатами юридических консультаций, адвокатских бюро, а также адвокатами, осуществляющими адвокатскую деятельность индивидуально.</span></li>
-			<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Порядок возмещения расходов на оплату труда адвоката за счет средств республиканского и (или) местного бюджетов определяется Советом Министров Республики Беларусь.</span></li>
-		</ol>
-	</blockquote>
+	<p>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;">&nbsp; истцам - при составлении заявлений и ведении дел в судах первой инстанции, связанных с трудовыми правоотношениями, о взыскании алиментов, о лишении родительских прав; </span><br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;">&nbsp; участникам и инвалидам Великой Отечественной войны, инвалидам боевых действий на территории других государств - при даче устной консультации по вопросам, не связанным с предпринимательской деятельностью; </span><br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;">&nbsp; гражданам - при составлении заявлений об установлении факта получения заработной платы за конкретный период в определенном размере для назначения пенсий, о признании гражданина ограниченно дееспособным или недееспособным; </span><br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;">
+		инвалидам I и II группы - при даче устной консультации, не требующей ознакомления с документами; </span><br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;">&nbsp; малообеспеченным родителю в неполной семье, воспитывающему ребенка в возрасте до восемнадцати лет, родителям (усыновителям, удочерителям) в многодетных семьях - при даче устной консультации, не требующей ознакомления с документами; </span><br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;">&nbsp; несовершеннолетним - в их интересах; родителям (усыновителям, удочерителям, опекунам, попечителям) несовершеннолетних - в интересах их несовершеннолетних детей; </span><br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;">&nbsp; пенсионерам и инвалидам, пребывающим (проживающим) в&nbsp;учреждениях социального обслуживания, осуществляющих стационарное социальное обслуживание, а также законным представителям граждан, признанных судом недееспособными, - при даче консультации по вопросам, связанным с обеспечением и защитой прав и законных интересов указанных граждан; </span><br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;">&nbsp; беременным женщинам - при даче устной консультации по вопросам, связанным с рождением ребенка; </span><br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;">&nbsp; иным категориям граждан - по решению коллегии адвокатов.</span><br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;"><span style="font-family: &quot;Times New Roman&quot;, Times;">Юридическая помощь по вопросам социальной защиты и реабилитации жертвам торговли людьми, а в случае недостижения ими четырнадцатилетнего возраста — их законным представителям, лицам, пострадавшим в результате акта терроризма, оказывается за счет средств республиканского бюджета.</span><br>
+ </span><br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;">&nbsp; &nbsp;Юридическая помощь подозреваемому или обвиняемому по уголовному делу оплачивается из средств местного бюджета в случае участия адвоката в уголовном процессе по требованию органа, ведущего уголовный процесс (то есть в порядке статьи 46 Уголовно-процессуального кодекса Республики Беларусь). Следует иметь в виду, что затраты местного бюджета на оплату помощи адвоката могут быть взысканы с обвиняемого в случае признания его виновным, за исключением расходов по оплате труда адвоката при даче им консультации до начала первого допроса.&nbsp;</span>
+	</p>
+	<p>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 14pt;">&nbsp; Юридическая помощь по вопросам социальной защиты и реабилитации жертвам торговли людьми, а в случае недостижения ими четырнадцатилетнего возраста - их законным представителям, лицам, пострадавшим в результате акта терроризма, оказывается за счет средств республиканского бюджета. </span>
+	</p>
 </div>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:menu",

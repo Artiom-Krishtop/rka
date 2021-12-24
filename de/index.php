@@ -7,11 +7,9 @@ $APPLICATION->SetTitle("Belarusian National Bar Association");
  </h2>
 	<p>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 16pt;">„Jede Person hat das Recht auf Rechtsbeistand zur Ausübung und zum Schutz der Rechte und Freiheiten, einschließlich des Rechts, jederzeit die Rechtshilfe von Rechtsanwälten und ihren sonstigen Vertretern vor Gerichten, anderen staatlichen Stellen, kommunalen Körperschaften, bei Unternehmen, Institutionen, Organisationen, öffentlichen Vereinigungen und in den Beziehungen zu Beamten und Bürgern. Der Widerstand gegen die Gewährung von Rechtshilfe in der Republik Belarus ist verboten "(Artikel 62 der Verfassung der Republik Belarus).</span><br>
-	<br>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 16pt;">Rechtsanwälte der Republik Belarus bieten qualifizierten Rechtsbeistand für Bürger und juristische Personen der Republik Belarus und anderer Staaten.</span><br>
-	<br>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 16pt;">&nbsp;Für ausländische Staatsbürger und juristische Personen bieten wir ein Verzeichnis fremdsprachiger Anwälte an.</span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 16pt;">«Jede Person hat das Recht auf Rechtsbeistand zur Ausübung und zum Schutz der Rechte und Freiheiten, einschließlich des Rechts, jederzeit die Rechtshilfe von Rechtsanwälten und ihren sonstigen Vertreternffebevrechtsanwälten und ihren sonstigen Vertreternffebev der Bernörungen und zum Schutz der Rechte und Freiheiten». Der Widerstand gegen die Gewährung von Rechtshilfe in der Republik Belarus ist verboten "(Artikel 62 der Verfassung der Republik Belarus). </span><br>
+ <br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 16pt;">Rechtsanwälte der Republik Belarus bieten qualifizierten Rechtsbeistand.</span>
 	<p>
 	</p>
 </div>

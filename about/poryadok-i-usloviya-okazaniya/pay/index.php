@@ -6,117 +6,59 @@ $APPLICATION->SetPageProperty("description", "Оплата юридически�
 $APPLICATION->SetTitle("Оплата юридической помощи");
 ?><div class="field-item even" property="content:encoded">
 	<p>
- <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Как правило, адвокаты оказывают юридическую помощь на возмездной основе. </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">&nbsp; &nbsp;Как правило, адвокаты оказывают юридическую помощь на возмездной основе. Юридическую помощь можно оплатить наличными в кассу юридической консультации, безналичным путем на расчетный счет территориальной коллегии адвокатов, а также посредством автоматизированной информационной системы единого расчетного и информационного пространства (АИС ЕРИП). </span>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
-		При этом, в современных условиях все чаще граждане и юридические лица желают получить юридическую помощь дистанционно. Соответственно возникает и необходимость в ее дистанционной оплате.&nbsp; </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><b><span style="font-size: 13pt; font-family: &quot;Times New Roman&quot;, Times;">&nbsp; &nbsp;Алгоритм оплаты через систему ЕРИП</span></b><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">:&nbsp; </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
-		Помимо возможности безналичной оплаты юридической помощи на расчетный счет коллегии, адвокатского бюро либо адвоката, осуществляющего адвокатскую деятельность индивидуально, граждане могут </span><b><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">оплатить юридическую помощь через систему ЕРИП</span></b><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">.&nbsp; </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><b><span style="font-size: 13pt; font-family: &quot;Times New Roman&quot;, Times;">&nbsp;Алгоритм оплаты</span></b><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">:&nbsp; </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
 		- выбрать "Суды, юстиция, юридические услуги";&nbsp; </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
 		&nbsp;- выбрать "Адвокатура";&nbsp; </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
 		&nbsp;- выбрать регион, где адвокат, который оказал юридическую помощь, осуществляет свою деятельность. Например, "г.Минск";&nbsp; </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
-		&nbsp;- выбрать из появившегося списка адвокатское бюро либо адвоката. Если в списке нет фамилии адвоката, необходимо выбрать "Минская городская коллегия адвокатов";&nbsp; </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+		&nbsp;- выбрать из появившегося списка&nbsp;адвоката. Если в списке его нет, необходимо выбрать "Минская городская коллегия адвокатов";&nbsp; </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
 		&nbsp;- выбрать "Юридическая помощь";&nbsp; </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
 		&nbsp;- ввести табельный номер адвоката, который оказал юридическую помощь;</span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">- внести оплату, размер которой согласован с адвокатом.&nbsp;</span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">- внести оплату, размер которой согласован с адвокатом.&nbsp;</span>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
-		&nbsp;Статья 27 Закона Республики Беларусь "Об адвокатуре и адвокатской деятельности в Республике Беларусь" регламентирует порядок заключения договора и оказания юридической помощи на возмездной основе. </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">&nbsp; &nbsp;Размер гонорара и порядок его определения (фиксированная сумма, оплата за день участия в предварительном следствии или в суде, оплата согласованной почасовой ставки, доплата за позитивный результат по делу и т.д.) определяются по договоренности между адвокатом&nbsp;и клиентом и указываются в договоре на оказание юридической помощи.</span>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-	<blockquote>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-		<p>
-			<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><strong><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Статья 27. Оказание адвокатами юридической помощи на возмездной основе</span></strong><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-		</p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-		<ol>
-			<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Юридическая помощь оказывается адвокатами на основании договора на оказание юридической помощи.</span></li>
-			<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> Договор, предметом которого является оказание юридической помощи, заключается между адвокатом либо адвокатским бюро и клиентом или иным лицом, действующим в интересах клиента, в письменной форме. При даче устной консультации договор на оказание юридической помощи в письменной форме не заключается.</span></li>
-			<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Договор, заключенный в письменной форме, составляется и подписывается в двух экземплярах. Один экземпляр передается клиенту (иному лицу, действующему в интересах клиента), второй хранится у адвоката, в юридической консультации либо адвокатском бюро.</span></li>
-			<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">Существенными условиями договора на оказание юридической помощи являются:</span></li>
-		</ol>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-		<ul>
-			<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">вид (виды) юридической помощи;</span></li>
-			<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">порядок и размер оплаты юридической помощи.</span></li>
-		</ul>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-	</blockquote>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
-		Кроме того, согласно пунктам 54-57 Правил профессиональной этики адвоката порядок и размер оплаты юридической помощи, оказываемой адвокатом клиенту (далее – гонорар), определяются договором на оказание юридической помощи и являются его существенными условиями. </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">&nbsp;Кроме того, адвокат имеет право на возмещение понесенных им при оказании юридической помощи издержек и расходов. </span>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
-		Адвокат имеет право на возмещение понесенных им при оказании юридической помощи издержек и расходов. </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">&nbsp;<br>
+ </span>
 	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
-		Размер гонорара и порядок его определения (фиксированная сумма, оплата за день участия в предварительном следствии или в суде, оплата согласованной почасовой ставки, доплата за позитивный результат по делу и т.д.) определяются по договоренности между адвокатом (адвокатским бюро) и клиентом и указываются в договоре на оказание юридической помощи. </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-	<p>
-		<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">
-		Рекомендуется определять размер гонорара, принимая во внимание следующие факторы: </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-	</p>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
-	<ul>
-		<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">опыт и квалификацию адвоката, требуемые для оказания юридической помощи надлежащим образом;</span></li>
-		<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">профессиональный авторитет адвоката;</span></li>
-		<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> новизну и сложность вопросов;</span></li>
-		<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">необходимые затраты времени и труда;</span></li>
-		<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">вероятность того, что принятие данного поручения ограничит возможности адвоката одновременно работать по другим делам;</span></li>
-		<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">сроки, установленные клиентом или обстоятельствами;</span></li>
-		<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">необходимость привлечения специалистов;</span></li>
-		<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">расходы, связанные с оказанием юридической помощи;</span></li>
-		<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">практику определения размера гонорара в данном регионе, а также в регионе, в котором клиент имеет постоянное местопребывание;</span></li>
-		<li><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;">иные факторы.</span></li>
-	</ul>
-	<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span>
 </div>
-<span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><?$APPLICATION->IncludeComponent(
+ <span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 13pt;"> </span><?$APPLICATION->IncludeComponent(
 	"bitrix:menu",
 	"aboutsub_menu",
 	Array(

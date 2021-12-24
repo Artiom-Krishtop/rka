@@ -1,16 +1,16 @@
-<h3 class="block-title">Belarusian Republican Bar Association</h3>
+<h3 class="block-title">Белорусская республиканская коллегия адвокатов</h3>
 <p>
-	&nbsp;
+	 &nbsp;
 </p>
 <p>
-	220004, Minsk,
+	 220004, г.Минск,
 </p>
 <p>
-	Kollektornaya str., 10
+	 ул. Коллекторная, 10
 </p>
 <p>
-	Phone +375 (17) 200-55-34
+	 Тел +375 (17) 200-55-34
 </p>
 <p>
-	e-mail: <a href="mailto:info@rka.by">info@rka.by</a>
+	 e-mail: <a href="mailto:info@rka.by">info@rka.by</a>
 </p>
