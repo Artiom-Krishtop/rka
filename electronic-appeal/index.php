@@ -2,31 +2,27 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Электронное обращение");
 ?><p style="text-align: center;">
- <span style="font-family: &quot;Times New Roman&quot;, Times;"><b><i><span style="font-size: 13pt; color: #7a0026;">Уважаемые пользователи! </span></i></b></span>
+ <b><i><span style="color: #7a0026; font-family: &quot;Times New Roman&quot;, Times;"><span style="font-size: 16pt;">Уважаемые пользователи!</span> </span></i></b>
 </p>
- <span style="font-size: 13pt; color: #7a0026;"> <b><i> </i></b>
-<p style="text-align: justify;">
- <b> <span style="font-family: &quot;Times New Roman&quot;, Times;"><b><i><span style="font-size: 13pt; color: #7a0026;">&nbsp;Вы можете направить электронное обращение в Белорусскую республиканскую коллегию адвокатов, </span><u><span style="font-size: 13pt; color: #7a0026;">заполнив форму внизу страницы</span></u><span style="font-size: 13pt; color: #7a0026;">. Электронное обращение должно соответствовать Закону Республики Беларусь "Об обращениях граждан и юридических лиц" от 18 июля 2011 и Порядку подачи и рассмотрения электронных обращений в Белорусскую республиканскую коллегию адвокатов, утв. постановлением совета Республиканской коллегии адвокатов 11.01.2017 №08/01.</span></i></b></span><span style="font-size: 13pt; color: #7a0026;">&nbsp;</span><br>
- <span style="font-family: &quot;Times New Roman&quot;, Times;"><b><i><span style="font-size: 13pt; color: #7a0026;">&nbsp; В электронном обращении не рассматриваются просьбы об оказании юридической помощи. Для этого перейдите на страницу интернет-ресурса "Бесплатная юридическая онлайн-консультация Белорусской республиканской коллегии адвокатов" по адресу:&nbsp;<b><i><b><span style="color: #7a0026;"><i><a title="ON-LINE консультация" href="http://www.rka.by/faq_ask" target="_blank"><span style="font-size: 13pt; color: #7a0026;">http://www.rka.by/faq_ask</span></a><span style="font-size: 13pt; color: #7a0026;">.</span></i></span></b><br>
- <span style="font-family: &quot;Times New Roman&quot;, Times;"><b><i><span style="font-size: 13pt; color: #7a0026;">&nbsp; Вопросы, адресованные конкретным адвокатам, рассматриваться не будут.</span></i></b></span></i></b></span></i></b><i> </i></span></b>
+ <span style="font-family: &quot;Times New Roman&quot;, Times;"><b><i><span style="font-size: 15pt; color: #7a0026; font-family: &quot;Times New Roman&quot;, Times;">Форма электронного обращения не предусмотрена для получения юридической помощи!<br>
+ </span></i></b></span><span style="font-family: &quot;Times New Roman&quot;, Times;"><b><i><span style="font-size: 15pt; color: #7a0026; font-family: &quot;Times New Roman&quot;, Times;">Для получения юридической онлайн-консультации перейдите на страницу: </span></i></b></span><a title="ON-LINE консультация" href="http://www.rka.by/faq_ask" target="_blank"><i><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 15pt;"><b>http://www.rka.by/faq_ask</b></span></i></a>
+<p>
+</p>
+ <span style="font-family: &quot;Times New Roman&quot;, Times;"><b><i><span style="font-size: 15pt; color: #7a0026; font-family: &quot;Times New Roman&quot;, Times;">Вы можете направить электронное обращение в Белорусскую республиканскую коллегию адвокатов, <u>заполнив форму внизу страницы</u>. <br>
+ </span></i></b></span><span style="font-family: &quot;Times New Roman&quot;, Times;"><b><i><span style="font-size: 15pt; color: #7a0026; font-family: &quot;Times New Roman&quot;, Times;">Электронное обращение должно соответствовать Закону Республики Беларусь "Об обращениях граждан и юридических лиц" от 18 июля 2011 и Порядку подачи и рассмотрения электронных обращений в Белорусскую республиканскую коллегию адвокатов, утв. постановлением совета Республиканской коллегии адвокатов 11.01.2017 №08/01.</span></i></b></span><span style="font-size: 13pt; color: #7a0026; font-family: &quot;Times New Roman&quot;, Times;"><i><span style="font-size: 15pt;"><b>&nbsp;</b></span></i></span><br>
+ <span style="font-family: &quot;Times New Roman&quot;, Times;"><b><i><span style="font-size: 13pt; color: #7a0026;">&nbsp;&nbsp;</span></i></b></span>
+<p>
 </p>
 <p>
 </p>
 <p style="text-align: right;">
- <span style="font-size: 11pt; color: #000000;">УТВЕРЖДЕНО </span><br>
- <span style="font-size: 11pt; color: #000000;">
-	Постановление совета</span><br>
- <span style="font-size: 11pt; color: #000000;">
-	Республиканской коллегии адвокатов</span><br>
- <span style="font-size: 11pt; color: #000000;">
-	11.01.2017 №08/01</span><br>
- <span style="font-size: 11pt; color: #000000;">
-	(в редакции постановления</span><br>
- <span style="font-size: 11pt; color: #000000;">
-	совета Белорусской республиканской</span><br>
- <span style="font-size: 11pt; color: #000000;">
-	коллегии адвокатов 23.10.2017 №06/07)</span><br>
- <span style="font-size: 11pt; color: #000000;"> </span>
+ <span style="font-size: 11pt; color: #000000;">УТВЕРЖДЕНО <br>
+	 Постановление совета<br>
+	 Республиканской коллегии адвокатов<br>
+	 11.01.2017 №08/01<br>
+	 (в ред. постановления совета БРКА<br>
+	 23.10.2017 №06/07) <br>
+ <span style="font-size: 11pt; color: #000000;"> </span> </span>
 </p>
  <span style="font-size: 11pt; color: #000000;"> </span>
 <p style="text-align: center;">
@@ -129,5 +125,4 @@ console.log(jert);
 .js-hidden {
 	display:none;
 }
-</style></b></span></span> <br>
- </span><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+</style></b></span></span> <br><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

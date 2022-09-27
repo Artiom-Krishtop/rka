@@ -59,11 +59,10 @@ $this->setFrameMode(true);
             $create_name=$arItem["CREATED_USER_NAME"];
             $create_name=preg_replace('~\(.*\)~ ','',$create_name);
             ?>
+
             <?if($arItem['IBLOCK_SECTION_ID']!=89 && $arItem['IBLOCK_SECTION_ID']!=90){?>
                 <span class="submitted-by">
-                    Опубликовано: <?if(!empty($arItem['PROPERTIES']['PUBLIC_DATE']['VALUE'])){?>
-                        <?echo $arItem['PROPERTIES']['PUBLIC_DATE']['VALUE'] ?>
-                    <?}else{?>
+                    Опубликовано: <?if(!empty($arItem['DISPLAY_ACTIVE_FROM'])){?>
                         <?=FormatDate('d F Y',MakeTimeStamp($arItem['DISPLAY_ACTIVE_FROM']), time())?>
                     <?}?>
                     | автор: <?=$create_name?>
@@ -71,6 +70,7 @@ $this->setFrameMode(true);
             <?}else{?>
                 <?=FormatDate('d F Y',MakeTimeStamp($arItem['DISPLAY_ACTIVE_FROM']), time())?>
             <?}?>
+            
             <ul class="links inline">
                 <li class="node-readmore first"><a href="<?=$arItem["DETAIL_PAGE_URL"]?>">Подробнее</a>	</li>
                 <li class="comment-add"><a href="<?=$arItem["DETAIL_PAGE_URL"]?>#commento" title="Добавить комментарий к этой странице.">Добавить комментарий</a></li>

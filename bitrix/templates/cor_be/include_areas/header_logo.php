@@ -1,1 +1,1 @@
-             <a href="/be/" title="Галоўная" rel="home" id="logo"><img src="<?=SITE_TEMPLATE_PATH.'/images/logo.png'?>" alt="Галоўная"></a>
+             <a href="/be/" title="Галоўная" rel="home" id="logo"><img src="<?=SITE_TEMPLATE_PATH.'/images/logo.gif'?>" alt="Галоўная"></a>

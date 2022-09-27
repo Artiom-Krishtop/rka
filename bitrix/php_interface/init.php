@@ -1,4 +1,7 @@
 <?
+
+require_once "require/listCollegiumsCSV.php";
+
 /*AddEventHandler('main', 'OnEpilog', '_Check404Error', 1);
 function _Check404Error(){
     if (defined('ERROR_404') && ERROR_404 == 'Y') {
@@ -485,29 +488,90 @@ function p( $_mixVar=null, $_intExit=null )
 }
 
 /* Список адвокатов для ЮНИСЕФ. Данные сохраняются как файл /upload/lawyers.csv */
+function getFAQCountByAdvocate()
+{
+    if(!CModule::IncludeModule("iblock")) return [];
+
+    $dbl = CIBlockElement::GetList([], ['IBLOCK_ID' => 16, 'ACTIVE' => 'Y'], ['PROPERTY_USER']);
+    $res = [];
+    while ($arr = $dbl->Fetch())
+    {
+        $res[] = $arr;
+    }
+    $arr = [];
+    foreach ($res as $v)
+    {
+        $arr[$v['PROPERTY_USER_VALUE']] = $v['CNT'];
+    }
+    return $arr;
+}
+
+function getArticlesCountByAdvocate()
+{
+    if(!CModule::IncludeModule("iblock")) return [];
+
+    $dbl = CIBlockElement::GetList([], ['IBLOCK_ID' => 14, 'ACTIVE' => 'Y'], ['CREATED_BY']);
+    $res = [];
+    while ($arr = $dbl->Fetch())
+    {
+        $res[] = $arr;
+    }
+    $arr = [];
+    foreach ($res as $v)
+    {
+        $arr[$v['CREATED_BY']] = $v['CNT'];
+    }
+    return $arr;
+}
+
+function getUsersOnline()
+{
+    $res = [];
+    $dbl = CUser::GetList(($by="ID"), ($order="ASC"), ['LAST_ACTIVITY' => 900]);
+    while($arr = $dbl->Fetch())
+    {
+        $res[] = $arr['ID'];
+    }
+    return $res;
+}
+
+
+function getSpheries(){
+    $res = [];
+    $dbl  = CIBlockElement::GetList(false, ["IBLOCK_ID" => 21, "ACTIVE" => 'Y'], false, false, ["ID", "NAME"]);
+    while ($arr = $dbl->Fetch()){
+        $res[$arr['ID']] = $arr['NAME'];
+    }
+    return $res;
+}
+
 function listLawyersCSV()
 {
     if(CModule::IncludeModule("iblock"))
     {
         global $APPLICATION;
         $hash = md5(microtime());
-        $baseUrl = '/upload/get-lawyers/';
-        $expUsersFile = $hash . '.csv';
+        //$baseUrl = '/upload/get-lawyers/';
+        //$expUsersFile = $hash . '.csv';
         $strDlmtr = ';';
         $lineDlmtr = "\n";
-        $arUsers = array('#;ФИО;Номер лицензии;Дата выдачи лицензии;Коллегия;Место работы;Основной номер телефона;Дополнительные номера телефонов;Мессенджеры;Электронная почта;Адрес: Область;Адрес: Район;Адрес: Населенный пункт;Адрес: Улица;Адрес: Номер дома;Адрес: корпус;Адрес: Номер помещения;График работы;Основные отрасли права;Ссылка на фото;gps-координаты');
+        $arUsers = ['#;ФИО;Номер лицензии;Дата выдачи лицензии;Коллегия;Место работы;Основной номер телефона;Дополнительные номера телефонов;Мессенджеры;Электронная почта;Адрес: Область;Адрес: Район;Адрес: Населенный пункт;Адрес: Улица;Адрес: Номер дома;Адрес: корпус;Адрес: Номер помещения;График работы;Основные отрасли права;Ссылка на фото;gps-координаты;Ссылка на страницу на сайте;Юридическая консультация;Специализация;Медиатор;Иностранные языки;Количество благодарностей;Количество ответов;Количество статей;Онлайн;Об адвокате;'];
         $i = 1;
+        $countAnswers = getFAQCountByAdvocate();
+        $countArticles = getArticlesCountByAdvocate();
+        $usersOnline = getUsersOnline();
 
-        $rsResCat = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 17, "ACTIVE_DATE" => "Y", "ACTIVE" => "Y"), false, false, Array("ID", "IBLOCK_ID"));
+        $userParams = array(
+            "SELECT" => array("UF_COLLEGIA", "UF_CONSULT", "UF_BURO", "UF_IND_US"),
+            "FIELDS" => array("ID", "NAME", "LAST_NAME", "SECOND_NAME", "EMAIL", "PERSONAL_PHONE", "PERSONAL_PHOTO")
+        );
+        $spheries = getSpheries();
+
+        $rsResCat = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 17, "ACTIVE_DATE" => "Y", "ACTIVE" => "Y"), false, false, Array("ID", "IBLOCK_ID", "CODE", "DETAIL_TEXT"));
         while($arItemCat = $rsResCat->GetNextElement())
         {
             $arFields = $arItemCat->GetFields();
             $arProps = $arItemCat->GetProperties();
-
-            $userParams = array(
-                "SELECT" => array("UF_COLLEGIA", "UF_CONSULT", "UF_BURO", "UF_IND_US"),
-                "FIELDS" => array("ID", "NAME", "LAST_NAME", "SECOND_NAME", "EMAIL", "PERSONAL_PHONE", "PERSONAL_PHOTO")
-            );
 
             $db = CUser::GetList($a, $b, array("ID" => $arProps["USER"]["VALUE"]), $userParams);
             while ($u = $db->Fetch())
@@ -668,13 +732,14 @@ function listLawyersCSV()
                     $schedule = trim($arProps["SCHEDULE"]["VALUE"]);
 
                 $photo = '';
+                $baseSite = ((\Bitrix\Main\Context::getCurrent()->getRequest()->isHttps()) ? 'https://rka.by' : 'http://rka.by');
                 if(isset($u["PERSONAL_PHOTO"]) && !empty($u["PERSONAL_PHOTO"]))
                 {
                     $arPhoto = CFile::GetFileArray($u["PERSONAL_PHOTO"]);
                     if($arPhoto["FILE_NAME"] != 'picture-default.jpg')
                     {
                         $arPhotoResize = CFile::ResizeImageGet($arPhoto, array("width" => 300, "height" => 300), BX_RESIZE_IMAGE_EXACT, true);
-                        $photo = ((\Bitrix\Main\Context::getCurrent()->getRequest()->isHttps()) ? 'https://rka.by' : 'http://rka.by') . $arPhotoResize["src"];
+                        $photo = $baseSite . $arPhotoResize["src"];
                         unset($arPhotoResize);
                     }
                     unset($arPhoto);
@@ -683,22 +748,17 @@ function listLawyersCSV()
                 $sferaPrava = '';
                 if(is_array($arProps["SFERA_DET"]["VALUE"]))
                 {
-                    $si = 0;
+                    $arSpheries = [];
                     foreach ($arProps["SFERA_DET"]["VALUE"] as $v)
                     {
-                        $resSfera = CIBlockElement::GetList(Array(), Array("IBLOCK_ID" => 21, "ID" => $v), false, false, Array("ID", "NAME"));
-                        while($arSfera = $resSfera->GetNext())
-                        {
-                            if($si >= 1)
-                                $sferaPrava .= ', ';
-                            $sferaPrava .= $arSfera["NAME"];
-                            $si ++;
-                        }
-                        unset($resSfera, $arSfera);
+                        if (!empty($spheries[$v])) $arSpheries[] = $spheries[$v];
                     }
-                    unset($v, $si);
+                    $sferaPrava = implode('#', $arSpheries);
                 }
 
+                $link = !empty($arFields['CODE']) ? $baseSite . '/advokat/' . $arFields['CODE'] . '/' : '-';
+                $urConsult = empty($u['UF_CONSULT']) ? '-' : $u['UF_CONSULT'];
+                $mediator = strpos($sferaPrava, 'Медиация') !== false ? 'да' : 'нет';
                 /*
                     #
                     ФИО
@@ -721,6 +781,16 @@ function listLawyersCSV()
                     Основные отрасли права
                     Ссылка на фото
                     gps-координаты
+                    Ссылка на страницу на сайте
+                    Юридическая консультация
+                    Специализация
+                    Медиатор
+                    Иностранные языки
+                    Количество благодарностей
+                    Количество ответов
+                    Количество статей
+                    Онлайн
+                    Об адвокате
                 */
                 $pattern = '/[\;]/u';
                 $replacement = ',';
@@ -745,14 +815,22 @@ function listLawyersCSV()
                     preg_replace($pattern, $replacement, $schedule),
                     $sferaPrava,
                     $photo,
-                    preg_replace($pattern, $replacement, $map)
+                    preg_replace($pattern, $replacement, $map),
+                    $link,
+                    $urConsult,
+                    $sferaPrava,
+                    $mediator,
+                    str_replace([',', ';'], '#', trim($arProps["LANG"]["VALUE"]['TEXT'])),
+                    $arProps["BLAGOD"]["VALUE"],
+                    !empty($countAnswers[$arProps['USER']['VALUE']]) ? $countAnswers[$arProps['USER']['VALUE']] : '0',
+                    !empty($countArticles[$arProps['USER']['VALUE']]) ? $countArticles[$arProps['USER']['VALUE']] : '0',
+                    in_array($u['ID'], $usersOnline) ? 'да' : 'нет',
+                    preg_replace($pattern, $replacement, str_replace(["\n", "\r"], ' ', $arFields['DETAIL_TEXT'])),
                 );
-                //if($arFields["ID"] === '104985')
-                //    p($arFields["ID"]);
 
-                $arUsers[] = implode($strDlmtr, $tmp).';';
+                $arUsers[] = implode($strDlmtr, $tmp) . ';';
 
-                unset($tmp, $fio, $collegia, $phone, $phone_phone, $skype, $email, $work, $map, $photo, $sferaPrava, $a_state, $a_district, $a_city, $a_street, $a_house, $a_building, $a_room, $schedule);
+                unset($tmp, $fio, $collegia, $phone, $phone_phone, $skype, $email, $work, $map, $photo, $sferaPrava, $a_state, $a_district, $a_city, $a_street, $a_house, $a_building, $a_room, $schedule, $link);
             }
             unset($db, $u, $arFields, $arProps);
 
@@ -761,9 +839,22 @@ function listLawyersCSV()
 
         $strUsers = implode($lineDlmtr, $arUsers);
 
+        $strUsers = strip_tags( $strUsers );
+
+        $strUsers = str_replace( '&quot', '',  $strUsers );
+
+        $strUsers = str_replace( '&nbsp' , '', $strUsers );
+
+        $strUsers = str_replace( '&lt,' , '', $strUsers );
+
+		$strUsers = str_replace( '/p&gt,' , '', $strUsers );
+
+        $strUsers = str_replace( 'p&gt,' , '', $strUsers );
+
+        file_put_contents($_SERVER['DOCUMENT_ROOT'].'/file/herwfvhrfhre', $strUsers, LOCK_EX);
         file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/lawyers.csv', $strUsers, LOCK_EX);
 
-        /* generate file for secret link */
+        /* generate file for secret link
         if(file_put_contents($_SERVER['DOCUMENT_ROOT'].$baseUrl.$expUsersFile, $strUsers, LOCK_EX))
         {
             $arr = file($_SERVER['DOCUMENT_ROOT'] . $baseUrl . 'get_url.txt');
@@ -774,10 +865,12 @@ function listLawyersCSV()
 
             file_put_contents($_SERVER['DOCUMENT_ROOT'] . $baseUrl . 'get_url.txt', $baseUrl . $expUsersFile, LOCK_EX);
         }
+        */
     }
 
     return "listLawyersCSV();";
 }
+
 
 /* Удаление по расписанию сообщений форума "Вопрос-ответ", в течении последних трех месяцев не прошедших модерацию и неопубликованных по каким либо причинам.  */
 function deleteNotActiveMessages()

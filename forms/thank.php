@@ -1,6 +1,5 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");?>
- <?
-    
+ <?    
     function search($array, $key, $value)
         {
             $results = array();
@@ -47,49 +46,90 @@
                              
                           }*/
 
-        $ID_ADVO = preg_match_all("/\[(.*?)\]/", $_POST['ADVOKAT'], $matches);
-        $ID_ADVO = $matches[1][0];
-        $IP = $_POST['ip'];
-        $arSelect = Array("ID", "IBLOCK_ID", "NAME", "DETAIL_PAGE_URL","PROPERTY_*");//IBLOCK_ID и ID обязательно должны быть указаны, см. описание arSelectFields выше
-        $arFilter = Array("IBLOCK_ID"=>17, "ACTIVE"=>"Y","PROPERTY_USER"=>$ID_ADVO);
-        $res = CIBlockElement::GetList(Array(), $arFilter, false, Array("nPageSize"=>50), $arSelect);
-        if($ar_res = $res->GetNext())
+    $ID_ADVO = preg_match_all("/\[(.*?)\]/", $_POST['ADVOKAT'], $matches);
+    $ID_ADVO = $matches[1][0];
+    $IP = $_POST['ip'];
+
+    $message = '';
+    $lawyerData = [];
+
+    $arSelect = Array("ID", "IBLOCK_ID", "NAME", "DETAIL_PAGE_URL","PROPERTY_BLAGOD");//IBLOCK_ID и ID обязательно должны быть указаны, см. описание arSelectFields выше
+    $arFilter = Array("IBLOCK_ID"=>17, "ACTIVE"=>"Y","PROPERTY_USER"=>$ID_ADVO);
+    
+    $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
+
+    if($ar_res = $res->GetNext()){
+        $lawyerData = $ar_res;
         $link = 'href="'.$ar_res['DETAIL_PAGE_URL'].'"';
         $name = $ar_res['NAME'];
         $data_id = 'data-id="'.$ID_ADVO.'"' ;
-        $data_ip = 'data-id="'.$IP.'"' ;
+        $data_ip = 'data-ip="'.$IP.'"' ;
         $NAME_ADVO = preg_replace("/\[[^\]]*\]/", '', $_POST['ADVOKAT']);
         $message = "<p>Спасибо за помощь адвокату <a  ".$data_ip." ".$data_id." ".$link." target=\"_blank\" rel=\"nofollow\">".$name."</a></p>";
-        if(!empty($_POST['MESSAGE'])) {
-            $message = $message . "<p>" . $_POST['MESSAGE'] . "</p>";
-        }
-        $date = date("d.m.Y H:i:s");
-        if(!empty($_POST['user_id'])){
-            $user_id = $_POST['user_id'];
-        }else{
-            $user_id = "";
-        }
+    }
 
-        $arFields = Array(
-            "NEW_TOPIC" => "N",
-            "TOPIC_ID" => "1168",
-            "LAST_POSTER_NAME" => $_POST['NAME'],
-            "LAST_POST_DATE" => $date,
-            "LAST_MESSAGE_ID" => $xID++,
-            "POST_MESSAGE" => $message,
-            "USE_SMILES" => "N",
-            "APPROVED" => "N",
-            "AUTHOR_NAME" =>  $_POST['NAME'],
-            "AUTHOR_ID" => $user_id,
-            "FORUM_ID" => "14",
-            "POST_DATE" => $date,
-            //"PARAM1" => $ID_ADVO,
-            "AUTHOR_IP" => $IP
-        );
+    if(!empty($_POST['MESSAGE'])) {
+        $message = $message . "<p>" . $_POST['MESSAGE'] . "</p>";
+    }
+
+    
+    $date = date("d.m.Y H:i:s");
+    if(!empty($_POST['user_id'])){
+        $user_id = $_POST['user_id'];
+    }else{
+        $user_id = "";
+    }
+
+    $arFields = Array(
+        "NEW_TOPIC" => "N",
+        "TOPIC_ID" => "1168",
+        "LAST_POSTER_NAME" => $_POST['NAME'],
+        "LAST_POST_DATE" => $date,
+        "LAST_MESSAGE_ID" => $xID++,
+        "POST_MESSAGE" => $message,
+        "USE_SMILES" => "N",
+        "APPROVED" => "N",
+        "AUTHOR_NAME" =>  $_POST['NAME'],
+        "AUTHOR_ID" => $user_id,
+        "FORUM_ID" => "14",
+        "POST_DATE" => $date,
+        //"PARAM1" => $ID_ADVO,
+        "AUTHOR_IP" => $IP
+    );
+
+    $ID = CForumMessage::Add($arFields);
+
+    /* Счётчик благодарностей */
+
+    if(!empty($_POST['QUESTION_ID'])){
+
+        $questionId = intval($_POST['QUESTION_ID']);
+        
+        if($questionId > 0){
+    
+            $iblockId = 16;
+    
+            $res = CIBlockElement::GetProperty($iblockId, $questionId, ['sort' => 'asc'], ['CODE' => 'COUNTER_BLAGOD']);
+    
+            while ($rs = $res->GetNext()) {
+    
+                if(!empty($rs['VALUE'])){
+    
+                    $rs['VALUE']++;                
+                }else{
+    
+                    $rs['VALUE'] = 1;
+                }
+                
+                CIBlockElement::SetPropertyValuesEx($questionId, $iblockId, array("COUNTER_BLAGOD" => $rs['VALUE']));
+            }
+    
+        }  
+    }
+
 /*print "<pre>";
 print_r($arFields);
 print "</pre>";*/
-        $ID = CForumMessage::Add($arFields);
   /*   $el = new CIBlockElement;
          $arLoadProductSERVICE = Array(
               "IBLOCK_ID"      => 22,
@@ -123,11 +163,7 @@ $countInt = ($count+1) - $count;   */
 						$arFields = $ob->GetFields(); // поля элемента
 						$arProps = $ob->GetProperties(); // свойства элемента
 					   }*/
-//$chislo = $arProps['BLAGOD']["VALUE"] + 1;
-//CIBlockElement::SetPropertyValuesEx($arFields['ID'], 17, array("BLAGOD" => $chislo));
 
-
-                        
-                     
-    ?>
+   
+?>
   

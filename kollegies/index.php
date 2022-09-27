@@ -94,7 +94,7 @@ $APPLICATION->IncludeComponent(
 			2 => "OT_PRAVO",
 			3 => "USER",
 			4 => "OLD_ID",
-			5 => "AUTHOR",
+ 		        5 => "AUTHOR",
 			6 => "LANG",
 			7 => "",
 		),
@@ -133,7 +133,7 @@ $APPLICATION->IncludeComponent(
 		"FILTER_FIELD_CODE" => array(
 			0 => "",
 			1 => "",
-		),
+	),
 		"FILTER_PROPERTY_CODE" => array(
 			0 => "",
 			1 => "",

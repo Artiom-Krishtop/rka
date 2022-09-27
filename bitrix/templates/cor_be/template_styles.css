@@ -367,3 +367,15 @@ div#sonet_events_ms_message {width:150px;}
 .text_main p{
 	color: #fff;
 }
+.about {
+     background-color: #fff ;
+/*    background: #fff url(/upload/about_man.jpg) no-repeat left bottom;*/
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    min-height: 440px;
+    margin-top: 7px;
+    margin-bottom: 20px;
+    padding: 20px 30px 20px 377px;
+    position: relative;
+}

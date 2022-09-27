@@ -3,10 +3,11 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Вопросы-ответы");
 ?><?
 global $arFilter;
+
 $arFilter = array("PROPERTY_ARCHIVE"=>false);
 $APPLICATION->IncludeComponent(
 	"bitrix:news", 
-	"quest", 
+	'quest', 
 	array(
 		"ADD_ELEMENT_CHAIN" => "Y",
 		"ADD_SECTIONS_CHAIN" => "N",

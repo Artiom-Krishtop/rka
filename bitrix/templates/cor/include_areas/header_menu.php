@@ -1,10 +1,63 @@
-<br>
-<ul class="quicklinks">
-	<li class="leaf" style="color: #004a80;"><a href="/grazhdanskoe-pravo/" title="Гражданское право"><span style="font-family: Arial, Helvetica; font-size: 11pt;">Гражданское право</span></a></li>
-	<li class="leaf" style="color: #004a80;"><a href="/zhilishchnoe-pravo/" title="Жилищное право"><span style="font-family: Arial, Helvetica; font-size: 11pt;">Жилищное право</span></a></li>
-	<li class="leaf" style="color: #004a80;"><a href="/zashchita-prav-potrebiteley/" title="Защита прав потребителей"><span style="font-family: Arial, Helvetica; font-size: 11pt;">Защита прав потребителей</span></a></li>
-	<li class="leaf" style="color: #004a80;"><a href="/semeynoe-pravo/" title="Семейное право"><span style="font-family: Arial, Helvetica; font-size: 11pt;">Семейное право</span></a></li>
-	<li class="leaf" style="color: #004a80;"><a href="/trudovoe-pravo/" title="Трудовое право"><span style="font-family: Arial, Helvetica; font-size: 11pt;">Трудовое право</span></a></li>
-	<li class="last leaf" style="color: #004a80;"><a href="/hozyaystvennoe-pravo/" title="Хозяйственное право"><span style="font-family: Arial, Helvetica; font-size: 11pt;">Хозяйственное право</span></a></li>
-	<li class="more" style="color: #004a80;"><a href="/questcats/" class="button"><span style="font-family: Arial, Helvetica; font-size: 11pt;">все отрасли права</span></a></li>
-</ul>
+<?php
+
+global $arrFilterHeaderList;
+
+$arrFilterHeaderList = ['=PROPERTY_SHOW_IN_HEADER_VALUE' => 'Y'];
+
+$APPLICATION->IncludeComponent(
+    "bitrix:news.list",
+    "header_pravo_list",
+    Array(
+        "DISPLAY_DATE" => "N",
+        "DISPLAY_NAME" => "Y",
+        "DISPLAY_PICTURE" => "N",
+        "DISPLAY_PREVIEW_TEXT" => "N",
+        "AJAX_MODE" => "N",
+        "IBLOCK_TYPE" => "company",
+        "IBLOCK_ID" => "21",
+        "NEWS_COUNT" => "6",
+        "SORT_BY1" => "ACTIVE_FROM",
+        "SORT_ORDER1" => "DESC",
+        "SORT_BY2" => "SORT",
+        "SORT_ORDER2" => "ASC",
+        "FILTER_NAME" => "arrFilterHeaderList",
+        "FIELD_CODE" => Array("ID"),
+        "PROPERTY_CODE" => Array("DESCRIPTION"),
+        "CHECK_DATES" => "N",
+        "DETAIL_URL" => "",
+        "PREVIEW_TRUNCATE_LEN" => "",
+        "ACTIVE_DATE_FORMAT" => "d.m.Y",
+        "SET_TITLE" => "N",
+        "SET_BROWSER_TITLE" => "N",
+        "SET_META_KEYWORDS" => "N",
+        "SET_META_DESCRIPTION" => "N",
+        "SET_LAST_MODIFIED" => "N",
+        "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+        "ADD_SECTIONS_CHAIN" => "N",
+        "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+        "PARENT_SECTION" => "",
+        "PARENT_SECTION_CODE" => "",
+        "INCLUDE_SUBSECTIONS" => "N",
+        "CACHE_TYPE" => "A",
+        "CACHE_TIME" => "3600",
+        "CACHE_FILTER" => "Y",
+        "CACHE_GROUPS" => "Y",
+        "DISPLAY_TOP_PAGER" => "N",
+        "DISPLAY_BOTTOM_PAGER" => "N",
+        "PAGER_TITLE" => "Новости",
+        "PAGER_SHOW_ALWAYS" => "N",
+        "PAGER_TEMPLATE" => "",
+        "PAGER_DESC_NUMBERING" => "Y",
+        "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+        "PAGER_SHOW_ALL" => "Y",
+        "PAGER_BASE_LINK_ENABLE" => "Y",
+        "SET_STATUS_404" => "Y",
+        "SHOW_404" => "Y",
+        "MESSAGE_404" => "",
+        "PAGER_BASE_LINK" => "",
+        "PAGER_PARAMS_NAME" => "arrPager",
+	),
+	false
+);
+
+?>

@@ -2136,6 +2136,69 @@ ul.fiji-ticker li{
 	float: left;
 	margin-right: 20px;
 }
+
+.search-lawyer-inputs{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.search-lawyer-inputs .choose-wrapper{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+	justify-content: space-between;
+	margin-bottom: 20px;
+	width: 63%;
+	float: left;
+}
+
+.search-lawyer-inputs .choose-wrapper label{
+	display: block;
+	width: 20%;
+}
+
+.search-lawyer-inputs .choose-wrapper select.form-select, 
+.search-lawyer-inputs .choose-wrapper input, 
+.search-lawyer-inputs .choose-wrapper .input-wrapper{
+	width: 75%;
+}
+
+.input-wrapper input{
+	width: 100%!important;
+}
+
+.btn-custom {
+	display: inline-block;	
+	box-sizing: border-box;
+	padding: 0 20px;
+	margin: 0 15px 15px 0;
+	outline: none;
+	border: none;  
+	border-radius: 4px;
+	height: 32px;
+	line-height: 32px;
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none;
+	color: #fff;
+	background-color: #85092D;
+	box-shadow: 0 2px #9e1c41;
+	cursor: pointer;
+	user-select: none;
+	appearance: none;
+	touch-action: manipulation;  
+	vertical-align: top;
+}
+.btn-custom:hover {
+	background-color: #9e1c41;
+}
+
+.search-lawyer-inputs .choose-wrapper input + .description{
+	display: inline-block;
+}
+
 .krass,.views-exposed-form .description{
 	display: inline-block;
 	margin-bottom: 20px;
@@ -2326,4 +2389,34 @@ form .licence_block.bx_filter {
 }
 .body-info p {
 	margin-bottom: 0;
+}
+.pozdravlenie {
+    background: #f4f4f4;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 20px;
+    padding: 0 20px 20px;
+    height: 400px;
+    width: 585px;
+    float: left;
+    text-align:justify;
+    padding-bottom:10px;
+}
+.pozdravlenie-img {
+    background-color: #F4F4F4;
+    float: right;
+    padding: 40px 20px 0px 20px;
+   /* padding:0;*/
+    width: 250px;
+    font-size: 12px;
+    height: 360px;
+    margin-top: 20px;
+    float: right;
+}
+#logo img {
+    height: auto !important;
+    margin-left: -20px !important;
+    width: 308px;
+    max-width: 308px;
 }

@@ -28,7 +28,6 @@
 		this.create2xByDefault = data.create2xByDefault !== false;
 		this.uploadParams = typeof data.uploadParams === "object" ? data.uploadParams : {};
 		this.onValueChangeHandler = data.onValueChange ? data.onValueChange : (function() {});
-		this.layout.classList.add("landing-ui-field-image");
 		this.type = this.content.type || "image";
 		this.allowClear = data.allowClear;
 		this.input.innerText = this.content.src;
@@ -36,6 +35,12 @@
 		this.input2x = this.createInput();
 		this.input2x.innerText = this.content.src2x;
 		this.input2x.hidden = true;
+
+		this.layout.classList.add("landing-ui-field-image");
+		if (data.compactMode === true)
+		{
+			this.layout.classList.add("landing-ui-field-image--compact");
+		}
 
 		this.disableAltField = typeof data.disableAltField === "boolean" ? data.disableAltField : false;
 
@@ -184,7 +189,8 @@
 			options: {
 				siteId: BX.Landing.Main.getInstance().options.site_id,
 				landingId: BX.Landing.Main.getInstance().id
-			}
+			},
+			contentRoot: this.contentRoot
 		});
 
 		this.urlCheckbox = create("input", {
@@ -508,10 +514,13 @@
 
 			if (!this.uploadMenu)
 			{
-				this.uploadMenu = BX.PopupMenu.create(
-					"upload_" + this.selector + (+new Date()),
-					this.bindElement,
-					[
+				this.uploadMenu = BX.Main.MenuManager.create({
+					id: "upload_" + this.selector + (+new Date()),
+					bindElement: this.bindElement,
+					bindOptions: {
+						forceBindPosition: true
+					},
+					items: [
 						{
 							text: BX.Landing.Loc.getMessage("LANDING_IMAGE_UPLOAD_MENU_UNSPLASH"),
 							onclick: this.onUnsplashShow.bind(this)
@@ -533,30 +542,36 @@
 							onclick: this.onLinkShow.bind(this)
 						}
 					],
-					{
-						events: {
-							onPopupClose: function() {
-								this.bindElement.classList.remove("landing-ui-active");
+					events: {
+						onPopupClose: function ()
+						{
+							this.bindElement.classList.remove("landing-ui-active");
 
-								if (this.uploadMenu)
-								{
-									this.uploadMenu.destroy();
-									this.uploadMenu = null;
-								}
-							}.bind(this)
-						}
-					}
-				);
-				this.bindElement.parentNode.appendChild(this.uploadMenu.popupWindow.popupContainer);
+							if (this.uploadMenu)
+							{
+								this.uploadMenu.destroy();
+								this.uploadMenu = null;
+							}
+						}.bind(this)
+					},
+					targetContainer: this.contentRoot
+				});
+				if (!this.contentRoot)
+				{
+					this.bindElement.parentNode.appendChild(this.uploadMenu.popupWindow.popupContainer);
+				}
 			}
 
 			this.bindElement.classList.add("landing-ui-active");
-			this.uploadMenu.show();
+			this.uploadMenu.toggle();
 
-			var rect = BX.pos(this.bindElement, this.bindElement.parentNode);
-			this.uploadMenu.popupWindow.popupContainer.style.top = rect.bottom + "px";
-			this.uploadMenu.popupWindow.popupContainer.style.left = "auto";
-			this.uploadMenu.popupWindow.popupContainer.style.right = "5px";
+			if (!this.contentRoot)
+			{
+				var rect = BX.pos(this.bindElement, this.bindElement.parentNode);
+				this.uploadMenu.popupWindow.popupContainer.style.top = rect.bottom + "px";
+				this.uploadMenu.popupWindow.popupContainer.style.left = "auto";
+				this.uploadMenu.popupWindow.popupContainer.style.right = "5px";
+			}
 		},
 
 		onUnsplashShow: function()
@@ -738,16 +753,19 @@
 
 		/**
 		 * @param {object} value
+		 * @param {boolean} [preventEvent = false]
 		 */
-		setValue: function(value)
+		setValue: function(value, preventEvent)
 		{
 			if (value.type !== "icon")
 			{
 				if (!value || !value.src)
 				{
 					this.input.innerText = "";
+					this.input2x.innerText = "";
 					this.preview.removeAttribute("style");
 					this.input.dataset.ext = "";
+					this.showDropzone();
 				}
 				else
 				{
@@ -792,7 +810,10 @@
 				data: {value: this.getValue()},
 				compatData: [this.getValue()],
 			});
-			this.emit('change', event);
+			if (!preventEvent)
+			{
+				this.emit('change', event);
+			}
 		},
 
 		adjustEditButtonState: function()

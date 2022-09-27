@@ -57,6 +57,7 @@ BX.Kanban.Grid = function(options)
 		rightShadow: null
 	};
 
+	this.emptyStubItems = options.emptyStubItems;
 	this.itemType = this.getItemType(options.itemType);
 	this.columnType = this.getColumnType(options.columnType);
 
@@ -1011,11 +1012,44 @@ BX.Kanban.Grid.prototype =
 	 */
 	getEmptyStub: function()
 	{
-		if (this.layout.emptyStub)
+		if(this.layout.emptyStub)
 		{
 			return this.layout.emptyStub;
 		}
 
+		if(this.emptyStubItems && typeof this.emptyStubItems === 'object')
+		{
+			this.layout.emptyStub = BX.create("div", {
+				attrs: {
+					className: "main-kanban-no-data"
+				},
+				children: [
+					BX.create("div", {
+						attrs: {
+							className: "main-kanban-no-data-inner"
+						},
+						children: [
+							BX.create("div", {
+								attrs: {
+									className: "main-kanban-no-data-title"
+								},
+								text: this.emptyStubItems['title']
+							}),
+							BX.create("div", {
+								attrs: {
+									className: "main-kanban-no-data-description"
+								},
+								text: this.emptyStubItems['description']
+							})
+						]
+					})
+				]
+			});
+
+			return this.layout.emptyStub;
+		}
+
+		// default empty layout
 		this.layout.emptyStub = BX.create("div", {
 			attrs: {
 				className: "main-kanban-no-data"
@@ -1057,9 +1091,9 @@ BX.Kanban.Grid.prototype =
 				className: "main-kanban-loader-container"
 			},
 			html:
-			'<svg class="main-kanban-loader-circular" viewBox="25 25 50 50">' +
+				'<svg class="main-kanban-loader-circular" viewBox="25 25 50 50">' +
 				'<circle class="main-kanban-loader-path" cx="50" cy="50" r="20" fill="none" stroke-miterlimit="10"/>' +
-			'</svg>'
+				'</svg>'
 		});
 
 		return this.layout.loader;
@@ -1181,7 +1215,7 @@ BX.Kanban.Grid.prototype =
 		for (var itemId in items)
 		{
 			var column = this.getColumn(items[itemId].columnId);
-			
+
 			if(currentColumns.indexOf(column) === -1)
 			{
 				currentColumns.push(column);
@@ -1404,7 +1438,7 @@ BX.Kanban.Grid.prototype =
 				this.selectedItems[item].unDisabledItem();
 			}
 		}
-		
+
 		this.resetDragMode();
 		this.getDropZoneArea().hide();
 

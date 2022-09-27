@@ -309,7 +309,7 @@
         </div>
         <?if (($APPLICATION->GetCurPage() == "/about/")){?>
             <section class="about">
-                <div class="region region-intro">
+               <div class="region region-intro">
                     <div id="block-block-8" class="block block-block contextual-links-region first last odd">
                         <?$APPLICATION->IncludeComponent(
                             "bitrix:main.include",
@@ -321,8 +321,8 @@
                             )
                         );
                         ?>
-                    </div><!-- /.block -->
-                </div><!-- /.region -->
+                </div><!-- /.block -->
+              </div><!-- /.region -->
             </section>
         <?}?>
         <?if (($APPLICATION->GetCurPage() != "/")){?>

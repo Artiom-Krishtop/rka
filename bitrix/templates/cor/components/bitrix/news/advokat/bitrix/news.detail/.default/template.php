@@ -132,69 +132,11 @@ if(strpos($arResult['PREVIEW_PICTURE']['SRC'], 'picture-default'))
 }
 ?>
 <div class="news-detail profile">
-    <div class="adv_stats_prof">
-            <? if(!empty($arResult['PREVIEW_PICTURE'])) {?>    
-                <img width="100%" src="<?=$arResult['PREVIEW_PICTURE']['SRC']?>" alt="<?=$arResult['NAME']?>">
-            <?}?>         
-            <?  
-            global $USER;
-            if(CUser::IsOnLine($arResult['DISPLAY_PROPERTIES']['USER']['VALUE'], 120)) {?>
-                <div class="online">сейчас на сайте</div>
-            <?}?>
-        <div><?
-                if(!empty($arResult["COUNT_OTVET"])){
-                    if(preg_match("/(5|6|7|8|9|0|11|12|13|14)$/",$arResult["COUNT_OTVET"])){
-                        $comment='ответов';
-                    }elseif(preg_match("|(1)$|",$arResult["COUNT_OTVET"])){
-                        $comment='ответ';
-                    }elseif(preg_match("/(2|3|4)$/",$arResult["COUNT_OTVET"])){
-                        $comment='ответа';
-                    }
-                    echo "<span>".$arResult["COUNT_OTVET"]."</span> ".$comment;
-                }else{
-                    echo "<span>0</span> ответов";
-                }?><br>
-            <?
-            if(!empty($arResult["COUNT_COMMENT"])){
-                if(preg_match("/(5|6|7|8|9|0|11|12|13|14)$/",$arResult["COUNT_COMMENT"])){
-                    $comment='комментариев';
-                }elseif(preg_match("|(1)$|",$arResult["COUNT_COMMENT"])){
-                    $comment='комментарий';
-                }elseif(preg_match("/(2|3|4)$/",$arResult["COUNT_COMMENT"])){
-                    $comment='комментария';
-                }
-                echo "<span>".$arResult["COUNT_COMMENT"]."</span> ".$comment;
-            }else{
-                echo "<span>0</span> комментариев";
-            }?><br>
-            <?
-            if(!empty($arResult["COUNT_BLOG"])){
-                if(preg_match("/(5|6|7|8|9|0|11|12|13|14)$/",$arResult["COUNT_BLOG"])){
-                    $comment='статей';
-                }elseif(preg_match("|(1)$|",$arResult["COUNT_BLOG"])){
-                    $comment='статья';
-                }elseif(preg_match("/(2|3|4)$/",$arResult["COUNT_BLOG"])){
-                    $comment='статьи';
-                }
-                echo "<span>".$arResult["COUNT_BLOG"]."</span> ".$comment;
-            }else{
-                echo "<span>0</span> статей";
-            }?><br>
-            <?
-            if(!empty($arResult['PROPERTIES']["BLAGOD"]["VALUE"])){
-                if(preg_match("/(5|6|7|8|9|0|11|12|13|14)$/",$arResult['PROPERTIES']["BLAGOD"]["VALUE"])){
-                    $comment='благодарностей';
-                }elseif(preg_match("|(1)$|",$arResult['PROPERTIES']["BLAGOD"]["VALUE"])){
-                    $comment='благодарность';
-                }elseif(preg_match("/(2|3|4)$/",$arResult['PROPERTIES']["BLAGOD"]["VALUE"])){
-                    $comment='благодарности';
-                }
-                echo "<span>".$arResult['PROPERTIES']["BLAGOD"]["VALUE"]."</span> ".$comment;
-            }else{
-                echo "<span>0</span> благодарностей";
-            }
-             ?>
-        </div>
+    <div class="adv_stats_prof" id="lawyer-card">
+        <? if(!empty($arResult['PREVIEW_PICTURE'])) {?>    
+            <img width="100%" src="<?=$arResult['PREVIEW_PICTURE']['SRC']?>" alt="<?=$arResult['NAME']?>">
+        <?}?>
+        <div class='lawyer-card-loading'></div>         
     </div>	
     <?if(!empty($arResult['PROPERTIES']["PHONE"]["VALUE"])){?>
         <div class="field field-name-field-phone field-type-text field-label-inline">
@@ -475,3 +417,8 @@ if(strpos($arResult['PREVIEW_PICTURE']['SRC'], 'picture-default'))
         margin-left: 0px;
     }
 </style>
+<script>
+    $().ready(function(){
+        getAdvokatThanks(<?=$arResult['PROPERTIES']['USER']['VALUE']?>, 'advokat');
+    })
+</script>

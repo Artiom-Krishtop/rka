@@ -14,8 +14,9 @@ $this->setFrameMode(true);
 ?>
 <div class="view-header">
       <br>
-<a class="button" href="/news/">Новости белорусской адвокатуры</a> <a class="button" href="/news/neighbornews/">Новости наших соседей</a><!-- <a class="button" href="/news/smi/">СМИ об адвокатах</a>-->
-<br><br>    </div>
+<a class="button" style="margin-bottom: 5px;" href="/news/">Новости белорусской адвокатуры</a> <a class="button" href="/news/konkurs-ya-advokat/">Конкурс «Я - адвокат»</a> <a class="button" href="/news/blagodarnosti-advokatam/">Благодарности адвокатам</a><!-- <a class="button" href="/news/smi/">СМИ об адвокатах</a>-->
+<!--<a class="button" href="/news/navstrechu-referendumu">Навстречу референдуму</a> <a class="button" href="/news/god-istoricheskoy-pamyati">Год исторической памяти</a>
+<br><br> -->   </div>
 <?if($arParams["USE_RSS"]=="Y"):?>
 	<?
 	$rss_url = CComponentEngine::makePathFromTemplate($arResult["FOLDER"].$arResult["URL_TEMPLATES"]["rss_section"], array_map("urlencode", $arResult["VARIABLES"]));

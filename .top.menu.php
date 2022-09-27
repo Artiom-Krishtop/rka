@@ -8,36 +8,29 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Электронное обращение", 
-		"https://www.rka.by/electronic-appeal/", 
+		"Коллегии адвокатов", 
+		"https://www.rka.by/kollegies/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Вопросы и ответы", 
+		"Как стать адвокатом", 
+		"https://www.rka.by/news/kak-stat-advokatom.php?", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Ответы адвокатов на вопросы онлайн-консультации", 
 		"https://www.rka.by/question/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Блоги адвокатов", 
+		"Статьи адвокатов", 
 		"https://www.rka.by/blogs/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Правила онлайн-консультации БРКА", 
-		"https://www.rka.by/pravila-online-konsultacii", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Правила пользования сайтом БРКА", 
-		"https://www.rka.by/pravila-polzovaniya-saytom/", 
 		Array(), 
 		Array(), 
 		"" 

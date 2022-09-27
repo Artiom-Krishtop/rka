@@ -88,12 +88,20 @@ $arUrlRewrite=array (
     'PATH' => '/content/faq/index.php',
     'SORT' => 100,
   ),
-  12 => 
+  47 => 
   array (
     'CONDITION' => '#^/kollegies/#',
     'RULE' => '',
     'ID' => 'bitrix:news',
     'PATH' => '/kollegies/index.php',
+    'SORT' => 100,
+  ),
+  50 => 
+  array (
+    'CONDITION' => '#^/questcats/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/questcats/index.php',
     'SORT' => 100,
   ),
   34 => 
@@ -136,7 +144,7 @@ $arUrlRewrite=array (
     'PATH' => '/blogs/index.php',
     'SORT' => 100,
   ),
-  46 => 
+  49 => 
   array (
     'CONDITION' => '#^/forum/#',
     'RULE' => '',
@@ -152,7 +160,7 @@ $arUrlRewrite=array (
     'PATH' => '/bitrix/services/rest/index.php',
     'SORT' => 100,
   ),
-  42 => 
+  51 => 
   array (
     'CONDITION' => '#^/news/#',
     'RULE' => '',

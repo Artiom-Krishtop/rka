@@ -22,3 +22,11 @@ div.news-detail img.detail_picture
     padding: 5px;
 }
 
+.lawyer-card-loading{
+
+	width: 100%;
+	height: 60px;
+	background: url(images/loader.gif) 50% 50% no-repeat;
+}
+
+

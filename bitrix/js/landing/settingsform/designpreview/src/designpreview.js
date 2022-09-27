@@ -254,13 +254,6 @@ export class DesignPreview extends EventEmitter
 		{
 			colorPrimary = colorPickerElement.dataset.value;
 		}
-		if (colorPrimary)
-		{
-			if (colorPrimary[0] !== '#')
-			{
-				colorPrimary = '#' + colorPrimary;
-			}
-		}
 		//for 'design page', if use not checked, use color from 'design site'
 		if (this.controls.theme.use.node)
 		{
@@ -269,7 +262,14 @@ export class DesignPreview extends EventEmitter
 				colorPrimary = this.controls.theme.corporateColor.defaultValue;
 			}
 		}
-		css += `--design-preview-primary: ${colorPrimary};`;
+		if (colorPrimary)
+		{
+			if (colorPrimary[0] !== '#')
+			{
+				colorPrimary = '#' + colorPrimary;
+			}
+			css += `--design-preview-primary: ${colorPrimary};`;
+		}
 
 		return css;
 	}
@@ -385,7 +385,7 @@ export class DesignPreview extends EventEmitter
 		link.rel = 'stylesheet';
 		link.href = 'https://fonts.googleapis.com/css2?family=';
 		link.href += font.replace(' ', '+');
-		link.href += ':wght@300;400;500;600;700;900';
+		link.href += ':wght@100;200;300;400;500;600;700;800;900';
 		return link;
 	}
 

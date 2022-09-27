@@ -16,6 +16,7 @@ $this->setFrameMode(true);
         <img width="100%" src="<?=CFile::GetPath($arResult["FOTO"])?>" alt="<?=$arResult["NAME_AVDO"]?>">
     </a>
     <br>
+    <div id="is-online" class="online"></div>
     Ответил(а) <a href="<?=$arResult["LINKS"]?>"> адвокат <?=$arResult["NAME_AVDO"]?></a>,
     <br><?=FormatDate('d F Y',MakeTimeStamp($arResult['ACTIVE_FROM']), time())?>
     <div class="contacts">
@@ -23,60 +24,8 @@ $this->setFrameMode(true);
         <?if(!empty($arResult["SKYPE"])){?><?=$arResult["SKYPE"]?><br><?}?>
         <?if(!empty($arResult["ISQ"])){?><?=$arResult["ISQ"]?><br><?}?>
     </div>
-    <div class="contacts" style="padding:10px 15px;">
-        <?
-        if(!empty($arResult["COUNT_OTVET"])){
-            if(preg_match("/(5|6|7|8|9|0|11|12|13|14)$/",$arResult["COUNT_OTVET"])){
-                $comment='ответов';
-            }elseif(preg_match("|(1)$|",$arResult["COUNT_OTVET"])){
-                $comment='ответ';
-            }elseif(preg_match("/(2|3|4)$/",$arResult["COUNT_OTVET"])){
-                $comment='ответа';
-            }
-            echo "<span>".$arResult["COUNT_OTVET"]."</span> ".$comment;
-        }else{
-            echo "<span>0</span> ответов";
-        }?><br>
-        <?
-        if(!empty($arResult["COUNT_COMMENT"])){
-            if(preg_match("/(5|6|7|8|9|0|11|12|13|14)$/",$arResult["COUNT_COMMENT"])){
-                $comment='комментариев';
-            }elseif(preg_match("|(1)$|",$arResult["COUNT_COMMENT"])){
-                $comment='комментарий';
-            }elseif(preg_match("/(2|3|4)$/",$arResult["COUNT_COMMENT"])){
-                $comment='комментария';
-            }
-            echo "<span>".$arResult["COUNT_COMMENT"]."</span> ".$comment;
-        }else{
-            echo "<span>0</span> комментариев";
-        }?><br>
-        <?
-        if(!empty($arResult["COUNT_BLOG"])){
-            if(preg_match("/(5|6|7|8|9|0|11|12|13|14)$/",$arResult["COUNT_BLOG"])){
-                $comment='статей';
-            }elseif(preg_match("|(1)$|",$arResult["COUNT_BLOG"])){
-                $comment='статья';
-            }elseif(preg_match("/(2|3|4)$/",$arResult["COUNT_BLOG"])){
-                $comment='статьи';
-            }
-            echo "<span>".$arResult["COUNT_BLOG"]."</span> ".$comment;
-        }else{
-            echo "<span>0</span> статей";
-        }?><br>
-        <?
-        if(!empty($arResult["BLAGOD"])){
-            if(preg_match("/(5|6|7|8|9|0|11|12|13|14)$/",$arResult["BLAGOD"])){
-                $comment='благодарностей';
-            }elseif(preg_match("|(1)$|",$arResult["BLAGOD"])){
-                $comment='благодарность';
-            }elseif(preg_match("/(2|3|4)$/",$arResult["BLAGOD"])){
-                $comment='благодарности';
-            }
-            echo "<span>".$arResult["BLAGOD"]."</span> ".$comment;
-        }else{
-            echo "<span>0</span> благодарностей";
-        }
-        ?>
+    <div class="contacts" id="lawyer-statistic" style="padding:10px 15px;">
+        <div class="lawyer-card-loading"></div>
     </div>
     <div class="collegies">
         <?php
@@ -145,6 +94,7 @@ $this->setFrameMode(true);
 <form method="post" name="calculate" action="" class="form" id="modal-form" style="display:none;">
     <input type="hidden" id="user_id" name="user_id" value="<?=$id_user?>">
     <input type="hidden" id="ip" name="ip" value="<?=$ip?>">
+    <input type="hidden" name="QUESTION_ID" value="<?=$arResult['ID']?>">
     <div id="success" style="display: none;color:green;text-align: center;font-size: 20px;">Ваша благодарость отправлена.</div>  
       <label for="name" class="form__label"><?=$props_info["BLAG_NAME"]["NAME"]?>:</label>
       <input type="text" name="NAME" id="NAME" class="form__field" value="<?=$name_user?>" required />
@@ -183,28 +133,23 @@ jQuery("#modal-form").submit(function (e) { // Устанавливаем соб
              //formData.append('VOPROS', jQuery('#VOPROS').val());
              formData.append('MESSAGE', jQuery('#MESSAGE').val());    
              //console.log(formData);    
- var xhr = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
     			xhr.open("POST", "/forms/thank.php");
     
     			xhr.onreadystatechange = function() {
     				if (xhr.readyState == 4) {
     					if(xhr.status == 200) {
     						data = xhr.responseText;
-                            console.log(data);
     						if(data == 0) {
-                              jQuery('#modal-form input').remove();
-                              jQuery('#modal-form textarea').remove();
-                              jQuery('#modal-form label').remove();
-                              jQuery("#modal-form #success").show();
-    						  //jQuery('#modal-form').remove();
-                              //$('#resultblock').remove();
-                              //$('#send_email_form').remove();
-                              //$('#wait_block').hide();
-                              //jQuery("#success").show();
+                                setThanksCount();
+                                jQuery('#modal-form input').remove();
+                                jQuery('#modal-form textarea').remove();
+                                jQuery('#modal-form label').remove();
+                                jQuery("#modal-form #success").show();
     							return false;
     						} 
                             else if (data == 1) {
-    							return false;
+                                return false;
     						}
                             else {
                                 return false;
@@ -326,3 +271,8 @@ if($ar_resfera = $resfera->GetNext())?>
 </div>
 	
 </div>
+<script>
+    $().ready(function(){
+        getAdvokatThanks(<?=$arResult['PROPERTIES']['USER']['VALUE']?>, 'question', <?=$arResult['ID']?>);
+    })
+</script>

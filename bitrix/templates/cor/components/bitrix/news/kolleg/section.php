@@ -155,77 +155,74 @@ else {
         <div class="field-items">
             <div class="field-item even">
                 <?if($section['ID'] == 70){?>
-                    <?$APPLICATION->IncludeComponent(
-                        "bitrix:map.yandex.view",
-                        "brest",
-                        array(
-                            "COMPONENT_TEMPLATE" => ".default",
-                            "CONTROLS" => array(
-                                0 => "ZOOM",
-                                1 => "TYPECONTROL",
-                                2 => "SCALELINE",
-                            ),
-                            "INIT_MAP_TYPE" => "MAP",
-                            "MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:52.08767162863938;s:10:\"yandex_lon\";d:23.693381249224206;s:12:\"yandex_scale\";i:17;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:23.6935920185244;s:3:\"LAT\";d:52.087464990302855;s:4:\"TEXT\";s:73:\"Брестская областная коллегия адвокатов\";}}}",
-                            "MAP_HEIGHT" => "300",
-                            "MAP_ID" => "",
-                            "MAP_WIDTH" => "100%",
-                            "OPTIONS" => array(
-                                0 => "ENABLE_DBLCLICK_ZOOM",
-                            )
-                        ),
-                        false
-                    );?>
-                <?}else if ($section['ID'] == 64){?>
-                    <?$APPLICATION->IncludeComponent(
-                        "bitrix:map.yandex.view",
-                        "resp",
-                        array(
-                            "COMPONENT_TEMPLATE" => "resp",
-                            "CONTROLS" => array(
-                                0 => "ZOOM",
-                                1 => "TYPECONTROL",
-                                2 => "SCALELINE",
-                            ),
-                            "INIT_MAP_TYPE" => "MAP",
-                            "MAP_HEIGHT" => "300",
-                            "MAP_ID" => "",
-                            "MAP_WIDTH" => "100%",
-                            "OPTIONS" => array(
-                                0 => "ENABLE_DBLCLICK_ZOOM",
-                            ),
-                            "MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:53.901221760398855;s:10:\"yandex_lon\";d:27.541828555541958;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:27.541506690460043;s:3:\"LAT\";d:53.90127244827242;s:4:\"TEXT\";s:66:\"Республиканская коллегия адвокатов\";}}}"
-                        ),
-                        false
-                    );?>
-                <?}else if ($section['ID'] == 65){?>
-                    <?$APPLICATION->IncludeComponent(
-                        "bitrix:map.yandex.view",
-                        "minsk-gor",
-                        array(
-                            "COMPONENT_TEMPLATE" => "minsk-gor",
-                            "CONTROLS" => array(
-                                0 => "ZOOM",
-                                1 => "TYPECONTROL",
-                                2 => "SCALELINE",
-                            ),
-                            "INIT_MAP_TYPE" => "MAP",
-                            "MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:53.90521320755281;s:10:\"yandex_lon\";d:27.57491938973494;s:12:\"yandex_scale\";i:15;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:27.579897569666567;s:3:\"LAT\";d:53.90214676740278;s:4:\"TEXT\";s:69:\"Минская городская коллегия адвокатов\";}}}",
-                            "MAP_HEIGHT" => "300",
-                            "MAP_ID" => "",
-                            "MAP_WIDTH" => "100%",
-                            "OPTIONS" => array(
-                                0 => "ENABLE_DBLCLICK_ZOOM",
-                            )
-                        ),
-                        false
-                    );?>
-                <?}else if ($section['ID'] == 71){?>
-                    <?$APPLICATION->IncludeComponent(
-	"bitrix:map.yandex.view", 
-	"minsk", 
+                    <?$APPLICATION->IncludeComponent("bitrix:map.yandex.view", "brest", array(
+	"COMPONENT_TEMPLATE" => ".default",
+		"CONTROLS" => array(
+			0 => "ZOOM",
+			1 => "TYPECONTROL",
+			2 => "SCALELINE",
+		),
+		"INIT_MAP_TYPE" => "MAP",
+		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:52.08767162863938;s:10:\"yandex_lon\";d:23.693381249224206;s:12:\"yandex_scale\";i:17;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:23.6935920185244;s:3:\"LAT\";d:52.087464990302855;s:4:\"TEXT\";s:73:\"Брестская областная коллегия адвокатов\";}}}",
+		"MAP_HEIGHT" => "300",
+		"MAP_ID" => "",
+		"MAP_WIDTH" => "100%",
+		"OPTIONS" => array(
+			0 => "ENABLE_DBLCLICK_ZOOM",
+		)
+	),
+	false,
 	array(
-		"COMPONENT_TEMPLATE" => "minsk",
+	"ACTIVE_COMPONENT" => "N"
+	)
+);?>
+                <?}else if ($section['ID'] == 64){?>
+                    <?$APPLICATION->IncludeComponent("bitrix:map.yandex.view", "resp", array(
+	"COMPONENT_TEMPLATE" => "resp",
+		"CONTROLS" => array(
+			0 => "ZOOM",
+			1 => "TYPECONTROL",
+			2 => "SCALELINE",
+		),
+		"INIT_MAP_TYPE" => "MAP",
+		"MAP_HEIGHT" => "300",
+		"MAP_ID" => "",
+		"MAP_WIDTH" => "100%",
+		"OPTIONS" => array(
+			0 => "ENABLE_DBLCLICK_ZOOM",
+		),
+		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:53.901221760398855;s:10:\"yandex_lon\";d:27.541828555541958;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:27.541506690460043;s:3:\"LAT\";d:53.90127244827242;s:4:\"TEXT\";s:66:\"Республиканская коллегия адвокатов\";}}}"
+	),
+	false,
+	array(
+	"ACTIVE_COMPONENT" => "N"
+	)
+);?>
+                <?}else if ($section['ID'] == 65){?>
+                    <?$APPLICATION->IncludeComponent("bitrix:map.yandex.view", "minsk-gor", array(
+	"COMPONENT_TEMPLATE" => "minsk-gor",
+		"CONTROLS" => array(
+			0 => "ZOOM",
+			1 => "TYPECONTROL",
+			2 => "SCALELINE",
+		),
+		"INIT_MAP_TYPE" => "MAP",
+		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:53.90521320755281;s:10:\"yandex_lon\";d:27.57491938973494;s:12:\"yandex_scale\";i:15;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:27.579897569666567;s:3:\"LAT\";d:53.90214676740278;s:4:\"TEXT\";s:69:\"Минская городская коллегия адвокатов\";}}}",
+		"MAP_HEIGHT" => "300",
+		"MAP_ID" => "",
+		"MAP_WIDTH" => "100%",
+		"OPTIONS" => array(
+			0 => "ENABLE_DBLCLICK_ZOOM",
+		)
+	),
+	false,
+	array(
+	"ACTIVE_COMPONENT" => "N"
+	)
+);?>
+                <?}else if ($section['ID'] == 71){?>
+                    <?$APPLICATION->IncludeComponent("bitrix:map.yandex.view", "minsk", array(
+	"COMPONENT_TEMPLATE" => "minsk",
 		"CONTROLS" => array(
 			0 => "ZOOM",
 			1 => "TYPECONTROL",
@@ -240,36 +237,36 @@ else {
 			0 => "ENABLE_DBLCLICK_ZOOM",
 		)
 	),
-	false
+	false,
+	array(
+	"ACTIVE_COMPONENT" => "N"
+	)
 );?>
                 <?}else if ($section['ID'] == 66){?>
-                    <?$APPLICATION->IncludeComponent(
-                        "bitrix:map.yandex.view",
-                        "mogilev",
-                        array(
-                            "COMPONENT_TEMPLATE" => "mogilev",
-                            "CONTROLS" => array(
-                                0 => "ZOOM",
-                                1 => "TYPECONTROL",
-                                2 => "SCALELINE",
-                            ),
-                            "INIT_MAP_TYPE" => "MAP",
-                            "MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:53.92453767117823;s:10:\"yandex_lon\";d:30.34224069641545;s:12:\"yandex_scale\";i:13;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:30.3508237652631;s:3:\"LAT\";d:53.918964748783054;s:4:\"TEXT\";s:77:\"Могилевская областная коллегия адвокатов\";}}}",
-                            "MAP_HEIGHT" => "300",
-                            "MAP_ID" => "",
-                            "MAP_WIDTH" => "100%",
-                            "OPTIONS" => array(
-                                0 => "ENABLE_DBLCLICK_ZOOM",
-                            )
-                        ),
-                        false
-                    );?>
-                <?}else if ($section['ID'] == 67){?>
-                    <?$APPLICATION->IncludeComponent(
-	"bitrix:map.yandex.view", 
-	"grodno", 
+                    <?$APPLICATION->IncludeComponent("bitrix:map.yandex.view", "mogilev", array(
+	"COMPONENT_TEMPLATE" => "mogilev",
+		"CONTROLS" => array(
+			0 => "ZOOM",
+			1 => "TYPECONTROL",
+			2 => "SCALELINE",
+		),
+		"INIT_MAP_TYPE" => "MAP",
+		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:53.92453767117823;s:10:\"yandex_lon\";d:30.34224069641545;s:12:\"yandex_scale\";i:13;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:30.3508237652631;s:3:\"LAT\";d:53.918964748783054;s:4:\"TEXT\";s:77:\"Могилевская областная коллегия адвокатов\";}}}",
+		"MAP_HEIGHT" => "300",
+		"MAP_ID" => "",
+		"MAP_WIDTH" => "100%",
+		"OPTIONS" => array(
+			0 => "ENABLE_DBLCLICK_ZOOM",
+		)
+	),
+	false,
 	array(
-		"COMPONENT_TEMPLATE" => "grodno",
+	"ACTIVE_COMPONENT" => "N"
+	)
+);?>
+                <?}else if ($section['ID'] == 67){?>
+                    <?$APPLICATION->IncludeComponent("bitrix:map.yandex.view", "grodno", array(
+	"COMPONENT_TEMPLATE" => "grodno",
 		"CONTROLS" => array(
 			0 => "ZOOM",
 			1 => "TYPECONTROL",
@@ -287,52 +284,55 @@ else {
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
-	false
+	false,
+	array(
+	"ACTIVE_COMPONENT" => "N"
+	)
 );?>
                 <?}else if ($section['ID'] == 68){?>
-                    <?$APPLICATION->IncludeComponent(
-                        "bitrix:map.yandex.view",
-                        "gomel",
-                        array(
-                            "COMPONENT_TEMPLATE" => "gomel",
-                            "CONTROLS" => array(
-                                0 => "ZOOM",
-                                1 => "TYPECONTROL",
-                                2 => "SCALELINE",
-                            ),
-                            "INIT_MAP_TYPE" => "MAP",
-                            "MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:52.425531321113596;s:10:\"yandex_lon\";d:31.008135626983595;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:31.00920851058943;s:3:\"LAT\";d:52.42494102921979;s:4:\"TEXT\";s:75:\"Гомельская областная коллегия адвокатов\";}}}",
-                            "MAP_HEIGHT" => "300",
-                            "MAP_ID" => "",
-                            "MAP_WIDTH" => "100%",
-                            "OPTIONS" => array(
-                                0 => "ENABLE_DBLCLICK_ZOOM",
-                            )
-                        ),
-                        false
-                    );?>
+                    <?$APPLICATION->IncludeComponent("bitrix:map.yandex.view", "gomel", array(
+	"COMPONENT_TEMPLATE" => "gomel",
+		"CONTROLS" => array(
+			0 => "ZOOM",
+			1 => "TYPECONTROL",
+			2 => "SCALELINE",
+		),
+		"INIT_MAP_TYPE" => "MAP",
+		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:52.425531321113596;s:10:\"yandex_lon\";d:31.008135626983595;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:31.00920851058943;s:3:\"LAT\";d:52.42494102921979;s:4:\"TEXT\";s:75:\"Гомельская областная коллегия адвокатов\";}}}",
+		"MAP_HEIGHT" => "300",
+		"MAP_ID" => "",
+		"MAP_WIDTH" => "100%",
+		"OPTIONS" => array(
+			0 => "ENABLE_DBLCLICK_ZOOM",
+		)
+	),
+	false,
+	array(
+	"ACTIVE_COMPONENT" => "N"
+	)
+);?>
                 <?}else if ($section['ID'] == 69){?>
-                    <?$APPLICATION->IncludeComponent(
-                        "bitrix:map.yandex.view",
-                        "",
-                        array(
-                            "COMPONENT_TEMPLATE" => "",
-                            "CONTROLS" => array(
-                                0 => "ZOOM",
-                                1 => "TYPECONTROL",
-                                2 => "SCALELINE",
-                            ),
-                            "INIT_MAP_TYPE" => "MAP",
-                            "MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:52.425531321113596;s:10:\"yandex_lon\";d:31.008135626983595;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:31.00920851058943;s:3:\"LAT\";d:52.42494102921979;s:4:\"TEXT\";s:75:\"Гомельская областная коллегия адвокатов\";}}}",
-                            "MAP_HEIGHT" => "300",
-                            "MAP_ID" => "",
-                            "MAP_WIDTH" => "100%",
-                            "OPTIONS" => array(
-                                0 => "ENABLE_DBLCLICK_ZOOM",
-                            )
-                        ),
-                        false
-                    );?>
+                    <?$APPLICATION->IncludeComponent("bitrix:map.yandex.view", "", array(
+	"COMPONENT_TEMPLATE" => "",
+		"CONTROLS" => array(
+			0 => "ZOOM",
+			1 => "TYPECONTROL",
+			2 => "SCALELINE",
+		),
+		"INIT_MAP_TYPE" => "MAP",
+		"MAP_DATA" => "a:4:{s:10:\"yandex_lat\";d:52.425531321113596;s:10:\"yandex_lon\";d:31.008135626983595;s:12:\"yandex_scale\";i:16;s:10:\"PLACEMARKS\";a:1:{i:0;a:3:{s:3:\"LON\";d:31.00920851058943;s:3:\"LAT\";d:52.42494102921979;s:4:\"TEXT\";s:75:\"Гомельская областная коллегия адвокатов\";}}}",
+		"MAP_HEIGHT" => "300",
+		"MAP_ID" => "",
+		"MAP_WIDTH" => "100%",
+		"OPTIONS" => array(
+			0 => "ENABLE_DBLCLICK_ZOOM",
+		)
+	),
+	false,
+	array(
+	"ACTIVE_COMPONENT" => "N"
+	)
+);?>
                 <?}?>
             </div>
         </div>
@@ -485,7 +485,7 @@ else {
     <?if($section['ID'] != 64){?>
 
         <div class="block block-views contextual-links-region first odd">
-            <h2 class="block-title">Адвокатские бюро</h2>
+            <h2 class="block-title"></h2>
         </div>
         <?
         $APPLICATION->IncludeComponent(
@@ -551,7 +551,7 @@ else {
     <?if($section['ID'] != 64){?>
 
         <div class="block block-views contextual-links-region first odd">
-            <h2 class="block-title">Адвокаты, осуществляющие деятельность индивидуально</h2>
+            <h2 class="block-title"></h2>
             <div class="view view-og-members view-id-og_members view-display-id-block_5">
                 <div class="view-content adv-individs" style="overflow: hidden;">
                     <?

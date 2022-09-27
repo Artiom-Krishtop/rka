@@ -4,6 +4,7 @@ import { Type, Text, Tag, Event, Dom, Browser, Reflection } from 'main.core';
 import { EventEmitter, BaseEvent } from 'main.core.events';
 import { type PopupOptions, type PopupTarget, type PopupAnimationOptions } from './popup-types';
 import { ZIndexManager, ZIndexComponent } from 'main.core.z-index-manager';
+import PositionEvent from './position-event';
 
 declare type TargetPosition = {
 	left: number,
@@ -149,6 +150,7 @@ export default class Popup extends EventEmitter
 		this.closeIcon = null;
 		this.resizeIcon = null;
 		this.angle = null;
+		this.angleArrowElement = null;
 		this.overlay = null;
 		this.titleBar = null;
 		this.bindOptions = typeof (params.bindOptions) === 'object' ? params.bindOptions : {};
@@ -175,6 +177,9 @@ export default class Popup extends EventEmitter
 		this.contentPadding = null;
 		this.background = null;
 		this.contentBackground = null;
+
+		this.borderRadius = null;
+		this.contentBorderRadius = null;
 
 		this.targetContainer = Type.isElementNode(params.targetContainer) ? params.targetContainer : document.body;
 
@@ -205,11 +210,6 @@ export default class Popup extends EventEmitter
 		this.subscribeFromOptions(params.events);
 
 		let popupClassName = 'popup-window';
-
-		if (params.contentColor && Type.isStringFilled(params.contentColor))
-		{
-			popupClassName += ' popup-window-content-' + params.contentColor;
-		}
 
 		if (params.titleBar)
 		{
@@ -257,8 +257,8 @@ export default class Popup extends EventEmitter
 		 * @private
 		 */
 		this.popupContainer = Tag.render
-			`<div 
-				class="${popupClassName}" 
+			`<div
+				class="${popupClassName}"
 				id="${popupId}"
 				style="display: none; position: absolute; left: 0; top: 0;"
 			>${[this.titleBar, this.contentContainer, this.closeIcon]}</div>`
@@ -269,6 +269,20 @@ export default class Popup extends EventEmitter
 		this.zIndexComponent = ZIndexManager.register(this.popupContainer, params.zIndexOptions);
 
 		this.buttonsContainer = null;
+
+		if (params.contentColor && Type.isStringFilled(params.contentColor))
+		{
+			if (
+				params.contentColor === 'white'
+				|| params.contentColor === 'gray'
+			)
+			{
+				popupClassName += ' popup-window-content-' + params.contentColor;
+			}
+
+			this.setContentColor(params.contentColor);
+
+		}
 
 		if (params.angle)
 		{
@@ -294,6 +308,8 @@ export default class Popup extends EventEmitter
 		this.setResizeMode(params.resizable);
 		this.setPadding(params.padding);
 		this.setContentPadding(params.contentPadding);
+		this.setBorderRadius(params.borderRadius);
+		this.setContentBorderRadius(params.contentBorderRadius);
 		this.setBackground(params.background);
 		this.setContentBackground(params.contentBackground);
 		this.setAnimation(params.animation);
@@ -560,6 +576,7 @@ export default class Popup extends EventEmitter
 			}
 
 			this.angle = null;
+			this.angleArrowElement = null;
 			return;
 		}
 
@@ -576,8 +593,18 @@ export default class Popup extends EventEmitter
 				defaultOffset += angleLeftOffset - Popup.defaultOptions.angleLeftOffset;
 			}
 
+			this.angleArrowElement = Tag.render`<div class="popup-window-angly--arrow"></div>`;
+			if (this.background)
+			{
+				this.angleArrowElement.style.background = this.background;
+			}
+
 			this.angle = {
-				element: Tag.render`<div class="${className} ${className}-${position}"></div>`,
+				element: Tag.render`
+					<div class="${className} ${className}-${position}">
+						${this.angleArrowElement}
+					</div>
+				`,
 				position: position,
 				offset: 0,
 				defaultOffset: Math.max(defaultOffset, angleMinLeft)
@@ -824,17 +851,67 @@ export default class Popup extends EventEmitter
 		return this.contentPadding;
 	}
 
+	setBorderRadius(radius): void
+	{
+		if (Type.isStringFilled(radius))
+		{
+			this.borderRadius = radius;
+			this.getPopupContainer().style.setProperty('--popup-window-border-radius', radius);
+		}
+		else if (radius === null)
+		{
+			this.borderRadius = null;
+			this.getPopupContainer().style.removeProperty('--popup-window-border-radius');
+		}
+	}
+
+	setContentBorderRadius(radius): void
+	{
+		if (Type.isStringFilled(radius))
+		{
+			this.contentBorderRadius = radius;
+			this.getContentContainer().style.setProperty('--popup-window-content-border-radius', radius);
+		}
+		else if (radius === null)
+		{
+			this.contentBorderRadius = null;
+			this.getContentContainer().style.removeProperty('--popup-window-content-border-radius');
+		}
+	}
+
+	setContentColor(color: string | null)
+	{
+		if (Type.isString(color) && this.contentContainer)
+		{
+			this.contentContainer.style.backgroundColor = color;
+		}
+		else if (color === null)
+		{
+			this.contentContainer.style.style.removeProperty('background-color');
+		}
+	}
+
 	setBackground(background: string | null)
 	{
 		if (Type.isStringFilled(background))
 		{
 			this.background = background;
 			this.getPopupContainer().style.background = background;
+
+			if (this.angleArrowElement)
+			{
+				this.angleArrowElement.style.background = background;
+			}
 		}
 		else if (background === null)
 		{
 			this.background = null;
 			this.getPopupContainer().style.removeProperty('background');
+
+			if (this.angleArrowElement)
+			{
+				this.angleArrowElement.style.removeProperty('background');
+			}
 		}
 	}
 
@@ -1393,13 +1470,7 @@ export default class Popup extends EventEmitter
 			return;
 		}
 
-		if (!this.firstShow)
-		{
-			this.emit('onFirstShow', new BaseEvent({ compatData: [this] }));
-			this.firstShow = true;
-		}
-
-		this.emit('onShow', new BaseEvent({ compatData: [this] }));
+		this.emit('onBeforeShow');
 
 		this.showOverlay();
 		this.getPopupContainer().style.display = 'block';
@@ -1408,6 +1479,14 @@ export default class Popup extends EventEmitter
 		{
 			this.bringToFront();
 		}
+
+		if (!this.firstShow)
+		{
+			this.emit('onFirstShow', new BaseEvent({ compatData: [this] }));
+			this.firstShow = true;
+		}
+
+		this.emit('onShow', new BaseEvent({ compatData: [this] }));
 
 		this.adjustPosition();
 
@@ -1649,6 +1728,7 @@ export default class Popup extends EventEmitter
 		this.titleBar = null;
 		this.buttonsContainer = null;
 		this.angle = null;
+		this.angleArrowElement = null;
 		this.resizeIcon = null;
 	}
 
@@ -1771,10 +1851,16 @@ export default class Popup extends EventEmitter
 			top = 0;
 		}
 
+		const event = new PositionEvent();
+		event.left = left;
+		event.top = top;
+
+		this.emit('onBeforeAdjustPosition', event);
+
 		Dom.adjust(this.popupContainer, {
 			style: {
-				top: top + 'px',
-				left: left + 'px'
+				top: event.top + 'px',
+				left: event.left + 'px'
 			}
 		});
 	}

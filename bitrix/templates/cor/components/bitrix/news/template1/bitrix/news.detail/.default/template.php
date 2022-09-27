@@ -66,23 +66,23 @@ $this->setFrameMode(true);
     <br />
     <?if(!empty($arResult['PROPERTIES']['ISTOCH']['VALUE'])){?>
         <b>Источник:</b> <a href="<?=$arResult['PROPERTIES']['ISTOCH']['VALUE']?>"><?=$arResult['PROPERTIES']['ISTOCH']['VALUE']?></a>
-    <?}?>
-    <?if($arResult['IBLOCK_SECTION_ID']!=89 && $arResult['IBLOCK_SECTION_ID']!=90){?>
-        <div>
-            Опубликовано:
-            <?if(!empty($arResult['PROPERTIES']['PUBLIC_DATE']['VALUE'])){?>
-                <?echo $arResult['PROPERTIES']['PUBLIC_DATE']['VALUE'] ?>
-            <?}else{?>
-                <?=FormatDate('d F Y',MakeTimeStamp($arResult['DISPLAY_ACTIVE_FROM']), time())?>
-            <?}?>
-            <?
-            $create_name=$arResult["CREATED_USER_NAME"];
-            $create_name=preg_replace('~\(.*\)~ ','',$create_name);
-            ?>
-            | автор:<?=$create_name?>
-        </div>
-    <?}?>
-    <div class="dop-image">
+        <?}?>
+
+        <?if($arResult['IBLOCK_SECTION_ID']!=89 && $arResult['IBLOCK_SECTION_ID']!=90){?>
+            <div>
+                Опубликовано:
+                <?if(!empty($arResult['DISPLAY_ACTIVE_FROM'])){?>
+                    <?echo $arResult['DISPLAY_ACTIVE_FROM'] ?>
+                <?}?>
+                <?
+                $create_name=$arResult["CREATED_USER_NAME"];
+                $create_name=preg_replace('~\(.*\)~ ','',$create_name);
+                ?>
+                | автор:<?=$create_name?>
+            </div>
+        <?}?>
+
+        <div class="dop-image">
         <? $dopimage = str_replace(',','', $arResult['PROPERTIES']['DOP_PHOTO']['~VALUE']['TEXT'])?>
         <?echo $dopimage ?>
         <?if(count($arResult["MORE_PHOTO"])>0):?>

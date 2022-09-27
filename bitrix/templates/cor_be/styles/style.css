@@ -2327,3 +2327,9 @@ form .licence_block.bx_filter {
 .body-info p {
 	margin-bottom: 0;
 }
+#logo img {
+    height: auto !important;
+    margin-left: -20px !important;
+    width: 308px;
+    max-width: 308px;
+}

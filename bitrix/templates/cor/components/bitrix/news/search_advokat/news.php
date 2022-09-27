@@ -35,32 +35,28 @@ print "</pre>";*/
 <div class="views-exposed-form">
 <div class="views-exposed-widgets clearfix">
     <input type="hidden" name="search" value="Y"/>
-    <div class="row select-input">
-        <div class="kass views-exposed-widget views-widget-filter-field_activity_tid law-field">
+    <div class="row select-input search-lawyer-inputs">
+        <div class="choose-wrapper views-exposed-widget views-widget-filter-field_activity_tid law-field">
 			<label for="edit-field-activity-tid"> Отрасль права</label>
-            <div class="views-widget">
-             <div class="form-item form-type-select form-item-field-activity-tid">
-                <select  multiple="multiple" size="9" name="PRAVO[]" id="PRAVO"  class="form-select">
-                    <?foreach ($pravo as $keys => $arPr) {?>
-                       <option
-                           <?if ($_REQUEST['search']=='Y' && !empty($_REQUEST["PRAVO"])):?>
-                                <?foreach($_REQUEST["PRAVO"] as $val){?>
+            <select  multiple="multiple" size="9" name="PRAVO[]" id="PRAVO"  class="form-select">
+                <?foreach ($pravo as $keys => $arPr) {?>
+                    <option
+                        <?if ($_REQUEST['search']=='Y' && !empty($_REQUEST["PRAVO"])):?>
+                            <?foreach($_REQUEST["PRAVO"] as $val){?>
+                            <?if($val ==$keys){?>
+                                selected=''
+                                <?}}?>
+                        <?elseif($_REQUEST['search']=='' && !empty($_SESSION['PRAVO_FILT'])):?>
+                            <?foreach($_SESSION['PRAVO_FILT'] as $val){?>
                                 <?if($val ==$keys){?>
-                                   selected=''
-                                 <?}}?>
-                           <?elseif($_REQUEST['search']=='' && !empty($_SESSION['PRAVO_FILT'])):?>
-                               <?foreach($_SESSION['PRAVO_FILT'] as $val){?>
-                                   <?if($val ==$keys){?>
-                                       selected=''
-                                   <?}}?>
-                           <?endif;?>
-                            value="<?=$keys?>"><?=$arPr?></option>
-                    <?}?>					
-                </select>
-                </div>
-             </div>
+                                    selected=''
+                                <?}}?>
+                        <?endif;?>
+                        value="<?=$keys?>"><?=$arPr?></option>
+                <?}?>					
+            </select>
         </div>    
-        <div class="krass views-exposed-widget views-widget-filter-gid choose-kollegy">
+        <div class="krass choose-wrapper views-exposed-widget views-widget-filter-gid choose-kollegy">
 			<label>Коллегия</label>
 			<select  name="KOLLEG" id="KOLLEG"  class="select">
                 <option value="" >- Выберите коллегию-</option>
@@ -75,17 +71,15 @@ print "</pre>";*/
                 <?}?>					
 			</select>
         </div>
-        <div class="views-exposed-widget views-widget-filter-gid choose-surname">
+        <div class="choose-wrapper views-exposed-widget views-widget-filter-gid choose-surname">
 			<label>Фамилия</label>
-			<input autocomplete="off" placeholder="" type="text" name="NAME" id="NAME"  value="<?=$_REQUEST["NAME"]?>" placeholder="">
-            <div class="description">Введите полностью или частично фамилию адвоката</div>
+            <div class="input-wrapper">
+                <input autocomplete="off" placeholder="" type="text" name="NAME" id="NAME"  value="<?=$_REQUEST["NAME"]?>">
+                <div class="description">Введите полностью или частично <b>фамилию</b> адвоката</div>
+            </div>
 		</div>
-    </div>
-	<div class="clearfix"></div>
-    <div class="row sd">
-        <div class="but-r">
-			<button class="button" type="submit" name="save" id="buttonsubmit" value="Найти"><span>Применить</span></button>
-			<div class="clearboth"></div>
+        <div class="choose-wrapper">
+			<button class="btn-custom" type="submit" name="save" id="buttonsubmit" value="Найти">Применить</button>
 		</div>
     </div>
 </div>

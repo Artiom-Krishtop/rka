@@ -76,33 +76,33 @@ print "</pre>";*/
 <?if($arResult['IBLOCK_SECTION_ID']!=89 && $arResult['IBLOCK_SECTION_ID']!=90){?>       
 <div>
     Апублікавана:
-<?if(!empty($arResult['PROPERTIES']['PUBLIC_DATE']['VALUE'])){?>
-<?echo $arResult['PROPERTIES']['PUBLIC_DATE']['VALUE'] ?>
-<?}else{?>
-    <?$date=FormatDate('d F Y',MakeTimeStamp($arItem['DISPLAY_ACTIVE_FROM']), time());
-    $date=str_replace("Ноября","Лiстапада",$date);
-    $date=str_replace("Декабря","Снежаня",$date);
-    $date=str_replace("Января","Студзеня",$date);
-    $date=str_replace("Февраля","Лютага",$date);
-    $date=str_replace("Марта","Сакавiка",$date);
-    $date=str_replace("Апреля","Красавiка",$date);
-    $date=str_replace("Июня","Чэрвеня",$date);
-    $date=str_replace("Июля","Лiпеня",$date);
-    $date=str_replace("Августа","Жнiўня",$date);
-    $date=str_replace("Сентября","Верасеня",$date);
-    $date=str_replace("Октября","Кастрычнiка",$date);
-    echo $date;?>
-<?}?>    
-    
-    <?//echo $arResult['PROPERTIES']['PUBLIC_DATE']['VALUE'] ?>
-    <?
+
+	<? if(!empty($arResult['DISPLAY_ACTIVE_FROM'])){
+
+		$date = FormatDate('d F Y',MakeTimeStamp($arResult['DISPLAY_ACTIVE_FROM']), time());
+		
+		$date=str_replace("ноября","лiстапада",$date);
+		$date=str_replace("декабря","снежаня",$date);
+		$date=str_replace("января","студзеня",$date);
+		$date=str_replace("февраля","лютага",$date);
+		$date=str_replace("марта","сакавiка",$date);
+		$date=str_replace("апреля","красавiка",$date);
+		$date=str_replace("июня","чэрвеня",$date);
+		$date=str_replace("июля","лiпеня",$date);
+		$date=str_replace("августа","жнiўня",$date);
+		$date=str_replace("сентября","верасеня",$date);
+		$date=str_replace("октября","кастрычнiка",$date);
+		
+		echo $date;
+	}
+}
     $create_name = $arResult["CREATED_USER_NAME"];
     $create_name = preg_replace('~\(.*\)~ ','', $create_name);
     ?>
-    
+	
     | аўтар:<?=$create_name?><!--Ірына Рэут--><?//echo $arResult['PROPERTIES']['AUTHOR']['~VALUE'] ?>
 </div>
-<?}?>  
+ 
 <div class="dop-image">	
 
 <? $dopimage = str_replace(',','', $arResult['PROPERTIES']['DOP_PHOTO']['~VALUE']['TEXT'])?>

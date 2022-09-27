@@ -204,6 +204,7 @@ else:
 <li class="leaf"><a href="/faq_ask/unanswered/" title="">Неотвеченные вопросы</a></li>
 <li class="leaf"><a href="/personal/my-answers/" title="">Мои ответы</a></li>
 <li class="leaf"><a href="/personal/my-articles/" title="">Мои статьи</a></li>
+<li class="leaf"><a href="/lokalnye-akty-brka/" title="">Локальные акты БРКА</a></li>
     <?}?>
 <?/*<li class="last leaf"><a href="/user/logout">Выйти</a></li>*/?>
 </ul>

@@ -12,7 +12,7 @@
 						<!-- End Article Image -->
 					</div>
 					<div class="col-lg-6 g-mb-0">
-						<div class="text-uppercase text-center g-mb-20">
+						<div class="text-uppercase text-center g-mx-30">
 							<h6 class="landing-block-node-card-subtitle landing-semantic-subtitle-small g-font-weight-700 g-color-white-opacity-0_7 g-mb-15 text-center">From
 								chef</h6>
 							<h2 class="landing-block-node-card-title landing-semantic-title-medium-bg-before js-animation fadeInLeft g-line-height-1_2 g-font-weight-700 h1 g-color-white u-heading-v2-12--1 g-mb-40 g-brd-white text-center">
@@ -40,7 +40,7 @@
 						<!-- End Article Image -->
 					</div>
 					<div class="col-lg-6 g-mb-0">
-						<div class="text-uppercase text-center g-mb-20">
+						<div class="text-uppercase text-center g-mx-30">
 							<h6 class="landing-block-node-card-subtitle landing-semantic-subtitle-small g-font-weight-700 g-color-white-opacity-0_7 g-mb-15 text-center">From
 								chef</h6>
 							<h2 class="landing-block-node-card-title landing-semantic-title-medium-bg-before js-animation fadeInLeft g-line-height-1_2 g-font-weight-700 h1 g-color-white u-heading-v2-12--1 g-mb-40 g-brd-white text-center">
@@ -69,7 +69,7 @@
 						<!-- End Article Image -->
 					</div>
 					<div class="col-lg-6 g-mb-0">
-						<div class="text-uppercase text-center g-mb-20">
+						<div class="text-uppercase text-center g-mx-30">
 							<h6 class="landing-block-node-card-subtitle landing-semantic-subtitle-small g-font-weight-700 g-color-white-opacity-0_7 g-mb-15 text-center">From
 								chef</h6>
 							<h2 class="landing-block-node-card-title landing-semantic-title-medium-bg-before js-animation fadeInLeft g-line-height-1_2 g-font-weight-700 h1 g-color-white u-heading-v2-12--1 g-mb-40 g-brd-white text-center">
@@ -97,7 +97,7 @@
 						<!-- End Article Image -->
 					</div>
 					<div class="col-lg-6 g-mb-0">
-						<div class="text-uppercase text-center g-mb-20">
+						<div class="text-uppercase text-center g-mx-30">
 							<h6 class="landing-block-node-card-subtitle landing-semantic-subtitle-small g-font-weight-700 g-color-white-opacity-0_7 g-mb-15 text-center">From
 								chef</h6>
 							<h2 class="landing-block-node-card-title landing-semantic-title-medium-bg-before js-animation fadeInLeft g-line-height-1_2 g-font-weight-700 h1 g-color-white u-heading-v2-12--1 g-mb-40 g-brd-white text-center">
@@ -125,7 +125,7 @@
 						<!-- End Article Image -->
 					</div>
 					<div class="col-lg-6 g-mb-0">
-						<div class="text-uppercase text-center g-mb-20">
+						<div class="text-uppercase text-center g-mx-30">
 							<h6 class="landing-block-node-card-subtitle landing-semantic-subtitle-small g-font-weight-700 g-color-white-opacity-0_7 g-mb-15 text-center">From
 								chef</h6>
 							<h2 class="landing-block-node-card-title landing-semantic-title-medium-bg-before js-animation fadeInLeft g-line-height-1_2 g-font-weight-700 h1 g-color-white u-heading-v2-12--1 g-mb-40 g-brd-white text-center">

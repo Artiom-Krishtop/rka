@@ -282,3 +282,16 @@ div#sonet_events_ms_message {width:150px;}
 	color: #fff;
 }
 .view-content .item-list div:nth-child(3n+1) {clear: left;}
+.about {
+  
+    /*background: #f4f4f4 url(/upload/about_man.jpg) no-repeat left bottom;*/
+     background: #f4f4f4 !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    min-height: 340px !important;
+    margin-top: 7px;
+    margin-bottom: 20px;
+    padding: 20px 30px 20px 30px !important; 
+    position: relative;
+}

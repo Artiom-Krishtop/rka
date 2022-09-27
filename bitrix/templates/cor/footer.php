@@ -120,11 +120,11 @@ IncludeTemplateLangFile(__FILE__);
         <ul id="langnavigation">
             <li><a href="/" hreflang="ru"><img src="/bitrix/templates/cor/images/Russia_56.png" alt="" /> Русский</a></li>
             <li><a href="/be/" hreflang="by"><img src="/bitrix/templates/cor/images/Bel_56.png" alt="" /> Belarus</a></li>
-            <li><a href="/en/" hreflang="en"><img src="/bitrix/templates/cor/images/UnitedKingsom_56.png" alt="" /> English</a></li>
+		<!--   <li><a href="/en/" hreflang="en"><img src="/bitrix/templates/cor/images/UnitedKingsom_56.png" alt="" /> English</a></li>
             <li><a href="/fr/" hreflang="fr"><img src="/bitrix/templates/cor/images/France_56.png" alt="" /> French</a></li>
             <li><a href="/de/" hreflang="de"><img src="/bitrix/templates/cor/images/Germany_56.png" alt="" /> German</a></li>
             <li><a href="/pl/" hreflang="pl"><img src="/bitrix/templates/cor/images/Poland_56.png" alt="" /> Polish</a></li>
-            <li><a href="/es/" hreflang="es"><img src="/bitrix/templates/cor/images/Spain_56.png" alt="" /> Spanish</a></li>
+            <li><a href="/es/" hreflang="es"><img src="/bitrix/templates/cor/images/Spain_56.png" alt="" /> Spanish</a></li>-->
         </ul>
     </div><!-- /.block -->
 </div><!-- /.region -->

@@ -1,4 +1,3 @@
-<?
-header("Content-Type:text/html; charset=windows-1251");
+<?php
+header("Content-Type:text/html; charset=UTF-8");
 include("license.html");
-?>
