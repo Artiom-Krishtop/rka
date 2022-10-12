@@ -65,7 +65,6 @@ class NewsHelperComponent extends \CBitrixComponent implements Controllerable{
         $answerCount = ListLawAnsw::getAnswerCout($this->lawyerId);
 
         if(empty($answerCount)){
-
             $answerCount = 0;
         }
 
@@ -91,12 +90,14 @@ class NewsHelperComponent extends \CBitrixComponent implements Controllerable{
         $res = CIBlockElement::GetList(['SORT' => 'ASC'], $arFilter, false, false, $arSelect);
 
         while($rs = $res->Fetch()){
-
             if(!empty($rs['PROPERTY_COUNTER_BLAGOD_VALUE'])){
                 $counter += $rs['PROPERTY_COUNTER_BLAGOD_VALUE'];
             }
         }
 
+        /* Суммируем количество благодарностей, полученных по старой логике */
+        $counter += $this->getOldLogicCountBlagod();
+        
         return $counter;
     }
 
@@ -120,9 +121,32 @@ class NewsHelperComponent extends \CBitrixComponent implements Controllerable{
         $res = CIBlockElement::GetList(['SORT' => 'ASC'], $arFilter, false, false, $arSelect);
 
         while($rs = $res->Fetch()){
-
             if(!empty($rs['PROPERTY_COUNTER_BLAGOD_VALUE'])){
                 $counter = $rs['PROPERTY_COUNTER_BLAGOD_VALUE'];
+            }
+        }
+
+        return $counter;
+    }
+
+    /* вывод благодарностей по старой логике */
+    protected function getOldLogicCountBlagod(){
+        $counter = 0;
+
+        $arFilter = [
+            'IBLOCK_ID' => 17,
+            '=PROPERTY_USER' => $this->lawyerId,
+        ];
+
+        $arSelect = [
+            'PROPERTY_BLAGOD',
+        ];
+
+        $res = CIBlockElement::GetList(['SORT' => 'ASC'], $arFilter, false, false, $arSelect);
+
+        while($rs = $res->Fetch()){
+            if(!empty($rs['PROPERTY_BLAGOD_VALUE'])){
+                $counter = intval($rs['PROPERTY_BLAGOD_VALUE']);
             }
         }
 
