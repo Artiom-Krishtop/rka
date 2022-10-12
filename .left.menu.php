@@ -1,6 +1,13 @@
 <?
 $aMenuLinks = Array(
 	Array(
+		"Концепция развития", 
+		"https://www.rka.by/news/kontseptsiya-razvitiya-advokatury-respubliki-belarus/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
 		"Новости", 
 		"/news/", 
 		Array(), 
@@ -43,13 +50,6 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Журнал \"Адвокат\"", 
-		"/archive/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
 		"Наша история", 
 		"/museum/", 
 		Array(), 
@@ -66,6 +66,13 @@ $aMenuLinks = Array(
 	Array(
 		"Локальные акты БРКА", 
 		"/lokalnye-akty-brka/?clear_cache=Y", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Издание \"Адвокат\"", 
+		"/archive/", 
 		Array(), 
 		Array(), 
 		"" 

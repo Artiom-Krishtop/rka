@@ -27,13 +27,6 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
-	),
-	Array(
-		"Статьи адвокатов", 
-		"https://www.rka.by/blogs/", 
-		Array(), 
-		Array(), 
-		"" 
 	)
 );
 ?>

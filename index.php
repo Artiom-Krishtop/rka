@@ -1,23 +1,19 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Белорусская республиканская коллегия адвокатов ");
-?><section class="asidenews" style="height:360px; width: 890px; padding-top:30px; text-align:justify;"> <a href="https://play.google.com/store/apps/details?id=com.lawyer_appliaction.lawyer_rb" target="_blank"><img width="720" alt="banner_playmarket_800x96.jpg" src="/upload/medialibrary/287/dx52ygn68jremgma3mecuwa9404txzc0/banner_playmarket_800x96.jpg" height="86" title="banner_playmarket_800x96.jpg"></a> <br>
- Белорусская республиканская коллегия адвокатов представляет мобильное приложение «АДВОКАТЫ БЕЛАРУСИ» для смартфонов на операционной системе Android, которое создано для обеспечения максимальной доступности юридической помощи, упрощения процесса поиска и общения с адвокатом. Скачивание в Gоogle Play Маркет и пользование приложением является бесплатным. <br>
-С помощью приложения пользователь сможет найти адвоката Республики Беларусь конкретно по своему запросу: по специализации, по месту нахождения, со знанием определенного иностранного языка, адвоката - медиатора и т.д., позвонить выбранному адвокату непосредственно из приложения, связаться через мессенджер, проложить маршрут к юридической консультации и многое другое. <br>
-<br>
- <img width="800" alt="ГИП 2022_800x90.jpg" src="/upload/medialibrary/fc9/j0xragyhpgacqu0zudvt26av3xl2j1ey/GIP-2022_800x90.jpg" height="90" title="ГИП 2022_800x90.jpg"><br>
-</p>
- </section> <section class="asidenews" style="margin-bottom:20px; height:735px;">
-<h2 class="block-title"><b><i><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 18pt;">Уважаемые пользователи!</span></i></b></h2>
+?><img width="800" alt="ГИП 2022_800x90.jpg" src="/upload/medialibrary/fc9/j0xragyhpgacqu0zudvt26av3xl2j1ey/GIP-2022_800x90.jpg" height="90" title="ГИП 2022_800x90.jpg"><br>
 <p>
- <span style="font-size: 13pt;">Обращаясь за помощью к адвокату, вы поступаете правильно, потому что:</span><br>
- <span style="font-size: 13pt;">- крайне важно обратиться к адвокату за советом прежде, чем совершить какое-либо юридически значимое действие. Предотвратить наступление неблагоприятных юридических последствий своих действий гораздо проще, чем их исправлять;</span><br>
- <span style="font-size: 13pt;"> - только адвокаты в Республике Беларусь имеют право оказывать юридическую помощь гражданам. Все другие субъекты, которые предлагают гражданам юридическую помощь (интернет-ресурсы, общественные организации, за исключением обществ защиты прав потребителей, юристы и т.д.), действуют нелегально, а потому не несут ответственность за качество своей работы;</span><br>
- <span style="font-size: 13pt;"> - только общение с адвокатом является предметом адвокатской тайны. Все иные лица не обязаны хранить в тайне информацию, полученную от вас в процессе оказания юридической помощи;</span><br>
- <span style="font-size: 13pt;"> - только адвокаты постоянно совершенствуют свое профессиональное мастерство, регулярно проходят аттестацию для подтверждения своего профессионального уровня.</span>
+</p>
+ <section class="asidenews" style="margin-bottom:20px; height:735px;">
+<h2 class="block-title"><b><i><span style="font-family: &quot;Times New Roman&quot;, Times; font-size: 18pt;">Обращение Президента Республики Беларусь Александра Лукашенко к адвокатам&nbsp;</span></i></b></h2>
+<p>
+ <span style="font-size: 12pt;">&nbsp;&nbsp;<img width="416" alt="Обращение Президента.jpg" src="/upload/medialibrary/b43/29pad24c62ifpjztmsfwimtyn0u5q53w/Obrashchenie-Prezidenta.jpg" height="500" title="Обращение Президента.jpg"></span>
 </p>
 <p>
- <a href="/faq_ask/" style="text-decoration: line-through !important;" class="ask">Задать вопрос</a>
+ <span style="font-size: 12pt;"><a href="https://president.gov.by/ru/events/obrashchenie-k-uchastnikam-i-sezda-advokatov-belarusi">https://president.gov.by/ru/events/obrashchenie-k-uchastnikam-i-sezda-advokatov-belarusi</a> </span>
+</p>
+<p>
+ <a href="/faq_ask/" class="ask" style="text-decoration-line: line-through !important;">Задать вопрос</a>
 </p>
  </section><b><i>
 <div class="region region-news" style="height: 695px;">

@@ -130,7 +130,10 @@ $APPLICATION->SetTitle("Локальные акты БРКА");
 <p>
  <a target="_blank" href="https://www.rka.by/lokalnye-akty-brka/o-vnesenii-izmeneniy-i-dopolneniy-v-postanovleniya-soveta-brka-i-priznanii-utrativshimi-silu-postano.php">"О внесении изменений и дополнений в постановления совета БРКА и признании утратившими силу постановлений совета БРКА" 19.10.2021</a>
 </p>
-<p style="text-align: center;">
+<p>
+</p>
+<p style="text-align: left;">
+ <a target="_blank" href="https://www.rka.by/lokalnye-akty-brka/o-litsevykh-schetakh-po-uchetu-raboty-advokatov.php?clear_cache=Y">"О лицевых счетах по учету работы адвокатов" 21.09.2022</a>
 </p>
 <p style="text-align: center;">
  <b>Другие локальные акты БРКА</b>

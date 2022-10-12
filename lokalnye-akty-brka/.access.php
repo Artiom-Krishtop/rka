@@ -1,4 +1,5 @@
 <?
+$PERM["o-litsevykh-schetakh-po-uchetu-raboty-advokatov.php"]["G10"]="R";
 $PERM["o-vnesenii-izmeneniy-i-dopolneniy-v-postanovleniya-soveta-brka-i-priznanii-utrativshimi-silu-postano.php"]["G10"]="R";
 $PERM["o-kollektivnom-obrashchenii-advokatov.php"]["G10"]="R";
 $PERM["o-veteranakh-advokatury.php"]["G10"]="R";

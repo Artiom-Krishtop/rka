@@ -1,3 +1,0 @@
-<?
-$sSectionName="mb_icon";
-?>
