@@ -1,4 +1,5 @@
 <?
+use Bitrix\Main\Type\DateTime;
 
 require_once "require/listCollegiumsCSV.php";
 
@@ -1202,4 +1203,77 @@ function sendMailForumMessage(&$mailTemplate, &$arForumSites, &$arFields)
     return $arFields;
 }
 
+
+/* Функция для проверки возможности ответа на вопрос адвокатом */
+define('MAX_COUNT_ANSWER', 5);
+
+function canAnswer() : bool 
+{
+    global $USER;
+
+    if(!$USER->IsAuthorized()){
+        return false;
+    }
+
+    $user = CUser::GetById($USER->GetId())->fetch();
+    
+    if(empty($user['UF_COUNT_ANSWER_IN_DAY'])){
+        return true;
+    }else{
+        $counterData = json_decode($user['UF_COUNT_ANSWER_IN_DAY'], true);
+
+        $obDateCounter = DateTime::createFromTimestamp($counterData['DATE_COUNTER']);
+        $obDateCurrent = new DateTime();
+
+        $dayCounter = intval($obDateCounter->format('d'));
+        $dayCurrent = intval($obDateCurrent->format('d'));
+
+        if($dayCounter == $dayCurrent && $counterData['COUNTER'] < MAX_COUNT_ANSWER){
+            return true;
+        }elseif ($dayCurrent != $dayCounter) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+}
+
+function sumCounterAnswer()
+{
+    global $USER;
+
+    if(!$USER->IsAuthorized()){
+        return false;
+    }
+
+    $user = CUser::GetById($USER->GetId())->fetch();
+
+    if(empty($user['UF_COUNT_ANSWER_IN_DAY'])){
+        $counterData = [
+            'DATE_COUNTER' => time(),
+            'COUNTER' => 1
+        ];
+    }else{
+        $counterData = json_decode($user['UF_COUNT_ANSWER_IN_DAY'], true);
+
+        $obDateCounter = DateTime::createFromTimestamp($counterData['DATE_COUNTER']);
+        $obDateCurrent = new DateTime();
+
+        $dayCounter = intval($obDateCounter->format('d'));
+        $dayCurrent = intval($obDateCurrent->format('d'));
+
+        if($dayCounter == $dayCounter && $counterData['COUNTER'] <= MAX_COUNT_ANSWER){
+            $counterData['COUNTER']++;
+        }elseif($dayCurrent != $dayCounter) {
+            $counterData = [
+                'DATE_COUNTER' => time(),
+                'COUNTER' => 1
+            ];
+        }else{
+            return false;
+        }
+    }
+
+    $USER->Update($user['ID'], ['UF_COUNT_ANSWER_IN_DAY' => json_encode($counterData)]);
+}
 ?>

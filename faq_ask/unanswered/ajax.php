@@ -1,10 +1,17 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");?>
 <?
+
+if(!canAnswer()){
+    echo json_encode(2);
+    exit();
+}
+
 CModule::IncludeModule("iblock");
 
 
 $props_info = array();
 $properties = CIBlockProperty::GetList(Array("sort"=>"asc", "name"=>"asc"), Array("ACTIVE"=>"Y", "IBLOCK_ID"=>16));
+
 while ($prop_fields = $properties->GetNext())
 {
     $props_info[$prop_fields['CODE']]  = $prop_fields;
@@ -19,7 +26,6 @@ while ($prop_fields = $properties->GetNext())
     }
 
 }
-//file_put_contents('log.txt', print_r($_POST, 1), FILE_APPEND);
 
 $PROPSERVICE['USER'] = $_POST['advo_id'];
 $PROPSERVICE['OTR_PRAVO'] = $_POST['PRAVO'];
@@ -37,7 +43,6 @@ $arLoadProductSERVICE = Array(
     "DETAIL_TEXT"    => $DET,
     "PROPERTY_VALUES"=> $PROPSERVICE,
     "ACTIVE"         => "Y",
-    //"ACTIVE_FROM"=>date('d.m.Y'),
 );
 $PRODUCT_ID = $_POST['elem_id'];  // изменяем элемент с кодом (ID) 2
 $arFilter = Array("IBLOCK_ID"=>16, "ID"=>$PRODUCT_ID);
@@ -77,22 +82,11 @@ if(empty($Detail)){
                 ));
         }
 
+        sumCounterAnswer();
     }
     echo json_encode(0);
     exit();
 }else{
     echo json_encode(1);
     exit();
-}
-// $el->Add($arLoadProductSERVICE);
-
-
-
-
-/*print "<pre>";
-print_r($arLoadProductSERVICE);
-print "</pre>";*/
-
-
-
-?>
+}?>

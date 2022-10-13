@@ -3,10 +3,11 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetPageProperty("title", "");
 $APPLICATION->SetPageProperty("description", "");
 $APPLICATION->SetTitle("Неотвеченные вопросы");
-?>
-<?
+
 global $arFilter;
+
 $arFilter = array("PROPERTY_ARCHIVE"=>false);
+
 $APPLICATION->IncludeComponent(
 	"bitrix:news", 
 	"not_answered", 
