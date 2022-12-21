@@ -13,10 +13,16 @@
 $this->setFrameMode(true);
 ?>
 <div class="view-header">
-      <br>
-	<a class="button" style="margin-bottom: 5px;" href="/news/">Новости белорусской адвокатуры</a> <a class="button" href="/news/konkurs-ya-advokat/">Конкурс «Я - адвокат»</a> <a class="button" href="/news/blagodarnosti-advokatam/">Благодарности адвокатам</a>
-<!--<a class="button" href="/news/navstrechu-referendumu">Навстречу референдуму</a> <a class="button" href="/news/god-istoricheskoy-pamyati">Год исторической памяти</a>
-<br><br> -->   </div>
+	<br>
+		<a class="button" style="margin-bottom: 5px;" href="/news/">Новости белорусской адвокатуры</a> 
+		<a class="button" href="/news/konkurs-ya-advokat/">Конкурс «Я - адвокат»</a> 
+		<a class="button" href="/news/blagodarnosti-advokatam/">Благодарности адвокатам</a>
+		<a class="button" href="/news/advokaty-v-smi/">Адвокаты в СМИ</a>
+		<!--<a class="button" href="/news/navstrechu-referendumu">Навстречу референдуму</a> 
+		<a class="button" href="/news/god-istoricheskoy-pamyati">Год исторической памяти</a>
+	<br>
+	<br> -->   
+</div>
 
 <?if($arParams["USE_RSS"]=="Y"):?>
 	<?
