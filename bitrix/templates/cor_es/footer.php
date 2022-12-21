@@ -55,7 +55,7 @@ IncludeTemplateLangFile(__FILE__);
     <div id="block-block-24" class="block block-block contextual-links-region first last odd">
 
 
-        <ul id="langnavigation">
+        <!--<ul id="langnavigation">
             <li><a href="/" hreflang="ru"><img src="/bitrix/templates/cor_be/images/Russia_56.png" alt="" /> Русский</a></li>
             <li><a href="/be/" hreflang="by"><img src="/bitrix/templates/cor_be/images/Bel_56.png" alt="" /> Belarus</a></li>
             <li><a href="/en/" hreflang="en"><img src="/bitrix/templates/cor_be/images/UnitedKingsom_56.png" alt="" /> English</a></li>
@@ -63,7 +63,7 @@ IncludeTemplateLangFile(__FILE__);
             <li><a href="/de/" hreflang="de"><img src="/bitrix/templates/cor_be/images/Germany_56.png" alt="" /> German</a></li>
             <li><a href="/pl/" hreflang="pl"><img src="/bitrix/templates/cor_be/images/Poland_56.png" alt="" /> Polish</a></li>
             <li><a href="/es/" hreflang="es"><img src="/bitrix/templates/cor_be/images/Spain_56.png" alt="" /> Spanish</a></li>
-        </ul>
+        </ul>-->
     </div><!-- /.block -->
 </div><!-- /.region -->
 <?

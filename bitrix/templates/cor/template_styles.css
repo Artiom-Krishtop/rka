@@ -295,3 +295,4 @@ div#sonet_events_ms_message {width:150px;}
     padding: 20px 30px 20px 30px !important; 
     position: relative;
 }
+a.file-link { display: none !important; }

@@ -22,6 +22,13 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
+		"Обучение адвокатов", 
+		"https://rka.by/about/obuchenie-advokatov.php", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
 		"БРКА", 
 		"/kollegies/respublikanskaya/", 
 		Array(), 
@@ -31,20 +38,6 @@ $aMenuLinks = Array(
 	Array(
 		"Об адвокатуре", 
 		"/about/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Юридическая помощь", 
-		"/about/poryadok-i-usloviya-okazaniya/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Медиация", 
-		"/questcats/mediaciya-pravo/", 
 		Array(), 
 		Array(), 
 		"" 

@@ -1,4 +1,7 @@
 <?
+$PERM["polozhenie-o-komissii-po-etike-brka.php"]["G10"]="R";
+$PERM["ob-otdelnykh-voprosakh-obespecheniya-grazhdan-yuridicheskoy-pomoshchyu-po-ugolovnym-delam.php"]["G10"]="R";
+$PERM["ob-utverzhdenii-poryadka-priema-advokatov-i-perekhoda-advokatov-v-mgka-i-moka.php"]["G10"]="R";
 $PERM["o-litsevykh-schetakh-po-uchetu-raboty-advokatov.php"]["G10"]="R";
 $PERM["o-vnesenii-izmeneniy-i-dopolneniy-v-postanovleniya-soveta-brka-i-priznanii-utrativshimi-silu-postano.php"]["G10"]="R";
 $PERM["o-kollektivnom-obrashchenii-advokatov.php"]["G10"]="R";

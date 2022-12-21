@@ -8,7 +8,7 @@ $APPLICATION->SetTitle("Локальные акты БРКА");
  В настоящем разделе публикуются:<br>
  методические рекомендации (рекомендации) совета БРКА (РКА);<br>
  постановления совета БРКА (РКА);<br>
- другие локальные акты БРКА (РКА).<br>
+положения и другие локальные акты БРКА (РКА).<br>
  <br>
  Постановления совета Белорусской республиканской коллегии адвокатов (Республиканской коллегии адвокатов), принятые до 30 ноября 2021 г., действуют в части, не противоречащей Закону Республики Беларусь от 27 мая 2021 N 113-З "Об изменении законов по вопросам адвокатской деятельности" и иному законодательству, регулирующему адвокатскую деятельность (постановления совета БРКА от 23.10.2017 №05/07 и от 19.10.2021 №04/09). <br>
  <b>
@@ -135,6 +135,12 @@ $APPLICATION->SetTitle("Локальные акты БРКА");
 <p style="text-align: left;">
  <a target="_blank" href="https://www.rka.by/lokalnye-akty-brka/o-litsevykh-schetakh-po-uchetu-raboty-advokatov.php?clear_cache=Y">"О лицевых счетах по учету работы адвокатов" 21.09.2022</a>
 </p>
+<p align="left">
+ <a target="_blank" href="https://www.rka.by/lokalnye-akty-brka/ob-utverzhdenii-poryadka-priema-advokatov-i-perekhoda-advokatov-v-mgka-i-moka.php?clear_cache=Y">"Об утверждении порядка приема адвокатов и перехода адвокатов в Минскую городскую и Минскую областную коллегии адвокатов" 27.10.2022</a>
+</p>
+<p align="left">
+ <a target="_blank" href="https://www.rka.by/lokalnye-akty-brka/ob-otdelnykh-voprosakh-obespecheniya-grazhdan-yuridicheskoy-pomoshchyu-po-ugolovnym-delam.php?clear_cache=Y">"Об отдельных вопросах обеспечения граждан юридической помощью по уголовным делам территориальными коллегиями адвокатов" 27.10.2022</a>
+</p>
 <p style="text-align: center;">
  <b>Другие локальные акты БРКА</b>
 </p>
@@ -216,5 +222,7 @@ $APPLICATION->SetTitle("Локальные акты БРКА");
  <a target="_blank" href="https://www.rka.by/lokalnye-akty-brka/polozhenie-ob-organizatsii-raboty-advokatury-po-pravovomu-vospitaniyu.php?clear_cache=Y">Положение об организации работы адвокатуры по правовому воспитанию</a>&nbsp;<br>
  <br>
  <a target="_blank" href="https://www.rka.by/lokalnye-akty-brka/polozhenie-o-poryadke-okazaniya-yuridicheskoy-pomoshchi-po-voprosam-polucheniya-nasledstva.php?clear_cache=Y">Положение о&nbsp;порядке оказания юридической помощи&nbsp;</a><a target="_blank" href="https://www.rka.by/lokalnye-akty-brka/polozhenie-o-poryadke-okazaniya-yuridicheskoy-pomoshchi-po-voprosam-polucheniya-nasledstva.php?clear_cache=Y">по вопросам получения наследства</a><br>
+ <br>
+ <a target="_blank" href="https://www.rka.by/lokalnye-akty-brka/polozhenie-o-komissii-po-etike-brka.php">Положение о Комиссии по соблюдению адвокатами Правил профессиональной этики адвоката и качеству оказания юридической помощи Белорусской республиканской коллегии адвокатов (Комиссия по этике)</a>
 <p>
 </p><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
